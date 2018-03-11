@@ -14,6 +14,11 @@ namespace MemeLord
             // Web API routes
             config.MapHttpAttributeRoutes();
 
+            // Route to index.html
+            config.Routes.MapHttpRoute(
+                name: "Index",
+                routeTemplate: "./AngularApp/src/index.html");
+
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
