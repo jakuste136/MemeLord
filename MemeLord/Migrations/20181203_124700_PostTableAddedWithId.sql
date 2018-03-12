@@ -1,0 +1,5 @@
+CREATE TABLE MemeLordDb.dbo.Post
+(
+    Id INT PRIMARY KEY NOT NULL IDENTITY
+)
+CREATE UNIQUE INDEX PK_Post_Id ON MemeLordDb.dbo.Post (Id)
