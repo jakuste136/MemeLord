@@ -8,6 +8,7 @@ namespace MemeLord
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
             MigrationRunner.RunMigrations();
+            AutofacConfig.Configure();
         }
     }
 }

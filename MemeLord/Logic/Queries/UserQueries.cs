@@ -4,7 +4,13 @@ using MemeLord.Models;
 
 namespace MemeLord.Logic.Queries
 {
-    public class UserQueries
+    public interface IUserQueries
+    {
+        IEnumerable<User> GetUsers();
+        User GetUserById(int id);
+    }
+
+    public class UserQueries : IUserQueries
     {
         public IEnumerable<User> GetUsers()
         {

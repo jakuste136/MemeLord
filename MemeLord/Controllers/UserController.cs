@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
-using MemeLord.Logic.Database;
 using MemeLord.Logic.Queries;
 using MemeLord.Models;
 
@@ -11,11 +9,11 @@ namespace MemeLord.Controllers
     [RoutePrefix("api/user")]
     public class UserController : ApiController
     {
-        private readonly UserQueries _userQueries;
+        private readonly IUserQueries _userQueries;
 
-        public UserController()
+        public UserController(IUserQueries userQueries)
         {
-            _userQueries = new UserQueries();
+            _userQueries = userQueries;
         }
 
         [Route("get")]
