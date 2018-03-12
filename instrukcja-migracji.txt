@@ -1,0 +1,11 @@
+﻿0. Musi być zainstalowany Sql Server na naszym localhoscie.
+1. Baza danych o nazwie MemeLordDb musi istnieć ( inaczej nie odpali nam sie apka ).
+2. Tworzymy skrypt .sql, w którym dokonujemy zmian, które nas interesują np CREATE TABLE Test.
+3. Zapisujemy ten skrypt w folderze Migrations i nazywamy go zgodnie z przyjętą konwencją czyli "rrrrmmdd_hhmmss_KrotkiOpisTegoCoRobiSkrypt".
+4. Owieramy VS.
+5. W solution explorerze zaznaczamy opcje show all files.
+6. Klikamy prawym w nasz skrypt i dajemy Include in project.
+7. Znowu klikamy prawym i dajemy Properties.
+8. Build action ustawiamy na embeded resource.
+9. Zapisujemy solucje (ctrl + shift + s).
+10. Restartujemy aplikację. 
