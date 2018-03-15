@@ -1,5 +1,7 @@
-﻿using System.Reflection;
+﻿using System.Configuration;
+using System.Reflection;
 using DbUp;
+using MemeLord.Configuration;
 
 namespace MemeLord
 {
@@ -7,13 +9,19 @@ namespace MemeLord
     {
         public static void RunMigrations()
         {
-            var connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["MemeLordDb"].ConnectionString;
+            if (MigrationsConfiguration.RunMigrationsOnBuild)
+                ExecuteMigrations();
+        }
+
+        private static void ExecuteMigrations()
+        {
+            var connectionString = ConfigurationManager.ConnectionStrings["MemeLordDb"].ConnectionString;
 
             DeployChanges.To.SqlDatabase(connectionString)
-                    .WithScriptsEmbeddedInAssembly(Assembly.GetExecutingAssembly())
-                    .LogToConsole()
-                    .Build()
-                    .PerformUpgrade();
+                .WithScriptsEmbeddedInAssembly(Assembly.GetExecutingAssembly())
+                .LogToConsole()
+                .Build()
+                .PerformUpgrade();
         }
     }
 }
