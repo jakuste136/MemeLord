@@ -1,0 +1,1 @@
+EXEC  sp_rename N'dbo.NotificationDisplayed', N'NotificationDescription', 'OBJECT'

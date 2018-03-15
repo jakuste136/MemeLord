@@ -102,8 +102,9 @@
     <Content Include="AngularApp\src\favicon.ico" />
     <Content Include="AngularApp\src\index.html" />
     <Content Include="Global.asax" />
-    <EmbeddedResource Include="Migrations\20180414_223500_Create_Database_Schema.sql" />
+    <EmbeddedResource Include="Migrations\20180314_223500_Create_Database_Schema.sql" />
     <Content Include="Web.config" />
+    <EmbeddedResource Include="Migrations\20180315_221300_Change_NotificationDisplayedName.sql" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AutofacConfig.cs" />
@@ -116,8 +117,14 @@
     </Compile>
     <Compile Include="Logic\Database\DatabaseFactory.cs" />
     <Compile Include="Logic\Queries\UserQueries.cs" />
-    <Compile Include="Models\PetaPoco.cs" />
-    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\Comment.cs" />
+    <Compile Include="Models\Like.cs" />
+    <Compile Include="Models\NotificationDescription.cs" />
+    <Compile Include="Models\Utils\PetaPoco.cs" />
+    <Compile Include="Models\Post.cs" />
+    <Compile Include="Models\Utils\BaseEntity.cs" />
+    <Compile Include="Models\Utils\ISoftDeletable.cs" />
+    <Compile Include="Models\Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Configuration\Settings\MigrationSettings.Designer.cs">
       <AutoGen>True</AutoGen>

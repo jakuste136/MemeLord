@@ -10,7 +10,7 @@ DROP TABLE Roles
 GO
 DROP TABLE Notifications
 GO
-DROP TABLE NotificationDisplayed
+DROP TABLE NotificationDescription
 GO
 DROP TABLE Likes
 GO
