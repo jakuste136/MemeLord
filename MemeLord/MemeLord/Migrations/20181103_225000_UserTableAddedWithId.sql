@@ -1,5 +1,0 @@
-CREATE TABLE MemeLordDb.dbo.[User]
-(
-    Id INT PRIMARY KEY NOT NULL IDENTITY
-)
-CREATE UNIQUE INDEX PK_User_Id ON MemeLordDb.dbo.[User] (Id)

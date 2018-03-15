@@ -1,5 +1,5 @@
 ﻿0. Musi być zainstalowany Sql Server na naszym localhoscie.
-1. Baza danych o nazwie MemeLordDb musi istnieć ( inaczej nie odpali nam sie apka ).
+1. Baza danych o nazwie MemeLordDb musi istnieć ( inaczej nie odpali nam sie apka ). Jest skrypt CreateDatabase.sql
 2. Tworzymy skrypt .sql, w którym dokonujemy zmian, które nas interesują np CREATE TABLE Test.
 3. Zapisujemy ten skrypt w folderze Migrations i nazywamy go zgodnie z przyjętą konwencją czyli "rrrrmmdd_hhmmss_KrotkiOpisTegoCoRobiSkrypt".
 4. Owieramy VS.

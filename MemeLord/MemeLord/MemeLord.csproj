@@ -102,10 +102,8 @@
     <Content Include="AngularApp\src\favicon.ico" />
     <Content Include="AngularApp\src\index.html" />
     <Content Include="Global.asax" />
-    <EmbeddedResource Include="Migrations\20181103_225000_UserTableAddedWithId.sql" />
-    <EmbeddedResource Include="Migrations\20181203_124700_PostTableAddedWithId.sql" />
+    <EmbeddedResource Include="Migrations\20180414_223500_Create_Database_Schema.sql" />
     <Content Include="Web.config" />
-    <EmbeddedResource Include="Migrations\20181203_133000_TestMigration.sql" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AutofacConfig.cs" />
