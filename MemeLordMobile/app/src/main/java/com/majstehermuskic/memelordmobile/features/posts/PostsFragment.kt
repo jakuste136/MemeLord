@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.majstehermuskic.memelordmobile.R
-import com.majstehermuskic.memelordmobile.commons.MemePostItem
 import com.majstehermuskic.memelordmobile.commons.RxBaseFragment
 import com.majstehermuskic.memelordmobile.commons.extensions.inflate
 import com.majstehermuskic.memelordmobile.features.posts.adapter.PostsAdapter
@@ -18,9 +17,6 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_posts.*
 
 
-/**
- * A simple [Fragment] subclass.
- */
 class PostsFragment : RxBaseFragment() {
 
     private val postsManager by lazy { PostsManager() }
@@ -39,14 +35,6 @@ class PostsFragment : RxBaseFragment() {
         initAdapter()
 
         if(savedInstanceState == null){
-//            val posts = mutableListOf<MemePostItem>()
-//            for(i in 1..10){
-//                posts.add(MemePostItem(
-//                        "Title $i",
-//                        "https://picsum.photos/200/200?image=$i"
-//                ))
-//            }
-//            (posts_list.adapter as PostsAdapter).addPosts(posts)
             requestPosts()
         }
     }

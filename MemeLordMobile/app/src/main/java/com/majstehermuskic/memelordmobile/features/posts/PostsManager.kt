@@ -1,24 +1,37 @@
 package com.majstehermuskic.memelordmobile.features.posts
 
+import com.majstehermuskic.memelordmobile.api.RestAPI
 import com.majstehermuskic.memelordmobile.commons.MemePostItem
 import io.reactivex.Observable
 
-/**
- * Created by Bartosz on 2018-03-16.
- */
-class PostsManager {
+class PostsManager(private val api: RestAPI = RestAPI()) {
 
-    fun getPosts(): Observable<List<MemePostItem>> {
-        return Observable.create { subscriber ->
+    fun getPosts(limit: String = "10"): Observable<List<MemePostItem>> {
+        return Observable.create {
+            subscriber ->
+            val callResponse = api.getNews("", limit)
+            val response = callResponse.execute()
 
-            val posts = mutableListOf<MemePostItem>()
-            for (i in 1..10) {
-                posts.add(MemePostItem(
-                        "Title $i",
-                        "https://picsum.photos/200/200?image=$i"
-                ))
+            if(response.isSuccessful) {
+                val posts = response.body()!!.data.children.map {
+                    val item = it.data
+                    MemePostItem(item.title, item.thumbnail)
+                }
+                subscriber.onNext(posts)
+                subscriber.onComplete()
+            } else {
+                subscriber.onError(Throwable(response.message()))
             }
-            subscriber.onNext(posts)
+
+
+//            val posts = mutableListOf<MemePostItem>()
+//            for (i in 1..10) {
+//                posts.add(MemePostItem(
+//                        "Title $i",
+//                        "https://picsum.photos/200/200?image=$i"
+//                ))
+//            }
+//            subscriber.onNext(posts)
         }
     }
 
