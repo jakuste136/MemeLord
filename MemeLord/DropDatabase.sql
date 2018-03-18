@@ -1,8 +1,8 @@
 ﻿DROP TABLE Reports
 GO
-DROP TABLE ReportDescription
+DROP TABLE ReportTypes
 GO
-DROP TABLE Following
+DROP TABLE Followings
 GO
 DROP TABLE UserRoles
 GO
@@ -10,7 +10,7 @@ DROP TABLE Roles
 GO
 DROP TABLE Notifications
 GO
-DROP TABLE NotificationDescription
+DROP TABLE NotificationTypes
 GO
 DROP TABLE Likes
 GO

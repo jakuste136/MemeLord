@@ -18,14 +18,14 @@ namespace MemeLord.Controllers
 
         [Route("get")]
         [HttpGet]
-        public IList<Users> Get()
+        public IList<User> Get()
         {
             return _userQueries.GetUsers().ToList();
         }
 
         [Route("get/{id}")]
         [HttpGet]
-        public Users Get(int id)
+        public User Get(int id)
         {
             return _userQueries.GetUserById(id);
         }

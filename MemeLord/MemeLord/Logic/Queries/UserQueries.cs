@@ -6,25 +6,26 @@ namespace MemeLord.Logic.Queries
 {
     public interface IUserQueries
     {
-        IEnumerable<Users> GetUsers();
-        Users GetUserById(int id);
+        IEnumerable<User> GetUsers();
+        User GetUserById(int id);
     }
 
     public class UserQueries : IUserQueries
     {
-        public IEnumerable<Users> GetUsers()
+        public IEnumerable<User> GetUsers()
         {
-            using (var db = DatabaseFactory.GetConnection())
+            using (var db = CustomDatabaseFactory.GetConnection())
             {
-                return db.Query<Users>("");
+                return db.Query<User>().ToEnumerable();
             }
         }
 
-        public Users GetUserById(int id)
+        public User GetUserById(int id)
         {
-            using (var db = DatabaseFactory.GetConnection())
+            using (var db = CustomDatabaseFactory.GetConnection())
             {
-                return db.SingleOrDefault<Users>(id);
+                return db.Query<User>()
+                    .SingleOrDefault(u => u.Id == id);
             }
         }
     }
