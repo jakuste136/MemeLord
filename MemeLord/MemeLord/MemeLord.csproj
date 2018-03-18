@@ -100,12 +100,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AngularApp\.gitignore" />
-    <Content Include="AngularApp\karma.conf.js" />
-    <Content Include="AngularApp\protractor.conf.js" />
-    <Content Include="AngularApp\src\app\app.component.html" />
-    <Content Include="AngularApp\src\favicon.ico" />
-    <Content Include="AngularApp\src\index.html" />
     <Content Include="Global.asax" />
     <EmbeddedResource Include="Migrations\20180314_223500_Create_Database_Schema.sql" />
     <Content Include="Web.config" />
@@ -148,18 +142,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AngularApp\.angular-cli.json" />
-    <Content Include="AngularApp\.editorconfig" />
-    <Content Include="AngularApp\package-lock.json" />
-    <Content Include="AngularApp\package.json" />
-    <Content Include="AngularApp\README.md" />
-    <Content Include="AngularApp\src\app\app.component.scss" />
-    <Content Include="AngularApp\src\assets\.gitkeep" />
-    <Content Include="AngularApp\src\styles.scss" />
-    <Content Include="AngularApp\src\tsconfig.app.json" />
-    <Content Include="AngularApp\src\tsconfig.spec.json" />
-    <Content Include="AngularApp\tsconfig.json" />
-    <Content Include="AngularApp\tslint.json" />
     <None Include="packages.config" />
     <None Include="Configuration\Settings\MigrationSettings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
@@ -174,17 +156,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="AngularApp\src\app\app.component.spec.ts" />
-    <TypeScriptCompile Include="AngularApp\src\app\app.component.ts" />
-    <TypeScriptCompile Include="AngularApp\src\app\app.module.ts" />
-    <TypeScriptCompile Include="AngularApp\src\environments\environment.prod.ts" />
-    <TypeScriptCompile Include="AngularApp\src\environments\environment.ts" />
-    <TypeScriptCompile Include="AngularApp\src\main.ts" />
-    <TypeScriptCompile Include="AngularApp\src\polyfills.ts" />
-    <TypeScriptCompile Include="AngularApp\src\test.ts" />
-    <TypeScriptCompile Include="AngularApp\src\typings.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
