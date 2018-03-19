@@ -52,6 +52,9 @@
     <Reference Include="Autofac.Integration.WebApi, Version=4.1.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.WebApi2.4.1.0\lib\net45\Autofac.Integration.WebApi.dll</HintPath>
     </Reference>
+    <Reference Include="AutoMapper, Version=6.2.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.2.2\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="DbUp, Version=3.3.5.0, Culture=neutral, PublicKeyToken=4b419c53bdfd4cbf, processorArchitecture=MSIL">
       <HintPath>..\packages\dbup.3.3.5\lib\net35\DbUp.dll</HintPath>
     </Reference>
@@ -117,9 +120,14 @@
     <Compile Include="Logic\Database\CustomMappings.cs" />
     <Compile Include="Logic\Database\CustomDatabaseFactory.cs" />
     <Compile Include="Logic\Database\MemeDatabase.cs" />
+    <Compile Include="Logic\Dto\PostDto.cs" />
+    <Compile Include="Logic\Mapping\SampleCustomMapper.cs" />
+    <Compile Include="Logic\Mapping\Mapper.cs" />
     <Compile Include="Logic\Queries\CommentQueries.cs" />
-    <Compile Include="Logic\Queries\PostQueries.cs" />
     <Compile Include="Logic\Queries\UserQueries.cs" />
+    <Compile Include="Logic\Repository\PostRepository.cs" />
+    <Compile Include="Logic\Request\GetManyPostsRequest.cs" />
+    <Compile Include="Logic\Response\GetManyPostsResponse.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Following.cs" />
     <Compile Include="Models\Like.cs" />

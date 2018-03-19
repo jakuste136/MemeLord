@@ -1,6 +1,4 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Web.DynamicData.ModelProviders;
 using MemeLord.Models.Utils;
 
 namespace MemeLord.Models
