@@ -121,7 +121,6 @@
     <Compile Include="Logic\Database\CustomDatabaseFactory.cs" />
     <Compile Include="Logic\Database\MemeDatabase.cs" />
     <Compile Include="Logic\Dto\PostDto.cs" />
-    <Compile Include="Logic\Dto\Test.cs" />
     <Compile Include="Logic\Mapping\Mapper.cs" />
     <Compile Include="Logic\Queries\CommentQueries.cs" />
     <Compile Include="Logic\Queries\PostQueries.cs" />
