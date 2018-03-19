@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MemeLord.Models
+namespace MemeLord.Models.Utils
 {
     public interface ISoftDeletable
     {
