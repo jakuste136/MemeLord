@@ -32,12 +32,10 @@ namespace MemeLord.Logic.Repository
         {
             using (var db = CustomDatabaseFactory.GetConnection())
             {
-                var queryResult = db.Query<Post>()
-                    .OrderByDescending(p => p.Id)
-                    .ToList()
-                    .Skip((request.PageNumber - 1) * request.PageSize)
-                    .Take(request.PageSize)
-                    .ToList();
+                var queryResult = db.Query<Post>().OrderByDescending(p => p.CreationDate)
+                               .Where(p => p.Id < request.LastId || request.LastId == 0)
+                               .Limit(request.Count)
+                               .ToList();
 
                 var result = MapEntityToDto(queryResult);
 
@@ -47,6 +45,7 @@ namespace MemeLord.Logic.Repository
         
         private GetManyPostsResponse MapEntityToDto(IEnumerable<Post> postsList)
         {
+            var lastId = postsList.LastOrDefault().Id;
             var postDtosList = new List<PostDto>();
             foreach(var post in postsList)
             {
@@ -54,12 +53,15 @@ namespace MemeLord.Logic.Repository
                 {
                     Title = post.Title,
                     Image = post.Image,
-                    Rating = post.Rating
+                    Rating = post.Rating,
+                    CreationDate = post.CreationDate,
+                    DeletionDate = post.DeletionDate
                 });
             }
             return new GetManyPostsResponse
             {
-                PostsList = postDtosList
+                PostsList = postDtosList,
+                LastId = lastId
             };
         }
     }

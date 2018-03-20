@@ -5,6 +5,7 @@ namespace MemeLord.Logic.Response
 {
     public class GetManyPostsResponse
     {
+        public int LastId { get; set; }
         public IEnumerable<PostDto> PostsList { get; set; }
     }
 }
