@@ -4,21 +4,20 @@ import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-// TODO: Zmienić z reddit api na nasze api
 class RestAPI {
 
-    private lateinit var redditApi: RedditApi
+    private lateinit var memeLordApi: MemeLordAPI
 
     init {
         val retrofit = Retrofit.Builder()
-                .baseUrl("https://www.reddit.com")
+                .baseUrl("http://192.168.0.108:3000/api/")
                 .addConverterFactory(MoshiConverterFactory.create())
                 .build()
 
-        redditApi = retrofit.create(RedditApi::class.java)
+        memeLordApi = retrofit.create(MemeLordAPI::class.java)
     }
 
-    fun getNews(after: String, limit: String): Call<RedditNewsResponse> {
-        return redditApi.getTop(after, limit)
+    fun getPosts(last: Int, count: Int): Call<MemePostsResponse> {
+        return memeLordApi.getTop(last, count)
     }
 }
