@@ -5,12 +5,16 @@ import { MaterialModule } from '../shared/material.module';
 
 import { AppComponent } from './app.component';
 import { GuestNavbarComponent } from './guest-navbar/guest-navbar.component';
+import { PostComponent } from './posts/post/post.component';
+import { PostsListComponent } from './posts/posts-list/posts-list.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    GuestNavbarComponent
+    GuestNavbarComponent,
+    PostComponent,
+    PostsListComponent
   ],
   imports: [
     BrowserModule,
