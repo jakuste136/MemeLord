@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27428.2002
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemeLord", "MemeLord\MemeLord.csproj", "{148EAF60-05A9-45A5-BEA1-902D5645A82C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Unit", "Test.Unit\Test.Unit.csproj", "{03CB2534-F7EF-413A-8B0D-8E20C281ABFB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{148EAF60-05A9-45A5-BEA1-902D5645A82C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{148EAF60-05A9-45A5-BEA1-902D5645A82C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{148EAF60-05A9-45A5-BEA1-902D5645A82C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03CB2534-F7EF-413A-8B0D-8E20C281ABFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03CB2534-F7EF-413A-8B0D-8E20C281ABFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03CB2534-F7EF-413A-8B0D-8E20C281ABFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03CB2534-F7EF-413A-8B0D-8E20C281ABFB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

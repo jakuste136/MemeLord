@@ -2,7 +2,7 @@
 
 namespace MemeLord.Models
 {
-    public class NotificationDescription : BaseEntity
+    public class ReportType : BaseEntity
     {
         public string Description { get; set; }
     }
