@@ -29,14 +29,15 @@ namespace MemeLord.Logic.Providers
         }
 
         /*
-         * Validate user to acqire token
+         * Validate user to acquire token
          */
         public override Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
+            // TODO: [Mateusz] Cleanup
             return Task.Factory.StartNew(() =>
             {
                 var user = new UserQueries().GetUserByCredentials(context.UserName);
-                if (true /*user != null && HashGenerator.Verify(context.Password, user.Salt)*/)
+                if (user != null && HashManager.Verify(context.Password, user.Hash))
                 {
                     var claims = new List<Claim>
                         {

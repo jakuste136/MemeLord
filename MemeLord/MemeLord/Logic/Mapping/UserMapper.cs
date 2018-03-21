@@ -14,7 +14,18 @@ namespace MemeLord.Logic.Mapping
                 Email = source.Email,
                 Sex = source.Sex,
                 DateOfBirth = source.DateOfBirth,
-                Salt = HashManager.Hash(source.Password)
+                Hash = HashManager.Hash(source.Password)
+            };
+        }
+
+        public UserDto Map(User source)
+        {
+            return new UserDto
+            {
+                Username = source.Username,
+                Email = source.Email,
+                Sex = source.Sex,
+                DateOfBirth = source.DateOfBirth
             };
         }
     }

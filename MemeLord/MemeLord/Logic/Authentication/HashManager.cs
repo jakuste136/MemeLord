@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Security.Cryptography;
+using MemeLord.Configuration;
 
 namespace MemeLord.Logic.Authentication
 {
@@ -10,7 +11,7 @@ namespace MemeLord.Logic.Authentication
     public sealed class HashManager
     {
         /* Size of salt part of hash in bytes. */
-        private const int SaltSize = 16;
+        private readonly int _saltSize = 16;
 
         /* Size of proper hash part of hash in bytes. */
         private const int HashSize = 20;
@@ -21,20 +22,25 @@ namespace MemeLord.Logic.Authentication
         /* Hash identification prefix. */
         private const string HashPrefix = "MMLRD$V1$";
 
+        public HashManager()
+        {
+            _saltSize = PasswordConfig.Salt;
+        }
+
         /*
          * Get hash from given string.
          */
         public static string Hash(string password)
         {
-            var salt = new byte[SaltSize];
+            var salt = new byte[_saltSize];
             new RNGCryptoServiceProvider().GetBytes(salt);
 
             var pbkdf2 = new Rfc2898DeriveBytes(password, salt, Iterations);
             var hash = pbkdf2.GetBytes(HashSize);
 
-            var hashBytes = new byte[SaltSize + HashSize];
-            Array.Copy(salt, 0, hashBytes, 0, SaltSize);
-            Array.Copy(hash, 0, hashBytes, SaltSize, HashSize);
+            var hashBytes = new byte[_saltSize + HashSize];
+            Array.Copy(salt, 0, hashBytes, 0, _saltSize);
+            Array.Copy(hash, 0, hashBytes, _saltSize, HashSize);
 
             var base64Hash = Convert.ToBase64String(hashBytes);
             return string.Format($"{HashPrefix}{Iterations}${base64Hash}");
@@ -64,15 +70,15 @@ namespace MemeLord.Logic.Authentication
 
             var hashBytes = Convert.FromBase64String(base64Hash);
 
-            var salt = new byte[SaltSize];
-            Array.Copy(hashBytes, 0, salt, 0, SaltSize);
+            var salt = new byte[_saltSize];
+            Array.Copy(hashBytes, 0, salt, 0, _saltSize);
 
             var pbkdf2 = new Rfc2898DeriveBytes(password, salt, iterations);
             var hash = pbkdf2.GetBytes(HashSize);
 
             for (var i = 0; i < HashSize; i++)
             {
-                if (hashBytes[i + SaltSize] != hash[i])
+                if (hashBytes[i + _saltSize] != hash[i])
                 {
                     return false;
                 }

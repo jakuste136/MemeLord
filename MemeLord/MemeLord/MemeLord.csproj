@@ -133,6 +133,7 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <EmbeddedResource Include="Migrations\20180314_223500_Create_Database_Schema.sql" />
+    <Content Include="Migrations\20180321_221700_Recreate_Database_Shema_With_Identities.sql" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -179,6 +180,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>MigrationSettings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -186,6 +192,10 @@
     <None Include="Configuration\Settings\MigrationSettings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>MigrationSettings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

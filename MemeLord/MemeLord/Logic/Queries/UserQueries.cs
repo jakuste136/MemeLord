@@ -16,6 +16,13 @@ namespace MemeLord.Logic.Queries
 
     public class UserQueries : IUserQueries
     {
+        private readonly IMapper<UserDto, User> _userMapper;
+
+        public UserQueries(IMapper<UserDto, User> userMapper)
+        {
+            _userMapper = userMapper;
+        }
+
         public IEnumerable<User> GetUsers()
         {
             using (var db = CustomDatabaseFactory.GetConnection())
@@ -46,7 +53,7 @@ namespace MemeLord.Logic.Queries
         {
             using (var db = CustomDatabaseFactory.GetConnection())
             {
-                var user = new UserMapper().Map(userObject);
+                var user = _userMapper.Map(userObject);
                 db.Save(user);
             }
         }
