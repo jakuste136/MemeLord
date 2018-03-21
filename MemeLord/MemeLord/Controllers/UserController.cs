@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web.Http;
+using MemeLord.Logic.Dto;
 using MemeLord.Logic.Queries;
 using MemeLord.Models;
 
@@ -28,6 +30,14 @@ namespace MemeLord.Controllers
         public User Get(int id)
         {
             return _userQueries.GetUserById(id);
+        }
+
+        [HttpPost]
+        public IHttpActionResult Post([FromBody] UserDto user)
+        {
+            if (!ModelState.IsValid) return StatusCode(HttpStatusCode.UnsupportedMediaType);
+            _userQueries.SaveUser(user);
+            return StatusCode(HttpStatusCode.Accepted);
         }
     }
 }
