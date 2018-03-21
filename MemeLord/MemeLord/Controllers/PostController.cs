@@ -22,7 +22,7 @@ namespace MemeLord.Controllers
             return _postRepository.GetPostById(id);
         }
 
-        [Route("getMany/{getManyPostsRequest}")]
+        [Route("getManyPosts")]
         public GetManyPostsResponse GetManyPosts(GetManyPostsRequest request)
         {
             return _postRepository.GetManyPosts(request);
