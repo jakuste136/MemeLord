@@ -153,13 +153,16 @@
     <Compile Include="Logic\Database\MemeDatabase.cs" />
     <Compile Include="Logic\Dto\PostDto.cs" />
     <Compile Include="Logic\Dto\UserDto.cs" />
+    <Compile Include="Logic\Mapping\SampleCustomMapper.cs" />
     <Compile Include="Logic\Extensions\OwinContextExtentions.cs" />
     <Compile Include="Logic\Mapping\Mapper.cs" />
     <Compile Include="Logic\Mapping\UserMapper.cs" />
     <Compile Include="Logic\Providers\OAuthAppProvider.cs" />
     <Compile Include="Logic\Queries\CommentQueries.cs" />
-    <Compile Include="Logic\Queries\PostQueries.cs" />
     <Compile Include="Logic\Queries\UserQueries.cs" />
+    <Compile Include="Logic\Repository\PostRepository.cs" />
+    <Compile Include="Logic\Request\GetManyPostsRequest.cs" />
+    <Compile Include="Logic\Response\GetManyPostsResponse.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Following.cs" />
     <Compile Include="Models\Like.cs" />

@@ -1,23 +1,31 @@
-﻿using System.Web.Http;
-using MemeLord.Logic.Queries;
+﻿using MemeLord.Logic.Repository;
+using MemeLord.Logic.Request;
+using MemeLord.Logic.Response;
 using MemeLord.Models;
+using System.Web.Http;
 
 namespace MemeLord.Controllers
 {
     [RoutePrefix("api/post")]
     public class PostController : ApiController
     {
-        private readonly IPostQueries _postQueries;
+        private readonly IPostRepository _postRepository;
 
-        public PostController(IPostQueries postQueries)
+        public PostController(IPostRepository postRepository)
         {
-            _postQueries = postQueries;
+            _postRepository = postRepository;
         }
 
         [Route("get/{id}")]
-        public Post Get(int id)
+        public Post GetById(int id)
         {
-            return _postQueries.GetPostById(id);
+            return _postRepository.GetPostById(id);
+        }
+
+        [Route("getManyPosts")]
+        public GetManyPostsResponse GetManyPosts(GetManyPostsRequest request)
+        {
+            return _postRepository.GetManyPosts(request);
         }
     }
 }

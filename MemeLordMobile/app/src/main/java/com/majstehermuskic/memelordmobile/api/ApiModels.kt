@@ -1,21 +1,11 @@
 package com.majstehermuskic.memelordmobile.api
 
-// TODO: Zmienić z reddit api na nasze api
-class RedditNewsResponse(val data: RedditDataResponse)
-
-class RedditDataResponse(
-        val children: List<RedditChildrenResponse>,
-        val after: String?,
-        val before: String?
+class MemePostsResponse(
+        val posts: List<MemePostResponse>,
+        val last: Int
 )
 
-class RedditChildrenResponse(val data: RedditNewsDataResponse)
-
-class RedditNewsDataResponse(
-        val author: String,
+class MemePostResponse(
         val title: String,
-        val num_comments: Int,
-        val created: Long,
-        val thumbnail: String,
-        val url: String
+        val image: String
 )

@@ -9,16 +9,21 @@ namespace MemeLord.Logic.Mapping
 
     public class Mapper<TSource, TDest> : IMapper<TSource, TDest>
     {
-        private readonly IMapper _mapper;
+        protected IMapper MapperInstance;
 
         public Mapper()
         {
-            _mapper = new MapperConfiguration(cfg => cfg.CreateMap<TSource, TDest>()).CreateMapper();
+            MapperInstance = new MapperConfiguration(cfg => CreateMap(cfg)).CreateMapper();
         }
 
         public TDest Map(TSource source)
         {
-            return _mapper.Map<TDest>(source);
+            return MapperInstance.Map<TDest>(source);
+        }
+
+        public virtual IMappingExpression<TSource, TDest> CreateMap(IMapperConfigurationExpression cfg)
+        {
+            return cfg.CreateMap<TSource, TDest>();
         }
     }
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { GuestSiteComponent } from './guest-site/guest-site.component'
 
 @Component({
   selector: 'app-root',
