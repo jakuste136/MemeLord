@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { GuestNavbarComponent } from './guest-navbar/guest-navbar.component'
-import { PostsListComponent } from './posts/posts-list/posts-list.component'
+import { GuestSiteComponent } from './guest-site/guest-site.component'
 
 @Component({
   selector: 'app-root',
