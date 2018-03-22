@@ -18,6 +18,6 @@ class RestAPI {
     }
 
     fun getPosts(last: Int, count: Int): Call<MemePostsResponse> {
-        return memeLordApi.getTop(last, count)
+        return memeLordApi.getPosts(last, count)
     }
 }
