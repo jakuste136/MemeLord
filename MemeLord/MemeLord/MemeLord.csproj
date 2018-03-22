@@ -128,7 +128,6 @@
     <Compile Include="Logic\Queries\UserQueries.cs" />
     <Compile Include="Logic\Repository\CommentRepository.cs" />
     <Compile Include="Logic\Repository\PostRepository.cs" />
-    <Compile Include="Logic\Request\GetManyPostsRequest.cs" />
     <Compile Include="Logic\Request\GetPostCommentsRequest.cs" />
     <Compile Include="Logic\Response\GetPostCommentsResponse.cs" />
     <Compile Include="Logic\Response\GetManyPostsResponse.cs" />

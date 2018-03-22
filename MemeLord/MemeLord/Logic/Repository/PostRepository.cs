@@ -11,7 +11,7 @@ namespace MemeLord.Logic.Repository
     public interface IPostRepository
     {
         Post GetPostById(int id);
-        GetManyPostsResponse GetManyPosts(GetManyPostsRequest request);
+        GetManyPostsResponse GetManyPosts(int lastId, int count);
     }
 
     public class PostRepository : IPostRepository
@@ -28,13 +28,13 @@ namespace MemeLord.Logic.Repository
             }
         }
 
-        public GetManyPostsResponse GetManyPosts(GetManyPostsRequest request)
+        public GetManyPostsResponse GetManyPosts(int lastId, int count)
         {
             using (var db = CustomDatabaseFactory.GetConnection())
             {
                 var queryResult = db.Query<Post>().OrderByDescending(p => p.CreationDate)
-                               .Where(p => p.Id < request.LastId || request.LastId == 0)
-                               .Limit(request.Count)
+                               .Where(p => p.Id < lastId || lastId == 0)
+                               .Limit(count)
                                .ToList();
 
                 var result = MapEntityToDto(queryResult);
