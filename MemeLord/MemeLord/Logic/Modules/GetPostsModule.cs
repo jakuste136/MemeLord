@@ -25,7 +25,7 @@ namespace MemeLord.Logic.Modules
 
         public GetPostsResponse GetPosts(int lastId, int count)
         {
-            var posts = _postRepository.GetManyPosts(lastId, count);
+            var posts = _postRepository.GetPosts(lastId, count);
             
             var postDtos = _postMapper.Map(posts);
 
