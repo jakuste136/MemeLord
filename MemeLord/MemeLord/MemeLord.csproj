@@ -122,6 +122,7 @@
     <Compile Include="Logic\Database\MemeDatabase.cs" />
     <Compile Include="Logic\Dto\CommentDto.cs" />
     <Compile Include="Logic\Dto\PostDto.cs" />
+    <Compile Include="Logic\Mapping\PostMapper.cs" />
     <Compile Include="Logic\Mapping\SampleCustomMapper.cs" />
     <Compile Include="Logic\Mapping\Mapper.cs" />
     <Compile Include="Logic\Queries\CommentQueries.cs" />

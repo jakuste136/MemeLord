@@ -1,5 +1,6 @@
 ﻿using MemeLord.Logic.Database;
 using MemeLord.Logic.Dto;
+using MemeLord.Logic.Mapping;
 using MemeLord.Logic.Request;
 using MemeLord.Logic.Response;
 using MemeLord.Models;
@@ -16,6 +17,13 @@ namespace MemeLord.Logic.Repository
 
     public class PostRepository : IPostRepository
     {
+        private readonly PostMapper _mapper;
+
+        public PostRepository(PostMapper mapper)
+        {
+            _mapper = mapper;
+        }
+
         public Post GetPostById(int id)
         {
             using (var db = CustomDatabaseFactory.GetConnection())
@@ -46,18 +54,7 @@ namespace MemeLord.Logic.Repository
         private GetManyPostsResponse MapEntityToDto(IEnumerable<Post> postsList)
         {
             var lastId = postsList.LastOrDefault().Id;
-            var postDtosList = new List<PostDto>();
-            foreach(var post in postsList)
-            {
-                postDtosList.Add(new PostDto
-                {
-                    Title = post.Title,
-                    Image = post.Image,
-                    Rating = post.Rating,
-                    CreationDate = post.CreationDate,
-                    DeletionDate = post.DeletionDate
-                });
-            }
+            var postDtosList = _mapper.MapList(postsList);
             return new GetManyPostsResponse
             {
                 PostsList = postDtosList,
