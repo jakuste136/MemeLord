@@ -7,7 +7,7 @@ namespace MemeLord.Logic.Repository
     public interface IPostRepository
     {
         Post GetPostById(int id);
-        List<Post> GetManyPosts(int lastId, int count);
+        List<Post> GetPosts(int lastId, int count);
     }
 
     public class PostRepository : IPostRepository
@@ -24,7 +24,7 @@ namespace MemeLord.Logic.Repository
             }
         }
 
-        public List<Post> GetManyPosts(int lastId, int count)
+        public List<Post> GetPosts(int lastId, int count)
         {
             using (var db = CustomDatabaseFactory.GetConnection())
             {
