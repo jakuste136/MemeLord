@@ -1,4 +1,6 @@
 <app-guest-navbar></app-guest-navbar>
 <div class="posts-list">
-    <app-posts-list></app-posts-list>
+    <div infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="1000" (scrolled)="onScroll()">
+        <app-post *ngFor="let post of posts" [title]="post.title" [path]="post.image"></app-post>
+    </div>
 </div>
