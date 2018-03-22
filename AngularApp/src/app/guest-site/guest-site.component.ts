@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { GuestNavbarComponent } from '../guest-navbar/guest-navbar.component';
+import { LoginPageComponent } from '../login-page/login-page.component'
 import { IPostDto } from './dto/post-dto';
 import { GuestSiteService } from './guest-site.service'
-
-import * as _ from 'lodash';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-guest-site',
@@ -30,7 +30,7 @@ export class GuestSiteComponent implements OnInit {
     this.posts = this.posts.concat(newPosts);
   }
 
-  onScroll() { 
+  onScroll() {
     this._guestSiteService.getPosts(this.lastId, 10).subscribe(data => {
       this.appendPosts(data.postsList);
       this.lastId = data.lastId;
