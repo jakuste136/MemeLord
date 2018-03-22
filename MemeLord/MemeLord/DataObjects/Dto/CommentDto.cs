@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MemeLord.Logic.Dto
+namespace MemeLord.DataObjects.Dto
 {
     public class CommentDto
     {

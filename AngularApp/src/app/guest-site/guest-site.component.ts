@@ -27,8 +27,7 @@ export class GuestSiteComponent implements OnInit {
   }
 
   appendPosts(newPosts: IPostDto[]) {
-    let currentPosts = this.posts;
-    this.posts = _.concat(this.posts, newPosts);      
+    this.posts = this.posts.concat(newPosts);
   }
 
   onScroll() { 

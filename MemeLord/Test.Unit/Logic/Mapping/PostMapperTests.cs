@@ -1,11 +1,11 @@
 ﻿using System;
 using FluentAssertions;
-using MemeLord.Logic.Dto;
 using MemeLord.Logic.Mapping;
 using MemeLord.Models;
 using NUnit.Framework;
 using Test.Unit.TestUtils;
 using System.Collections.Generic;
+using MemeLord.DataObjects.Dto;
 
 namespace Test.Unit.Logic.Mapping
 {
@@ -26,7 +26,7 @@ namespace Test.Unit.Logic.Mapping
             };
 
             //ACT
-            var sut = new Mapper<Post, PostDto>();
+            var sut = new PostMapper();
             var result = sut.Map(post);
 
             //ASSERT
@@ -63,8 +63,8 @@ namespace Test.Unit.Logic.Mapping
             };
 
             //ACT
-            var sut = new Mapper<Post, PostDto>();
-            var result = sut.MapList(postsList);
+            var sut = new PostMapper();
+            var result = sut.Map(postsList);
 
             //ASSERT
             var expectedResult = new List<PostDto>

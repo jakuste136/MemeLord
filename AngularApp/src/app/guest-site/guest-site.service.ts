@@ -9,10 +9,6 @@ export class GuestSiteService {
   constructor(private _http: HttpClient) { }
 
   getPosts(lastId: number, count: number): Observable<IGetPostsResponse> {
-    let params = new URLSearchParams();
-    params.set('lastId', lastId.toString());
-    params.set('count', count.toString());
-
-    return this._http.get<IGetPostsResponse>(`http://192.168.0.108:3000/api/post/getposts?lastid=${lastId}&count=${count}`);
+    return this._http.get<IGetPostsResponse>(`http://localhost:8080/api/post/get-posts?lastid=${lastId}&count=${count}`);
   }
 }

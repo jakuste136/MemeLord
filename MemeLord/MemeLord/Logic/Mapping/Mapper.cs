@@ -4,10 +4,10 @@ using System;
 
 namespace MemeLord.Logic.Mapping
 {
-    public interface IMapper<in TSource, out TDest>
+    public interface IMapper<TSource, TDest>
     {
         TDest Map(TSource source);
-        IEnumerable<TDest> MapList(IEnumerable<TSource> sourceItemsList);
+        IList<TDest> Map(IList<TSource> sourceItemsList);
     }
 
     public class Mapper<TSource, TDest> : IMapper<TSource, TDest>
@@ -24,19 +24,14 @@ namespace MemeLord.Logic.Mapping
             return MapperInstance.Map<TDest>(source);
         }
 
+        public IList<TDest> Map(IList<TSource> sourceItemsList)
+        {
+            return MapperInstance.Map<IList<TDest>>(sourceItemsList);
+        }
+
         public virtual IMappingExpression<TSource, TDest> CreateMap(IMapperConfigurationExpression cfg)
         {
             return cfg.CreateMap<TSource, TDest>();
-        }
-
-        public IEnumerable<TDest> MapList(IEnumerable<TSource> sourceItemsList)
-        {
-            var destinationItemsList = new List<TDest>();
-            foreach(var sourceItem in sourceItemsList)
-            {
-                destinationItemsList.Add(Map(sourceItem));
-            }
-            return destinationItemsList;
         }
     }
 }

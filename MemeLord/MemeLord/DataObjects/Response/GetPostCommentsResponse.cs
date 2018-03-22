@@ -1,7 +1,7 @@
-﻿using MemeLord.Logic.Dto;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using MemeLord.DataObjects.Dto;
 
-namespace MemeLord.Logic.Response
+namespace MemeLord.DataObjects.Response
 {
     public class GetPostCommentsResponse
     {
