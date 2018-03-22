@@ -22,10 +22,11 @@ namespace MemeLord.Controllers
             return _postRepository.GetPostById(id);
         }
 
-        [Route("getManyPosts")]
-        public GetManyPostsResponse GetManyPosts(GetManyPostsRequest request)
+        [Route("getPosts")]
+        [HttpGet]
+        public GetManyPostsResponse GetManyPosts([FromUri] int lastId, [FromUri] int count)
         {
-            return _postRepository.GetManyPosts(request);
+            return _postRepository.GetManyPosts(lastId, count);
         }
     }
 }
