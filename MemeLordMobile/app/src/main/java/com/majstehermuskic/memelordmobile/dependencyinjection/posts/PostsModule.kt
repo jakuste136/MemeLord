@@ -1,4 +1,4 @@
-package com.majstehermuskic.memelordmobile.di.posts
+package com.majstehermuskic.memelordmobile.dependencyinjection.posts
 
 import com.majstehermuskic.memelordmobile.api.MemeLordAPI
 import com.majstehermuskic.memelordmobile.api.PostsAPI

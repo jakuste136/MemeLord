@@ -1,4 +1,4 @@
-package com.majstehermuskic.memelordmobile.di
+package com.majstehermuskic.memelordmobile.dependencyinjection
 
 import dagger.Module
 import dagger.Provides

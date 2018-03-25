@@ -1,6 +1,5 @@
-package com.majstehermuskic.memelordmobile.di
+package com.majstehermuskic.memelordmobile.dependencyinjection
 
-import android.app.Application
 import android.content.Context
 import com.majstehermuskic.memelordmobile.MemeLordApp
 import dagger.Module

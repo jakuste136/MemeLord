@@ -1,7 +1,7 @@
-package com.majstehermuskic.memelordmobile.di.posts
+package com.majstehermuskic.memelordmobile.dependencyinjection.posts
 
-import com.majstehermuskic.memelordmobile.di.AppModule
-import com.majstehermuskic.memelordmobile.di.NetworkModule
+import com.majstehermuskic.memelordmobile.dependencyinjection.AppModule
+import com.majstehermuskic.memelordmobile.dependencyinjection.NetworkModule
 import com.majstehermuskic.memelordmobile.features.posts.PostsFragment
 import dagger.Component
 import javax.inject.Singleton

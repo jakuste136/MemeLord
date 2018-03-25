@@ -6,7 +6,7 @@ import io.reactivex.disposables.CompositeDisposable
 /**
  * Created by Bartosz on 2018-03-16.
  */
-open class RxBaseFragment() : Fragment() {
+open class RxBaseFragment : Fragment() {
 
     protected var subscriptions = CompositeDisposable()
 

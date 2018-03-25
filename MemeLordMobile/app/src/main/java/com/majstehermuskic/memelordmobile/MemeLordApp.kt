@@ -1,9 +1,9 @@
 package com.majstehermuskic.memelordmobile
 
 import android.app.Application
-import com.majstehermuskic.memelordmobile.di.AppModule
-import com.majstehermuskic.memelordmobile.di.posts.DaggerPostsComponent
-import com.majstehermuskic.memelordmobile.di.posts.PostsComponent
+import com.majstehermuskic.memelordmobile.dependencyinjection.AppModule
+import com.majstehermuskic.memelordmobile.dependencyinjection.posts.DaggerPostsComponent
+import com.majstehermuskic.memelordmobile.dependencyinjection.posts.PostsComponent
 
 /**
  * Created by Bartosz on 2018-03-22.
