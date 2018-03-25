@@ -1,8 +1,8 @@
 ﻿using MemeLord.Logic.Repository;
-using MemeLord.Logic.Request;
-using MemeLord.Logic.Response;
+using MemeLord.DataObjects.Response;
 using MemeLord.Models;
 using System.Web.Http;
+using MemeLord.Logic.Modules;
 
 namespace MemeLord.Controllers
 {
