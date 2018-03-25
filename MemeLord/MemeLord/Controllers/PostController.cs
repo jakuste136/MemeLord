@@ -1,8 +1,8 @@
 ﻿using MemeLord.Logic.Repository;
-using MemeLord.Logic.Request;
-using MemeLord.Logic.Response;
 using MemeLord.Models;
 using System.Web.Http;
+using MemeLord.DataObjects.Response;
+using MemeLord.Logic.Modules;
 
 namespace MemeLord.Controllers
 {
@@ -10,10 +10,12 @@ namespace MemeLord.Controllers
     public class PostController : ApiController
     {
         private readonly IPostRepository _postRepository;
+        private readonly IGetPostsModule _getPostsModule;
 
-        public PostController(IPostRepository postRepository)
+        public PostController(IPostRepository postRepository, IGetPostsModule getPostsModule)
         {
             _postRepository = postRepository;
+            _getPostsModule = getPostsModule;
         }
 
         [Route("get/{id}")]
@@ -22,10 +24,11 @@ namespace MemeLord.Controllers
             return _postRepository.GetPostById(id);
         }
 
-        [Route("getManyPosts")]
-        public GetManyPostsResponse GetManyPosts(GetManyPostsRequest request)
+        [Route("get-posts")]
+        [HttpGet]
+        public GetPostsResponse GetManyPosts([FromUri] int lastId, [FromUri] int count)
         {
-            return _postRepository.GetManyPosts(request);
+            return _getPostsModule.GetPosts(lastId, count);
         }
     }
 }

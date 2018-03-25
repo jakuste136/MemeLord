@@ -1,8 +1,8 @@
 package com.majstehermuskic.memelordmobile.api
 
 class MemePostsResponse(
-        val posts: List<MemePostResponse>,
-        val last: Int
+        val postsList: List<MemePostResponse>,
+        val lastId: Int
 )
 
 class MemePostResponse(

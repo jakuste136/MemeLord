@@ -3,7 +3,6 @@ package com.majstehermuskic.memelordmobile.features.posts
 
 import android.os.Bundle
 import android.support.design.widget.Snackbar
-import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -21,6 +20,10 @@ import kotlinx.android.synthetic.main.fragment_posts.*
 
 class PostsFragment : RxBaseFragment() {
 
+    companion object {
+        private val KEY_MEME_POSTS = "memePosts"
+    }
+
     private var memePosts: MemePosts? = null
     private val postsManager by lazy { PostsManager() }
 
@@ -32,16 +35,29 @@ class PostsFragment : RxBaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        posts_list.setHasFixedSize(true)
-        val linearLayout = LinearLayoutManager(context)
-        posts_list.layoutManager = linearLayout
-        posts_list.clearOnScrollListeners()
-        posts_list.addOnScrollListener(InfiniteScrollListener({requestPosts()}, linearLayout))
+        posts_list.apply {
+            setHasFixedSize(true)
+            val linearLayout = LinearLayoutManager(context)
+            layoutManager = linearLayout
+            clearOnScrollListeners()
+            addOnScrollListener(InfiniteScrollListener({requestPosts()}, linearLayout))
+        }
 
         initAdapter()
 
-        if(savedInstanceState == null){
+        if(savedInstanceState != null && savedInstanceState.containsKey(KEY_MEME_POSTS)){
+            memePosts = savedInstanceState.get(KEY_MEME_POSTS) as MemePosts
+            (posts_list.adapter as PostsAdapter).clearAndAddPosts(memePosts!!.posts)
+        } else {
             requestPosts()
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        val posts = (posts_list.adapter as PostsAdapter).getPosts()
+        if(memePosts != null && posts.isNotEmpty()) {
+            outState!!.putParcelable(KEY_MEME_POSTS, memePosts?.copy(posts = posts))
         }
     }
 

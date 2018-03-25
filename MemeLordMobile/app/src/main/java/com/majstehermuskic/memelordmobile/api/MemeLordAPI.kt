@@ -5,7 +5,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface MemeLordAPI {
-    @GET("user")
-    fun getTop(@Query("lastid") lastid: Int,
-               @Query("count") count: Int): Call<MemePostsResponse>
+    @GET("post/getPosts")
+    fun getPosts(@Query("lastid") lastid: Int,
+                 @Query("count") count: Int): Call<MemePostsResponse>
 }

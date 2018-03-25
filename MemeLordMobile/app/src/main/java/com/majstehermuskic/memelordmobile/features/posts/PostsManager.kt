@@ -15,11 +15,11 @@ class PostsManager(private val api: RestAPI = RestAPI()) {
 
             if(response.isSuccessful) {
                 val postsResponse = response.body()
-                val posts = postsResponse!!.posts.map {
+                val posts = postsResponse!!.postsList.map {
                     MemePostItem(it.title, it.image)
                 }
                 val memePosts = MemePosts(
-                        postsResponse.last,
+                        postsResponse.lastId,
                         posts
                 )
                 subscriber.onNext(memePosts)

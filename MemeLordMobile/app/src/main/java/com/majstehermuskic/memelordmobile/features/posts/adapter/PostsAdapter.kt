@@ -56,7 +56,7 @@ class PostsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         notifyItemRangeInserted(0 , items.size)
     }
 
-    fun getNews(): List<MemePostItem> {
+    fun getPosts(): List<MemePostItem> {
         return items
                 .filter { it.getViewType() == AdapterConstants.POSTS }
                 .map { it as MemePostItem}
