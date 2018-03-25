@@ -49,7 +49,7 @@ namespace MemeLord.Logic.Repository
                         .Include(c => c.MasterComment)
                         .OrderBy(c => c.CreationDate)
                         .Where(c => c.MasterComment.Id == masterComment.Id)
-                        .Where(c => c.DeletionDate != null)
+                        .Where(c => c.DeletionDate == null)
                         .ToList();
 
                     masterComment.Answers = answers;

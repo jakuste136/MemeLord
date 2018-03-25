@@ -10,7 +10,7 @@ namespace MemeLord.DataObjects.Dto
         public IList<CommentDto> Answers { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime? DeletionDate { get; set; }
-        public string Description { get; set; }
+        public string Text { get; set; }
         public int Id { get; set; }
     }
 }
