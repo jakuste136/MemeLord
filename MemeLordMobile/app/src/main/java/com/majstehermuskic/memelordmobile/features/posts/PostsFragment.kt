@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.majstehermuskic.memelordmobile.MemeLordApp
 import com.majstehermuskic.memelordmobile.R
 import com.majstehermuskic.memelordmobile.commons.InfiniteScrollListener
 import com.majstehermuskic.memelordmobile.commons.MemePosts
@@ -16,16 +17,22 @@ import com.majstehermuskic.memelordmobile.features.posts.adapter.PostsAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_posts.*
+import javax.inject.Inject
 
 
 class PostsFragment : RxBaseFragment() {
 
     companion object {
-        private val KEY_MEME_POSTS = "memePosts"
+        private const val KEY_MEME_POSTS = "memePosts"
     }
 
+    @Inject lateinit var postsManager: PostsManager
     private var memePosts: MemePosts? = null
-    private val postsManager by lazy { PostsManager() }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        MemeLordApp.postsComponent.inject(this)
+    }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -53,11 +60,11 @@ class PostsFragment : RxBaseFragment() {
         }
     }
 
-    override fun onSaveInstanceState(outState: Bundle?) {
+    override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         val posts = (posts_list.adapter as PostsAdapter).getPosts()
         if(memePosts != null && posts.isNotEmpty()) {
-            outState!!.putParcelable(KEY_MEME_POSTS, memePosts?.copy(posts = posts))
+            outState.putParcelable(KEY_MEME_POSTS, memePosts?.copy(posts = posts))
         }
     }
 
@@ -71,7 +78,7 @@ class PostsFragment : RxBaseFragment() {
                              (posts_list.adapter as PostsAdapter).addPosts(retrievedPosts.posts)
                          },
                          { e ->
-                             Snackbar.make(posts_list, e.message ?: "", Snackbar.LENGTH_SHORT).show()
+                             Snackbar.make(posts_list, e.message ?: "", Snackbar.LENGTH_LONG).show()
                          }
                  )
         subscriptions.add(subscription)
