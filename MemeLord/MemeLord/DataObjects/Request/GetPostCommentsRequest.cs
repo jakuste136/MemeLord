@@ -1,4 +1,4 @@
-﻿namespace MemeLord.Logic.Request
+﻿namespace MemeLord.DataObjects.Request
 {
     public class GetPostCommentsRequest
     {

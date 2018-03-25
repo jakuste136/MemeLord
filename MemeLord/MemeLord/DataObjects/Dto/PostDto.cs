@@ -1,9 +1,10 @@
 ﻿using System;
 
-namespace MemeLord.Logic.Dto
+namespace MemeLord.DataObjects.Dto
 {
     public class PostDto
     {
+        public string Username { get; set; }
         public string Title { get; set; }
         public string Image { get; set; }
         public DateTime CreationDate { get; set; }

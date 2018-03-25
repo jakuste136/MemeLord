@@ -1,11 +1,11 @@
 ﻿using MemeLord.Logic.Database;
-using MemeLord.Logic.Dto;
-using MemeLord.Logic.Request;
-using MemeLord.Logic.Response;
 using MemeLord.Models;
 using System.Collections.Generic;
 using MemeLord.Logic.Queries;
 using System.Linq;
+using MemeLord.DataObjects.Dto;
+using MemeLord.DataObjects.Request;
+using MemeLord.DataObjects.Response;
 
 namespace MemeLord.Logic.Repository
 {
