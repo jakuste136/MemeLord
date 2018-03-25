@@ -154,7 +154,13 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Configuration\MigrationsConfiguration.cs" />
-    <Compile Include="Configuration\HashManagerConfiguration.cs" />
+    <Compile Include="Configuration\AuthenticationConfiguration.cs" />
+    <Compile Include="Configuration\AuthorizationConfiguration.cs" />
+    <Compile Include="Configuration\Settings\AuthorizationSettings.Designer.cs">
+      <DependentUpon>AuthorizationSettings.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
     <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -173,8 +179,11 @@
     <Compile Include="Logic\Mapping\SampleCustomMapper.cs" />
     <Compile Include="Logic\Extensions\OwinContextExtentions.cs" />
     <Compile Include="Logic\Mapping\Mapper.cs" />
+    <Compile Include="Logic\Mapping\UserDtoMapper.cs" />
     <Compile Include="Logic\Mapping\UserMapper.cs" />
-    <Compile Include="Logic\Modules\UserUpdateModule.cs" />
+    <Compile Include="Logic\Modules\Users\UserAddModule.cs" />
+    <Compile Include="Logic\Modules\Users\UserGetModule.cs" />
+    <Compile Include="Logic\Modules\Users\UserUpdateModule.cs" />
     <Compile Include="Logic\Providers\OAuthAppProvider.cs" />
     <Compile Include="Logic\Modules\GetCommentsModule.cs" />
     <Compile Include="Logic\Modules\GetPostsModule.cs" />
@@ -204,22 +213,26 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>MigrationSettings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Configuration\Settings\HashManagerSettings.Designer.cs">
+    <Compile Include="Configuration\Settings\AuthenticationSettings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>HashManagerSettings.settings</DependentUpon>
+      <DependentUpon>AuthenticationSettings.settings</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Configuration\Settings\AuthorizationSettings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>AuthorizationSettings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
     <None Include="Configuration\Settings\MigrationSettings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>MigrationSettings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Configuration\Settings\HashManagerSettings.settings">
+    <None Include="Configuration\Settings\AuthenticationSettings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>HashManagerSettings.Designer.cs</LastGenOutput>
+      <LastGenOutput>AuthenticationSettings.Designer.cs</LastGenOutput>
     </None>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

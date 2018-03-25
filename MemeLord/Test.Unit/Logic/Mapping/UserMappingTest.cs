@@ -24,7 +24,7 @@ namespace Test.Unit.Logic.Mapping
             };
 
             //ACT
-            var sut = new UserMapper();
+            var sut = new UserDtoMapper();
             var result = sut.Map(userDto);
 
             //ASSERT

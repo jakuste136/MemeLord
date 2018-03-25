@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net;
+using System.Net.Http;
 using System.Web.Http;
 using JsonPatch;
 using MemeLord.DataObjects.Dto;
-using MemeLord.Logic.Modules;
+using MemeLord.Logic.Modules.Users;
 using MemeLord.Logic.Repository;
 using MemeLord.Models;
 
@@ -13,48 +13,41 @@ namespace MemeLord.Controllers
     [RoutePrefix("api/user")]
     public class UserController : ApiController
     {
-        private readonly IUserRepository _userRepository;
-        //private readonly IUserUpdateModule _userUpdateModule;
+        private readonly IUserUpdateModule _userUpdateModule;
+        private readonly IUserAddModule _userAddModule;
+        private readonly IUserGetModule _userGetModule;
 
-        public UserController(IUserRepository userQueries)
+        public UserController(IUserUpdateModule userUpdateModule, IUserAddModule userAddModule, IUserGetModule userGetModule)
         {
-            _userRepository = userQueries;
+            _userUpdateModule = userUpdateModule;
+            _userAddModule = userAddModule;
+            _userGetModule = userGetModule;
         }
 
-        [Route("get")]
         [HttpGet]
-        public IList<User> Get()
+        public IList<UserDto> Get()
         {
-            return _userRepository.GetUsers().ToList();
+            return _userGetModule.GetAllUsers();
         }
 
         [Route("{id}")]
         [HttpGet]
-        public User Get(int id)
+        public UserDto Get(int id)
         {
-            return _userRepository.GetUserById(id);
+            return _userGetModule.GetUserById(id);
         }
 
         [HttpPost]
-        public IHttpActionResult Post([FromBody] UserDto userDto)
+        public HttpResponseMessage Post([FromBody] UserDto userDto)
         {
-            if (!ModelState.IsValid) return StatusCode(HttpStatusCode.UnsupportedMediaType);
-            _userRepository.SaveUser(userDto);
-            return StatusCode(HttpStatusCode.Accepted);
+            return _userAddModule.AddUser(userDto);
         }
 
         [Route("{id}")]
         [HttpPatch]
-        public IHttpActionResult Patch(int id, JsonPatchDocument<User> userPatch)
+        public HttpResponseMessage Patch(int id, JsonPatchDocument<User> userPatch)
         {
-            var userToUpdate = _userRepository.GetUserById(id);
-            if (userToUpdate == null)
-            {
-                return NotFound();
-            }
-            userPatch.ApplyUpdatesTo(userToUpdate);
-            _userRepository.SaveUser(userToUpdate);
-            return Ok(userToUpdate);
+            return _userUpdateModule.UpdateUser(id, userPatch);
         }
     }
 }

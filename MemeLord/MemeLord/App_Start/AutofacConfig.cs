@@ -31,10 +31,11 @@ namespace MemeLord
                 .Where(t => t.GetInterfaces().Any(i => i.Name.EndsWith(t.Name)))
                 .As(t => t.GetInterfaces().Single(i => i.Name.EndsWith(t.Name)));
 
-            //builder.RegisterType<OAuthAppProvider>()
-            //    .OwnedByLifetimeScope()
-            //    .PropertiesAutowired()
-            //    .SingleInstance();
+            // Register OAuthAppProvider
+            builder.RegisterType<OAuthAppProvider>()
+                .OwnedByLifetimeScope()
+                .PropertiesAutowired()
+                .SingleInstance();
 
             // Set the dependency resolver to be Autofac.
             var container = builder.Build();

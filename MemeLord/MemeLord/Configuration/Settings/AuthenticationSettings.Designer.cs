@@ -13,11 +13,11 @@ namespace MemeLord.Configuration.Settings {
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.6.0.0")]
-    internal sealed partial class HashManagerSettings : global::System.Configuration.ApplicationSettingsBase {
+    internal sealed partial class AuthenticationSettings : global::System.Configuration.ApplicationSettingsBase {
         
-        private static HashManagerSettings defaultInstance = ((HashManagerSettings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new HashManagerSettings())));
+        private static AuthenticationSettings defaultInstance = ((AuthenticationSettings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new AuthenticationSettings())));
         
-        public static HashManagerSettings Default {
+        public static AuthenticationSettings Default {
             get {
                 return defaultInstance;
             }

@@ -18,9 +18,9 @@ namespace MemeLord.Logic.Providers
     {
         private readonly IUserRepository _userRepository;
 
-        public OAuthAppProvider(/*IUserRepository userRepository*/)
+        public OAuthAppProvider(IUserRepository userRepository)
         {
-            //_userRepository = userRepository;
+            _userRepository = userRepository;
         }
 
         public override Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
@@ -37,11 +37,9 @@ namespace MemeLord.Logic.Providers
 
         public override Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            //var autofacLifetimeScope = OwinContextExtensions.GetAutofacLifetimeScope(context.OwinContext);
             return Task.Factory.StartNew(() =>
             {
-                //var user = _userRepository.GetUserByCredentials(context.UserName);
-                var user = new UserRepository(new UserMapper()).GetUserByCredentials(context.UserName);
+                var user = _userRepository.GetUserByCredentials(context.UserName);
                 if (user != null && HashManager.Verify(context.Password, user.Hash))
                 {
                     var claims = new List<Claim>

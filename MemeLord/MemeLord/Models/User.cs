@@ -9,7 +9,7 @@ namespace MemeLord.Models
         public string Email { get; set; }
         public string Hash { get; set; }
         public string Avatar { get; set; }
-        public int Sex { get; set; }
+        public Sex Sex { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string Description { get; set; }
     }
@@ -17,7 +17,7 @@ namespace MemeLord.Models
     public enum Sex
     {
         Male,
-        Female = 1,
-        Undefined = 2
+        Female,
+        Undefined
     }
 }

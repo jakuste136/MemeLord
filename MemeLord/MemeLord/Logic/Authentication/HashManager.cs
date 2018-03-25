@@ -6,13 +6,13 @@ namespace MemeLord.Logic.Authentication
 {
     public static class HashManager
     {
-        private static readonly int saltSize = HashManagerConfiguration.SaltSize;  //16
+        private static readonly int saltSize = AuthenticationConfiguration.SaltSize;  //16
 
-        private static readonly int hashSize = HashManagerConfiguration.HashSize; //20
+        private static readonly int hashSize = AuthenticationConfiguration.HashSize; //20
 
-        private static readonly int iterations = HashManagerConfiguration.Iterations; //53238
+        private static readonly int iterations = AuthenticationConfiguration.Iterations; //53238
 
-        private static readonly string hashPrefix = HashManagerConfiguration.HashPrefix; //MMLRD$V1$
+        private static readonly string hashPrefix = AuthenticationConfiguration.HashPrefix; //MMLRD$V1$
 
         public static string Hash(string password)
         {

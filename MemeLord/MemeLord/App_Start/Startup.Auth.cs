@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Http;
 using Autofac;
 using Autofac.Integration.WebApi;
+using MemeLord.Configuration;
 using MemeLord.Logic.Providers;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
@@ -20,23 +21,19 @@ namespace MemeLord
 
         static Startup()
         {
-            
-        }
-
-        public void ConfigureAuth(IAppBuilder app)
-        {
             OAuthOptions = new OAuthAuthorizationServerOptions
             {
                 TokenEndpointPath = new PathString("/token"),
 
-                AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
+                AccessTokenExpireTimeSpan = AuthorizationConfiguration.TokenLifeTime,
                 AllowInsecureHttp = true,
-                //Provider = GlobalConfiguration.Configuration.DependencyResolver.GetRootLifetimeScope()
-                //    .Resolve<OAuthAppProvider>()
-                Provider = new OAuthAppProvider()
+                Provider = GlobalConfiguration.Configuration.DependencyResolver.GetRootLifetimeScope()
+                    .Resolve<OAuthAppProvider>()
             };
+        }
 
-
+        public void ConfigureAuth(IAppBuilder app)
+        {
             app.UseOAuthBearerTokens(OAuthOptions);
         }
     }
