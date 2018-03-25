@@ -2,6 +2,7 @@
 using System.Linq;
 using MemeLord.DataObjects.Response;
 using MemeLord.Logic.Mapping;
+using MemeLord.Logic.Mapping.CommentMapping;
 using MemeLord.Logic.Repository;
 using MemeLord.Models;
 
@@ -16,19 +17,19 @@ namespace MemeLord.Logic.Modules
     public class GetCommentsModule : IGetCommentsModule
     {
         private readonly ICommentRepository _commentRepository;
-        private readonly ICommentMapper _commentMapper;
+        private readonly IMasterCommentMapper _masterCommentMapper;
 
-        public GetCommentsModule (ICommentRepository commentRepository, ICommentMapper commentMapper)
+        public GetCommentsModule (ICommentRepository commentRepository, IMasterCommentMapper masterCommentMapper)
         {
             _commentRepository = commentRepository;
-            _commentMapper = commentMapper;
+            _masterCommentMapper = masterCommentMapper;
         }
 
 
         public GetPostCommentsResponse GetPostComments(int postId, int lastId, int count)
         {
             var comments = _commentRepository.GetManyComments(postId, lastId, count);
-            var commentDtos = _commentMapper.Map(comments);
+            var commentDtos = _masterCommentMapper.Map(comments);
 
             return new GetPostCommentsResponse
             {
