@@ -1,24 +1,22 @@
 ﻿using AutoMapper;
+using MemeLord.DataObjects.Dto;
 using MemeLord.Logic.Authentication;
-using MemeLord.Logic.Dto;
 using MemeLord.Models;
 
 namespace MemeLord.Logic.Mapping
 {
-    public class SampleCustomMapper : Mapper<UserDto, User>
+    public interface ISampleCustomMapper
     {
-        // TODO: [Mateusz] testIt!
+        User Map(UserDto source);
+    }
+
+    public class SampleCustomMapper : Mapper<UserDto, User>, ISampleCustomMapper
+    {
         public override IMappingExpression<UserDto, User> CreateMap(IMapperConfigurationExpression cfg)
         {
             // maps destination postDto.Title from source user.UserName
 
-            return base.CreateMap(cfg)
-                .ForMember(usr => usr.Hash, map => map.ResolveUsing(GetHash));
-        }
-
-        public string GetHash(UserDto dto)
-        {
-            return HashManager.Hash(dto.Password);
+            return base.CreateMap(cfg);
         }
     }
 }

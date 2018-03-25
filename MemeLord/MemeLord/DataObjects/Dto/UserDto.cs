@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using MemeLord.Models;
 
-namespace MemeLord.Logic.Dto
+namespace MemeLord.DataObjects.Dto
 {
     public class UserDto
     {

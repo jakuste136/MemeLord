@@ -1,48 +1,53 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using System.Web;
+using MemeLord.DataObjects.Dto;
 using MemeLord.Logic.Authentication;
-using MemeLord.Logic.Queries;
+using MemeLord.Logic.Mapping;
+using MemeLord.Logic.Repository;
 using MemeLord.Models;
+using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
+
 
 namespace MemeLord.Logic.Providers
 {
     public class OAuthAppProvider : OAuthAuthorizationServerProvider
     {
-        /*
-         * Validate client token request
-         */
+        private readonly IUserRepository _userRepository;
+
+        public OAuthAppProvider(/*IUserRepository userRepository*/)
+        {
+            //_userRepository = userRepository;
+        }
+
         public override Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
         {
+            // CLIENT TOKEN VALIDATION IS NOT USED AT THIS TIME
+
             if (context.ClientId == null)
             //if (context.TryGetFormCredentials(out var clientId, out var clientSecret))
             {
-                // validation of client
                 context.Validated();
             }
             return Task.FromResult<object>(null);
         }
 
-        /*
-         * Validate user to acquire token
-         */
         public override Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            // TODO: [Mateusz] Cleanup
+            //var autofacLifetimeScope = OwinContextExtensions.GetAutofacLifetimeScope(context.OwinContext);
             return Task.Factory.StartNew(() =>
             {
-                var user = new UserQueries().GetUserByCredentials(context.UserName);
+                //var user = _userRepository.GetUserByCredentials(context.UserName);
+                var user = new UserRepository(new UserMapper()).GetUserByCredentials(context.UserName);
                 if (user != null && HashManager.Verify(context.Password, user.Hash))
                 {
                     var claims = new List<Claim>
                         {
                             new Claim(ClaimTypes.Name, user.Username),
-                            //new Claim("UserID", user.Username)
+                            new Claim("role", "user"),
                         };
 
                     var oAutIdentity = new ClaimsIdentity(claims, Startup.OAuthOptions.AuthenticationType);
@@ -54,7 +59,5 @@ namespace MemeLord.Logic.Providers
                 }
             });
         }
-
-        
     }
 }

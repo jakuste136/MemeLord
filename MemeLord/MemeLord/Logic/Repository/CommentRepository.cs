@@ -60,7 +60,7 @@ namespace MemeLord.Logic.Repository
                             .ToList()
                             );
                     }
-                    catch (ArgumentNullException e) { /*when query returns null*/}
+                    catch (ArgumentNullException) { /*when query returns null*/}
                 }
                 
                 masterComments.InsertRange(masterComments.Count, answers);

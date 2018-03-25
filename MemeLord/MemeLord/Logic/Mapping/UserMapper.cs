@@ -1,32 +1,26 @@
-﻿using MemeLord.Logic.Authentication;
-using MemeLord.Logic.Dto;
+﻿using AutoMapper;
+using MemeLord.DataObjects.Dto;
+using MemeLord.Logic.Authentication;
 using MemeLord.Models;
 
 namespace MemeLord.Logic.Mapping
 {
-    public class UserMapper
+    public interface IUserMapper
     {
-        public User Map(UserDto source)
+        User Map(UserDto source);
+    }
+
+    public class UserMapper : Mapper<UserDto, User>, IUserMapper
+    {
+        public override IMappingExpression<UserDto, User> CreateMap(IMapperConfigurationExpression cfg)
         {
-            return new User
-            {
-                Username = source.Username,
-                Email = source.Email,
-                Sex = source.Sex,
-                DateOfBirth = source.DateOfBirth,
-                Hash = HashManager.Hash(source.Password)
-            };
+            return base.CreateMap(cfg)
+                .ForMember(usr => usr.Hash, map => map.ResolveUsing(GetHash));
         }
 
-        public UserDto Map(User source)
+        public string GetHash(UserDto dto)
         {
-            return new UserDto
-            {
-                Username = source.Username,
-                Email = source.Email,
-                Sex = source.Sex,
-                DateOfBirth = source.DateOfBirth
-            };
+            return HashManager.Hash(dto.Password);
         }
     }
 }

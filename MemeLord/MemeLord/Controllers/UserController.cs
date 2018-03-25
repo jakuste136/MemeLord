@@ -2,8 +2,10 @@
 using System.Linq;
 using System.Net;
 using System.Web.Http;
-using MemeLord.Logic.Dto;
-using MemeLord.Logic.Queries;
+using JsonPatch;
+using MemeLord.DataObjects.Dto;
+using MemeLord.Logic.Modules;
+using MemeLord.Logic.Repository;
 using MemeLord.Models;
 
 namespace MemeLord.Controllers
@@ -11,33 +13,48 @@ namespace MemeLord.Controllers
     [RoutePrefix("api/user")]
     public class UserController : ApiController
     {
-        private readonly IUserQueries _userQueries;
+        private readonly IUserRepository _userRepository;
+        //private readonly IUserUpdateModule _userUpdateModule;
 
-        public UserController(IUserQueries userQueries)
+        public UserController(IUserRepository userQueries)
         {
-            _userQueries = userQueries;
+            _userRepository = userQueries;
         }
 
         [Route("get")]
         [HttpGet]
         public IList<User> Get()
         {
-            return _userQueries.GetUsers().ToList();
+            return _userRepository.GetUsers().ToList();
         }
 
-        [Route("get/{id}")]
+        [Route("{id}")]
         [HttpGet]
         public User Get(int id)
         {
-            return _userQueries.GetUserById(id);
+            return _userRepository.GetUserById(id);
         }
 
         [HttpPost]
-        public IHttpActionResult Post([FromBody] UserDto user)
+        public IHttpActionResult Post([FromBody] UserDto userDto)
         {
             if (!ModelState.IsValid) return StatusCode(HttpStatusCode.UnsupportedMediaType);
-            _userQueries.SaveUser(user);
+            _userRepository.SaveUser(userDto);
             return StatusCode(HttpStatusCode.Accepted);
+        }
+
+        [Route("{id}")]
+        [HttpPatch]
+        public IHttpActionResult Patch(int id, JsonPatchDocument<User> userPatch)
+        {
+            var userToUpdate = _userRepository.GetUserById(id);
+            if (userToUpdate == null)
+            {
+                return NotFound();
+            }
+            userPatch.ApplyUpdatesTo(userToUpdate);
+            _userRepository.SaveUser(userToUpdate);
+            return Ok(userToUpdate);
         }
     }
 }

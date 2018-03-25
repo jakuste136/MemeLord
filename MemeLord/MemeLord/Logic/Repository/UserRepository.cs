@@ -1,24 +1,27 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using MemeLord.DataObjects.Dto;
 using MemeLord.Logic.Database;
-using MemeLord.Logic.Dto;
 using MemeLord.Logic.Mapping;
 using MemeLord.Models;
 
-namespace MemeLord.Logic.Queries
+namespace MemeLord.Logic.Repository
 {
-    public interface IUserQueries
+    public interface IUserRepository
     {
         IEnumerable<User> GetUsers();
         User GetUserById(int id);
         User GetUserByCredentials(string username);
+        [Obsolete]
         void SaveUser(UserDto userObject);
+        void SaveUser(User user);
     }
 
-    public class UserQueries : IUserQueries
+    public class UserRepository : IUserRepository
     {
-        private readonly IMapper<UserDto, User> _userMapper;
+        private readonly IUserMapper _userMapper;
 
-        public UserQueries(IMapper<UserDto, User> userMapper)
+        public UserRepository(IUserMapper userMapper)
         {
             _userMapper = userMapper;
         }
@@ -49,11 +52,20 @@ namespace MemeLord.Logic.Queries
             }
         }
 
+        [Obsolete]
         public void SaveUser(UserDto userObject)
         {
             using (var db = CustomDatabaseFactory.GetConnection())
             {
                 var user = _userMapper.Map(userObject);
+                db.Save(user);
+            }
+        }
+
+        public void SaveUser(User user)
+        {
+            using (var db = CustomDatabaseFactory.GetConnection())
+            {
                 db.Save(user);
             }
         }

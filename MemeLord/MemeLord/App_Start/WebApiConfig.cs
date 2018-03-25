@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Web.Http;
+using JsonPatch.Formatting;
 using Newtonsoft.Json.Serialization;
 
 namespace MemeLord
@@ -28,6 +29,7 @@ namespace MemeLord
                 defaults: new { id = RouteParameter.Optional }
             );
 
+            config.Formatters.Add(new JsonPatchFormatter());
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             config.Formatters.JsonFormatter.UseDataContractJsonSerializer = false;
