@@ -12,7 +12,7 @@ namespace MemeLord.Logic.Repository
     public interface ICommentRepository
     {
         Comment GetCommentById(int id);
-        GetPostCommentsResponse GetManyComments(GetPostCommentsRequest request);
+        List<Comment> GetManyComments(int postId, int lastId, int count);
     }
 
     public class CommentRepository : ICommentRepository
@@ -21,71 +21,31 @@ namespace MemeLord.Logic.Repository
         {
             using (var db = CustomDatabaseFactory.GetConnection())
             {
-                var data = db.Query<Comment>()
+                return db.Query<Comment>()
                     .Include(c => c.MasterComment)
+                    .Include(c => c.Post)
+                    .Include(c => c.User)
                     .SingleOrDefault(c => c.Id == id);
-
-                return data;
             }
         }
 
-        public GetPostCommentsResponse GetManyComments(GetPostCommentsRequest request)
+        public List<Comment> GetManyComments(int postId, int lastId, int count)
         {
             using (var db = CustomDatabaseFactory.GetConnection())
             {
-                var queryResult =  db.Query<Comment>().OrderByDescending(c => c.CreationDate).
-                    Where(c => c.Post.Id == request.PostId).ToEnumerable();
-
-                return MapEntityToDto(queryResult);
+                return db.Query<Comment>()
+                    .Include(c => c.MasterComment)
+                    .Include(c => c.Post)
+                    .Include(c => c.User)
+                    .OrderByDescending(c => c.CreationDate)
+                    .Where(c => c.Post.Id == postId)
+                    .Where(c => c.Id > lastId)
+                    .Where(c => c.DeletionDate == null)
+                    .Limit(count)
+                    .ToList();
             }
 
         }
 
-        private GetPostCommentsResponse MapEntityToDto(IEnumerable<Comment> commentList)
-        {
-            var commentDtoList = new List<CommentDto>();
-
-            foreach (var comment in commentList)
-            {
-                if (comment.MasterComment == null)
-                {
-                    //creating list of answers for this comment *** comments are already sorted by the date
-                    var FollowingComments = new List<CommentDto>();
-                    foreach(var tmp_comm in commentList)
-                    {
-                        if (tmp_comm.MasterComment.Id == comment.Id)
-                            FollowingComments.Add(new CommentDto
-                            {
-                                Author = tmp_comm.User.Username,
-                                Rating = tmp_comm.Rating,
-                                Answers = null,
-                                CreationDate = tmp_comm.CreationDate,
-                                DeletionDate = tmp_comm.DeletionDate,
-                                Description = tmp_comm.Description
-                            });
-                    }
-
-
-                    commentDtoList.Add(new CommentDto
-                    {
-                        Author = comment.User.Username,
-                        Rating = comment.Rating,
-                        Answers = FollowingComments,
-                        CreationDate = comment.CreationDate,
-                        DeletionDate = comment.DeletionDate,
-                        Description = comment.Description
-                    });
-                }
-            }
-
-            return new GetPostCommentsResponse
-            {
-                Number = commentDtoList.Count,
-                CommentsList = commentDtoList
-            };
-
-        }
-
-        
     }
 }

@@ -5,7 +5,7 @@ namespace MemeLord.Logic.Response
 {
     public class GetPostCommentsResponse
     {
-        public int Number { get; set; }
+        public int LastId { get; set; }
         public IEnumerable<CommentDto> CommentsList { get; set; }
     }
 }
