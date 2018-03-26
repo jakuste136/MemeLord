@@ -32,7 +32,7 @@ namespace MemeLord.Logic.Modules.Users
                 return new HttpResponseMessage(HttpStatusCode.NotFound);
             }
 
-            foreach (var passwordChange in userPatch.Operations.Where(o => o.Path == @"/Password"))
+            foreach (var passwordChange in userPatch.Operations.Where(o => o.Path == $"/{nameof(userToUpdate.Hash)}"))
             {
                 passwordChange.Value = _hashManager.Hash(passwordChange.Value.ToString());
             }

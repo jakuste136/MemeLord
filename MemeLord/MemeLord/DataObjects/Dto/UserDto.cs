@@ -1,5 +1,7 @@
 ﻿using System;
 using MemeLord.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace MemeLord.DataObjects.Dto
 {

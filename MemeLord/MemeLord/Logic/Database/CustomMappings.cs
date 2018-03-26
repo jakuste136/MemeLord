@@ -83,7 +83,11 @@ namespace MemeLord.Logic.Database
 
             For<User>()
                 .TableName("Users")
-                .PrimaryKey(u => u.Id);
+                .PrimaryKey(u => u.Id)
+                .Columns(b =>
+                {
+                    b.Column(user => user.Sex).WithDbType<string>();
+                });
         }
     }
 }
