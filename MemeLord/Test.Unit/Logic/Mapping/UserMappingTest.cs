@@ -1,6 +1,7 @@
 ﻿using System;
 using FluentAssertions;
 using MemeLord.DataObjects.Dto;
+using MemeLord.Logic.Authentication;
 using MemeLord.Logic.Mapping;
 using MemeLord.Models;
 using NUnit.Framework;
@@ -28,13 +29,17 @@ namespace Test.Unit.Logic.Mapping
             var result = sut.Map(userDto);
 
             //ASSERT
-            result.ShouldHavePropertyCount(5);
+            result.ShouldHavePropertyCount(8);
+
+            var hashStrings = HashManager.StripHashedPassword(result.Hash);
+            var hashBytes = Convert.FromBase64String(hashStrings[3]);
+            var salt = HashManager.GetSaltFromHashBytes(hashBytes);
 
             var expectedResult = new User
             {
                 DateOfBirth = new DateTime(1996, 1, 1),
                 Username = "Username",
-                Hash = "",
+                Hash = HashManager.Hash(salt, "Password"),
                 Email = "email@person.com",
                 Sex = Sex.Undefined,
             };

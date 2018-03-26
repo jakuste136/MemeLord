@@ -16,10 +16,12 @@ namespace MemeLord.Logic.Modules.Users
     public class UserUpdateModule : IUserUpdateModule
     {
         private readonly IUserRepository _userRepository;
+        private readonly HashManager _hashManager;
 
-        public UserUpdateModule(IUserRepository userRepository)
+        public UserUpdateModule(IUserRepository userRepository, HashManager hashManager)
         {
             _userRepository = userRepository;
+            _hashManager = hashManager;
         }
 
         public HttpResponseMessage UpdateUser(int id, JsonPatchDocument<User> userPatch)
@@ -32,7 +34,7 @@ namespace MemeLord.Logic.Modules.Users
 
             foreach (var passwordChange in userPatch.Operations.Where(o => o.Path == @"/Password"))
             {
-                passwordChange.Value = HashManager.Hash(passwordChange.Value.ToString());
+                passwordChange.Value = _hashManager.Hash(passwordChange.Value.ToString());
             }
 
             userPatch.ApplyUpdatesTo(userToUpdate);

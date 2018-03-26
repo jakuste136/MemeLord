@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Web.Http;
 using JsonPatch;
 using MemeLord.DataObjects.Dto;
 using MemeLord.Logic.Modules.Users;
-using MemeLord.Logic.Repository;
 using MemeLord.Models;
 
 namespace MemeLord.Controllers

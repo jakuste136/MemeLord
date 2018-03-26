@@ -6,7 +6,7 @@ namespace MemeLord.Logic.Repository
 {
     public interface IUserRepository
     {
-        IEnumerable<User> GetUsers();
+        IList<User> GetUsers();
         User GetUserById(int id);
         User GetUserByCredentials(string username);
         void SaveUser(User user);
@@ -14,11 +14,11 @@ namespace MemeLord.Logic.Repository
 
     public class UserRepository : IUserRepository
     {
-        public IEnumerable<User> GetUsers()
+        public IList<User> GetUsers()
         {
             using (var db = CustomDatabaseFactory.GetConnection())
             {
-                return db.Query<User>().ToEnumerable();
+                return db.Query<User>().ToList();
             }
         }
 

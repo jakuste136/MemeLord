@@ -1,31 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using MemeLord.DataObjects.Dto;
 using MemeLord.Logic.Authentication;
-using MemeLord.Logic.Mapping;
 using MemeLord.Logic.Repository;
-using MemeLord.Models;
-using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
-
 
 namespace MemeLord.Logic.Providers
 {
     public class OAuthAppProvider : OAuthAuthorizationServerProvider
     {
         private readonly IUserRepository _userRepository;
+        private readonly HashManager _hashManager;
 
-        public OAuthAppProvider(IUserRepository userRepository)
+        public OAuthAppProvider(IUserRepository userRepository, HashManager hashManager)
         {
             _userRepository = userRepository;
+            _hashManager = hashManager;
         }
 
         public override Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
         {
-            // CLIENT TOKEN VALIDATION IS NOT USED AT THIS TIME
+            // TODO Mateusz: CLIENT TOKEN VALIDATION IS NOT USED AT THIS TIME, ADD LATER
 
             if (context.ClientId == null)
             //if (context.TryGetFormCredentials(out var clientId, out var clientSecret))
@@ -40,7 +36,7 @@ namespace MemeLord.Logic.Providers
             return Task.Factory.StartNew(() =>
             {
                 var user = _userRepository.GetUserByCredentials(context.UserName);
-                if (user != null && HashManager.Verify(context.Password, user.Hash))
+                if (user != null && _hashManager.Verify(context.Password, user.Hash))
                 {
                     var claims = new List<Claim>
                         {

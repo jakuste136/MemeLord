@@ -32,7 +32,7 @@ namespace MemeLord.Logic.Modules.Users
         public IList<UserDto> GetAllUsers()
         {
             var userList = _userRepository.GetUsers();
-            return _userMapper.Map(userList.ToList());
+            return _userMapper.Map(userList);
         }
     }
 }

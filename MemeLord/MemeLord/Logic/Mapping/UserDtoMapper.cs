@@ -12,6 +12,13 @@ namespace MemeLord.Logic.Mapping
 
     public class UserDtoMapper : Mapper<UserDto, User>, IUserDtoMapper
     {
+        private readonly HashManager _hashManager;
+
+        public UserDtoMapper(HashManager hashManager)
+        {
+            _hashManager = hashManager;
+        }
+
         public override IMappingExpression<UserDto, User> CreateMap(IMapperConfigurationExpression cfg)
         {
             return base.CreateMap(cfg)
@@ -20,7 +27,7 @@ namespace MemeLord.Logic.Mapping
 
         public string GetHash(UserDto dto)
         {
-            return HashManager.Hash(dto.Password);
+            return _hashManager.Hash(dto.Password);
         }
     }
 }

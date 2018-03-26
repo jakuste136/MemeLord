@@ -52,10 +52,19 @@ namespace MemeLord.Configuration.Settings {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("MMLRD$V1$")]
+        [global::System.Configuration.DefaultSettingValueAttribute("MMLRD")]
         public string HashPrefix {
             get {
                 return ((string)(this["HashPrefix"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("V2")]
+        public string HashVersion {
+            get {
+                return ((string)(this["HashVersion"]));
             }
         }
     }

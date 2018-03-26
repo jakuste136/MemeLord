@@ -4,59 +4,68 @@ using MemeLord.Configuration;
 
 namespace MemeLord.Logic.Authentication
 {
-    public static class HashManager
+    public class HashManager
     {
-        private static readonly int saltSize = AuthenticationConfiguration.SaltSize;  //16
+        private readonly AuthenticationConfiguration _authenticationConfiguration;
 
-        private static readonly int hashSize = AuthenticationConfiguration.HashSize; //20
-
-        private static readonly int iterations = AuthenticationConfiguration.Iterations; //53238
-
-        private static readonly string hashPrefix = AuthenticationConfiguration.HashPrefix; //MMLRD$V1$
-
-        public static string Hash(string password)
+        public HashManager(AuthenticationConfiguration authenticationConfiguration)
         {
-            var salt = new byte[saltSize];
+            _authenticationConfiguration = authenticationConfiguration;
+        }
+
+        public string Hash(string password)
+        {
+            var salt = new byte[_authenticationConfiguration.SaltSize];
             new RNGCryptoServiceProvider().GetBytes(salt);
+            return Hash(password, salt);
+        }
 
-            var pbkdf2 = new Rfc2898DeriveBytes(password, salt, iterations);
-            var hash = pbkdf2.GetBytes(hashSize);
+        public string Hash(string password, byte[] salt)
+        {
+            var pbkdf2 = new Rfc2898DeriveBytes(password, salt, _authenticationConfiguration.Iterations);
+            var hash = pbkdf2.GetBytes(_authenticationConfiguration.HashSize);
 
-            var hashBytes = new byte[saltSize + hashSize];
-            Array.Copy(salt, 0, hashBytes, 0, saltSize);
-            Array.Copy(hash, 0, hashBytes, saltSize, hashSize);
+            var hashBytes = new byte[_authenticationConfiguration.SaltSize + _authenticationConfiguration.HashSize];
+            Array.Copy(salt, 0, hashBytes, 0, _authenticationConfiguration.SaltSize);
+            Array.Copy(hash, 0, hashBytes, _authenticationConfiguration.SaltSize, _authenticationConfiguration.HashSize);
 
             var base64Hash = Convert.ToBase64String(hashBytes);
-            return string.Format($"{hashPrefix}{iterations}${base64Hash}");
+            return string.Format($"{_authenticationConfiguration.HashPrefix}${_authenticationConfiguration.HashVersion}${_authenticationConfiguration.Iterations}${base64Hash}");
         }
 
-        public static bool IsHashSupported(string hashString)
+        public string[] StripHashedPassword(string hashedPassword)
         {
-            return hashString.Contains(hashPrefix);
+             return hashedPassword.Split('$');
         }
 
-        public static bool Verify(string password, string hashedPassword)
+        public byte[] GetSaltFromHashBytes(byte[] hashBytes)
         {
-            if (!IsHashSupported(hashedPassword))
+            var salt = new byte[_authenticationConfiguration.SaltSize];
+            Array.Copy(hashBytes, 0, salt, 0, _authenticationConfiguration.SaltSize);
+            return salt;
+        }
+
+        public bool Verify(string password, string hashedPassword)
+        {
+            var splittedHashString = StripHashedPassword(hashedPassword);
+            if (!string.Equals(splittedHashString[0], _authenticationConfiguration.HashPrefix) || !string.Equals(splittedHashString[1], _authenticationConfiguration.HashVersion))
             {
                 throw new NotSupportedException("The hashtype is not supported");
             }
 
-            var splittedHashString = hashedPassword.Replace(hashPrefix, "").Split('$');
-            var guessedIterations = int.Parse(splittedHashString[0]);
-            var base64Hash = splittedHashString[1];
+            var guessedIterations = int.Parse(splittedHashString[2]);
+            var base64Hash = splittedHashString[3];
 
             var hashBytes = Convert.FromBase64String(base64Hash);
 
-            var salt = new byte[saltSize];
-            Array.Copy(hashBytes, 0, salt, 0, saltSize);
+            var salt = GetSaltFromHashBytes(hashBytes);
 
             var pbkdf2 = new Rfc2898DeriveBytes(password, salt, guessedIterations);
-            var hash = pbkdf2.GetBytes(hashSize);
+            var hash = pbkdf2.GetBytes(_authenticationConfiguration.HashSize);
 
-            for (var i = 0; i < hashSize; i++)
+            for (var i = 0; i < _authenticationConfiguration.HashSize; i++)
             {
-                if (hashBytes[i + saltSize] != hash[i])
+                if (hashBytes[i + _authenticationConfiguration.SaltSize] != hash[i])
                 {
                     return false;
                 }
