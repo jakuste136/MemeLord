@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GuestNavbarComponent } from '../guest-navbar/guest-navbar.component';
+import { GuestNavbarComponent } from './guest-navbar/guest-navbar.component';
 import { LoginPageComponent } from '../login-page/login-page.component'
 import { IPostDto } from './dto/post-dto';
 import { GuestSiteService } from './guest-site.service'

@@ -5,12 +5,14 @@ import { MaterialModule } from '../shared/material.module';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule, RoutingComponents } from './app-routing.module'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { GuestNavbarComponent } from './guest-navbar/guest-navbar.component';
+import { GuestNavbarComponent } from './guest-site/guest-navbar/guest-navbar.component';
 import { PostComponent } from './guest-site/post/post.component';
 import { GuestSiteComponent } from './guest-site/guest-site.component';
 import { GuestSiteService } from './guest-site/guest-site.service';
+import { RegisterUserService } from './register-page/register-user.service';
 
 
 
@@ -28,9 +30,11 @@ import { GuestSiteService } from './guest-site/guest-site.service';
     MaterialModule,
     InfiniteScrollModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [GuestSiteService],
+  providers: [GuestSiteService, RegisterUserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
