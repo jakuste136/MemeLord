@@ -29,6 +29,5 @@ namespace MemeLord.Controllers
         {
             return _getCommentsModule.GetPostComments(postId, lastId, count);
         }
-
     }
 }

@@ -42,8 +42,6 @@ namespace MemeLord.Logic.Repository
                     .ToList();
 
                 List<Comment> answers = new List<Comment>();
-
-
                 foreach (var masterComment in masterComments ?? new List<Comment>())
                 {
                     try
@@ -68,6 +66,5 @@ namespace MemeLord.Logic.Repository
                 return masterComments;
             }
         }
-
     }
 }

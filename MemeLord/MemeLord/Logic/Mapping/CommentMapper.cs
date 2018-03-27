@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using MemeLord.DataObjects.Response;
 using MemeLord.DataObjects.Dto;
 using MemeLord.Models;
 
@@ -12,17 +11,14 @@ namespace MemeLord.Logic.Mapping
 
     public class CommentMapper : ICommentMapper
     {
-
         public IList<CommentDto> Map(IList<Comment> commentList)
         {
             var commentDtoList = new List<CommentDto>();
 
             foreach (var comment in commentList)
             {
-
                 if (comment.MasterComment == null)
                 {
-
                     //creating list of answers for this comment *** comments are already sorted by the date
                     var FollowingComments = new List<CommentDto>();
                     foreach (var tmp_comm in commentList)
@@ -34,12 +30,10 @@ namespace MemeLord.Logic.Mapping
                                 Rating = tmp_comm.Rating,
                                 Answers = null,
                                 CreationDate = tmp_comm.CreationDate,
-                                DeletionDate = tmp_comm.DeletionDate,
                                 Description = tmp_comm.Description,
                                 Id = tmp_comm.Id
                             });
                     }
-
                     //add mastercomment with its list
                     commentDtoList.Add(new CommentDto
                     {
@@ -47,15 +41,13 @@ namespace MemeLord.Logic.Mapping
                         Rating = comment.Rating,
                         Answers = FollowingComments,
                         CreationDate = comment.CreationDate,
-                        DeletionDate = comment.DeletionDate,
                         Description = comment.Description,
                         Id = comment.Id
                     });
                 } 
             }
+
             return commentDtoList;
         }
-
-
     }
 }
