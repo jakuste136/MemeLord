@@ -1,5 +1,6 @@
 ﻿using MemeLord.Logic.Database;
 using MemeLord.Models;
+using MemeLord.DataObjects.Request;
 using System.Collections.Generic;
 
 namespace MemeLord.Logic.Repository
@@ -53,6 +54,15 @@ namespace MemeLord.Logic.Repository
                     masterComment.Answers = answers;
                 }
                 return masterComments;
+            }
+        }
+
+        public void AddComment(AddCommentRequest comment)
+        {
+            using (var db = CustomDatabaseFactory.GetConnection())
+            {
+                db.Insert("Comments", "Id", true, comment);
+                //db.Insert(comment); could do the same
             }
         }
     }
