@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using MemeLord.DataObjects.Response;
-using MemeLord.Logic.Mapping;
 using MemeLord.Logic.Mapping.CommentMapping;
 using MemeLord.Logic.Repository;
 

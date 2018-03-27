@@ -54,6 +54,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Logic\Mapping\CommentMapping\AnswerCommentMapperTests.cs" />
+    <Compile Include="Logic\Mapping\CommentMapping\MasterCommentMapperTests.cs" />
     <Compile Include="Logic\Mapping\PostMapperTests.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,8 +1,6 @@
 ﻿using MemeLord.Logic.Database;
 using MemeLord.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace MemeLord.Logic.Repository
 {
@@ -54,10 +52,8 @@ namespace MemeLord.Logic.Repository
 
                     masterComment.Answers = answers;
                 }
-
                 return masterComments;
             }
         }
-
     }
 }
