@@ -9,7 +9,7 @@ namespace MemeLord.Logic.Database
         {
             For<Comment>()
                 .TableName("Comments")
-                .PrimaryKey(c => c.Id)
+                .PrimaryKey(c => c.Id, autoIncrement: true)
                 .Columns(b =>
                 {
                     b.Column(comment => comment.User).WithName("UserId").Reference(user => user.Id);
@@ -29,7 +29,7 @@ namespace MemeLord.Logic.Database
 
             For<Like>()
                 .TableName("Likes")
-                .PrimaryKey(l => l.Id)
+                .PrimaryKey(l => l.Id, autoIncrement: true)
                 .Columns(b =>
                 {
                     b.Column(like => like.User).WithName("UserId").Reference(user => user.Id);
@@ -39,7 +39,7 @@ namespace MemeLord.Logic.Database
 
             For<Notification>()
                 .TableName("Notifications")
-                .PrimaryKey(n => n.Id)
+                .PrimaryKey(n => n.Id, autoIncrement: true)
                 .Columns(b =>
                 {
                     b.Column(noti => noti.NotificationType).WithName("NotificationTypeId").Reference(type => type.Id);
@@ -49,11 +49,11 @@ namespace MemeLord.Logic.Database
 
             For<NotificationType>()
                 .TableName("NotificationTypes")
-                .PrimaryKey(n => n.Id);
+                .PrimaryKey(n => n.Id, autoIncrement: true);
 
             For<Post>()
                 .TableName("Posts")
-                .PrimaryKey(p => p.Id)
+                .PrimaryKey(p => p.Id, autoIncrement: true)
                 .Columns(b =>
                 {
                     b.Column(post => post.Op).WithName("OpId").Reference(user => user.Id);
@@ -61,7 +61,7 @@ namespace MemeLord.Logic.Database
 
             For<Report>()
                 .TableName("Reports")
-                .PrimaryKey(r => r.Id)
+                .PrimaryKey(r => r.Id, autoIncrement: true)
                 .Columns(b =>
                 {
                     b.Column(report => report.Post).WithName("PostId").Reference(post => post.Id);
@@ -72,11 +72,11 @@ namespace MemeLord.Logic.Database
 
             For<ReportType>()
                 .TableName("ReportTypes")
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.Id, autoIncrement: true);
 
             For<Role>()
                 .TableName("Roles")
-                .PrimaryKey(r => r.Id);
+                .PrimaryKey(r => r.Id, autoIncrement: true);
 
             For<UserRole>()
                 .TableName("UserRoles")
@@ -84,7 +84,7 @@ namespace MemeLord.Logic.Database
 
             For<User>()
                 .TableName("Users")
-                .PrimaryKey(u => u.Id)
+                .PrimaryKey(u => u.Id, autoIncrement: true)
                 .Columns(b =>
                 {
                     b.Column(user => user.Sex).WithDbType<string>();

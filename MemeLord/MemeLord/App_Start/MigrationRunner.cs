@@ -17,11 +17,12 @@ namespace MemeLord
         {
             var connectionString = ConfigurationManager.ConnectionStrings["MemeLordDb"].ConnectionString;
 
-            DeployChanges.To.SqlDatabase(connectionString)
+            var upgrader = DeployChanges.To.SqlDatabase(connectionString)
                 .WithScriptsEmbeddedInAssembly(Assembly.GetExecutingAssembly())
                 .LogToConsole()
-                .Build()
-                .PerformUpgrade();
+                .Build();
+
+            var result = upgrader.PerformUpgrade();
         }
     }
 }
