@@ -135,7 +135,7 @@
     <Compile Include="Logic\Queries\UserQueries.cs" />
     <Compile Include="Logic\Repository\CommentRepository.cs" />
     <Compile Include="Logic\Repository\PostRepository.cs" />
-    <Compile Include="DataObjects\Response\GetPostCommentsResponse.cs" />
+    <Compile Include="DataObjects\Response\GetCommentsResponse.cs" />
     <Compile Include="DataObjects\Response\GetPostsResponse.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Following.cs" />

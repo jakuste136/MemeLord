@@ -3,7 +3,7 @@ using MemeLord.DataObjects.Dto;
 
 namespace MemeLord.DataObjects.Response
 {
-    public class GetPostCommentsResponse
+    public class GetCommentsResponse
     {
         public int LastId { get; set; }
         public IEnumerable<CommentDto> CommentsList { get; set; }

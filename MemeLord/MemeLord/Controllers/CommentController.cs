@@ -25,7 +25,7 @@ namespace MemeLord.Controllers
         }
 
         [Route("get-comments")]
-        public GetPostCommentsResponse GetManyComments([FromUri] int postId, [FromUri] int lastId, [FromUri] int count)
+        public GetCommentsResponse GetManyComments([FromUri] int postId, [FromUri] int lastId, [FromUri] int count)
         {
             return _getCommentsModule.GetPostComments(postId, lastId, count);
         }

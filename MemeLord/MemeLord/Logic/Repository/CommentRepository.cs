@@ -9,6 +9,7 @@ namespace MemeLord.Logic.Repository
     {
         Comment GetCommentById(int id);
         List<Comment> GetManyComments(int postId, int lastId, int count);
+        List<Comment> GetBestComments(int postId, int count);
     }
 
     public class CommentRepository : ICommentRepository
@@ -54,6 +55,22 @@ namespace MemeLord.Logic.Repository
                     masterComment.Answers = answers;
                 }
                 return masterComments;
+            }
+        }
+
+        public List<Comment> GetBestComments(int postId, int count)
+        {
+            using (var db = CustomDatabaseFactory.GetConnection())
+            {
+                var result = db.Query<Comment>()
+                    .Include(c => c.User)
+                    .Include(p => p.Post)
+                    .OrderByDescending(c => c.Rating)
+                    .Where(c => c.Post.Id == postId)
+                    .Where(c => c.DeletionDate == null)
+                    .Limit(count)
+                    .ToList();
+                return result;
             }
         }
 

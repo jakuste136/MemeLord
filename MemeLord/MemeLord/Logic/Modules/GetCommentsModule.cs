@@ -7,7 +7,7 @@ namespace MemeLord.Logic.Modules
 {
     public interface IGetCommentsModule
     {
-        GetPostCommentsResponse GetPostComments(int postId, int lastId, int count);
+        GetCommentsResponse GetPostComments(int postId, int lastId, int count);
     }
 
     public class GetCommentsModule : IGetCommentsModule
@@ -21,12 +21,24 @@ namespace MemeLord.Logic.Modules
             _masterCommentMapper = masterCommentMapper;
         }
 
-        public GetPostCommentsResponse GetPostComments(int postId, int lastId, int count)
+        public GetCommentsResponse GetPostComments(int postId, int lastId, int count)
         {
             var comments = _commentRepository.GetManyComments(postId, lastId, count);
             var commentDtos = _masterCommentMapper.Map(comments);
 
-            return new GetPostCommentsResponse
+            return new GetCommentsResponse
+            {
+                LastId = commentDtos.Count == 0 ? 0 : commentDtos.Last().Id,
+                CommentsList = commentDtos
+            };
+        }
+
+        public GetCommentsResponse GetBestComments(int postId, int count)
+        {
+            var comments = _commentRepository.GetBestComments(postId, count);
+            var commentDtos = _masterCommentMapper.Map(comments);
+
+            return new GetCommentsResponse
             {
                 LastId = commentDtos.Count == 0 ? 0 : commentDtos.Last().Id,
                 CommentsList = commentDtos
