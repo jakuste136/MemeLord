@@ -7,7 +7,7 @@ namespace MemeLord.Models
     {
         public string Username { get; set; }
         public string Email { get; set; }
-        public string Salt { get; set; }
+        public string Hash { get; set; }
         public string Avatar { get; set; }
         public Sex Sex { get; set; }
         public DateTime DateOfBirth { get; set; }
