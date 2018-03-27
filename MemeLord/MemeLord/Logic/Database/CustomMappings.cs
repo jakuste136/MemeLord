@@ -14,7 +14,8 @@ namespace MemeLord.Logic.Database
                 {
                     b.Column(comment => comment.User).WithName("UserId").Reference(user => user.Id);
                     b.Column(comment => comment.Post).WithName("PostId").Reference(post => post.Id);
-                    b.Column(comment => comment.MasterComment).WithName("CommentId").Reference(comment => comment.Id);
+                    b.Column(comment => comment.MasterComment).WithName("MasterCommentId").Reference(comment => comment.Id);
+                    b.Column(comment => comment.Answers).Ignore();
                 });
 
             For<Following>()

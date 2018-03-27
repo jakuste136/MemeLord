@@ -123,7 +123,8 @@
     <Compile Include="Logic\Database\MemeDatabase.cs" />
     <Compile Include="DataObjects\Dto\CommentDto.cs" />
     <Compile Include="DataObjects\Dto\PostDto.cs" />
-    <Compile Include="Logic\Mapping\CommentMapper.cs" />
+    <Compile Include="Logic\Mapping\CommentMapping\AnswerCommentMapper.cs" />
+    <Compile Include="Logic\Mapping\CommentMapping\MasterCommentMapper.cs" />
     <Compile Include="Logic\Mapping\PostMapper.cs" />
     <Compile Include="Logic\Mapping\SampleCustomMapper.cs" />
     <Compile Include="Logic\Mapping\Mapper.cs" />

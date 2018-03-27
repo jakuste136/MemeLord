@@ -1,13 +1,17 @@
 package com.majstehermuskic.memelordmobile.features.posts
 
-import com.majstehermuskic.memelordmobile.api.RestAPI
+import com.majstehermuskic.memelordmobile.api.PostsAPI
+import com.majstehermuskic.memelordmobile.api.PostsRestAPI
 import com.majstehermuskic.memelordmobile.commons.MemePostItem
 import com.majstehermuskic.memelordmobile.commons.MemePosts
 import io.reactivex.Observable
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class PostsManager(private val api: RestAPI = RestAPI()) {
+@Singleton
+class PostsManager @Inject constructor(private val api: PostsAPI) {
 
-    fun getPosts(last: Int = 0, count: Int = 10): Observable<MemePosts> {
+    fun getPosts(last: Int, count: Int = 10): Observable<MemePosts> {
         return Observable.create {
             subscriber ->
             val callResponse = api.getPosts(last, count)
