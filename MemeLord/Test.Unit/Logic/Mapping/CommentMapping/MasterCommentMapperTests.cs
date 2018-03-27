@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using MemeLord.DataObjects.Dto;
 using MemeLord.Models;
 using Test.Unit.TestUtils;
+using NUnit.Framework;
 using FluentAssertions;
 using MemeLord.Logic.Mapping.CommentMapping;
 
@@ -10,6 +11,7 @@ namespace Test.Unit.Logic.Mapping.CommentMapping
 {
     class MasterCommentMapperTests
     {
+        [Test]
         public void Can_Map_From_Comment_To_CommentDto()
         {
             //ARRANGE
@@ -45,7 +47,7 @@ namespace Test.Unit.Logic.Mapping.CommentMapping
             var result = sut.Map(comment);
 
             //ASSERT
-            result.ShouldHavePropertyCount(5);
+            result.ShouldHavePropertyCount(6);
 
             var expectedResult = new CommentDto
             {
@@ -68,6 +70,7 @@ namespace Test.Unit.Logic.Mapping.CommentMapping
             result.Should().BeEquivalentTo(expectedResult);
         }
 
+        [Test]
         public void Can_Map_From_Comments_Collection_To_CommentDtos_Collection()
         {
             //ARRANGE

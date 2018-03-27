@@ -32,7 +32,7 @@ namespace Test.Unit.Logic.Mapping.CommentMapping
             var result = sut.Map(comment);
 
             //ASSERT
-            result.ShouldHavePropertyCount(5);
+            result.ShouldHavePropertyCount(6);
 
             var expectedResult = new CommentDto
             {
