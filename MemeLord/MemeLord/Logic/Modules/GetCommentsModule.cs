@@ -8,6 +8,7 @@ namespace MemeLord.Logic.Modules
     public interface IGetCommentsModule
     {
         GetCommentsResponse GetPostComments(int postId, int lastId, int count);
+        GetCommentsResponse GetBestComments(int postId, int count);
     }
 
     public class GetCommentsModule : IGetCommentsModule

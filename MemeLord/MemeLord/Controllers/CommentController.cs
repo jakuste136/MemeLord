@@ -25,9 +25,17 @@ namespace MemeLord.Controllers
         }
 
         [Route("get-comments")]
+        [HttpGet]
         public GetCommentsResponse GetManyComments([FromUri] int postId, [FromUri] int lastId, [FromUri] int count)
         {
             return _getCommentsModule.GetPostComments(postId, lastId, count);
+        }
+
+        [Route("get-best")]
+        [HttpGet]
+        public GetCommentsResponse GetBestComments([FromUri] int postId, [FromUri] int count)
+        {
+            return _getCommentsModule.GetBestComments(postId, count);
         }
     }
 }
