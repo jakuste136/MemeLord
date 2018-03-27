@@ -1,38 +1,37 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using MemeLord.DataObjects.Dto;
-using MemeLord.Logic.Mapping;
+using MemeLord.DataObjects.Response;
+using MemeLord.Logic.Mapping.Users;
 using MemeLord.Logic.Repository;
 
 namespace MemeLord.Logic.Modules.Users
 {
     public interface IUserGetModule
     {
-        UserDto GetUserById(int id);
-        IList<UserDto> GetAllUsers();
+        GetUserResponse GetUserById(int id);
+        IList<GetUserResponse> GetAllUsers();
     }
 
     public class UserGetModule : IUserGetModule
     {
         private readonly IUserRepository _userRepository;
-        private readonly IUserMapper _userMapper;
+        private readonly IGetUserResponseMapper _responseMapper;
 
-        public UserGetModule(IUserRepository userRepository, IUserMapper userMapper)
+        public UserGetModule(IUserRepository userRepository, IGetUserResponseMapper responseMapper)
         {
             _userRepository = userRepository;
-            _userMapper = userMapper;
+            _responseMapper = responseMapper;
         }
 
-        public UserDto GetUserById(int id)
+        public GetUserResponse GetUserById(int id)
         {
             var user = _userRepository.GetUserById(id);
-            return _userMapper.Map(user);
+            return _responseMapper.Map(user);
         }
 
-        public IList<UserDto> GetAllUsers()
+        public IList<GetUserResponse> GetAllUsers()
         {
             var userList = _userRepository.GetUsers();
-            return _userMapper.Map(userList);
+            return _responseMapper.Map(userList);
         }
     }
 }

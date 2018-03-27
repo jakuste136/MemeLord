@@ -3,6 +3,8 @@ using System.Net.Http;
 using System.Web.Http;
 using JsonPatch;
 using MemeLord.DataObjects.Dto;
+using MemeLord.DataObjects.Request;
+using MemeLord.DataObjects.Response;
 using MemeLord.Logic.Modules.Users;
 using MemeLord.Models;
 
@@ -23,22 +25,22 @@ namespace MemeLord.Controllers
         }
 
         [HttpGet]
-        public IList<UserDto> Get()
+        public IList<GetUserResponse> Get()
         {
             return _userGetModule.GetAllUsers();
         }
 
         [Route("{id}")]
         [HttpGet]
-        public UserDto Get(int id)
+        public GetUserResponse Get(int id)
         {
             return _userGetModule.GetUserById(id);
         }
 
         [HttpPost]
-        public HttpResponseMessage Post([FromBody] UserDto userDto)
+        public HttpResponseMessage Post([FromBody] AddUserRequest request)
         {
-            return _userAddModule.AddUser(userDto);
+            return _userAddModule.AddUser(request);
         }
 
         [Route("{id}")]

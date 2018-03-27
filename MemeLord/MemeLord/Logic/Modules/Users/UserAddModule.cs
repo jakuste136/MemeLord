@@ -1,34 +1,35 @@
 ﻿using System.Net;
 using System.Net.Http;
-using MemeLord.DataObjects.Dto;
+using MemeLord.DataObjects.Request;
 using MemeLord.Logic.Authentication;
-using MemeLord.Logic.Mapping;
+using MemeLord.Logic.Mapping.Users;
 using MemeLord.Logic.Repository;
 
 namespace MemeLord.Logic.Modules.Users
 {
     public interface IUserAddModule
     {
-        HttpResponseMessage AddUser(UserDto userDto);
+        HttpResponseMessage AddUser(AddUserRequest userDto);
     }
 
     public class UserAddModule : IUserAddModule
     {
-        private readonly IUserDtoMapper _userMapper;
+        private readonly IAddUserRequestMapper _requestMapper;
         private readonly IUserRepository _userRepository;
         private readonly HashManager _hashManager;
 
-        public UserAddModule(IUserDtoMapper userMapper, IUserRepository userRepository, HashManager hashManager)
+        public UserAddModule(IAddUserRequestMapper requestMapper, IUserRepository userRepository, HashManager hashManager)
         {
-            _userMapper = userMapper;
+            _requestMapper = requestMapper;
             _userRepository = userRepository;
             _hashManager = hashManager;
         }
 
-        public HttpResponseMessage AddUser(UserDto userDto)
+        public HttpResponseMessage AddUser(AddUserRequest request)
         {
-            var user = _userMapper.Map(userDto);
-            user.Hash = _hashManager.Hash(userDto.Password);
+            if (request == null) return new HttpResponseMessage(HttpStatusCode.UnsupportedMediaType);
+            var user = _requestMapper.Map(request);
+            user.Hash = _hashManager.Hash(request.Password);
             _userRepository.SaveUser(user);
             return new HttpResponseMessage(HttpStatusCode.OK);
         }

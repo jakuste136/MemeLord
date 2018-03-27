@@ -1,12 +1,9 @@
 ﻿using System;
 using MemeLord.Models;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
-namespace MemeLord.DataObjects.Dto
+namespace MemeLord.DataObjects.Request
 {
-    [Obsolete]
-    public class UserDto
+    public class AddUserRequest
     {
         public string Username { get; set; }
         public string Password { get; set; }

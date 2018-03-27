@@ -3,6 +3,7 @@ using FluentAssertions;
 using MemeLord.DataObjects.Dto;
 using MemeLord.Logic.Authentication;
 using MemeLord.Logic.Mapping;
+using MemeLord.Logic.Mapping.Users;
 using MemeLord.Models;
 using NUnit.Framework;
 using Test.Unit.TestUtils;
@@ -25,7 +26,7 @@ namespace Test.Unit.Logic.Mapping
             };
 
             //ACT
-            var sut = new UserDtoMapper();
+            var sut = new AddUserRequestMapper();
             var result = sut.Map(userDto);
 
             //ASSERT

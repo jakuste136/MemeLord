@@ -1,15 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 using MemeLord.Models;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
-namespace MemeLord.DataObjects.Dto
+namespace MemeLord.DataObjects.Response
 {
-    [Obsolete]
-    public class UserDto
+    public class GetUserResponse
     {
         public string Username { get; set; }
-        public string Password { get; set; }
         public string Email { get; set; }
         public Sex Sex { get; set; }
         public DateTime DateOfBirth { get; set; }

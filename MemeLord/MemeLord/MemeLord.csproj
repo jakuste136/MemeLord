@@ -165,6 +165,8 @@
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DataObjects\Request\AddCommentRequest.cs" />
+    <Compile Include="DataObjects\Request\AddUserRequest.cs" />
+    <Compile Include="DataObjects\Response\GetUserResponse.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -181,8 +183,9 @@
     <Compile Include="Logic\Mapping\SampleCustomMapper.cs" />
     <Compile Include="Logic\Extensions\OwinContextExtentions.cs" />
     <Compile Include="Logic\Mapping\Mapper.cs" />
-    <Compile Include="Logic\Mapping\UserDtoMapper.cs" />
-    <Compile Include="Logic\Mapping\UserMapper.cs" />
+    <Compile Include="Logic\Mapping\Users\AddUserRequestMapper.cs" />
+    <Compile Include="Logic\Mapping\Users\GetUserResponseMapper.cs" />
+    <Compile Include="Logic\Mapping\Users\UserMapper.cs" />
     <Compile Include="Logic\Modules\Users\UserAddModule.cs" />
     <Compile Include="Logic\Modules\Users\UserGetModule.cs" />
     <Compile Include="Logic\Modules\Users\UserUpdateModule.cs" />
