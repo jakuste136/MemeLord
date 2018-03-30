@@ -43,7 +43,7 @@ export class RegisterPageComponent implements OnInit {
   }
 
   addUser(user: IUserDto) {
-    this._registerUserService.registerUser(user);
+    this._registerUserService.registerUser(user).subscribe();
   }
 
   getUserNameErrorMessage() {
