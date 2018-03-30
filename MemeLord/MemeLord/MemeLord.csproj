@@ -185,12 +185,14 @@
     <Compile Include="DataObjects\Dto\PostDto.cs" />
     <Compile Include="Logic\Mapping\CommentMapping\AnswerCommentMapper.cs" />
     <Compile Include="Logic\Mapping\CommentMapping\MasterCommentMapper.cs" />
+    <Compile Include="Logic\Mapping\CommentMapping\NewCommentMapper.cs" />
     <Compile Include="Logic\Mapping\PostMapper.cs" />
     <Compile Include="Logic\Extensions\OwinContextExtentions.cs" />
     <Compile Include="Logic\Mapping\Mapper.cs" />
     <Compile Include="Logic\Mapping\Users\AddUserRequestMapper.cs" />
     <Compile Include="Logic\Mapping\Users\GetUserResponseMapper.cs" />
     <Compile Include="Logic\Mapping\Users\UserMapper.cs" />
+    <Compile Include="Logic\Modules\AddCommentsModule.cs" />
     <Compile Include="Logic\Modules\Users\UserAddModule.cs" />
     <Compile Include="Logic\Modules\Users\UserGetModule.cs" />
     <Compile Include="Logic\Modules\Users\UserUpdateModule.cs" />
