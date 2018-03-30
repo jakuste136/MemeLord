@@ -3,6 +3,9 @@ using System.Reflection;
 using System.Web.Http;
 using Autofac;
 using Autofac.Integration.WebApi;
+using MemeLord.Logic.Authentication;
+using MemeLord.Logic.Providers;
+using Microsoft.Owin.Security.OAuth;
 
 namespace MemeLord
 {
@@ -28,6 +31,21 @@ namespace MemeLord
             builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
                 .Where(t => t.GetInterfaces().Any(i => i.Name.EndsWith(t.Name)))
                 .As(t => t.GetInterfaces().Single(i => i.Name.EndsWith(t.Name)));
+
+            // Register configurations by naming convention
+            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
+                .Where(t => t.Name.EndsWith("Configuration"));
+
+            // Register HashManager
+            builder.RegisterType<HashManager>()
+                .PropertiesAutowired()
+                .SingleInstance();
+
+            // Register OAuthAppProvider
+            builder.RegisterType<OAuthAppProvider>()
+                .OwnedByLifetimeScope()
+                .PropertiesAutowired()
+                .SingleInstance();
 
             // Set the dependency resolver to be Autofac.
             var container = builder.Build();

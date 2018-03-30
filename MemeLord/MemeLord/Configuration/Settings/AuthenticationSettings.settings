@@ -1,0 +1,21 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="MemeLord.Configuration.Settings" GeneratedClassName="AuthenticationSettings">
+  <Profiles />
+  <Settings>
+    <Setting Name="SaltSize" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">16</Value>
+    </Setting>
+    <Setting Name="HashSize" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">20</Value>
+    </Setting>
+    <Setting Name="Iterations" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">53238</Value>
+    </Setting>
+    <Setting Name="HashPrefix" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">MMLRD</Value>
+    </Setting>
+    <Setting Name="HashVersion" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">V2</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

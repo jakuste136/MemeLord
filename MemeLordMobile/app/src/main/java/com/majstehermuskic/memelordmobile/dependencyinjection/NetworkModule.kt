@@ -16,7 +16,7 @@ class NetworkModule {
     @Singleton
     fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
-                .baseUrl("http://192.168.0.108:3000/api/")
+                .baseUrl("http://memelordapp.azurewebsites.net/api/")
                 .addConverterFactory(MoshiConverterFactory.create())
                 .build()
     }

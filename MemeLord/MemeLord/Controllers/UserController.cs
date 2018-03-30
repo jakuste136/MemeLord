@@ -1,7 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
+using System.Net.Http;
 using System.Web.Http;
-using MemeLord.Logic.Queries;
+using JsonPatch;
+using MemeLord.DataObjects.Dto;
+using MemeLord.DataObjects.Request;
+using MemeLord.DataObjects.Response;
+using MemeLord.Logic.Modules.Users;
 using MemeLord.Models;
 
 namespace MemeLord.Controllers
@@ -9,25 +13,41 @@ namespace MemeLord.Controllers
     [RoutePrefix("api/user")]
     public class UserController : ApiController
     {
-        private readonly IUserQueries _userQueries;
+        private readonly IUserUpdateModule _userUpdateModule;
+        private readonly IUserAddModule _userAddModule;
+        private readonly IUserGetModule _userGetModule;
 
-        public UserController(IUserQueries userQueries)
+        public UserController(IUserUpdateModule userUpdateModule, IUserAddModule userAddModule, IUserGetModule userGetModule)
         {
-            _userQueries = userQueries;
+            _userUpdateModule = userUpdateModule;
+            _userAddModule = userAddModule;
+            _userGetModule = userGetModule;
         }
 
-        [Route("get")]
         [HttpGet]
-        public IList<User> Get()
+        public IList<GetUserResponse> Get()
         {
-            return _userQueries.GetUsers().ToList();
+            return _userGetModule.GetAllUsers();
         }
 
-        [Route("get/{id}")]
+        [Route("{id}")]
         [HttpGet]
-        public User Get(int id)
+        public GetUserResponse Get(int id)
         {
-            return _userQueries.GetUserById(id);
+            return _userGetModule.GetUserById(id);
+        }
+
+        [HttpPost]
+        public HttpResponseMessage Post([FromBody] AddUserRequest request)
+        {
+            return _userAddModule.AddUser(request);
+        }
+
+        [Route("{id}")]
+        [HttpPatch]
+        public HttpResponseMessage Patch(int id, JsonPatchDocument<User> userPatch)
+        {
+            return _userUpdateModule.UpdateUser(id, userPatch);
         }
     }
 }
