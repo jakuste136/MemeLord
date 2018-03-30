@@ -2,6 +2,7 @@
 using MemeLord.DataObjects.Response;
 using MemeLord.Models;
 using System.Web.Http;
+using MemeLord.DataObjects.Request;
 using MemeLord.Logic.Modules;
 
 namespace MemeLord.Controllers
@@ -11,11 +12,13 @@ namespace MemeLord.Controllers
     {
         private readonly ICommentRepository _commentRepository;
         private readonly IGetCommentsModule _getCommentsModule;
+        private readonly IAddCommentsModule _addCommentsModule;
 
-        public CommentController(ICommentRepository commentRepository, IGetCommentsModule getCommentsModule)
+        public CommentController(ICommentRepository commentRepository, IGetCommentsModule getCommentsModule, IAddCommentsModule addCommentsModule)
         {
             _commentRepository = commentRepository;
             _getCommentsModule = getCommentsModule;
+            _addCommentsModule = addCommentsModule;
         }
 
         [Route("get/{id}")]
@@ -36,6 +39,13 @@ namespace MemeLord.Controllers
         public GetCommentsResponse GetBestComments([FromUri] int postId, [FromUri] int count)
         {
             return _getCommentsModule.GetBestComments(postId, count);
+        }
+
+        [Route("add-comment")]
+        [HttpPost]
+        public void AddComment(AddCommentRequest addCommentRequest)
+        {
+            _addCommentsModule.AddComment(addCommentRequest);
         }
     }
 }
