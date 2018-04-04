@@ -36,7 +36,7 @@ namespace MemeLord.Controllers
 
         [Route("get-best")]
         [HttpGet]
-        public GetCommentsResponse GetBestComments([FromUri] int postId, [FromUri] int count)
+        public GetBestCommentsResponse GetBestComments([FromUri] int postId, [FromUri] int count)
         {
             return _getCommentsModule.GetBestComments(postId, count);
         }

@@ -14,9 +14,9 @@ namespace MemeLord.Logic.Mapping.CommentMapping
         public override IMappingExpression<AddCommentRequest, Comment> CreateMap(IMapperConfigurationExpression cfg)
         {
             return base.CreateMap(cfg)
-                .ForMember(comment => comment.MasterComment, map => map.ResolveUsing(request => request.MasterCommentId))
-                .ForMember(comment => comment.Post, map => map.ResolveUsing(request => request.PostId))
-                .ForMember(comment => comment.User, map => map.ResolveUsing(request => request.UserId))
+                .ForPath(comment => comment.MasterComment.Id, map => map.MapFrom(request => request.MasterCommentId))
+                .ForPath(comment => comment.Post.Id, map => map.MapFrom(request => request.PostId))
+                .ForPath(comment => comment.User.Id, map => map.MapFrom(request => request.UserId))
                 .ForMember(comment => comment.Answers, map => map.Ignore())
                 .ForMember(comment => comment.DeletionDate, map => map.Ignore());
         }

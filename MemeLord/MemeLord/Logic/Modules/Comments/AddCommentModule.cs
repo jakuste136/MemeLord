@@ -1,7 +1,6 @@
 ﻿using MemeLord.DataObjects.Request;
 using MemeLord.Logic.Repository;
 using MemeLord.Logic.Mapping.CommentMapping;
-using MemeLord.Models;
 
 namespace MemeLord.Logic.Modules
 {

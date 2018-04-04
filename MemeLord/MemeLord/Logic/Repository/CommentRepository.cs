@@ -71,6 +71,7 @@ namespace MemeLord.Logic.Repository
                     .Where(c => c.DeletionDate == null)
                     .Limit(count)
                     .ToList();
+
                 return result;
             }
         }
