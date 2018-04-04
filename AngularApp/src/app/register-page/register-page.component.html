@@ -1,7 +1,6 @@
 <div class="wrapper">
   <form [formGroup]="registryForm" (ngSubmit)="addUser(registryForm.value)">
     <mat-card class="center login-form">
-
       <mat-form-field>
         <input matInput placeholder="Nazwa użytkownika" formControlName="userName">
         <mat-error *ngIf="!registryForm.controls['userName'].valid && registryForm.controls['userName'].touched">{{getUserNameErrorMessage()}}</mat-error>
