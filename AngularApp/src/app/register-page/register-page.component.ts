@@ -12,7 +12,6 @@ import { RegisterUserService } from './register-user.service'
 })
 export class RegisterPageComponent implements OnInit {
 
-  userMode: IUserDto;
   registryForm: FormGroup;
 
   constructor(
@@ -43,7 +42,10 @@ export class RegisterPageComponent implements OnInit {
   }
 
   addUser(user: IUserDto) {
-    this._registerUserService.registerUser(user).subscribe();
+    if (this.registryForm.valid) {
+      this._registerUserService.registerUser(user).subscribe();
+      console.log("Adding user...");
+    }
   }
 
   getUserNameErrorMessage() {
