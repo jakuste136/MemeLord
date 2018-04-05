@@ -150,9 +150,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <EmbeddedResource Include="Migrations\20180314_223500_Create_Database_Schema.sql" />
-    <EmbeddedResource Include="Migrations\20180321_221700_Recreate_Database_Shema_With_Identities.sql" />
-    <Content Include="Web.config" />
+    <EmbeddedResource Include="Migrations\20180405_134400_Create_Azure_Compatible_Migration_Script.sql" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AutofacConfig.cs" />
