@@ -8,6 +8,7 @@ namespace MemeLord.Logic.Repository
     {
         Post GetPostById(int id);
         List<Post> GetPosts(int lastId, int count);
+        void AddPost(Post post);
     }
 
     public class PostRepository : IPostRepository
@@ -35,6 +36,14 @@ namespace MemeLord.Logic.Repository
                     .Where(p => p.DeletionDate == null)
                     .Limit(count)
                     .ToList();
+            }
+        }
+
+        public void AddPost(Post post)
+        {
+            using (var db = CustomDatabaseFactory.GetConnection())
+            {
+                db.Save(post);
             }
         }
     }
