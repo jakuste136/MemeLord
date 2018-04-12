@@ -24,8 +24,7 @@ namespace MemeLord.Logic.Modules
         private readonly PathsConfiguration _pathsConfiguration;
         private readonly IPostRepository _postRepository;
 
-        public AddPostsModule(IPostRepository postRepository, CloudinaryConfiguration cloudinaryConfiguration,
-            PathsConfiguration pathsConfiguration)
+        public AddPostsModule(IPostRepository postRepository, CloudinaryConfiguration cloudinaryConfiguration, PathsConfiguration pathsConfiguration)
         {
             _postRepository = postRepository;
             _cloudinaryConfiguration = cloudinaryConfiguration;
