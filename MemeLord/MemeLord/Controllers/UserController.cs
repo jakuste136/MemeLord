@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Web.Http;
 using JsonPatch;
 using MemeLord.DataObjects.Dto;
@@ -27,6 +29,9 @@ namespace MemeLord.Controllers
         [HttpGet, Authorize(Roles = "User")]
         public IList<GetUserResponse> Get()
         {
+            // TODO Mateusz: Remove only for test purposes
+            var username = ClaimsPrincipal.Current.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value ?? "";
+
             return _userGetModule.GetAllUsers();
         }
 

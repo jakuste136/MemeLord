@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Web;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
@@ -44,13 +46,15 @@ namespace MemeLord.Logic.Modules
 
             var imageUri = UploadToCludinary(dataUri);
 
+            var userId = ClaimsPrincipal.Current.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value ?? "0";
+
             var post = new Post
             {
                 CreationDate = DateTime.Now,
                 Image = imageUri.ToString(),
                 Op = new User
                 {
-                    Id = Convert.ToInt32(httpRequest.Form.Get("userid"))
+                    Id = Convert.ToInt32(userId)
                 },
                 Title = httpRequest.Form.Get("title")
             };
