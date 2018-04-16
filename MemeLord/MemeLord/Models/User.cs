@@ -10,7 +10,7 @@ namespace MemeLord.Models
         public string Hash { get; set; }
         public string Avatar { get; set; }
         public Sex Sex { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
         public string Description { get; set; }
     }
 
