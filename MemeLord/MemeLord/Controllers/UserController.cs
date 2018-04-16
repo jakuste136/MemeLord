@@ -24,7 +24,7 @@ namespace MemeLord.Controllers
             _userGetModule = userGetModule;
         }
 
-        [HttpGet]
+        [HttpGet, Authorize(Roles = "User")]
         public IList<GetUserResponse> Get()
         {
             return _userGetModule.GetAllUsers();
