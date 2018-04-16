@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, EmailValidator } from '@angular/forms';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-login-page',
@@ -11,7 +12,8 @@ export class LoginPageComponent implements OnInit {
   registryForm: FormGroup;
 
   constructor(
-    private _fb: FormBuilder) {
+    private _fb: FormBuilder,
+    private _authenticationService: AuthenticationService) {
     this.registryForm = _fb.group({
       'login': [null, Validators.compose([
         Validators.required,
@@ -28,7 +30,7 @@ export class LoginPageComponent implements OnInit {
 
   login() {
     if (this.registryForm.valid) {
-      console.log("Logging in...");
+      this._authenticationService.login(this.registryForm.get('login').value, this.registryForm.get('password').value);
     }
   }
 

@@ -1,0 +1,26 @@
+@import '../../../../node_modules/@angular/material/theming';
+@import '../../../styles/custom-palette.scss';
+
+.wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    mat-toolbar {
+        display: flex;
+        justify-content: space-between;
+    }
+    z-index: 10;
+}
+
+button.mat-button {
+    height: 50px;
+}
+
+button:hover {
+    background: #71767b;
+}
+
+mat-toolbar {
+    height: 75px;
+}

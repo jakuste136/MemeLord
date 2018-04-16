@@ -1,0 +1,16 @@
+<div class="wrapper">
+    <mat-toolbar color="primary">
+      <div>
+        <button mat-button >Top 100</button>
+        <button mat-button>Losowy</button>
+      </div>
+      <div>
+        <button mat-button routerLink="/user/posts">MemeLord</button>
+      </div>
+      <div>
+        <button mat-button routerLink="/user/profile" >Mój profil</button>
+        <button mat-button routerLink="/user/notifications" >Powiadomienia</button>
+        <button mat-button (click)="logout()" >Wyloguj</button>
+      </div>
+    </mat-toolbar>
+  </div>
