@@ -13,20 +13,20 @@ using MemeLord.Logic.Repository;
 using MemeLord.Models;
 using CloudinaryConfiguration = MemeLord.Configuration.CloudinaryConfiguration;
 
-namespace MemeLord.Logic.Modules
+namespace MemeLord.Logic.Modules.Posts
 {
-    public interface IAddPostsModule
+    public interface IAddPostModule
     {
         HttpResponseMessage AddPost(HttpRequestMessage request);
     }
 
-    public class AddPostsModule : IAddPostsModule
+    public class AddPostModule : IAddPostModule
     {
         private readonly CloudinaryConfiguration _cloudinaryConfiguration;
         private readonly PathsConfiguration _pathsConfiguration;
         private readonly IPostRepository _postRepository;
 
-        public AddPostsModule(IPostRepository postRepository, CloudinaryConfiguration cloudinaryConfiguration, PathsConfiguration pathsConfiguration)
+        public AddPostModule(IPostRepository postRepository, CloudinaryConfiguration cloudinaryConfiguration, PathsConfiguration pathsConfiguration)
         {
             _postRepository = postRepository;
             _cloudinaryConfiguration = cloudinaryConfiguration;

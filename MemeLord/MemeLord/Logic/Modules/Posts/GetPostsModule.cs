@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using MemeLord.DataObjects.Response;
+using MemeLord.DataObjects.Response.Posts;
 using MemeLord.Logic.Mapping;
 using MemeLord.Logic.Repository;
 using MemeLord.Models;
 
-namespace MemeLord.Logic.Modules
+namespace MemeLord.Logic.Modules.Posts
 {
     public interface IGetPostsModule
     {

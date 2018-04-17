@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using MemeLord.DataObjects.Dto;
 
-namespace MemeLord.DataObjects.Response
+namespace MemeLord.DataObjects.Response.Posts
 {
     public class GetPostsResponse
     {
