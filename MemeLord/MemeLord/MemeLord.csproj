@@ -168,6 +168,7 @@
     <Compile Include="Configuration\MigrationsConfiguration.cs" />
     <Compile Include="Configuration\AuthenticationConfiguration.cs" />
     <Compile Include="Configuration\AuthorizationConfiguration.cs" />
+    <Compile Include="Configuration\ReportingConfiguration.cs" />
     <Compile Include="Configuration\Settings\AuthorizationSettings.Designer.cs">
       <DependentUpon>AuthorizationSettings.settings</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -175,11 +176,16 @@
     </Compile>
     <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\PostController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="DataObjects\Dto\ReportDtos\ReportedCommentDto.cs" />
+    <Compile Include="DataObjects\Dto\ReportDtos\ReportedPostDto.cs" />
     <Compile Include="DataObjects\Request\AddCommentRequest.cs" />
     <Compile Include="DataObjects\Request\AddUserRequest.cs" />
     <Compile Include="DataObjects\Response\CommentResponses\GetBestCommentsResponse.cs" />
     <Compile Include="DataObjects\Response\GetUserResponse.cs" />
+    <Compile Include="DataObjects\Response\ReportResponses\GetReportedCommentsResponse.cs" />
+    <Compile Include="DataObjects\Response\ReportResponses\GetReportedPostsResponse.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -196,17 +202,22 @@
     <Compile Include="Logic\Mapping\PostMapper.cs" />
     <Compile Include="Logic\Extensions\OwinContextExtentions.cs" />
     <Compile Include="Logic\Mapping\Mapper.cs" />
+    <Compile Include="Logic\Mapping\Reports\ReportedPostMapper.cs" />
     <Compile Include="Logic\Mapping\Users\AddUserRequestMapper.cs" />
     <Compile Include="Logic\Mapping\Users\GetUserResponseMapper.cs" />
     <Compile Include="Logic\Mapping\Users\UserMapper.cs" />
     <Compile Include="Logic\Modules\AddPostsModule.cs" />
     <Compile Include="Logic\Modules\Comments\AddCommentModule.cs" />
+    <Compile Include="Logic\Modules\Reports\AddReportModule.cs" />
+    <Compile Include="Logic\Modules\Reports\FindMostFrequentReport.cs" />
+    <Compile Include="Logic\Modules\Reports\GetReportsModule.cs" />
     <Compile Include="Logic\Modules\Users\UserAddModule.cs" />
     <Compile Include="Logic\Modules\Users\UserGetModule.cs" />
     <Compile Include="Logic\Modules\Users\UserUpdateModule.cs" />
     <Compile Include="Logic\Providers\OAuthAppProvider.cs" />
     <Compile Include="Logic\Modules\Comments\GetCommentsModule.cs" />
     <Compile Include="Logic\Modules\GetPostsModule.cs" />
+    <Compile Include="Logic\Repository\ReportRepository.cs" />
     <Compile Include="Logic\Repository\UserRepository.cs" />
     <Compile Include="Logic\Repository\CommentRepository.cs" />
     <Compile Include="Logic\Repository\PostRepository.cs" />
@@ -247,6 +258,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>PathsSettings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Configuration\Settings\ReportingSettings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>ReportingSettings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -270,6 +286,10 @@
     <None Include="Configuration\Settings\PathsSettings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>PathsSettings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Configuration\Settings\ReportingSettings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>ReportingSettings.Designer.cs</LastGenOutput>
     </None>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
