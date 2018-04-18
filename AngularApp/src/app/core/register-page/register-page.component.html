@@ -1,0 +1,28 @@
+<app-guest-navbar></app-guest-navbar>
+<div class="wrapper">
+  <form [formGroup]="registryForm" (ngSubmit)="addUser(registryForm.value)">
+    <mat-card class="center login-form">
+      <mat-form-field>
+        <input matInput placeholder="Nazwa użytkownika" formControlName="userName">
+        <mat-error *ngIf="!registryForm.controls['userName'].valid && registryForm.controls['userName'].touched">{{getUserNameErrorMessage()}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="E-mail" formControlName="email">
+        <mat-error *ngIf="!registryForm.controls['email'].valid && registryForm.controls['email'].touched">{{getEmailErrorMessage()}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Hasło" type="password" formControlName="password">
+        <mat-error *ngIf="!registryForm.controls['password'].valid && registryForm.controls['password'].touched">{{getPasswordErrorMessage()}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Powtórz hasło" type="password" formControlName="repeatPassword">
+        <mat-error *ngIf="!registryForm.controls['repeatPassword'].valid && registryForm.controls['repeatPassword'].touched">{{getRepeatPasswordErrorMessage()}}</mat-error>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" class="login-button" type="submit">Załóż konto</button>
+    </mat-card>
+  </form>
+</div>

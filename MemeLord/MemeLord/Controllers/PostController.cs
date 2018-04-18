@@ -5,6 +5,8 @@ using MemeLord.Models;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using MemeLord.DataObjects.Response.Posts;
+using MemeLord.Logic.Modules.Posts;
 
 namespace MemeLord.Controllers
 {
@@ -13,19 +15,28 @@ namespace MemeLord.Controllers
     {
         private readonly IPostRepository _postRepository;
         private readonly IGetPostsModule _getPostsModule;
-        private readonly IAddPostsModule _addPostsModule;
+        private readonly IAddPostModule _addPostModule;
+        private readonly IGetRandomPostModule _getRandomPostModule;
 
-        public PostController(IPostRepository postRepository, IGetPostsModule getPostsModule, IAddPostsModule addPostsModule)
+        public PostController(IPostRepository postRepository, IGetPostsModule getPostsModule, IAddPostModule addPostModule, IGetRandomPostModule getRandomPostModule)
         {
             _postRepository = postRepository;
             _getPostsModule = getPostsModule;
-            _addPostsModule = addPostsModule;
+            _addPostModule = addPostModule;
+            _getRandomPostModule = getRandomPostModule;
         }
 
         [Route("{id}")]
         public Post GetById(int id)
         {
             return _postRepository.GetPostById(id);
+        }
+
+        [Route("random")]
+        [HttpGet]
+        public GetRandomPostResponse GetRandomPost()
+        {
+            return _getRandomPostModule.GetRandomPost();
         }
 
         [HttpGet]
@@ -37,7 +48,7 @@ namespace MemeLord.Controllers
         [HttpPost]
         public HttpResponseMessage AddPost()
         {
-            return _addPostsModule.AddPost(Request);
+            return _addPostModule.AddPost(Request);
         }
     }
 }

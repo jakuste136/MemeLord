@@ -9,6 +9,5 @@ namespace MemeLord.DataObjects.Request
         public string Password { get; set; }
         public string Email { get; set; }
         public Sex Sex { get; set; }
-        public DateTime DateOfBirth { get; set; }
     }
 }

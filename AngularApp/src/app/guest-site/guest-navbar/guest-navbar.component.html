@@ -1,15 +1,15 @@
 <div class="wrapper">
   <mat-toolbar color="primary">
     <div>
-      <button mat-button >Top 100</button>
-      <button mat-button>Losowy</button>
+      <button mat-button routerLink="/guest/top">Top 100</button>
+      <button mat-button routerLink="/guest/random">Losowy</button>
     </div>
     <div>
-      <button mat-button routerLink="">MemeLord</button>
+      <button mat-button routerLink="/guest">MemeLord</button>
     </div>
     <div>
-      <button mat-button routerLink="/login" >Loguj</button>
-      <button mat-button routerLink="/register" >Rejestruj</button>
+      <button mat-button (click)="routeToLogin()" >Loguj</button>
+      <button mat-button (click)="routeToRegister()" >Rejestruj</button>
     </div>
   </mat-toolbar>
 </div>

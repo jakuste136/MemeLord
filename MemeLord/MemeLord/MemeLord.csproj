@@ -180,6 +180,7 @@
     <Compile Include="DataObjects\Request\AddUserRequest.cs" />
     <Compile Include="DataObjects\Response\CommentResponses\GetBestCommentsResponse.cs" />
     <Compile Include="DataObjects\Response\GetUserResponse.cs" />
+    <Compile Include="DataObjects\Response\Posts\GetRandomPostResponse.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -199,19 +200,20 @@
     <Compile Include="Logic\Mapping\Users\AddUserRequestMapper.cs" />
     <Compile Include="Logic\Mapping\Users\GetUserResponseMapper.cs" />
     <Compile Include="Logic\Mapping\Users\UserMapper.cs" />
-    <Compile Include="Logic\Modules\AddPostsModule.cs" />
+    <Compile Include="Logic\Modules\Posts\AddPostModule.cs" />
     <Compile Include="Logic\Modules\Comments\AddCommentModule.cs" />
+    <Compile Include="Logic\Modules\Posts\GetRandomPostModule.cs" />
     <Compile Include="Logic\Modules\Users\UserAddModule.cs" />
     <Compile Include="Logic\Modules\Users\UserGetModule.cs" />
     <Compile Include="Logic\Modules\Users\UserUpdateModule.cs" />
     <Compile Include="Logic\Providers\OAuthAppProvider.cs" />
     <Compile Include="Logic\Modules\Comments\GetCommentsModule.cs" />
-    <Compile Include="Logic\Modules\GetPostsModule.cs" />
+    <Compile Include="Logic\Modules\Posts\GetPostsModule.cs" />
     <Compile Include="Logic\Repository\UserRepository.cs" />
     <Compile Include="Logic\Repository\CommentRepository.cs" />
     <Compile Include="Logic\Repository\PostRepository.cs" />
     <Compile Include="DataObjects\Response\CommentResponses\GetCommentsResponse.cs" />
-    <Compile Include="DataObjects\Response\GetPostsResponse.cs" />
+    <Compile Include="DataObjects\Response\Posts\GetPostsResponse.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Following.cs" />
     <Compile Include="Models\Like.cs" />
