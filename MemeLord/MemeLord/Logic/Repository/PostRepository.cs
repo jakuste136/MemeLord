@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MemeLord.Logic.Database;
 using MemeLord.Models;
 
@@ -9,6 +10,7 @@ namespace MemeLord.Logic.Repository
         Post GetPostById(int id);
         List<Post> GetPosts(int lastId, int count);
         void AddPost(Post post);
+        Post GetRandomPost();
     }
 
     public class PostRepository : IPostRepository
@@ -36,6 +38,24 @@ namespace MemeLord.Logic.Repository
                     .Where(p => p.DeletionDate == null)
                     .Limit(count)
                     .ToList();
+            }
+        }
+
+        public Post GetRandomPost()
+        {
+            using (var db = CustomDatabaseFactory.GetConnection())
+            {
+                var postsCount = db.Query<Post>()
+                    .Where(p => p.DeletionDate == null)
+                    .Count();
+
+                var randomIndex = new Random().Next(0, postsCount);
+
+                return db.Query<Post>()
+                    .Include(p => p.Op)
+                    .Where(p => p.DeletionDate == null)
+                    .Limit(randomIndex, 1)
+                    .First();
             }
         }
 

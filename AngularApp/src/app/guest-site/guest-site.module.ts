@@ -14,7 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginPageComponent } from '../core/login-page/login-page.component';
 import { CoreModule } from '../core/core.module';
 import { TopComponent } from './top/top.component';
-import { RandomComponent } from './random/random.component';
+import { RandomPostComponent } from './random/random-post.component';
 
 
 @NgModule({
@@ -36,7 +36,7 @@ import { RandomComponent } from './random/random.component';
     PostComponent,
     PostsListComponent,
     TopComponent,
-    RandomComponent],
+    RandomPostComponent],
   providers: [
     PostsListService
   ]

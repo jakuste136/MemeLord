@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { GuestSiteComponent } from './guest-site.component';
 import { PostsListComponent } from './posts-list/posts-list.component';
 import { TopComponent } from './top/top.component';
-import { RandomComponent } from './random/random.component';
+import { RandomPostComponent } from './random/random-post.component';
 
 const routes: Routes = [
   {
@@ -20,7 +20,7 @@ const routes: Routes = [
       },
       {
         path: 'random',
-        component: RandomComponent
+        component: RandomPostComponent
       },
     ]
   }
