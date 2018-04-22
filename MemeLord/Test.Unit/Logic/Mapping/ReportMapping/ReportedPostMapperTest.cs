@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using MemeLord.DataObjects.Dto.ReportDtos;
 using MemeLord.Models;
-using Test.Unit.TestUtils;
 using FluentAssertions;
 using NUnit.Framework;
 using MemeLord.Logic.Mapping.Reports;

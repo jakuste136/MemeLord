@@ -83,7 +83,8 @@
     <Compile Include="Logic\Mapping\CommentMapping\MasterCommentMapperTests.cs" />
     <Compile Include="Logic\Mapping\CommentMapping\NewCommentMapperTests.cs" />
     <Compile Include="Logic\Mapping\PostMapperTests.cs" />
-    <Compile Include="Logic\Mapping\ReportedPostMapperTest.cs" />
+    <Compile Include="Logic\Mapping\ReportMapping\AddReportMapperTest.cs" />
+    <Compile Include="Logic\Mapping\ReportMapping\ReportedPostMapperTest.cs" />
     <Compile Include="Logic\Mapping\UserMappingTest.cs" />
     <Compile Include="Logic\Modules\FindMostFrequentReportTest.cs" />
     <Compile Include="Program.cs" />

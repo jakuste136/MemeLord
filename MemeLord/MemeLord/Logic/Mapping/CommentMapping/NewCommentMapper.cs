@@ -8,7 +8,6 @@ namespace MemeLord.Logic.Mapping.CommentMapping
     {
     }
 
-
     public class NewCommentMapper : Mapper<AddCommentRequest, Comment>, INewCommentMapper
     {
         public override IMappingExpression<AddCommentRequest, Comment> CreateMap(IMapperConfigurationExpression cfg)

@@ -187,6 +187,7 @@
     <Compile Include="DataObjects\Dto\ReportDtos\ReportedPostDto.cs" />
     <Compile Include="DataObjects\Request\AddCommentRequest.cs" />
     <Compile Include="DataObjects\Request\AddUserRequest.cs" />
+    <Compile Include="DataObjects\Request\Reports\AddReportRequest.cs" />
     <Compile Include="DataObjects\Response\CommentResponses\GetBestCommentsResponse.cs" />
     <Compile Include="DataObjects\Response\ReportResponses\GetReportedCommentsResponse.cs" />
     <Compile Include="DataObjects\Response\ReportResponses\GetReportedPostsResponse.cs" />
@@ -208,6 +209,7 @@
     <Compile Include="Logic\Mapping\PostMapper.cs" />
     <Compile Include="Logic\Extensions\OwinContextExtentions.cs" />
     <Compile Include="Logic\Mapping\Mapper.cs" />
+    <Compile Include="Logic\Mapping\Reports\NewReportMapper.cs" />
     <Compile Include="Logic\Mapping\Reports\ReportedPostMapper.cs" />
     <Compile Include="Logic\Mapping\Users\AddUserRequestMapper.cs" />
     <Compile Include="Logic\Mapping\Users\GetUserResponseMapper.cs" />

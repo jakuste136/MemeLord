@@ -1,6 +1,5 @@
 ﻿using MemeLord.Logic.Database;
 using MemeLord.Models;
-using MemeLord.DataObjects.Request;
 using System.Collections.Generic;
 
 namespace MemeLord.Logic.Repository
@@ -9,6 +8,7 @@ namespace MemeLord.Logic.Repository
     {
         Report GetReportById(int id);
         List<Report> GetReportedPosts(int lastId);
+        void AddReport(Report report);
     }
 
     public class ReportRepository : IReportRepository
@@ -40,6 +40,14 @@ namespace MemeLord.Logic.Repository
                     .Where(r => r.Post.Id > lastId || lastId == 0)
                     .OrderBy(r => r.Post.Id)
                     .ToList();
+            }
+        }
+
+        public void AddReport(Report report)
+        {
+            using (var db = CustomDatabaseFactory.GetConnection())
+            {
+                db.Save(report);
             }
         }
     }
