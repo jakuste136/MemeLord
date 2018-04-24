@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Claims;
 using JsonPatch;
 using MemeLord.DataObjects.Request;
 using MemeLord.Logic.Authentication;
@@ -32,10 +33,12 @@ namespace MemeLord.Logic.Modules.Users
         public HttpResponseMessage UpdateUser(UpdateUserRequest request)
         {
             if (request == null) return new HttpResponseMessage(HttpStatusCode.UnsupportedMediaType);
-            var originalUser = _userRepository.GetUserByCredentials(request.Username);
+            var username = ClaimsPrincipal.Current.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value ?? "";
+            var originalUser = _userRepository.GetUserByCredentials(username);
             if (originalUser == null) return new HttpResponseMessage(HttpStatusCode.NotFound);
             var newUser = _requestMapper.Map(request);
             newUser.Id = originalUser.Id;
+            newUser.Username = username;
             newUser.Hash = originalUser.Hash;
             _userRepository.SaveUser(newUser);
             return new HttpResponseMessage(HttpStatusCode.OK);

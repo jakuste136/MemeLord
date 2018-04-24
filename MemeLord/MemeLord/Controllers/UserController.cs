@@ -55,7 +55,7 @@ namespace MemeLord.Controllers
             return _userAddModule.AddUser(request);
         }
 
-        [HttpPut]
+        [HttpPut, Authorize]
         public HttpResponseMessage Put([FromBody] UpdateUserRequest request)
         {
             return _userUpdateModule.UpdateUser(request);

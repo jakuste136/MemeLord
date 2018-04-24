@@ -15,6 +15,7 @@ namespace MemeLord.Logic.Mapping.Users
         {
             return base.CreateMap(cfg)
                 .ForMember(usr => usr.Hash, map => map.Ignore())
+                .ForMember(usr => usr.Username, map => map.Ignore())
                 .ForMember(usr => usr.Id, map => map.Ignore());
         }
     }
