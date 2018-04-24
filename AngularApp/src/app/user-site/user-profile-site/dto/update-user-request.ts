@@ -1,7 +1,5 @@
-export interface IUserDto {
-    userName: string;
-    password: string;
-    repeatPassword: string;
+export interface IUpdateUserRequest {
+    username: string;
     email: string;
     sex: string;
     dateOfBirth: Date;

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
+import { ToastrService } from 'ngx-toastr';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -8,22 +10,30 @@ const httpOptions = {
   })
 }
 
+const apiUrl = environment.apiUrl;
+
 @Injectable()
 export class AuthenticationService {
 
   tokenKey: string = "a5smm_utoken"
 
   constructor(private router: Router,
-    private _http: HttpClient) { }
+    private _http: HttpClient,
+    private _toastr: ToastrService) { }
 
   login(username, password) {
     this.getTokenFromBackend(username, password)
       .subscribe(response => {
         this.setToken(response);
         this.router.navigate(['user']);
+        this.showSuccess();
       }, error => {
         console.log(error.error.error_description)
       });
+  }
+
+  showSuccess() {
+    this._toastr.success('Hello world!', 'Toastr fun!');
   }
 
   logout() {
@@ -56,7 +66,7 @@ export class AuthenticationService {
         .set('content-type', 'application/x-www-form-urlencoded')
     };
 
-    return this._http.post('http://localhost:8080/token', credentials, httpOptions);
+    return this._http.post(`${apiUrl}/token`, credentials, httpOptions);
   }
 
 }

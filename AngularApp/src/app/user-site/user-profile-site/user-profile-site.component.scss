@@ -1,0 +1,24 @@
+.wrapper {
+    display:flex;
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+}
+
+.single-column {
+    margin: 0 5px;
+}
+
+.followers {
+    flex-grow:4;
+}
+
+.details {
+    flex-grow:4;
+    min-width: 700px;
+    max-width: 900px;
+}
+
+.recent {
+    flex-grow:4;
+}
