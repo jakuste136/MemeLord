@@ -8,11 +8,23 @@
     tools:context="com.majstehermuskic.memelordmobile.MainActivity"
     tools:showIn="@layout/activity_main">
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/buttonSwitchLoginFragment"
+        android:layout_width="72dp"
+        android:layout_height="59dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@android:drawable/btn_star_big_on" />
+
     <FrameLayout
         android:id="@+id/activity_base_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
     </FrameLayout>
 
 </android.support.constraint.ConstraintLayout>

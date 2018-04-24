@@ -8,6 +8,7 @@ namespace MemeLord.Logic.Modules.Users
     public interface IUserGetModule
     {
         GetUserResponse GetUserById(int id);
+        GetUserResponse GetUserByName(string name);
         IList<GetUserResponse> GetAllUsers();
     }
 
@@ -25,6 +26,12 @@ namespace MemeLord.Logic.Modules.Users
         public GetUserResponse GetUserById(int id)
         {
             var user = _userRepository.GetUserById(id);
+            return _responseMapper.Map(user);
+        }
+
+        public GetUserResponse GetUserByName(string name)
+        {
+            var user = _userRepository.GetUserByCredentials(name);
             return _responseMapper.Map(user);
         }
 

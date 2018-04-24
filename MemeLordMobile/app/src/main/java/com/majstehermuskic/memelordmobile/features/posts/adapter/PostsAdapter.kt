@@ -38,13 +38,13 @@ class PostsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun getItemViewType(position: Int) = this.items.get(position).getViewType()
 
     fun addPosts(posts: List<MemePostItem>) {
-        val initPosition = items.size - 1
-        items.removeAt(initPosition)
-        notifyItemRemoved(initPosition)
+            val initPosition = items.size - 1
+            items.removeAt(initPosition)
+            notifyItemRemoved(initPosition)
 
-        items.addAll(posts)
-        items.add(loadingItem)
-        notifyItemRangeChanged(initPosition, items.size + 1)
+            items.addAll(posts)
+            items.add(loadingItem)
+            notifyItemRangeChanged(initPosition, items.size + 1)
     }
 
     fun clearAndAddPosts(posts: List<MemePostItem>) {

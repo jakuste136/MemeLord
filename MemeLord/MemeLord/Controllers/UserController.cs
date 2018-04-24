@@ -4,7 +4,6 @@ using System.Net.Http;
 using System.Security.Claims;
 using System.Web.Http;
 using JsonPatch;
-using MemeLord.DataObjects.Dto;
 using MemeLord.DataObjects.Request;
 using MemeLord.DataObjects.Response;
 using MemeLord.Logic.Modules.Users;
@@ -35,11 +34,19 @@ namespace MemeLord.Controllers
             return _userGetModule.GetAllUsers();
         }
 
-        [Route("{id}")]
-        [HttpGet]
-        public GetUserResponse Get(int id)
+        [Route("get-self")]
+        [HttpGet, Authorize(Roles = "User")]
+        public GetUserResponse GetSelf()
         {
-            return _userGetModule.GetUserById(id);
+            var username = ClaimsPrincipal.Current.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value ?? "";
+            return _userGetModule.GetUserByName(username);
+        }
+
+        [Route("{username}")]
+        [HttpGet]
+        public GetUserResponse Get(string username)
+        {
+            return _userGetModule.GetUserByName(username);
         }
 
         [HttpPost]
@@ -48,8 +55,14 @@ namespace MemeLord.Controllers
             return _userAddModule.AddUser(request);
         }
 
+        [HttpPut, Authorize]
+        public HttpResponseMessage Put([FromBody] UpdateUserRequest request)
+        {
+            return _userUpdateModule.UpdateUser(request);
+        }
+
         [Route("{id}")]
-        [HttpPatch]
+        [HttpPatch, Authorize]
         public HttpResponseMessage Patch(int id, JsonPatchDocument<User> userPatch)
         {
             return _userUpdateModule.UpdateUser(id, userPatch);
