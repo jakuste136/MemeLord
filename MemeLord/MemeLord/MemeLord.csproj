@@ -204,6 +204,7 @@
     <Compile Include="DataObjects\Dto\CommentDto.cs" />
     <Compile Include="DataObjects\Dto\UserDto.cs" />
     <Compile Include="DataObjects\Dto\PostDto.cs" />
+    <Compile Include="Logic\Extensions\ClaimsPrincipalWrapper.cs" />
     <Compile Include="Logic\Mapping\CommentMapping\AnswerCommentMapper.cs" />
     <Compile Include="Logic\Mapping\CommentMapping\MasterCommentMapper.cs" />
     <Compile Include="Logic\Mapping\CommentMapping\NewCommentMapper.cs" />
