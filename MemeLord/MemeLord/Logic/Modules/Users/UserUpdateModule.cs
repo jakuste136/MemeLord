@@ -32,16 +32,26 @@ namespace MemeLord.Logic.Modules.Users
 
         public HttpResponseMessage UpdateUser(UpdateUserRequest request)
         {
-            if (request == null) return new HttpResponseMessage(HttpStatusCode.UnsupportedMediaType);
-            var username = ClaimsPrincipal.Current.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value ?? "";
+            if (request == null)
+                return new HttpResponseMessage(HttpStatusCode.UnsupportedMediaType);
+
+            var username = GetFromClaim(ClaimTypes.Name);
             var originalUser = _userRepository.GetUserByCredentials(username);
-            if (originalUser == null) return new HttpResponseMessage(HttpStatusCode.NotFound);
-            var newUser = _requestMapper.Map(request);
-            newUser.Id = originalUser.Id;
-            newUser.Username = username;
-            newUser.Hash = originalUser.Hash;
-            _userRepository.SaveUser(newUser);
+            if (originalUser == null)
+                return new HttpResponseMessage(HttpStatusCode.NotFound);
+
+            // todo: [astek] assert do tego testu co napisalem 
+            _requestMapper.Map(request, originalUser);
+            
+            _userRepository.SaveUser(originalUser);
+
             return new HttpResponseMessage(HttpStatusCode.OK);
+        }
+
+        public string GetFromClaim(string types)
+        {
+            // todo: [astek] przenies do jakiegos extension method albo cos 
+            return ClaimsPrincipal.Current.Claims.FirstOrDefault(x => x.Type == types)?.Value ?? "";
         }
 
         public HttpResponseMessage UpdateUser(int id, JsonPatchDocument<User> userPatch)

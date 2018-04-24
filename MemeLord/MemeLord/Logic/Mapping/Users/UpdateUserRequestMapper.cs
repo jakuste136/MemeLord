@@ -4,9 +4,8 @@ using MemeLord.Models;
 
 namespace MemeLord.Logic.Mapping.Users
 {
-    public interface IUpdateUserRequestMapper
+    public interface IUpdateUserRequestMapper : IMapper<UpdateUserRequest, User>
     {
-        User Map(UpdateUserRequest source);
     }
 
     public class UpdateUserRequestMapper : Mapper<UpdateUserRequest, User>, IUpdateUserRequestMapper

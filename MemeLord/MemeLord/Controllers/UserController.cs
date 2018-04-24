@@ -34,6 +34,7 @@ namespace MemeLord.Controllers
             return _userGetModule.GetAllUsers();
         }
 
+        // todo: [astek] zmienic route na pusty, wywalic getall (bo chyba nie jest potrzebny) 
         [Route("get-self")]
         [HttpGet, Authorize(Roles = "User")]
         public GetUserResponse GetSelf()
@@ -60,6 +61,8 @@ namespace MemeLord.Controllers
         {
             return _userUpdateModule.UpdateUser(request);
         }
+
+        // todo: [astek] mozna chyba patcha wyrzucić
 
         [Route("{id}")]
         [HttpPatch, Authorize]

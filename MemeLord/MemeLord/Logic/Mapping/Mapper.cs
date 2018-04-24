@@ -8,6 +8,7 @@ namespace MemeLord.Logic.Mapping
     {
         TDest Map(TSource source);
         IList<TDest> Map(IList<TSource> sourceItemsList);
+        void Map(TSource source, TDest dest);
     }
 
     public class Mapper<TSource, TDest> : IMapper<TSource, TDest>
@@ -27,6 +28,11 @@ namespace MemeLord.Logic.Mapping
         public IList<TDest> Map(IList<TSource> sourceItemsList)
         {
             return MapperInstance.Map<IList<TDest>>(sourceItemsList);
+        }
+
+        public void Map(TSource source, TDest dest)
+        {
+            MapperInstance.Map(source, dest);
         }
 
         public virtual IMappingExpression<TSource, TDest> CreateMap(IMapperConfigurationExpression cfg)
