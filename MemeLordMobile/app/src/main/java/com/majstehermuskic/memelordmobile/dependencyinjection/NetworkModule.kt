@@ -1,5 +1,6 @@
 package com.majstehermuskic.memelordmobile.dependencyinjection
 
+import com.majstehermuskic.memelordmobile.api.MemeLordAPI
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -16,8 +17,12 @@ class NetworkModule {
     @Singleton
     fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
-                .baseUrl("http://memelordapp.azurewebsites.net/api/")
+                .baseUrl("http://memelordapp.azurewebsites.net/")
                 .addConverterFactory(MoshiConverterFactory.create())
                 .build()
     }
+
+    @Provides
+    @Singleton
+    fun provideMemeLordApi(retrofit: Retrofit): MemeLordAPI = retrofit.create(MemeLordAPI::class.java)
 }

@@ -3,6 +3,7 @@ package com.majstehermuskic.memelordmobile.dependencyinjection.posts
 import com.majstehermuskic.memelordmobile.api.MemeLordAPI
 import com.majstehermuskic.memelordmobile.api.PostsAPI
 import com.majstehermuskic.memelordmobile.api.PostsRestAPI
+import com.majstehermuskic.memelordmobile.features.posts.adapter.PostsAdapter
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -20,5 +21,5 @@ class PostsModule {
 
     @Provides
     @Singleton
-    fun provideMemeLordApi(retrofit: Retrofit): MemeLordAPI = retrofit.create(MemeLordAPI::class.java)
+    fun providePostsAdapter() = PostsAdapter()
 }

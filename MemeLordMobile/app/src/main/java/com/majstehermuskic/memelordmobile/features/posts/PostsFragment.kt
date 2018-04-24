@@ -7,11 +7,14 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.majstehermuskic.memelordmobile.MainActivity
 import com.majstehermuskic.memelordmobile.MemeLordApp
 import com.majstehermuskic.memelordmobile.R
 import com.majstehermuskic.memelordmobile.commons.InfiniteScrollListener
+import com.majstehermuskic.memelordmobile.commons.MemePostItem
 import com.majstehermuskic.memelordmobile.commons.MemePosts
 import com.majstehermuskic.memelordmobile.commons.RxBaseFragment
+import com.majstehermuskic.memelordmobile.commons.adapter.ViewType
 import com.majstehermuskic.memelordmobile.commons.extensions.inflate
 import com.majstehermuskic.memelordmobile.features.posts.adapter.PostsAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -28,6 +31,7 @@ class PostsFragment : RxBaseFragment() {
 
     @Inject lateinit var postsManager: PostsManager
     private var memePosts: MemePosts? = null
+    private var allMemePosts: List<MemePostItem>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +61,18 @@ class PostsFragment : RxBaseFragment() {
             (posts_list.adapter as PostsAdapter).clearAndAddPosts(memePosts!!.posts)
         } else {
             requestPosts()
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        allMemePosts = (posts_list.adapter as PostsAdapter).getPosts()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if(allMemePosts != null && (posts_list.adapter as PostsAdapter).getPosts().isEmpty()) {
+            (posts_list.adapter as PostsAdapter).clearAndAddPosts(allMemePosts!!)
         }
     }
 
