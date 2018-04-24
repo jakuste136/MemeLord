@@ -188,6 +188,7 @@
     <Compile Include="DataObjects\Request\AddCommentRequest.cs" />
     <Compile Include="DataObjects\Request\AddUserRequest.cs" />
     <Compile Include="DataObjects\Request\Reports\AddReportRequest.cs" />
+    <Compile Include="DataObjects\Request\UpdateUserRequest.cs" />
     <Compile Include="DataObjects\Response\CommentResponses\GetBestCommentsResponse.cs" />
     <Compile Include="DataObjects\Response\ReportResponses\GetReportedCommentsResponse.cs" />
     <Compile Include="DataObjects\Response\ReportResponses\GetReportedPostsResponse.cs" />
@@ -213,6 +214,7 @@
     <Compile Include="Logic\Mapping\Reports\ReportedPostMapper.cs" />
     <Compile Include="Logic\Mapping\Users\AddUserRequestMapper.cs" />
     <Compile Include="Logic\Mapping\Users\GetUserResponseMapper.cs" />
+    <Compile Include="Logic\Mapping\Users\UpdateUserRequestMapper.cs" />
     <Compile Include="Logic\Mapping\Users\UserMapper.cs" />
     <Compile Include="Logic\Modules\Posts\AddPostModule.cs" />
     <Compile Include="Logic\Modules\Comments\AddCommentModule.cs" />
