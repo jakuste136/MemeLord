@@ -1,13 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Security.Claims;
 using System.Web.Http;
-using JsonPatch;
 using MemeLord.DataObjects.Request;
 using MemeLord.DataObjects.Response;
 using MemeLord.Logic.Modules.Users;
-using MemeLord.Models;
 
 namespace MemeLord.Controllers
 {
@@ -25,22 +21,17 @@ namespace MemeLord.Controllers
             _userGetModule = userGetModule;
         }
 
+        [Route("all")]
         [HttpGet, Authorize(Roles = "User")]
-        public IList<GetUserResponse> Get()
+        public IList<GetUserResponse> GetAll()
         {
-            // TODO Mateusz: Remove only for test purposes
-            var username = ClaimsPrincipal.Current.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value ?? "";
-
             return _userGetModule.GetAllUsers();
         }
 
-        // todo: [astek] zmienic route na pusty, wywalic getall (bo chyba nie jest potrzebny) 
-        [Route("get-self")]
         [HttpGet, Authorize(Roles = "User")]
-        public GetUserResponse GetSelf()
+        public GetUserResponse Get()
         {
-            var username = ClaimsPrincipal.Current.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value ?? "";
-            return _userGetModule.GetUserByName(username);
+            return _userGetModule.GetSelf();
         }
 
         [Route("{username}")]
@@ -60,15 +51,6 @@ namespace MemeLord.Controllers
         public HttpResponseMessage Put([FromBody] UpdateUserRequest request)
         {
             return _userUpdateModule.UpdateUser(request);
-        }
-
-        // todo: [astek] mozna chyba patcha wyrzucić
-
-        [Route("{id}")]
-        [HttpPatch, Authorize]
-        public HttpResponseMessage Patch(int id, JsonPatchDocument<User> userPatch)
-        {
-            return _userUpdateModule.UpdateUser(id, userPatch);
         }
     }
 }

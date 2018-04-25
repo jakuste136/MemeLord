@@ -81,7 +81,18 @@ namespace Test.Unit.Logic.Mapping
             sut.Map(request, user);
 
             // assert
-            // todo: [astek] assert 
+            var expectedResult = new User
+            {
+                Avatar = "avatar",
+                DateOfBirth = new DateTime(2017, 1, 1),
+                Description = "desc",
+                Email = "email",
+                Sex = Sex.Female,
+                Hash = "hash",
+                Id = 1,
+                Username = "username"
+            };
+            user.Should().BeEquivalentTo(expectedResult);
         }
     }
 }

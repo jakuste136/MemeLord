@@ -1,6 +1,5 @@
 ﻿using MemeLord.Logic.Database;
 using MemeLord.Models;
-using MemeLord.DataObjects.Request;
 using System.Collections.Generic;
 
 namespace MemeLord.Logic.Repository
