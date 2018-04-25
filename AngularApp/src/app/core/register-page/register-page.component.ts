@@ -4,6 +4,8 @@ import { IUserDto } from './dto/user-dto';
 import { validateConfig } from '@angular/router/src/config';
 import { PasswordValidator } from './password-validator';
 import { RegisterUserService } from './register-user.service'
+import { ToastrService } from 'ngx-toastr';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-register-page',
@@ -16,7 +18,9 @@ export class RegisterPageComponent implements OnInit {
 
   constructor(
     private _fb: FormBuilder,
-    private _registerUserService: RegisterUserService) {
+    private _registerUserService: RegisterUserService,
+    private _toastr: ToastrService,
+    private _authenticationService: AuthenticationService) {
     this.registryForm = _fb.group({
       'userName': [null, Validators.compose([
         Validators.required,
@@ -43,7 +47,10 @@ export class RegisterPageComponent implements OnInit {
 
   addUser(user: IUserDto) {
     if (this.registryForm.valid) {
-      this._registerUserService.registerUser(user).subscribe();
+      this._registerUserService.registerUser(user).subscribe(response => {
+        this._toastr.success("Pomyślnie założono konto");
+        this._authenticationService.login(user.userName, user.password);
+      });
       console.log("Adding user...");
     }
   }

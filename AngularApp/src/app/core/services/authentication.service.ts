@@ -26,19 +26,25 @@ export class AuthenticationService {
       .subscribe(response => {
         this.setToken(response);
         this.router.navigate(['user']);
-        this.showSuccess();
+        this.showSuccess('Zalogowano się'); 
       }, error => {
         console.log(error.error.error_description)
+        this.showError("Błąd logowania");
       });
   }
 
-  showSuccess() {
-    this._toastr.success('Hello world!', 'Toastr fun!');
+  showSuccess(message) {
+    this._toastr.success(message);
+  }
+
+  showError(message) {
+    this._toastr.error(message);
   }
 
   logout() {
     this.removeToken();
     this.router.navigate(['']);
+    this.showSuccess("Wylogowano się")
   }
 
   getToken() {

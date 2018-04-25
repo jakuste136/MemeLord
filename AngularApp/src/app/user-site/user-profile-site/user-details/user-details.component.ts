@@ -26,7 +26,9 @@ export class UserDetailsComponent implements OnInit {
     }
   ]
 
-  constructor(private _fb: FormBuilder, private _userDetailsService: UserDetailsService) {
+  constructor(
+    private _fb: FormBuilder, 
+    private _userDetailsService: UserDetailsService) {
 
     this.user = {
       avatar: ""

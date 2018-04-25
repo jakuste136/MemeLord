@@ -23,7 +23,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     MaterialModule,
     GuestSiteModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      timeOut: 1500,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    }),
     BrowserAnimationsModule
   ],
   declarations: [NotFoundComponent, LoginPageComponent, RegisterPageComponent],
