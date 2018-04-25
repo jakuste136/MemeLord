@@ -4,19 +4,34 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { IGetUserResponse } from '../dto/get-user-response';
 import { IUpdateUserRequest } from '../dto/update-user-request';
 import { environment } from '../../../../environments/environment';
+import { AuthenticationService } from '../../../core/services/authentication.service';
 
 const apiUrl = environment.apiUrl;
 
 @Injectable()
 export class UserDetailsService {
 
-  constructor(private _http: HttpClient) { }
+  constructor(private _http: HttpClient, private _authenticationService: AuthenticationService) { }
 
   getUserDetails(): Observable<IGetUserResponse> {
-    return this._http.get<IGetUserResponse>(`${apiUrl}/api/user/1`);
+    var token = this._authenticationService.getToken().access_token;
+
+    const httpOptions = {
+      headers: new HttpHeaders()
+        .set('Authorization', `bearer ${token}`)
+    };
+
+    return this._http.get<IGetUserResponse>(`${apiUrl}/api/user`, httpOptions);
   }
 
   updateUserDetails(user: IUpdateUserRequest){
-    return this._http.put<IUpdateUserRequest>(`${apiUrl}/api/user`, user);
+    var token = this._authenticationService.getToken().access_token;
+
+    const httpOptions = {
+      headers: new HttpHeaders()
+        .set('Authorization', `bearer ${token}`)
+    };
+    
+    return this._http.put<IUpdateUserRequest>(`${apiUrl}/api/user`, user, httpOptions);
   }
 }
