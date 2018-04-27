@@ -11,6 +11,7 @@ namespace MemeLord.Logic.Repository
         List<Post> GetPosts(int lastId, int count);
         void AddPost(Post post);
         Post GetRandomPost();
+        void UpdatePost(Post post);
     }
 
     public class PostRepository : IPostRepository
@@ -60,6 +61,14 @@ namespace MemeLord.Logic.Repository
         }
 
         public void AddPost(Post post)
+        {
+            using (var db = CustomDatabaseFactory.GetConnection())
+            {
+                db.Save(post);
+            }
+        }
+
+        public void UpdatePost(Post post)
         {
             using (var db = CustomDatabaseFactory.GetConnection())
             {

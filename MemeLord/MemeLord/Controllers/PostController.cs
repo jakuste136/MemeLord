@@ -17,13 +17,15 @@ namespace MemeLord.Controllers
         private readonly IGetPostsModule _getPostsModule;
         private readonly IAddPostModule _addPostModule;
         private readonly IGetRandomPostModule _getRandomPostModule;
+        private readonly IUpdatePostModule _updatePostModule;
 
-        public PostController(IPostRepository postRepository, IGetPostsModule getPostsModule, IAddPostModule addPostModule, IGetRandomPostModule getRandomPostModule)
+        public PostController(IPostRepository postRepository, IGetPostsModule getPostsModule, IAddPostModule addPostModule, IGetRandomPostModule getRandomPostModule, IUpdatePostModule updatePostModule)
         {
             _postRepository = postRepository;
             _getPostsModule = getPostsModule;
             _addPostModule = addPostModule;
             _getRandomPostModule = getRandomPostModule;
+            _updatePostModule = updatePostModule;
         }
 
         [Route("{id}")]
@@ -49,6 +51,13 @@ namespace MemeLord.Controllers
         public HttpResponseMessage AddPost()
         {
             return _addPostModule.AddPost(Request);
+        }
+
+        [Route("delete")]
+        [HttpGet]
+        public void DeletePost([FromUri] int id)
+        {
+            _updatePostModule.DeletePost(id);
         }
     }
 }

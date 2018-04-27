@@ -10,6 +10,7 @@ namespace MemeLord.Logic.Repository
         List<Comment> GetManyComments(int postId, int lastId, int count);
         List<Comment> GetBestComments(int postId, int count);
         void AddComment(Comment comment);
+        void UpdateComment(Comment comment);
     }
 
     public class CommentRepository : ICommentRepository
@@ -74,8 +75,16 @@ namespace MemeLord.Logic.Repository
                 return result;
             }
         }
-
+        
         public void AddComment(Comment comment)
+        {
+            using (var db = CustomDatabaseFactory.GetConnection())
+            {
+                db.Save(comment);
+            }
+        }
+
+        public void UpdateComment(Comment comment)
         {
             using (var db = CustomDatabaseFactory.GetConnection())
             {
