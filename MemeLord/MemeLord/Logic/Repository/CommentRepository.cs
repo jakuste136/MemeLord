@@ -19,11 +19,21 @@ namespace MemeLord.Logic.Repository
         {
             using (var db = CustomDatabaseFactory.GetConnection())
             {
-                return db.Query<Comment>()
+                var comment = db.Query<Comment>()
                     .Include(c => c.MasterComment)
                     .Include(c => c.Post)
                     .Include(c => c.User)
                     .SingleOrDefault(c => c.Id == id);
+
+                var answers = db.Query<Comment>()
+                    .Include(c => c.MasterComment)
+                    .Include(c => c.Post)
+                    .Include(c => c.User)
+                    .Where(c => c.MasterComment.Id == id)
+                    .ToList();
+
+                comment.Answers = answers;
+                return comment;
             }
         }
 
