@@ -1,7 +1,5 @@
 package com.majstehermuskic.memelordmobile.api
 
-import android.text.SpannableStringBuilder
-
 class GetPostsResponse(
         val postsList: List<PostDto>,
         val lastId: Int
@@ -13,8 +11,5 @@ class PostDto(
 )
 
 class LoginResponse(
-        val accessToken: String,
-        val tokenType: String,
-        val expiresIn: Int,
-        val role: String
+        val access_token: String
 )

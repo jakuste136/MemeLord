@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import com.majstehermuskic.memelordmobile.features.authorization.LoginFragment
 
 import kotlinx.android.synthetic.main.activity_main.*
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         buttonSwitchLoginFragment.setOnClickListener{
+            buttonSwitchLoginFragment.hide()
             changeFragment(LoginFragment())
         }
 
@@ -53,6 +55,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         val fragmentManager = supportFragmentManager
+        if(buttonSwitchLoginFragment.visibility == View.GONE)
+            buttonSwitchLoginFragment.show()
         if(fragmentManager.backStackEntryCount > 1){
             fragmentManager.popBackStack(null, 0)
         }else{

@@ -11,8 +11,7 @@ import javax.inject.Singleton
 @Component(modules = arrayOf(
         AppModule::class,
         LoginModule::class,
-        NetworkModule::class,
-        PostsModule::class
+        NetworkModule::class
 ))
 interface LoginComponent {
 

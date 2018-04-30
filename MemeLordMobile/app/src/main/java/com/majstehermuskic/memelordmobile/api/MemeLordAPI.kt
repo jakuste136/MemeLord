@@ -14,5 +14,5 @@ interface MemeLordAPI {
     @POST("token")
     fun login(@Field("username") username: String,
               @Field("password") password: String,
-              @Field("grant-type") grantType: String = "password"): Call<LoginResponse>
+              @Field("grant_type") grantType: String = "password"): Call<LoginResponse>
 }
