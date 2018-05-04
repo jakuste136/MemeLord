@@ -31,7 +31,6 @@ export class LoginPageComponent implements OnInit {
   }
 
   login() {
-    // this._toastr.success("lalal","lalal");
     if (this.registryForm.valid) {
       this._authenticationService.login(this.registryForm.get('login').value, this.registryForm.get('password').value);
     }

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { IPostDto } from '../dto/post-dto';
 import { PostsListService } from './posts-list.service';
+import { AuthenticationService } from '../../core/services/authentication.service';
+import { MatDialogRef, MatDialog } from '@angular/material';
+import { AddPostModalComponent } from './add-post-modal/add-post-modal.component';
 
 @Component({
   selector: 'app-posts-list',
@@ -12,16 +15,25 @@ export class PostsListComponent implements OnInit {
   posts = new Array<IPostDto>();
   lastId: number;
 
-  constructor(private _postsListService: PostsListService) {
+  addPostModalRef: MatDialogRef<AddPostModalComponent>;
+
+  constructor(private _postsListService: PostsListService,
+    private _authenticationService: AuthenticationService,
+    private _dialog: MatDialog) {
+
+    this.refreshPosts();
+  }
+
+  ngOnInit() {
+  }
+
+  refreshPosts() {
     this.lastId = 0;
 
     this._postsListService.getPosts(this.lastId, 10).subscribe(data => {
       this.posts = data.postsList;
       this.lastId = data.lastId;
     });
-  }
-
-  ngOnInit() {
   }
 
   appendPosts(newPosts: IPostDto[]) {
@@ -35,4 +47,17 @@ export class PostsListComponent implements OnInit {
     });
   }
 
+  openAddPostModal() {
+    this.addPostModalRef = this._dialog.open(AddPostModalComponent, {
+      width: "550px"
+    });
+
+    this.addPostModalRef.afterClosed().subscribe(result => {
+      setTimeout(() => this.refreshPosts(), 1000);
+    })
+  }
+
+  isAuthenticated() {
+    return this._authenticationService.getToken() != null;
+  }
 }

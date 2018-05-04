@@ -15,6 +15,8 @@ import { LoginPageComponent } from '../core/login-page/login-page.component';
 import { CoreModule } from '../core/core.module';
 import { TopComponent } from './top/top.component';
 import { RandomPostComponent } from './random/random-post.component';
+import { AddPostModalComponent } from './posts-list/add-post-modal/add-post-modal.component';
+import { AddPostService } from './posts-list/add-post-modal/add-post.service';
 
 
 @NgModule({
@@ -36,9 +38,14 @@ import { RandomPostComponent } from './random/random-post.component';
     PostComponent,
     PostsListComponent,
     TopComponent,
-    RandomPostComponent],
+    RandomPostComponent,
+    AddPostModalComponent],
   providers: [
-    PostsListService
+    PostsListService,
+    AddPostService
+  ],
+  entryComponents: [
+    AddPostModalComponent
   ]
 })
 export class GuestSiteModule { }

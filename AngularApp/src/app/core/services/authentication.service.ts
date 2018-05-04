@@ -58,9 +58,7 @@ export class AuthenticationService {
   removeToken() {
     localStorage.removeItem(this.tokenKey);
   }
-
-
-
+  
   private getTokenFromBackend(username: string, password: string) {
     var credentials = new HttpParams()
       .set('username', username)

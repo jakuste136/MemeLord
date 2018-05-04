@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { RegisterUserService } from '../../../core/register-page/register-user.service';
 import { IGetUserResponse } from '../dto/get-user-response';
 import { UserDetailsService } from './user-details.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-user-details',
@@ -27,8 +28,9 @@ export class UserDetailsComponent implements OnInit {
   ]
 
   constructor(
-    private _fb: FormBuilder, 
-    private _userDetailsService: UserDetailsService) {
+    private _fb: FormBuilder,
+    private _userDetailsService: UserDetailsService,
+    private _toastr: ToastrService) {
 
     this.user = {
       avatar: ""
@@ -45,7 +47,9 @@ export class UserDetailsComponent implements OnInit {
   }
 
   updateUser() {
-    this._userDetailsService.updateUserDetails(this.user).subscribe();
+    this._userDetailsService.updateUserDetails(this.user).subscribe(response => {
+      this._toastr.success("Zaktualizowano dane");
+    });
   }
 
   getEmailErrorMessage() {
@@ -55,7 +59,7 @@ export class UserDetailsComponent implements OnInit {
   }
 
   initializeFormGroup() {
-     return this._fb.group(
+    return this._fb.group(
       {
         "username": [null, Validators.compose([])],
         "sex": [null, Validators.compose([])],
