@@ -15,6 +15,11 @@ import { LoginPageComponent } from '../core/login-page/login-page.component';
 import { CoreModule } from '../core/core.module';
 import { TopComponent } from './top/top.component';
 import { RandomPostComponent } from './random/random-post.component';
+import { RatingsBarComponent } from './post/ratings-bar/ratings-bar.component';
+import { RatingsService } from './post/ratings-bar/ratings-bar.service';
+import { PostBarComponent } from './post/post-bar/post-bar/post-bar.component';
+import { CommentButtonComponent } from './post/comment-button/comment-button/comment-button.component';
+
 
 
 @NgModule({
@@ -36,9 +41,13 @@ import { RandomPostComponent } from './random/random-post.component';
     PostComponent,
     PostsListComponent,
     TopComponent,
-    RandomPostComponent],
+    RandomPostComponent,
+    RatingsBarComponent,
+    PostBarComponent,
+    CommentButtonComponent],
   providers: [
-    PostsListService
+    PostsListService,
+    RatingsService
   ]
 })
 export class GuestSiteModule { }

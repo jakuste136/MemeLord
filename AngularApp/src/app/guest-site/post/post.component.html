@@ -3,4 +3,8 @@
       <mat-card-title>{{title}}</mat-card-title>
   </mat-card-header>
   <img mat-card-image [src]="path">
+  <mat-card-footer>
+    <app-post-bar [rating]="rating" [likeValue]="likeValue" [index]="index" [postId]="postId">
+    </app-post-bar>
+  </mat-card-footer>
 </mat-card>

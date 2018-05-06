@@ -1,12 +1,10 @@
-﻿using MemeLord.DataObjects.Response;
-using MemeLord.Logic.Modules;
+﻿using MemeLord.DataObjects.Request;
+using MemeLord.DataObjects.Response.Posts;
+using MemeLord.Logic.Modules.Posts;
 using MemeLord.Logic.Repository;
 using MemeLord.Models;
 using System.Net.Http;
-using System.Threading.Tasks;
 using System.Web.Http;
-using MemeLord.DataObjects.Response.Posts;
-using MemeLord.Logic.Modules.Posts;
 
 namespace MemeLord.Controllers
 {
@@ -17,12 +15,18 @@ namespace MemeLord.Controllers
         private readonly IGetPostsModule _getPostsModule;
         private readonly IAddPostModule _addPostModule;
         private readonly IGetRandomPostModule _getRandomPostModule;
+        private readonly IPostUpdateModule _postUpdateModule;
 
-        public PostController(IPostRepository postRepository, IGetPostsModule getPostsModule, IAddPostModule addPostModule, IGetRandomPostModule getRandomPostModule)
+        public PostController(IPostRepository postRepository, 
+            IGetPostsModule getPostsModule, 
+            IAddPostModule addPostModule, 
+            IGetRandomPostModule getRandomPostModule, 
+            IPostUpdateModule postUpdateModule)
         {
             _postRepository = postRepository;
             _getPostsModule = getPostsModule;
             _addPostModule = addPostModule;
+            _postUpdateModule = postUpdateModule;
             _getRandomPostModule = getRandomPostModule;
         }
 
@@ -49,6 +53,20 @@ namespace MemeLord.Controllers
         public HttpResponseMessage AddPost()
         {
             return _addPostModule.AddPost(Request);
+        }
+
+        [Route("update-rating")]
+        [HttpPatch]
+        public HttpResponseMessage UpdatePostRating([FromBody] UpdatePostRatingRequest request)
+        {
+            return _postUpdateModule.UpdatePostRating(request);
+        }
+
+        [Route("top")]
+        [HttpGet]
+        public GetPostsResponse GetTopPosts([FromUri] int lastId, [FromUri] int count)
+        {
+            return _getPostsModule.GetTopPosts(lastId, count);
         }
     }
 }

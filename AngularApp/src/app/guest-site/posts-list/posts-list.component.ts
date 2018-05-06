@@ -8,7 +8,7 @@ import { PostsListService } from './posts-list.service';
   styleUrls: ['./posts-list.component.scss']
 })
 export class PostsListComponent implements OnInit {
-
+  
   posts = new Array<IPostDto>();
   lastId: number;
 

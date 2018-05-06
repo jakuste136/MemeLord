@@ -17,6 +17,7 @@ namespace Test.Unit.Logic.Mapping
             //ARRANGE
             var post = new Post
             {
+                Id = 1,
                 Op = new User { Username = "username" },
                 CreationDate = new DateTime(2015, 1, 1),
                 Image = "image",
@@ -30,10 +31,11 @@ namespace Test.Unit.Logic.Mapping
             var result = sut.Map(post);
 
             //ASSERT
-            result.ShouldHavePropertyCount(6);
+            result.ShouldHavePropertyCount(7);
 
             var expectedResult = new PostDto
             {
+                Id = 1,
                 Username = "username",
                 CreationDate = new DateTime(2015, 1, 1),
                 Image = "image",
@@ -53,6 +55,7 @@ namespace Test.Unit.Logic.Mapping
             {
                 new Post
                 {
+                    Id = 1,
                     Op = new User { Username = "username" },
                     CreationDate = new DateTime(2015, 1, 1),
                     Image = "image",
@@ -71,6 +74,7 @@ namespace Test.Unit.Logic.Mapping
             {
                 new PostDto
                 {
+                    Id = 1,
                     Username = "username",
                     CreationDate = new DateTime(2015, 1, 1),
                     Image = "image",

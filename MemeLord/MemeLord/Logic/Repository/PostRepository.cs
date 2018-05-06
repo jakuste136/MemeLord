@@ -9,8 +9,10 @@ namespace MemeLord.Logic.Repository
     {
         Post GetPostById(int id);
         List<Post> GetPosts(int lastId, int count);
+        List<Post> GetTopPosts(int lastId, int count);
         void AddPost(Post post);
         Post GetRandomPost();
+        void UpdatePost(Post post);
     }
 
     public class PostRepository : IPostRepository
@@ -41,6 +43,20 @@ namespace MemeLord.Logic.Repository
             }
         }
 
+        public List<Post> GetTopPosts(int lastId, int count)
+        {
+            using (var db = CustomDatabaseFactory.GetConnection())
+            {
+                return db.Query<Post>()
+                    .Include(p => p.Op)
+                    .OrderByDescending(p => p.Rating)
+                    .Where(p => p.Id < lastId || lastId == 0)
+                    .Where(p => p.DeletionDate == null)
+                    .Limit(count)
+                    .ToList();
+            }
+        }
+
         public Post GetRandomPost()
         {
             using (var db = CustomDatabaseFactory.GetConnection())
@@ -64,6 +80,14 @@ namespace MemeLord.Logic.Repository
             using (var db = CustomDatabaseFactory.GetConnection())
             {
                 db.Save(post);
+            }
+        }
+
+        public void UpdatePost(Post post)
+        {
+            using (var db = CustomDatabaseFactory.GetConnection())
+            {
+                db.Update(post);
             }
         }
     }

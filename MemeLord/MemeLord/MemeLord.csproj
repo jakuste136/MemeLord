@@ -180,13 +180,16 @@
       <DependentUpon>ReportingSettings.settings</DependentUpon>
     </Compile>
     <Compile Include="Controllers\CommentController.cs" />
+    <Compile Include="Controllers\LikeController.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DataObjects\Dto\ReportDtos\ReportedCommentDto.cs" />
     <Compile Include="DataObjects\Dto\ReportDtos\ReportedPostDto.cs" />
     <Compile Include="DataObjects\Request\AddCommentRequest.cs" />
+    <Compile Include="DataObjects\Request\AddLikeRequest.cs" />
     <Compile Include="DataObjects\Request\AddUserRequest.cs" />
+    <Compile Include="DataObjects\Request\UpdatePostRatingRequest.cs" />
     <Compile Include="DataObjects\Response\CommentResponses\GetBestCommentsResponse.cs" />
     <Compile Include="DataObjects\Response\ReportResponses\GetReportedCommentsResponse.cs" />
     <Compile Include="DataObjects\Response\ReportResponses\GetReportedPostsResponse.cs" />
@@ -212,9 +215,12 @@
     <Compile Include="Logic\Mapping\Users\AddUserRequestMapper.cs" />
     <Compile Include="Logic\Mapping\Users\GetUserResponseMapper.cs" />
     <Compile Include="Logic\Mapping\Users\UserMapper.cs" />
+    <Compile Include="Logic\Modules\Likes\LikeAddModule.cs" />
+    <Compile Include="Logic\Modules\Likes\LikeGetModule.cs" />
     <Compile Include="Logic\Modules\Posts\AddPostModule.cs" />
     <Compile Include="Logic\Modules\Comments\AddCommentModule.cs" />
     <Compile Include="Logic\Modules\Posts\GetRandomPostModule.cs" />
+    <Compile Include="Logic\Modules\Posts\PostUpdateModule.cs" />
     <Compile Include="Logic\Modules\Reports\AddReportModule.cs" />
     <Compile Include="Logic\Modules\Reports\FindMostFrequentReport.cs" />
     <Compile Include="Logic\Modules\Reports\GetReportsModule.cs" />
@@ -224,6 +230,7 @@
     <Compile Include="Logic\Providers\OAuthAppProvider.cs" />
     <Compile Include="Logic\Modules\Comments\GetCommentsModule.cs" />
     <Compile Include="Logic\Modules\Posts\GetPostsModule.cs" />
+    <Compile Include="Logic\Repository\LikeRepository.cs" />
     <Compile Include="Logic\Repository\ReportRepository.cs" />
     <Compile Include="Logic\Repository\UserRepository.cs" />
     <Compile Include="Logic\Repository\CommentRepository.cs" />
