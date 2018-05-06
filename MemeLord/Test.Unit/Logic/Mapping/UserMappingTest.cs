@@ -50,5 +50,49 @@ namespace Test.Unit.Logic.Mapping
 
             result.Should().BeEquivalentTo(expectedResult);
         }
+
+        [Test]
+        public void Can_Update_Existing_User()
+        {
+            // arrange
+            var request = new UpdateUserRequest
+            {
+                Avatar = "avatar",
+                DateOfBirth = new DateTime(2017,1,1),
+                Description = "desc",
+                Email = "email",
+                Sex = Sex.Female
+            };
+            
+            var user = new User
+            {
+                Avatar = "oldAvatar",
+                DateOfBirth = null,
+                Description = "oldDescription",
+                Email = "oldEmail",
+                Hash = "hash",
+                Id = 1,
+                Sex = Sex.Male,
+                Username = "username"
+            };
+
+            // act
+            var sut = new Mapper<UpdateUserRequest, User>();
+            sut.Map(request, user);
+
+            // assert
+            var expectedResult = new User
+            {
+                Avatar = "avatar",
+                DateOfBirth = new DateTime(2017, 1, 1),
+                Description = "desc",
+                Email = "email",
+                Sex = Sex.Female,
+                Hash = "hash",
+                Id = 1,
+                Username = "username"
+            };
+            user.Should().BeEquivalentTo(expectedResult);
+        }
     }
 }

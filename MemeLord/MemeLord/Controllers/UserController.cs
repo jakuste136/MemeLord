@@ -1,14 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Security.Claims;
 using System.Web.Http;
-using JsonPatch;
-using MemeLord.DataObjects.Dto;
 using MemeLord.DataObjects.Request;
 using MemeLord.DataObjects.Response;
 using MemeLord.Logic.Modules.Users;
-using MemeLord.Models;
 
 namespace MemeLord.Controllers
 {
@@ -26,20 +21,24 @@ namespace MemeLord.Controllers
             _userGetModule = userGetModule;
         }
 
+        [Route("all")]
         [HttpGet, Authorize(Roles = "User")]
-        public IList<GetUserResponse> Get()
+        public IList<GetUserResponse> GetAll()
         {
-            // TODO Mateusz: Remove only for test purposes
-            var username = ClaimsPrincipal.Current.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value ?? "";
-
             return _userGetModule.GetAllUsers();
         }
 
-        [Route("{id}")]
-        [HttpGet]
-        public GetUserResponse Get(int id)
+        [HttpGet, Authorize(Roles = "User")]
+        public GetUserResponse Get()
         {
-            return _userGetModule.GetUserById(id);
+            return _userGetModule.GetSelf();
+        }
+
+        [Route("{username}")]
+        [HttpGet]
+        public GetUserResponse Get(string username)
+        {
+            return _userGetModule.GetUserByName(username);
         }
 
         [HttpPost]
@@ -48,11 +47,10 @@ namespace MemeLord.Controllers
             return _userAddModule.AddUser(request);
         }
 
-        [Route("{id}")]
-        [HttpPatch]
-        public HttpResponseMessage Patch(int id, JsonPatchDocument<User> userPatch)
+        [HttpPut, Authorize]
+        public HttpResponseMessage Put([FromBody] UpdateUserRequest request)
         {
-            return _userUpdateModule.UpdateUser(id, userPatch);
+            return _userUpdateModule.UpdateUser(request);
         }
     }
 }

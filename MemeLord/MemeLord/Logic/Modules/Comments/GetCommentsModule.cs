@@ -1,14 +1,16 @@
 ﻿using System.Linq;
+using MemeLord.DataObjects.Dto;
 using MemeLord.DataObjects.Response;
 using MemeLord.Logic.Mapping.CommentMapping;
 using MemeLord.Logic.Repository;
 
-namespace MemeLord.Logic.Modules
+namespace MemeLord.Logic.Modules.Comments
 {
     public interface IGetCommentsModule
     {
         GetCommentsResponse GetPostComments(int postId, int lastId, int count);
         GetBestCommentsResponse GetBestComments(int postId, int count);
+        CommentDto GetComment(int id);
     }
 
     public class GetCommentsModule : IGetCommentsModule
@@ -22,6 +24,12 @@ namespace MemeLord.Logic.Modules
             _commentRepository = commentRepository;
             _masterCommentMapper = masterCommentMapper;
             _answerCommentMapper = answerCommentMapper;
+        }
+
+        public CommentDto GetComment(int id)
+        {
+            var comment = _commentRepository.GetCommentById(id);
+            return _masterCommentMapper.Map(comment);
         }
 
         public GetCommentsResponse GetPostComments(int postId, int lastId, int count)

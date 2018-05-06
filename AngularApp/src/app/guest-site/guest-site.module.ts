@@ -17,6 +17,8 @@ import { TopComponent } from './top/top.component';
 import { RandomPostComponent } from './random/random-post.component';
 import { RatingsBarComponent } from './post/ratings-bar/ratings-bar.component';
 import { RatingsService } from './post/ratings-bar/ratings-bar.service';
+import { AddPostModalComponent } from './posts-list/add-post-modal/add-post-modal.component';
+import { AddPostService } from './posts-list/add-post-modal/add-post.service';
 import { PostBarComponent } from './post/post-bar/post-bar/post-bar.component';
 import { CommentButtonComponent } from './post/comment-button/comment-button/comment-button.component';
 
@@ -43,11 +45,16 @@ import { CommentButtonComponent } from './post/comment-button/comment-button/com
     TopComponent,
     RandomPostComponent,
     RatingsBarComponent,
+    AddPostModalComponent,
     PostBarComponent,
     CommentButtonComponent],
   providers: [
     PostsListService,
-    RatingsService
+    RatingsService,
+    AddPostService
+  ],
+  entryComponents: [
+    AddPostModalComponent
   ]
 })
 export class GuestSiteModule { }

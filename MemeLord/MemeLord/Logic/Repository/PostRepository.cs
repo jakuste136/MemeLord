@@ -87,7 +87,7 @@ namespace MemeLord.Logic.Repository
         {
             using (var db = CustomDatabaseFactory.GetConnection())
             {
-                db.Update(post);
+                db.Save(post);
             }
         }
     }

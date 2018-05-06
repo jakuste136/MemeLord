@@ -1,0 +1,48 @@
+<mat-card>
+  <mat-card-header>
+    <p>Dane użytkownika</p>
+  </mat-card-header>
+  <form [formGroup]="registryForm" (ngSubmit)="updateUser()">
+    <div class="wrapper">
+      <div class="inputs">
+        <mat-form-field>
+          <input matInput placeholder="Nazwa użytkownika" formControlName="username" [(ngModel)]="user.username" readonly>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Email" formControlName="email" [(ngModel)]="user.email">
+          <mat-error *ngIf="!registryForm.controls['email'].valid && registryForm.controls['email'].touched">{{getEmailErrorMessage()}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-select placeholder="Płeć" formControlName="sex" [(ngModel)]="user.sex">
+            <mat-option *ngFor="let sex of sexes" [value]="sex.value">
+              {{ sex.view }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" placeholder="Data urodzenia" formControlName="dateOfBirth" [(ngModel)]="user.dateOfBirth">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+          <textarea 
+          matInput 
+          placeholder="Opis" 
+          matTextareaAutosize 
+          matAutosizeMinRows="1" 
+          matAutosizeMaxRows="5" 
+          formControlName="description"
+          [(ngModel)]="user.description"></textarea>
+        </mat-form-field>
+      </div>
+      <div class="image">
+        <img mat-card-image class="avatar" [src]="user.avatar">
+        <button mat-raised-button color="primary" class="save-button" type="submit" [disabled]="!registryForm.valid">Zapisz</button>
+      </div>
+    </div>
+  </form>
+</mat-card>

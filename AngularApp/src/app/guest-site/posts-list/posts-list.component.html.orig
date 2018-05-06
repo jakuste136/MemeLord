@@ -1,0 +1,11 @@
+<div class="posts-list">
+  <div infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="1000" (scrolled)="onScroll()">
+<<<<<<< HEAD
+      <app-post *ngFor="let post of posts; let i = index" [title]="post.title" [path]="post.image" 
+       [rating]="post.rating" [postId]="post.id" [index]="i" [attr.id]="'post-' + i"></app-post>
+=======
+    <app-post *ngFor="let post of posts" [title]="post.title" [path]="post.image"></app-post>
+>>>>>>> 66b7cfafe146f65a43af7f71945c48a958adb231
+  </div>
+</div>
+<button mat-fab color="primary" class="add-post-button" *ngIf="isAuthenticated()" (click)="openAddPostModal()">+</button>

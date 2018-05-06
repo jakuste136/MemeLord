@@ -9,3 +9,7 @@ class PostDto(
         val title: String,
         val image: String
 )
+
+class LoginResponse(
+        val access_token: String
+)

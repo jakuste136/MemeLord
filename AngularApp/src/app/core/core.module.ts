@@ -12,6 +12,8 @@ import { MaterialModule } from '../shared/material.module';
 import { GuestSiteModule } from '../guest-site/guest-site.module';
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { RegisterUserService } from './register-page/register-user.service';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [
@@ -20,7 +22,13 @@ import { RegisterUserService } from './register-page/register-user.service';
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    GuestSiteModule
+    GuestSiteModule,
+    ToastrModule.forRoot({
+      timeOut: 1500,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    }),
+    BrowserAnimationsModule
   ],
   declarations: [NotFoundComponent, LoginPageComponent, RegisterPageComponent],
   exports: [

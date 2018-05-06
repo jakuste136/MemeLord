@@ -21,7 +21,6 @@ namespace Test.Unit.Logic.Mapping.CommentMapping
                 MasterCommentId = 1,
                 UserId = 1,
                 Rating = 1,
-                CreationDate = new DateTime(2013, 1, 1),
                 Text = "text"
             };
 
@@ -58,7 +57,6 @@ namespace Test.Unit.Logic.Mapping.CommentMapping
                     MasterCommentId = 1,
                     UserId = 1,
                     Rating = 1,
-                    CreationDate = new DateTime(2013, 1, 1),
                     Text = "text"
                 }
             };

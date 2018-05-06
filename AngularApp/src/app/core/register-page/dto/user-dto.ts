@@ -5,4 +5,6 @@ export interface IUserDto {
     email: string;
     sex: string;
     dateOfBirth: Date;
+    description: string;
+    avatar: string;
 }

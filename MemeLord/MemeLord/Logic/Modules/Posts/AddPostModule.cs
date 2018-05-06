@@ -9,6 +9,7 @@ using System.Web;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
 using MemeLord.Configuration;
+using MemeLord.Logic.Extensions;
 using MemeLord.Logic.Repository;
 using MemeLord.Models;
 using CloudinaryConfiguration = MemeLord.Configuration.CloudinaryConfiguration;
@@ -46,7 +47,9 @@ namespace MemeLord.Logic.Modules.Posts
 
             var imageUri = UploadToCludinary(dataUri);
 
-            var userId = ClaimsPrincipal.Current.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value ?? "0";
+            var userId = ClaimsPrincipalWrapper.GetFromClaim(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userId))
+                return request.CreateResponse(HttpStatusCode.ExpectationFailed, message);
 
             var post = new Post
             {

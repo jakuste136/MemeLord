@@ -1,0 +1,14 @@
+<form>
+  <mat-form-field>
+    <input matInput [(ngModel)]="post.title" placeholder="Tytuł" name="post.title">
+  </mat-form-field>
+</form>
+<mat-dialog-content>
+  <input hidden type="file" #imgFileInput (change)="choosePicture($event.target.files)" />
+  <img mat-card-image class="avatar" [src]="display">
+  <button mat-raised-button color="primary" (click)="imgFileInput.click()">Wybierz plik</button>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="addPost()">Dodaj</button>
+  <button mat-raised-button color="primary" (click)="closeModal()">Anuluj</button>
+</mat-dialog-actions>

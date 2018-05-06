@@ -1,6 +1,5 @@
 ﻿using MemeLord.Logic.Database;
 using MemeLord.Models;
-using MemeLord.DataObjects.Request;
 using System.Collections.Generic;
 
 namespace MemeLord.Logic.Repository
@@ -11,6 +10,7 @@ namespace MemeLord.Logic.Repository
         List<Comment> GetManyComments(int postId, int lastId, int count);
         List<Comment> GetBestComments(int postId, int count);
         void AddComment(Comment comment);
+        void UpdateComment(Comment comment);
     }
 
     public class CommentRepository : ICommentRepository
@@ -19,11 +19,21 @@ namespace MemeLord.Logic.Repository
         {
             using (var db = CustomDatabaseFactory.GetConnection())
             {
-                return db.Query<Comment>()
+                var comment = db.Query<Comment>()
                     .Include(c => c.MasterComment)
                     .Include(c => c.Post)
                     .Include(c => c.User)
                     .SingleOrDefault(c => c.Id == id);
+
+                var answers = db.Query<Comment>()
+                    .Include(c => c.MasterComment)
+                    .Include(c => c.Post)
+                    .Include(c => c.User)
+                    .Where(c => c.MasterComment.Id == id)
+                    .ToList();
+
+                comment.Answers = answers;
+                return comment;
             }
         }
 
@@ -75,8 +85,16 @@ namespace MemeLord.Logic.Repository
                 return result;
             }
         }
-
+        
         public void AddComment(Comment comment)
+        {
+            using (var db = CustomDatabaseFactory.GetConnection())
+            {
+                db.Save(comment);
+            }
+        }
+
+        public void UpdateComment(Comment comment)
         {
             using (var db = CustomDatabaseFactory.GetConnection())
             {

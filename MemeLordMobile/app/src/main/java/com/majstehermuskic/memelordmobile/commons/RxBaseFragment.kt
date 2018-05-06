@@ -15,8 +15,8 @@ open class RxBaseFragment : Fragment() {
         subscriptions = CompositeDisposable()
     }
 
-    override fun onPause() {
-        super.onPause()
+    override fun onDestroy() {
+        super.onDestroy()
         if(!subscriptions.isDisposed) {
             subscriptions.dispose()
         }

@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using MemeLord.DataObjects.Dto.ReportDtos;
 using MemeLord.Models;
-using Test.Unit.TestUtils;
 using FluentAssertions;
 using NUnit.Framework;
 using MemeLord.Logic.Mapping.Reports;
 
-namespace Test.Unit.Logic.Mapping
+namespace Test.Unit.Logic.Mapping.ReportMapping
 {
-    class ReportedPostMapperTest
+    class ReportedCommentMapperTest
     {
         [Test]
         public void Can_Map_From_Report_To_ReportDto()
@@ -17,15 +16,14 @@ namespace Test.Unit.Logic.Mapping
             //ARRANGE
             var report = new Report
             {
-                Post = new Post
+                Comment = new Comment
                 {
                     Id = 1,
-                    Op = new User { Username = "user" },
-                    Title = "title",
-                    Image = "image",
+                    User = new User { Username = "user" },
+                    Text = "text",
                     CreationDate = new DateTime(2013, 1, 1)
                 },
-                Comment = null,
+                Post = null,
                 Reporter = new User(),
                 ReportDate = new DateTime(2015, 1, 1),
                 ReportType = new ReportType
@@ -35,17 +33,16 @@ namespace Test.Unit.Logic.Mapping
                 }
             };
             //ACT
-            var reportedPostMapper = new ReportedPostMapper();
-            var result = reportedPostMapper.Map(report);
+            var reportedCommentMapper = new ReportedCommentMapper();
+            var result = reportedCommentMapper.Map(report);
             //ASSERT
-            var expectedResult = new ReportedPostDto
+            var expectedResult = new ReportedCommentDto
             {
                 Username = "user",
-                Title = "title",
-                Image = "image",
+                Text = "text",
                 CreationDate = new DateTime(2013, 1, 1),
                 Description = "jeden",
-                PostId = 1
+                CommentId = 1
             };
             result.Should().BeEquivalentTo(expectedResult);
         }
@@ -58,34 +55,32 @@ namespace Test.Unit.Logic.Mapping
             {
                 new Report
                 {
-                    Post = new Post
-                    {
-                        Id = 1,
-                        Op = new User { Username = "user" },
-                        Title = "title",
-                        Image = "image",
-                        CreationDate = new DateTime(2013, 1, 1)
-                    },
-                    Comment = null,
-                    Reporter = new User(),
-                    ReportDate = new DateTime(2015, 1, 1),
-                    ReportType = new ReportType
-                    {
-                        Id = 1,
-                        Description = "jeden"
-                    }
+                    Comment = new Comment
+                {
+                    Id = 1,
+                    User = new User { Username = "user" },
+                    Text = "text",
+                    CreationDate = new DateTime(2013, 1, 1)
+                },
+                Post = null,
+                Reporter = new User(),
+                ReportDate = new DateTime(2015, 1, 1),
+                ReportType = new ReportType
+                {
+                    Id = 1,
+                    Description = "jeden"
+                }
                 },
                 new Report
                 {
-                    Post = new Post
+                     Comment = new Comment
                     {
                         Id = 2,
-                        Op = new User { Username = "user" },
-                        Title = "title",
-                        Image = "image",
-                        CreationDate = new DateTime(2013, 1, 1)
+                        User = new User { Username = "user" },
+                    Text = "text",
+                    CreationDate = new DateTime(2013, 1, 1)
                     },
-                    Comment = null,
+                    Post = null,
                     Reporter = new User(),
                     ReportDate = new DateTime(2015, 1, 1),
                     ReportType = new ReportType
@@ -96,28 +91,26 @@ namespace Test.Unit.Logic.Mapping
                 }
             };
             //ACT
-            var reportedPostMapper = new ReportedPostMapper();
-            var result = reportedPostMapper.Map(reports);
+            var reportedCommentMapper = new ReportedCommentMapper();
+            var result = reportedCommentMapper.Map(reports);
             //ASSERT
-            var expectedResult = new List<ReportedPostDto>
+            var expectedResult = new List<ReportedCommentDto>
             {
-                new ReportedPostDto
+                new ReportedCommentDto
                 {
                     Username = "user",
-                    Title = "title",
-                    Image = "image",
+                    Text = "text",
                     CreationDate = new DateTime(2013, 1, 1),
                     Description = "jeden",
-                    PostId = 1
+                    CommentId = 1
                 },
-                new ReportedPostDto
+                new ReportedCommentDto
                 {
                     Username = "user",
-                    Title = "title",
-                    Image = "image",
+                    Text = "text",
                     CreationDate = new DateTime(2013, 1, 1),
                     Description = "dwa",
-                    PostId = 2
+                    CommentId = 2
                 }
             };
             result.Should().BeEquivalentTo(expectedResult);

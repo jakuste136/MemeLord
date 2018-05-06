@@ -4,20 +4,28 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
+import android.view.View
+import com.majstehermuskic.memelordmobile.features.authorization.LoginFragment
 
 import kotlinx.android.synthetic.main.activity_main.*
 
 import com.majstehermuskic.memelordmobile.features.posts.PostsFragment
+import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
+        //setSupportActionBar(toolbar)
 
         if(savedInstanceState == null){
-            changeFragment(PostsFragment())
+            changeFragment(PostsFragment(), true)
+        }
+
+        buttonSwitchLoginFragment.setOnClickListener{
+            buttonSwitchLoginFragment.hide()
+            changeFragment(LoginFragment())
         }
 
 //        fab.setOnClickListener { view ->
@@ -26,7 +34,7 @@ class MainActivity : AppCompatActivity() {
 //        }
     }
 
-    private fun changeFragment(f: Fragment, cleanStack: Boolean = false){
+    fun changeFragment(f: Fragment, cleanStack: Boolean = false){
         val ft = supportFragmentManager.beginTransaction()
         if(cleanStack){
             clearBackStack()
@@ -47,8 +55,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         val fragmentManager = supportFragmentManager
+        if(buttonSwitchLoginFragment.visibility == View.GONE)
+            buttonSwitchLoginFragment.show()
         if(fragmentManager.backStackEntryCount > 1){
-            fragmentManager.popBackStack()
+            fragmentManager.popBackStack(null, 0)
         }else{
             finish()
         }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, EmailValidator } from '@angular/forms';
 import { AuthenticationService } from '../services/authentication.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login-page',
@@ -13,7 +14,8 @@ export class LoginPageComponent implements OnInit {
 
   constructor(
     private _fb: FormBuilder,
-    private _authenticationService: AuthenticationService) {
+    private _authenticationService: AuthenticationService,
+    private _toastr: ToastrService) {
     this.registryForm = _fb.group({
       'login': [null, Validators.compose([
         Validators.required,
