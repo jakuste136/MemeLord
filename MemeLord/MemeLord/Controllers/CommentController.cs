@@ -41,14 +41,14 @@ namespace MemeLord.Controllers
             return _getCommentsModule.GetBestComments(postId, count);
         }
         
-        [HttpPost]
+        [HttpPost, Authorize(Roles = "Member, Admin")]
         public void AddComment(AddCommentRequest addCommentRequest)
         {
             _addCommentsModule.AddComment(addCommentRequest);
         }
 
         [Route("delete")]
-        [HttpGet]
+        [HttpGet, Authorize(Roles = "Member, Admin")]
         public void DeleteComment([FromUri] int id)
         {
             _updateCommentModule.DeleteComment(id);

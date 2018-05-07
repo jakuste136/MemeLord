@@ -47,14 +47,14 @@ namespace MemeLord.Controllers
             return _getPostsModule.GetPosts(lastId, count);
         }
 
-        [HttpPost]
+        [HttpPost, Authorize(Roles = "Member, Admin")]
         public HttpResponseMessage AddPost()
         {
             return _addPostModule.AddPost(Request);
         }
 
         [Route("delete")]
-        [HttpGet]
+        [HttpGet, Authorize(Roles = "Member, Admin")]
         public void DeletePost([FromUri] int id)
         {
             _updatePostModule.DeletePost(id);

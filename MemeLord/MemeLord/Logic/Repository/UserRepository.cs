@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Data.Common;
+using System.Linq;
 using MemeLord.Logic.Database;
 using MemeLord.Models;
 
@@ -10,6 +12,9 @@ namespace MemeLord.Logic.Repository
         User GetUserById(int id);
         User GetUserByCredentials(string username);
         void SaveUser(User user);
+        void SaveUserRole(UserRole userRole);
+        Role GetUserRoleByUserId(int userId);
+        Role GetDefaultRole();
     }
 
     public class UserRepository : IUserRepository
@@ -45,6 +50,35 @@ namespace MemeLord.Logic.Repository
             using (var db = CustomDatabaseFactory.GetConnection())
             {
                 db.Save(user);
+            }
+        }
+
+        public void SaveUserRole(UserRole userRole)
+        {
+            using (var db = CustomDatabaseFactory.GetConnection())
+            {
+                db.Save(userRole);
+            }
+        }
+
+        public Role GetUserRoleByUserId(int userId)
+        {
+            using (var db = CustomDatabaseFactory.GetConnection())
+            {
+                return db.Query<UserRole>()
+                    .Include(ur => ur.User)
+                    .Include(ur => ur.Role)
+                    .Where(ur => ur.User.Id == userId)
+                    .FirstOrDefault()?
+                    .Role;
+            }
+        }
+
+        public Role GetDefaultRole()
+        {
+            using (var db = CustomDatabaseFactory.GetConnection())
+            {
+                return db.Query<Role>().SingleOrDefault(r => r.Name == "Member");
             }
         }
     }

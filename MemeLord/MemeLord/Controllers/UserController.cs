@@ -22,20 +22,20 @@ namespace MemeLord.Controllers
         }
 
         [Route("all")]
-        [HttpGet, Authorize(Roles = "User")]
+        [HttpGet, Authorize(Roles = "Member, Admin")]
         public IList<GetUserResponse> GetAll()
         {
             return _userGetModule.GetAllUsers();
         }
 
-        [HttpGet, Authorize(Roles = "User")]
+        [HttpGet, Authorize(Roles = "Member, Admin")]
         public GetUserResponse Get()
         {
             return _userGetModule.GetSelf();
         }
 
         [Route("{username}")]
-        [HttpGet]
+        [HttpGet, Authorize(Roles = "Member, Admin")]
         public GetUserResponse Get(string username)
         {
             return _userGetModule.GetUserByName(username);
@@ -47,7 +47,7 @@ namespace MemeLord.Controllers
             return _userAddModule.AddUser(request);
         }
 
-        [HttpPut, Authorize]
+        [HttpPut, Authorize(Roles = "Member, Admin")]
         public HttpResponseMessage Put([FromBody] UpdateUserRequest request)
         {
             return _userUpdateModule.UpdateUser(request);
