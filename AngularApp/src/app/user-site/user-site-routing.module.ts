@@ -5,6 +5,7 @@ import { PostsListComponent } from '../guest-site/posts-list/posts-list.componen
 import { RandomPostComponent } from '../guest-site/random/random-post.component';
 import { TopComponent } from '../guest-site/top/top.component';
 import { UserProfileSiteComponent } from './user-profile-site/user-profile-site.component';
+import { PostDetailsComponent } from '../guest-site/posts-list/post-details/post-details.component';
 
 const routes: Routes = [
   {
@@ -13,11 +14,11 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'posts'
+        component: PostsListComponent
       },
       {
-        path: 'posts',
-        component: PostsListComponent
+        path: 'post/:id',
+        component: PostDetailsComponent
       },
       {
         path: 'top',

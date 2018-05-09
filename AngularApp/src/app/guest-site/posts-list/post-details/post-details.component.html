@@ -1,0 +1,10 @@
+<app-post *ngIf="post != null" [title]="post.title" [path]="post.image"></app-post>
+<div class="content-wrapper" *ngIf="user != null">
+  <img *ngIf="user != null" [src]="user.avatar">
+  <mat-form-field>
+    <textarea matInput [(ngModel)]="comment.text" placeholder="Napisz komentarz..." matTextareaAutosize matAutosizeMinRows="1" matAutosizeMaxRows="3"></textarea>
+  </mat-form-field>
+  <button mat-icon-button color="primary" (click)="addComment()">
+    <mat-icon>send</mat-icon>
+  </button>
+</div>

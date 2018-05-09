@@ -4,6 +4,7 @@ import { PostsListService } from './posts-list.service';
 import { AuthenticationService } from '../../core/services/authentication.service';
 import { MatDialogRef, MatDialog } from '@angular/material';
 import { AddPostModalComponent } from './add-post-modal/add-post-modal.component';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-posts-list',
@@ -19,7 +20,9 @@ export class PostsListComponent implements OnInit {
 
   constructor(private _postsListService: PostsListService,
     private _authenticationService: AuthenticationService,
-    private _dialog: MatDialog) {
+    private _dialog: MatDialog,
+    private _router: Router,
+    private _route: ActivatedRoute) {
 
     this.refreshPosts();
   }
@@ -45,6 +48,10 @@ export class PostsListComponent implements OnInit {
       this.appendPosts(data.postsList);
       this.lastId = data.lastId;
     });
+  }
+
+  openPostDetails(post) {
+    this._router.navigate(['./post', post.id], {relativeTo: this._route})
   }
 
   openAddPostModal() {

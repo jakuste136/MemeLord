@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using MemeLord.DataObjects.Dto;
 using MemeLord.DataObjects.Response;
 using MemeLord.DataObjects.Response.Posts;
 using MemeLord.Logic.Mapping;
@@ -11,6 +12,7 @@ namespace MemeLord.Logic.Modules.Posts
     public interface IGetPostsModule
     {
         GetPostsResponse GetPosts(int lastId, int count);
+        PostDto GetPost(int id);
     }
 
     public class GetPostsModule : IGetPostsModule
@@ -35,6 +37,12 @@ namespace MemeLord.Logic.Modules.Posts
                 LastId = GetLastId(posts),
                 PostsList = postDtos
             };
+        }
+
+        public PostDto GetPost(int id)
+        {
+            var post = _postRepository.GetPostById(id);
+            return _postMapper.Map(post);
         }
 
         private static int GetLastId(List<Post> posts)

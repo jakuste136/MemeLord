@@ -4,6 +4,7 @@ import { GuestSiteComponent } from './guest-site.component';
 import { PostsListComponent } from './posts-list/posts-list.component';
 import { TopComponent } from './top/top.component';
 import { RandomPostComponent } from './random/random-post.component';
+import { PostDetailsComponent } from './posts-list/post-details/post-details.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,10 @@ const routes: Routes = [
       {
         path: '',
         component: PostsListComponent
+      },
+      {
+        path: 'post/:id',
+        component: PostDetailsComponent
       },
       {
         path: 'top',

@@ -17,6 +17,9 @@ import { TopComponent } from './top/top.component';
 import { RandomPostComponent } from './random/random-post.component';
 import { AddPostModalComponent } from './posts-list/add-post-modal/add-post-modal.component';
 import { AddPostService } from './posts-list/add-post-modal/add-post.service';
+import { PostDetailsComponent } from './posts-list/post-details/post-details.component';
+import { CommentService } from './posts-list/post-details/comment.service';
+import { UserDetailsService } from '../user-site/user-profile-site/user-details/user-details.service';
 
 
 @NgModule({
@@ -39,10 +42,13 @@ import { AddPostService } from './posts-list/add-post-modal/add-post.service';
     PostsListComponent,
     TopComponent,
     RandomPostComponent,
-    AddPostModalComponent],
+    AddPostModalComponent,
+    PostDetailsComponent],
   providers: [
+    UserDetailsService,
     PostsListService,
-    AddPostService
+    AddPostService,
+    CommentService
   ],
   entryComponents: [
     AddPostModalComponent

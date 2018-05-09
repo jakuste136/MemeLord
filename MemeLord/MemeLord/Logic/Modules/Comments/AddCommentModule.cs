@@ -1,4 +1,6 @@
-﻿using MemeLord.DataObjects.Request;
+﻿using System.Security.Claims;
+using MemeLord.DataObjects.Request;
+using MemeLord.Logic.Extensions;
 using MemeLord.Logic.Repository;
 using MemeLord.Logic.Mapping.CommentMapping;
 
@@ -23,6 +25,7 @@ namespace MemeLord.Logic.Modules
         public void AddComment(AddCommentRequest addCommentRequest)
         {
             var comment = _newCommentMapper.Map(addCommentRequest);
+
             _commentRepository.AddComment(comment);
         }
     }

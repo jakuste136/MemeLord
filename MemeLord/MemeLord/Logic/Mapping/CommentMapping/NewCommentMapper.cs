@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Security.Claims;
 using AutoMapper;
 using MemeLord.Models;
 using MemeLord.DataObjects.Request;
+using MemeLord.Logic.Extensions;
 
 namespace MemeLord.Logic.Mapping.CommentMapping
 {
@@ -16,7 +18,7 @@ namespace MemeLord.Logic.Mapping.CommentMapping
             return base.CreateMap(cfg)
                 .ForMember(comment => comment.MasterComment, map => map.ResolveUsing(request => GetMasterComment(request.MasterCommentId)))
                 .ForPath(comment => comment.Post.Id, map => map.MapFrom(request => request.PostId))
-                .ForPath(comment => comment.User.Id, map => map.MapFrom(request => request.UserId))
+                .ForPath(comment => comment.User.Id, map => map.MapFrom(request => GetUserId()))
                 .ForMember(comment => comment.Answers, map => map.Ignore())
                 .ForMember(comment => comment.DeletionDate, map => map.Ignore())
                 .ForMember(comment => comment.CreationDate, map => map.MapFrom(request => DateTime.Now));
@@ -31,6 +33,11 @@ namespace MemeLord.Logic.Mapping.CommentMapping
             {
                 Id = masterCommentId.Value
             };
+        }
+
+        private int GetUserId()
+        {
+            return Convert.ToInt32(ClaimsPrincipalWrapper.GetFromClaim(ClaimTypes.NameIdentifier));
         }
     }
 }

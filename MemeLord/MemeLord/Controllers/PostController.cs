@@ -5,6 +5,7 @@ using MemeLord.Models;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using MemeLord.DataObjects.Dto;
 using MemeLord.DataObjects.Response.Posts;
 using MemeLord.Logic.Modules.Posts;
 
@@ -29,9 +30,9 @@ namespace MemeLord.Controllers
         }
 
         [Route("{id}")]
-        public Post GetById(int id)
+        public PostDto GetById(int id)
         {
-            return _postRepository.GetPostById(id);
+            return _getPostsModule.GetPost(id);
         }
 
         [Route("random")]
