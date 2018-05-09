@@ -42,6 +42,8 @@ export class AddPostModalComponent implements OnInit {
   addPost() {
     this._addPostService.addPost(this.post).subscribe(response => {
       this._toastr.success("Dodano post");
+    }, error => {
+      this._toastr.error(error.error);
     });
 
     this._dialogRef.close();

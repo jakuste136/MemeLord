@@ -71,26 +71,26 @@ namespace MemeLord.Logic.Modules.Posts
         {
             if (file == null || file.ContentLength <= 0)
             {
-                message = "Please Upload a image.";
+                message = "Nie wybrano obrazka";
                 return false;
             }
 
-            var allowedFileExtensions = new List<string> {".jpg", ".gif", ".png"};
+            var allowedFileExtensions = new List<string> {".jpg", ".gif", ".png", ".jpeg"};
             var extension = file.FileName.Substring(file.FileName.LastIndexOf('.')).ToLower();
             if (!allowedFileExtensions.Contains(extension))
             {
-                message = "Please Upload image of type .jpg,.gif,.png.";
+                message = "Nieobsługiwalny format pliku";
                 return false;
             }
 
             var maxContentLength = 1 * 1024 * 1024;
             if (file.ContentLength > maxContentLength)
             {
-                message = "Please Upload a file upto 1 mb.";
+                message = "Za duży obrazek";
                 return false;
             }
 
-            message = "Image Uploaded Successfully.";
+            message = "Dodano obrazek";
             return true;
         }
 
