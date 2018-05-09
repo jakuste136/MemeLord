@@ -1,4 +1,4 @@
-package com.majstehermuskic.memelordmobile.features.posts.adapter
+package com.majstehermuskic.memelordmobile.features.displayposts.adapter
 
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup

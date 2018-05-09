@@ -15,8 +15,7 @@ class AuthorizationInterceptor : Interceptor{
         if(!token.isNullOrEmpty()){
             val originalRequest = chain.request()
             val authorizedRequest = originalRequest.newBuilder()
-                    //TODO: Dokończyć headery
-                    .header("token", token ?: "")
+                    .header("Authorization", "bearer $token")
                     .method(originalRequest.method(), originalRequest.body())
                     .build()
             return chain.proceed(authorizedRequest)

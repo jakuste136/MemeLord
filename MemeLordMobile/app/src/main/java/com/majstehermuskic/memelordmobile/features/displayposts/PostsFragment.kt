@@ -1,4 +1,4 @@
-package com.majstehermuskic.memelordmobile.features.posts
+package com.majstehermuskic.memelordmobile.features.displayposts
 
 
 import android.os.Bundle
@@ -7,16 +7,14 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.majstehermuskic.memelordmobile.MainActivity
 import com.majstehermuskic.memelordmobile.MemeLordApp
 import com.majstehermuskic.memelordmobile.R
 import com.majstehermuskic.memelordmobile.commons.InfiniteScrollListener
 import com.majstehermuskic.memelordmobile.commons.MemePostItem
 import com.majstehermuskic.memelordmobile.commons.MemePosts
 import com.majstehermuskic.memelordmobile.commons.RxBaseFragment
-import com.majstehermuskic.memelordmobile.commons.adapter.ViewType
 import com.majstehermuskic.memelordmobile.commons.extensions.inflate
-import com.majstehermuskic.memelordmobile.features.posts.adapter.PostsAdapter
+import com.majstehermuskic.memelordmobile.features.displayposts.adapter.PostsAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_posts.*

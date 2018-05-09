@@ -3,6 +3,7 @@ package com.majstehermuskic.memelordmobile.features.authorization
 import android.app.Fragment
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v4.content.ContextCompat.getDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import com.majstehermuskic.memelordmobile.api.LoginAPI
 import com.majstehermuskic.memelordmobile.api.LoginResponse
 import com.majstehermuskic.memelordmobile.commons.RxBaseFragment
 import com.majstehermuskic.memelordmobile.commons.extensions.inflate
+import com.majstehermuskic.memelordmobile.features.addpost.AddPostFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.fragment_login.*
@@ -52,6 +54,15 @@ class LoginFragment : RxBaseFragment() {
                     override fun onResponse(call: Call<LoginResponse>?, response: Response<LoginResponse>?) {
                         if (response?.code() == 200) {
                             AuthorizationInterceptor.token = response.body()?.access_token ?: ""
+                            val mainActivity = (activity as MainActivity)
+                            activity.buttonSwitchLoginFragment.apply {
+                                setOnClickListener{
+                                    mainActivity.changeFragment(AddPostFragment())
+                                    mainActivity.buttonSwitchLoginFragment.hide()
+                                }
+                                setImageDrawable(getDrawable(activity, android.R.drawable.ic_input_add))
+                                show()
+                            }
                             fragmentManager.popBackStack()
                         } else {
                             Toast.makeText(context, "Wrong password!!!", Toast.LENGTH_LONG).show()

@@ -7,9 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.majstehermuskic.memelordmobile.features.authorization.LoginFragment
 
-import kotlinx.android.synthetic.main.activity_main.*
-
-import com.majstehermuskic.memelordmobile.features.posts.PostsFragment
+import com.majstehermuskic.memelordmobile.features.displayposts.PostsFragment
 import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity() {

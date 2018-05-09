@@ -1,7 +1,6 @@
-package com.majstehermuskic.memelordmobile.features.posts
+package com.majstehermuskic.memelordmobile.features.displayposts
 
 import com.majstehermuskic.memelordmobile.api.PostsAPI
-import com.majstehermuskic.memelordmobile.api.PostsRestAPI
 import com.majstehermuskic.memelordmobile.commons.MemePostItem
 import com.majstehermuskic.memelordmobile.commons.MemePosts
 import io.reactivex.Observable

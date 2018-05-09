@@ -1,12 +1,11 @@
-package com.majstehermuskic.memelordmobile.dependencyinjection.posts
+package com.majstehermuskic.memelordmobile.dependencyinjection.displayposts
 
 import com.majstehermuskic.memelordmobile.api.MemeLordAPI
 import com.majstehermuskic.memelordmobile.api.PostsAPI
 import com.majstehermuskic.memelordmobile.api.PostsRestAPI
-import com.majstehermuskic.memelordmobile.features.posts.adapter.PostsAdapter
+import com.majstehermuskic.memelordmobile.features.displayposts.adapter.PostsAdapter
 import dagger.Module
 import dagger.Provides
-import retrofit2.Retrofit
 import javax.inject.Singleton
 
 /**

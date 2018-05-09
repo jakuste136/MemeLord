@@ -13,3 +13,5 @@ class PostDto(
 class LoginResponse(
         val access_token: String
 )
+
+class AddPostResponse
