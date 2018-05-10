@@ -26,6 +26,7 @@ namespace MemeLord.Logic.Repository
             {
                 return db.Query<Like>()
                     .Include(l => l.Post)
+                    .Include(l => l.User)
                     .SingleOrDefault(l => l.Post.Id == postId && l.User.Id == userId);
             }
         }

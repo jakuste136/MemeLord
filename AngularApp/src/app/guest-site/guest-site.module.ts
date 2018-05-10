@@ -21,6 +21,7 @@ import { AddPostModalComponent } from './posts-list/add-post-modal/add-post-moda
 import { AddPostService } from './posts-list/add-post-modal/add-post.service';
 import { PostBarComponent } from './post/post-bar/post-bar/post-bar.component';
 import { CommentButtonComponent } from './post/comment-button/comment-button/comment-button.component';
+import { PostService } from './post/post.service';
 
 
 
@@ -51,7 +52,8 @@ import { CommentButtonComponent } from './post/comment-button/comment-button/com
   providers: [
     PostsListService,
     RatingsService,
-    AddPostService
+    AddPostService,
+    PostService
   ],
   entryComponents: [
     AddPostModalComponent

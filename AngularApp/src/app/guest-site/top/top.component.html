@@ -1,6 +1,6 @@
 <div class="posts-list">
   <div infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="1000" (scrolled)="onScroll()">
       <app-post *ngFor="let post of posts; let i = index" [title]="post.title" [path]="post.image" 
-      [likeValue]=1 [rating]=96 [postId]="post.id" [index]="i" [attr.id]="'post-' + i"></app-post>
+     [rating]=96 [postId]="post.id" [index]="i" [attr.id]="'post-' + i"></app-post>
   </div>
 </div>

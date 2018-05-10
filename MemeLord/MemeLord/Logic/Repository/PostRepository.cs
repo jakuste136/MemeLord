@@ -71,7 +71,7 @@ namespace MemeLord.Logic.Repository
                     .Include(p => p.Op)
                     .Where(p => p.DeletionDate == null)
                     .Limit(randomIndex, 1)
-                    .First();
+                    .FirstOrDefault();
             }
         }
 

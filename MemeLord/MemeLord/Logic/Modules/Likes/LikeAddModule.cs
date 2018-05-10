@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Security.Claims;
+using System.Web.Http;
 
 namespace MemeLord.Logic.Modules.Likes
 {
@@ -14,6 +15,7 @@ namespace MemeLord.Logic.Modules.Likes
         HttpResponseMessage AddLike(AddLikeRequest request);
     }
 
+    [Authorize]
     public class LikeAddModule : ILikeAddModule
     {
         private readonly ILikeRepository _likeRepository;
@@ -37,25 +39,27 @@ namespace MemeLord.Logic.Modules.Likes
             var like = _likeRepository.GetLikeByPostId(request.PostId, Int32.Parse(userId));
             if (like == null)
             {
-                var preparedLike = PrepareLikeToBeAdded(request.Like, request.PostId, Int32.Parse(userId));
+                var preparedLike = PrepareLikeToBeAdded(request.PostId, Int32.Parse(userId));
                 _likeRepository.AddLike(preparedLike);
             }
             else
             {
-                like.Value = request.Like.Value;
+                like.Value = request.Value;
                 _likeRepository.UpdateLike(like);
             }
 
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
 
-        private Like PrepareLikeToBeAdded(Like like, int postId, int userId)
+        private Like PrepareLikeToBeAdded(int postId, int userId)
         {
-            like.Comment = null;
-            like.CreationDate = DateTime.UtcNow;
-            like.Post = _postRepository.GetPostById(postId);
-            like.User = _userRepository.GetUserById(userId);
-            return like;
+            return new Like
+            {
+                Comment = null,
+                CreationDate = DateTime.UtcNow,
+                Post = _postRepository.GetPostById(postId),
+                User = _userRepository.GetUserById(userId)
+            };
         }
     }
 }
