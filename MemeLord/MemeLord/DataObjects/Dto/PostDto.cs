@@ -4,6 +4,7 @@ namespace MemeLord.DataObjects.Dto
 {
     public class PostDto
     {
+        public int Id { get; set; }
         public string Username { get; set; }
         public string Title { get; set; }
         public string Image { get; set; }

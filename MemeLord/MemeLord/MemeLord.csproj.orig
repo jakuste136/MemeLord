@@ -189,9 +189,12 @@
     <Compile Include="DataObjects\Request\AddCommentRequest.cs" />
     <Compile Include="DataObjects\Request\AddLikeRequest.cs" />
     <Compile Include="DataObjects\Request\AddUserRequest.cs" />
+<<<<<<< HEAD
     <Compile Include="DataObjects\Request\UpdatePostRatingRequest.cs" />
+=======
     <Compile Include="DataObjects\Request\Reports\AddReportRequest.cs" />
     <Compile Include="DataObjects\Request\UpdateUserRequest.cs" />
+>>>>>>> 66b7cfafe146f65a43af7f71945c48a958adb231
     <Compile Include="DataObjects\Response\CommentResponses\GetBestCommentsResponse.cs" />
     <Compile Include="DataObjects\Response\ReportResponses\GetReportedCommentsResponse.cs" />
     <Compile Include="DataObjects\Response\ReportResponses\GetReportedPostsResponse.cs" />
@@ -221,14 +224,20 @@
     <Compile Include="Logic\Mapping\Users\GetUserResponseMapper.cs" />
     <Compile Include="Logic\Mapping\Users\UpdateUserRequestMapper.cs" />
     <Compile Include="Logic\Mapping\Users\UserMapper.cs" />
-    <Compile Include="Logic\Modules\Comments\UpdateCommentModule.cs" />
+<<<<<<< HEAD
     <Compile Include="Logic\Modules\Likes\LikeAddModule.cs" />
     <Compile Include="Logic\Modules\Likes\LikeGetModule.cs" />
     <Compile Include="Logic\Modules\Posts\AddPostModule.cs" />
     <Compile Include="Logic\Modules\Comments\AddCommentModule.cs" />
     <Compile Include="Logic\Modules\Posts\GetRandomPostModule.cs" />
-    <Compile Include="Logic\Modules\Posts\UpdatePostModule.cs" />
     <Compile Include="Logic\Modules\Posts\PostUpdateModule.cs" />
+=======
+    <Compile Include="Logic\Modules\Comments\UpdateCommentModule.cs" />
+    <Compile Include="Logic\Modules\Posts\AddPostModule.cs" />
+    <Compile Include="Logic\Modules\Comments\AddCommentModule.cs" />
+    <Compile Include="Logic\Modules\Posts\GetRandomPostModule.cs" />
+    <Compile Include="Logic\Modules\Posts\UpdatePostModule.cs" />
+>>>>>>> 66b7cfafe146f65a43af7f71945c48a958adb231
     <Compile Include="Logic\Modules\Reports\AddReportModule.cs" />
     <Compile Include="Logic\Modules\Reports\FindMostFrequentReport.cs" />
     <Compile Include="Logic\Modules\Reports\GetReportsModule.cs" />

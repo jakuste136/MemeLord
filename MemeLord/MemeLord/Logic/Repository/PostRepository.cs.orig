@@ -71,7 +71,7 @@ namespace MemeLord.Logic.Repository
                     .Include(p => p.Op)
                     .Where(p => p.DeletionDate == null)
                     .Limit(randomIndex, 1)
-                    .FirstOrDefault();
+                    .First();
             }
         }
 
@@ -87,7 +87,11 @@ namespace MemeLord.Logic.Repository
         {
             using (var db = CustomDatabaseFactory.GetConnection())
             {
+<<<<<<< HEAD
+                db.Update(post);
+=======
                 db.Save(post);
+>>>>>>> 66b7cfafe146f65a43af7f71945c48a958adb231
             }
         }
     }

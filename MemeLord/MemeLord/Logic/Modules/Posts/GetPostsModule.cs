@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using MemeLord.DataObjects.Dto;
-using MemeLord.DataObjects.Response;
+﻿using MemeLord.DataObjects.Dto;
 using MemeLord.DataObjects.Response.Posts;
 using MemeLord.Logic.Mapping;
 using MemeLord.Logic.Repository;
 using MemeLord.Models;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MemeLord.Logic.Modules.Posts
 {
@@ -13,6 +12,7 @@ namespace MemeLord.Logic.Modules.Posts
     {
         GetPostsResponse GetPosts(int lastId, int count);
         PostDto GetPost(int id);
+        GetPostsResponse GetTopPosts(int lastId, int count);
     }
 
     public class GetPostsModule : IGetPostsModule
@@ -35,6 +35,19 @@ namespace MemeLord.Logic.Modules.Posts
             return new GetPostsResponse
             {
                 LastId = GetLastId(posts),
+                PostsList = postDtos
+            };
+        }
+
+        public GetPostsResponse GetTopPosts(int lastId, int count)
+        {
+            var topPosts = _postRepository.GetTopPosts(lastId, count);
+
+            var postDtos = _postMapper.Map(topPosts);
+
+            return new GetPostsResponse
+            {
+                LastId = GetLastId(topPosts),
                 PostsList = postDtos
             };
         }
