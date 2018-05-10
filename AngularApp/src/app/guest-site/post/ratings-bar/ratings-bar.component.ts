@@ -1,4 +1,4 @@
-import { Component, Input, AfterContentChecked, AfterViewInit } from '@angular/core';
+import { Component, Input, AfterContentChecked, AfterViewInit, SimpleChanges, OnChanges } from '@angular/core';
 import { RatingsService } from './ratings-bar.service';
 import { PostLike } from '../../dto/like-dto';
 import { AuthGuardService } from '../../../core/services/auth-guard.service';
@@ -9,7 +9,7 @@ import { PostsListService } from '../../posts-list/posts-list.service';
   templateUrl: './ratings-bar.component.html',
   styleUrls: ['./ratings-bar.component.scss']
 })
-export class RatingsBarComponent implements AfterViewInit {
+export class RatingsBarComponent implements AfterViewInit, OnChanges {
 
   ngAfterViewInit(): void {
     if (this.likeValue == 1 || this.likeValue == -1) {
@@ -25,6 +25,12 @@ export class RatingsBarComponent implements AfterViewInit {
   constructor(private _ratingsService: RatingsService, 
     private _authGuardService: AuthGuardService,
     private _postsListService: PostsListService) { }
+
+    ngOnChanges(changes: SimpleChanges) {
+      if (this.likeValue == 1 || this.likeValue == -1) {
+        this.InitializeLikeButtonSyle(this.likeValue, this.index.toString());
+      }
+    }
 
   addOrRemoveLike(event: Event, requestedLikeValue: number) {
     if(this._authGuardService.canActivate()){

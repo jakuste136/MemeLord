@@ -39,7 +39,7 @@ namespace MemeLord.Logic.Modules.Likes
             var like = _likeRepository.GetLikeByPostId(request.PostId, Int32.Parse(userId));
             if (like == null)
             {
-                var preparedLike = PrepareLikeToBeAdded(request.PostId, Int32.Parse(userId));
+                var preparedLike = PrepareLikeToBeAdded(request.PostId, request.Value, Int32.Parse(userId));
                 _likeRepository.AddLike(preparedLike);
             }
             else
@@ -51,14 +51,15 @@ namespace MemeLord.Logic.Modules.Likes
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
 
-        private Like PrepareLikeToBeAdded(int postId, int userId)
+        private Like PrepareLikeToBeAdded(int postId, int value, int userId)
         {
             return new Like
             {
                 Comment = null,
                 CreationDate = DateTime.UtcNow,
                 Post = _postRepository.GetPostById(postId),
-                User = _userRepository.GetUserById(userId)
+                User = _userRepository.GetUserById(userId),
+                Value = value
             };
         }
     }

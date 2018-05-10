@@ -23,7 +23,7 @@ namespace MemeLord.Controllers
         [HttpGet]
         public Like GetPostLikeForUser([FromUri] int postId)
         {
-            return _likeGetModule.GetLike(postId);
+          return _likeGetModule.GetLike(postId);
         } 
 
         [Route("add-like")]

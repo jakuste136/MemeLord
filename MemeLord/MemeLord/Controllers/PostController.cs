@@ -66,7 +66,7 @@ namespace MemeLord.Controllers
         }
         
         [Route("update-rating")]
-        [HttpPatch]
+        [HttpPut]
         public HttpResponseMessage UpdatePostRating([FromBody] UpdatePostRatingRequest request)
         {
             return _postUpdateModule.UpdatePostRating(request);
