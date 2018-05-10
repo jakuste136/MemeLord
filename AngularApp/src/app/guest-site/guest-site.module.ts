@@ -57,7 +57,7 @@ import { PostService } from './post/post.service';
     UserDetailsService,
     PostsListService,
     AddPostService,
-    CommentService
+    CommentService,
     RatingsService,
     PostService
   ],

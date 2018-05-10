@@ -11,6 +11,5 @@ namespace MemeLord.DataObjects.Dto
         public DateTime CreationDate { get; set; }
         public int Rating { get; set; }
         public DateTime? DeletionDate { get; set; }
-        public int Id { get; set; }
     }
 }
