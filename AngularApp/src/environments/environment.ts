@@ -6,5 +6,5 @@
 export const environment = {
   production: false,
   //apiUrl: "http://Memelordapp.azurewebsites.net"
-  apiUrl: "http://localhost:54923/"
+  apiUrl: "http://localhost:8080"
 };

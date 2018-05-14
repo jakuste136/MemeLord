@@ -2,7 +2,7 @@
   <button id="minus-button-{{index}}" mat-mini-fab color="primary" (click)="addOrRemoveLike($event, -1)">
       <mat-icon id="minus-icon-{{index}}">remove</mat-icon>
   </button>
-  <button mat-mini-fab color="primary">{{rating}}</button>
+  <button mat-mini-fab color="primary" readonly>{{rating}}</button>
   <button id="plus-button-{{index}}" mat-mini-fab color="primary" (click)="addOrRemoveLike($event, 1)">
       <mat-icon id="plus-icon-{{index}}">add</mat-icon>
   </button>

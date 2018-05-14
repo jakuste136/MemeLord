@@ -2,7 +2,7 @@
   <mat-card-header>
       <mat-card-title>{{postId}}. {{title}}</mat-card-title>
   </mat-card-header>
-  <img mat-card-image [src]="path">
+  <img mat-card-image [src]="path" (click)="postClicked()">
   <mat-card-footer>
     <app-post-bar [rating]="rating" [likeValue]="likeValue" [index]="index" [postId]="postId">
     </app-post-bar>

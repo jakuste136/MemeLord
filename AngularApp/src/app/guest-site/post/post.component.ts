@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, AfterViewInit, AfterViewChecked, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, AfterViewChecked, OnChanges, SimpleChanges, EventEmitter, Output } from '@angular/core';
 import { PostService } from './post.service';
 
 @Component({
@@ -16,6 +16,8 @@ export class PostComponent implements OnInit, OnChanges {
   @Input() postId: number;
   likeValue: number;
   storedPostId: number;
+
+  @Output() onClicked: EventEmitter<any> = new EventEmitter();
 
   constructor(private _postService: PostService) {
     
@@ -37,6 +39,10 @@ export class PostComponent implements OnInit, OnChanges {
         this.likeValue = (data === null ? 0 : data.value);
       })
     }
+  }
+
+  postClicked() {
+    this.onClicked.emit();
   }
 
 }
