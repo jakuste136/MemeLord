@@ -1,0 +1,10 @@
+<div class="wrapper" *ngFor="let comment of comments">
+  <img [src]="comment.avatar">
+  <div class="text-wrapper">
+    <p class="comment-header">{{comment.username}}</p>
+    <p>{{comment.text}}</p>
+  </div>
+</div>
+<div class="more-comments">
+  <span (click)="showPostDetails()">wyświetl wszystkie komentarze</span>
+</div>

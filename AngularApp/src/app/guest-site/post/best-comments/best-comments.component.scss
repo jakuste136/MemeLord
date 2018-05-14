@@ -1,0 +1,33 @@
+.wrapper{
+    display: flex;
+    margin: 15px;
+
+    img {
+        max-width: 50px;
+        max-height: 50px;
+        border-radius: 100%;
+    }
+
+    .text-wrapper {
+        display: block;
+
+        .comment-header {
+            font-weight: bold;
+        }
+
+        p {
+            margin: 3px 5px;
+        }
+    }
+}
+.more-comments {
+    text-align: center;
+    
+    span {
+        font-size: 10pt;
+        color: #429ef4;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+}
+

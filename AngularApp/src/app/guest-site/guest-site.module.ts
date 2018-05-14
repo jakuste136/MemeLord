@@ -25,6 +25,8 @@ import { UserDetailsService } from '../user-site/user-profile-site/user-details/
 import { PostBarComponent } from './post/post-bar/post-bar/post-bar.component';
 import { CommentButtonComponent } from './post/comment-button/comment-button/comment-button.component';
 import { PostService } from './post/post.service';
+import { BestCommentsComponent } from './post/best-comments/best-comments.component';
+import { BestCommentsService } from './post/best-comments/best-comments.service';
 
 
 
@@ -52,15 +54,17 @@ import { PostService } from './post/post.service';
     PostDetailsComponent,
     RatingsBarComponent,
     PostBarComponent,
-    CommentButtonComponent],
+    CommentButtonComponent,
+    BestCommentsComponent],
   providers: [
     UserDetailsService,
     PostsListService,
     AddPostService,
     CommentService,
     RatingsService,
-    PostService
-  ],
+    PostService,
+    BestCommentsService
+  ],  
   entryComponents: [
     AddPostModalComponent
   ]

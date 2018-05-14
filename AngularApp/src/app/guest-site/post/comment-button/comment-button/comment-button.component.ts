@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-comment-button',
@@ -10,13 +10,15 @@ export class CommentButtonComponent implements OnInit {
   @Input() index: number;
   @Input() postId: number;
 
+  @Output() commentsToggled: EventEmitter<any> = new EventEmitter();
+
   constructor() { }
 
   ngOnInit() {
   }
 
-  showComments(){
-    //TODO provide implementation
+  showComments() {
+    this.commentsToggled.emit();
   }
 
 }

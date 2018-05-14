@@ -1,5 +1,7 @@
-import { Component, OnInit, Input, AfterViewInit, AfterViewChecked, OnChanges, SimpleChanges, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, AfterViewChecked, OnChanges, SimpleChanges, EventEmitter, Output, ViewChild } from '@angular/core';
 import { PostService } from './post.service';
+import { BestCommentsService } from './best-comments/best-comments.service';
+import { BestCommentsComponent } from './best-comments/best-comments.component';
 
 @Component({
   selector: 'app-post',
@@ -8,7 +10,7 @@ import { PostService } from './post.service';
 })
 export class PostComponent implements OnInit, OnChanges {
 
-  
+
   @Input() title: string;
   @Input() path: string;
   @Input() rating: number;
@@ -19,8 +21,13 @@ export class PostComponent implements OnInit, OnChanges {
 
   @Output() onClicked: EventEmitter<any> = new EventEmitter();
 
-  constructor(private _postService: PostService) {
-    
+  @ViewChild(BestCommentsComponent)
+  private bestComments: BestCommentsComponent;
+  areBestCommentsVisible = false;
+
+  constructor(private _postService: PostService,
+    private _bestCommentsService: BestCommentsService) {
+
   }
 
   ngOnInit() {
@@ -43,6 +50,12 @@ export class PostComponent implements OnInit, OnChanges {
 
   postClicked() {
     this.onClicked.emit();
+  }
+
+  toggleComments() {
+    this.areBestCommentsVisible = !this.areBestCommentsVisible;
+    if(this.areBestCommentsVisible)
+      this.bestComments.getBestComments(this.postId);
   }
 
 }
