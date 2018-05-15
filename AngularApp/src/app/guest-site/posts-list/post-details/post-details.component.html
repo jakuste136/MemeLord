@@ -1,5 +1,5 @@
 <app-post *ngIf="post != null" [title]="post.title" [path]="post.image"
-[rating]="post.rating" [postId]="post.id" [index]="post.id" [attr.id]="'post-' + post.id"></app-post>
+[rating]="post.rating" [postId]="post.id" [index]="post.id" [attr.id]="'post-' + post.id" [showBestComments]="false"></app-post>
 <div class="content-wrapper" *ngIf="user != null">
   <img *ngIf="user != null" [src]="user.avatar">
   <mat-form-field>
@@ -8,4 +8,7 @@
   <button mat-icon-button color="primary" (click)="addComment()">
     <mat-icon>send</mat-icon>
   </button>
+</div>
+<div infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="1000" (scrolled)="onScroll()">
+    <app-comment *ngFor="let comment of comments" [comment]="comment"></app-comment>
 </div>

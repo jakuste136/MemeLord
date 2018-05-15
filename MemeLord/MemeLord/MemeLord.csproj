@@ -192,6 +192,7 @@
     <Compile Include="DataObjects\Request\UpdatePostRatingRequest.cs" />
     <Compile Include="DataObjects\Request\Reports\AddReportRequest.cs" />
     <Compile Include="DataObjects\Request\UpdateUserRequest.cs" />
+    <Compile Include="DataObjects\Response\CommentResponses\AddCommentResponse.cs" />
     <Compile Include="DataObjects\Response\CommentResponses\GetBestCommentsResponse.cs" />
     <Compile Include="DataObjects\Response\ReportResponses\GetReportedCommentsResponse.cs" />
     <Compile Include="DataObjects\Response\ReportResponses\GetReportedPostsResponse.cs" />

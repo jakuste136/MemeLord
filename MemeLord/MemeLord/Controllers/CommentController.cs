@@ -27,7 +27,7 @@ namespace MemeLord.Controllers
         {
             return _getCommentsModule.GetComment(id);
         }
-        
+
         [HttpGet]
         public GetCommentsResponse GetManyComments([FromUri] int postId, [FromUri] int lastId, [FromUri] int count)
         {
@@ -40,11 +40,14 @@ namespace MemeLord.Controllers
         {
             return _getCommentsModule.GetBestComments(postId, count);
         }
-        
+
         [HttpPost]
-        public void AddComment(AddCommentRequest addCommentRequest)
+        public AddCommentResponse AddComment(AddCommentRequest addCommentRequest)
         {
-            _addCommentsModule.AddComment(addCommentRequest);
+            return new AddCommentResponse
+            {
+                Comment = _addCommentsModule.AddComment(addCommentRequest)
+            };
         }
 
         [Route("delete")]

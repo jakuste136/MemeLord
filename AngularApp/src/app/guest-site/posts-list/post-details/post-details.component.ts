@@ -17,6 +17,9 @@ export class PostDetailsComponent implements OnInit {
   user;
   comment;
 
+  comments;
+  lastCommentId;
+
   constructor(private _route: ActivatedRoute,
     private _postService: PostsListService,
     private _userDetailsService: UserDetailsService,
@@ -29,8 +32,11 @@ export class PostDetailsComponent implements OnInit {
       postId: id
     };
 
+    this.comments = [];
+
     _postService.getPost(id).subscribe(response => {
       this.post = response;
+      this.initializeComments();
     })
 
     if (_authenticationService.getToken())
@@ -39,14 +45,34 @@ export class PostDetailsComponent implements OnInit {
       })
   }
 
-  addComment() {
+  private initializeComments() {
+    this.lastCommentId = 0;
+    this.getComments();
+  }
+
+  private onScroll() {
+    this.getComments();
+  }
+
+  private getComments() {
+    this._commentService.getComments(this.post.id, this.lastCommentId, 10).subscribe(response => {
+      this.appendComments(response.commentsList);
+      this.lastCommentId = response.lastId;
+    })
+  }
+
+  private appendComments(comments) {
+    this.comments = this.comments.concat(comments);
+  }
+
+  private addComment() {
     if (!this.comment.text) {
       this._toastr.error("Nie można dodać pustego komentarza")
       return;
     }
     this._commentService.addComment(this.comment).subscribe(response => {
+      this.appendNewComment(response.comment);
       this._toastr.success("Dodano komentarz");
-      // refresh
     }, error => {
       this._toastr.error("Dodawanie komentarza nie powiodło się");
     });
@@ -54,7 +80,10 @@ export class PostDetailsComponent implements OnInit {
     this.comment.text = '';
   }
 
-  ngOnInit() {
+  private appendNewComment(comment) {
+    this.comments.unshift(comment);
   }
 
+  ngOnInit(): void {
+  }
 }

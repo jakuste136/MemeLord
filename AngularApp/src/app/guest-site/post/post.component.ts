@@ -16,6 +16,8 @@ export class PostComponent implements OnInit, OnChanges {
   @Input() rating: number;
   @Input() index: number;
   @Input() postId: number;
+  @Input() showBestComments = true;
+
   likeValue: number;
   storedPostId: number;
 
@@ -53,9 +55,11 @@ export class PostComponent implements OnInit, OnChanges {
   }
 
   toggleComments() {
-    this.areBestCommentsVisible = !this.areBestCommentsVisible;
-    if(this.areBestCommentsVisible)
-      this.bestComments.getBestComments(this.postId);
+    if (this.showBestComments) {
+      this.areBestCommentsVisible = !this.areBestCommentsVisible;
+      if (this.areBestCommentsVisible)
+        this.bestComments.getBestComments(this.postId);
+    }
   }
 
 }

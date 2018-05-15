@@ -1,32 +1,41 @@
-﻿using System.Security.Claims;
+﻿using MemeLord.DataObjects.Dto;
 using MemeLord.DataObjects.Request;
-using MemeLord.Logic.Extensions;
-using MemeLord.Logic.Repository;
 using MemeLord.Logic.Mapping.CommentMapping;
+using MemeLord.Logic.Repository;
 
 namespace MemeLord.Logic.Modules
 {
     public interface IAddCommentsModule
     {
-        void AddComment(AddCommentRequest comment);
+        CommentDto AddComment(AddCommentRequest comment);
     }
 
     public class AddCommentsModule : IAddCommentsModule
     {
         private readonly ICommentRepository _commentRepository;
+        private readonly IMasterCommentMapper _masterCommentMapper;
         private readonly INewCommentMapper _newCommentMapper;
+        private readonly IUserRepository _userRepository;
 
-        public AddCommentsModule(ICommentRepository commentRepository, INewCommentMapper newCommentMapper)
+        public AddCommentsModule(ICommentRepository commentRepository, INewCommentMapper newCommentMapper,
+            IMasterCommentMapper masterCommentMapper, IUserRepository userRepository)
         {
             _commentRepository = commentRepository;
             _newCommentMapper = newCommentMapper;
+            _masterCommentMapper = masterCommentMapper;
+            _userRepository = userRepository;
         }
 
-        public void AddComment(AddCommentRequest addCommentRequest)
+        public CommentDto AddComment(AddCommentRequest addCommentRequest)
         {
             var comment = _newCommentMapper.Map(addCommentRequest);
 
             _commentRepository.AddComment(comment);
+
+            var user = _userRepository.GetUserById(comment.User.Id);
+            comment.User = user;
+
+            return _masterCommentMapper.Map(comment);
         }
     }
 }
