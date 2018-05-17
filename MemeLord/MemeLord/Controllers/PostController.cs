@@ -2,7 +2,7 @@
 using MemeLord.DataObjects.Response.Posts;
 using MemeLord.Logic.Modules.Posts;
 using MemeLord.Logic.Repository;
-using MemeLord.Models;
+using MemeLord.Logic.Modules.Reports;
 using System.Net.Http;
 using System.Web.Http;
 using MemeLord.DataObjects.Dto;
@@ -18,13 +18,15 @@ namespace MemeLord.Controllers
         private readonly IGetRandomPostModule _getRandomPostModule;
         private readonly IPostUpdateModule _postUpdateModule;
         private readonly IUpdatePostModule _updatePostModule;
+        private readonly IAutoBanModule _autoBanModule;
 
         public PostController(IPostRepository postRepository, 
             IGetPostsModule getPostsModule, 
             IAddPostModule addPostModule, 
             IGetRandomPostModule getRandomPostModule, 
             IPostUpdateModule postUpdateModule,
-            IUpdatePostModule updatePostModule)
+            IUpdatePostModule updatePostModule,
+            IAutoBanModule autoBanModule)
         {
             _postRepository = postRepository;
             _getPostsModule = getPostsModule;
@@ -32,6 +34,7 @@ namespace MemeLord.Controllers
             _postUpdateModule = postUpdateModule;
             _getRandomPostModule = getRandomPostModule;
             _updatePostModule = updatePostModule;
+            _autoBanModule = autoBanModule;
         }
 
         [Route("{id}")]
@@ -64,6 +67,8 @@ namespace MemeLord.Controllers
         public void DeletePost([FromUri] int id)
         {
             _updatePostModule.DeletePost(id);
+            //check if user should be banned
+            _autoBanModule.BanIfDeserveByPostId(id);
         }
         
         [Route("update-rating")]

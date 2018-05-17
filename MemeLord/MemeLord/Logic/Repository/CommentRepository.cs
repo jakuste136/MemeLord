@@ -11,6 +11,7 @@ namespace MemeLord.Logic.Repository
         List<Comment> GetBestComments(int postId, int count);
         void AddComment(Comment comment);
         void UpdateComment(Comment comment);
+        int GetNumberOfDeletedByUserId(int userId);
     }
 
     public class CommentRepository : ICommentRepository
@@ -99,6 +100,18 @@ namespace MemeLord.Logic.Repository
             using (var db = CustomDatabaseFactory.GetConnection())
             {
                 db.Save(comment);
+            }
+        }
+
+        public int GetNumberOfDeletedByUserId(int userId)
+        {
+            using (var db = CustomDatabaseFactory.GetConnection())
+            {
+                return db.Query<Comment>()
+                    .Include(c => c.User)
+                    .Where(c => c.User.Id == userId || userId == 0)
+                    .Where(c => c.DeletionDate != null)
+                    .Count();
             }
         }
     }

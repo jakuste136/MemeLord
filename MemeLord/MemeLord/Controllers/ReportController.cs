@@ -34,7 +34,7 @@ namespace MemeLord.Controllers
             return _getReportsModule.GetReportedPosts(lastId, count);
         }
 
-        [Route("get-posts")]
+        [Route("get-comments")]
         [HttpGet]
         public GetReportedCommentsResponse GetReportedComments([FromUri] int lastId, [FromUri] int count)
         {

@@ -231,6 +231,7 @@
     <Compile Include="Logic\Modules\Posts\UpdatePostModule.cs" />
     <Compile Include="Logic\Modules\Posts\PostUpdateModule.cs" />
     <Compile Include="Logic\Modules\Reports\AddReportModule.cs" />
+    <Compile Include="Logic\Modules\Reports\AutoBanModule.cs" />
     <Compile Include="Logic\Modules\Reports\FindMostFrequentReport.cs" />
     <Compile Include="Logic\Modules\Reports\GetReportsModule.cs" />
     <Compile Include="Logic\Modules\Users\UserAddModule.cs" />

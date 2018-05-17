@@ -31,5 +31,14 @@ namespace MemeLord.Configuration.Settings {
                 return ((int)(this["MinimumReportsNumber"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public int MinimumDeletionsNumber {
+            get {
+                return ((int)(this["MinimumDeletionsNumber"]));
+            }
+        }
     }
 }
