@@ -11,6 +11,8 @@ import { UserProfileSiteComponent } from './user-profile-site/user-profile-site.
 import { UserDetailsComponent } from './user-profile-site/user-details/user-details.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { UserDetailsService } from './user-profile-site/user-details/user-details.service';
+import { JwtInterceptor } from '../core/services/jwt.inerceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -27,7 +29,12 @@ import { UserDetailsService } from './user-profile-site/user-details/user-detail
     UserProfileSiteComponent, 
     UserDetailsComponent],
   providers: [
-    UserDetailsService
+    UserDetailsService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    },
   ]
 })
 export class UserSiteModule { }

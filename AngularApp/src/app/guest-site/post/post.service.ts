@@ -16,15 +16,6 @@ export class PostService {
      }
 
     getPostLikeForUser(postId: number): Observable<IPostLike>{
-
-        var token = this._authenticationService.getToken().access_token;
-
-        const httpOptions = {
-            headers: new HttpHeaders()
-                .set('Authorization', `bearer ${token}`)
-                .set('Content-Type', 'application/json')
-        };
-
-        return this._http.get<IPostLike>(`${apiUrl}/api/like?postId=${postId}`, httpOptions);
+        return this._http.get<IPostLike>(`${apiUrl}/api/like?postId=${postId}`);
     }
 }

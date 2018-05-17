@@ -15,7 +15,7 @@ const apiUrl = environment.apiUrl;
 @Injectable()
 export class AuthenticationService {
 
-  tokenKey: string = "a5smm_utoken"
+  tokenKey: string = "currentUser"
 
   constructor(private router: Router,
     private _http: HttpClient,

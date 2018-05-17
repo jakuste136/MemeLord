@@ -9,7 +9,7 @@ import { PostComponent } from './post/post.component';
 import { PostsListComponent } from './posts-list/posts-list.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { PostsListService } from './posts-list/posts-list.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginPageComponent } from '../core/login-page/login-page.component';
 import { CoreModule } from '../core/core.module';
@@ -28,6 +28,7 @@ import { PostService } from './post/post.service';
 import { BestCommentsComponent } from './post/best-comments/best-comments.component';
 import { BestCommentsService } from './post/best-comments/best-comments.service';
 import { CommentComponent } from './posts-list/post-details/comment/comment.component';
+import { JwtInterceptor } from '../core/services/jwt.inerceptor';
 
 
 
@@ -65,7 +66,12 @@ import { CommentComponent } from './posts-list/post-details/comment/comment.comp
     CommentService,
     RatingsService,
     PostService,
-    BestCommentsService
+    BestCommentsService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    },
   ],  
   entryComponents: [
     AddPostModalComponent

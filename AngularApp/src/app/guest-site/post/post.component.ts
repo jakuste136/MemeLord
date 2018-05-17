@@ -2,6 +2,7 @@ import { Component, OnInit, Input, AfterViewInit, AfterViewChecked, OnChanges, S
 import { PostService } from './post.service';
 import { BestCommentsService } from './best-comments/best-comments.service';
 import { BestCommentsComponent } from './best-comments/best-comments.component';
+import { AuthGuardService } from '../../core/services/auth-guard.service';
 
 @Component({
   selector: 'app-post',
@@ -27,13 +28,14 @@ export class PostComponent implements OnInit, OnChanges {
   private bestComments: BestCommentsComponent;
   areBestCommentsVisible = false;
 
-  constructor(private _postService: PostService,
+  constructor(private _authGuardService: AuthGuardService, 
+    private _postService: PostService,
     private _bestCommentsService: BestCommentsService) {
 
   }
 
   ngOnInit() {
-    if (this.postId !== undefined) {
+    if (this.postId !== undefined && this._authGuardService.canActivate(false)) {
       this.storedPostId = this.postId
       this._postService.getPostLikeForUser(this.storedPostId).subscribe(data => {
         this.likeValue = (data === null ? 0 : data.value);
@@ -42,7 +44,7 @@ export class PostComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.postId !== undefined) {
+    if (this.postId !== undefined && this._authGuardService.canActivate(false)) {
       this.storedPostId = this.postId
       this._postService.getPostLikeForUser(this.storedPostId).subscribe(data => {
         this.likeValue = (data === null ? 0 : data.value);

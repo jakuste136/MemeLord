@@ -53,21 +53,21 @@ namespace MemeLord.Controllers
             return _getPostsModule.GetPosts(lastId, count);
         }
 
-        [HttpPost]
+        [HttpPost, Authorize]
         public HttpResponseMessage AddPost()
         {
             return _addPostModule.AddPost(Request);
         }
 
         [Route("delete")]
-        [HttpGet]
+        [HttpGet, Authorize]
         public void DeletePost([FromUri] int id)
         {
             _updatePostModule.DeletePost(id);
         }
         
         [Route("update-rating")]
-        [HttpPut]
+        [HttpPut, Authorize]
         public HttpResponseMessage UpdatePostRating([FromBody] UpdatePostRatingRequest request)
         {
             return _postUpdateModule.UpdatePostRating(request);
