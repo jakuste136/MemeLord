@@ -20,11 +20,19 @@ namespace MemeLord.Controllers
             _likeGetModule = likeGetModule;
         }
 
+        [Route("get-post")]
         [HttpGet]
         public Like GetPostLikeForUser([FromUri] int postId)
         {
-          return _likeGetModule.GetLike(postId);
-        } 
+          return _likeGetModule.GetPostLike(postId);
+        }
+
+        [Route("get-comment")]
+        [HttpGet]
+        public Like GetCommentLikeForUser([FromUri] int commentId)
+        {
+            return _likeGetModule.GetCommentLike(commentId);
+        }
 
         [Route("add-post")]
         [HttpPost]

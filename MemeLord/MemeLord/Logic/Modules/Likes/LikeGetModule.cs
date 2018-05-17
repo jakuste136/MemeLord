@@ -10,7 +10,8 @@ namespace MemeLord.Logic.Modules.Likes
 {
     public interface ILikeGetModule
     {
-        Like GetLike(int postId);
+        Like GetPostLike(int postId);
+        Like GetCommentLike(int commentId);
     }
 
     public class LikeGetModule : ILikeGetModule
@@ -22,10 +23,16 @@ namespace MemeLord.Logic.Modules.Likes
             _likeRepository = likeRepository;
         }
 
-        public Like GetLike(int postId)
+        public Like GetPostLike(int postId)
         {
             var userId = ClaimsPrincipal.Current.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value ?? "0";
             return _likeRepository.GetLikeByPostId(postId, Int32.Parse(userId));
+        }
+
+        public Like GetCommentLike(int commentId)
+        {
+            var userId = ClaimsPrincipal.Current.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value ?? "0";
+            return _likeRepository.GetLikeByCommentId(commentId, Int32.Parse(userId));
         }
     }
 }

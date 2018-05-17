@@ -25,6 +25,6 @@ export class PostService {
                 .set('Content-Type', 'application/json')
         };
 
-        return this._http.get<IPostLike>(`${apiUrl}/api/like?postId=${postId}`, httpOptions);
+        return this._http.get<IPostLike>(`${apiUrl}/api/like/get-post?postId=${postId}`, httpOptions);
     }
 }
