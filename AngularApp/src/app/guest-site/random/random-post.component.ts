@@ -9,14 +9,9 @@ import { IPostDto } from '../dto/post-dto';
 })
 export class RandomPostComponent implements OnInit {
 
-  post;
+  post: IPostDto;
 
   constructor(private _postService: PostsListService) {
-    this.post = {
-      title:"Image not loaded yet",
-      image:""
-    };
-
     this.getRandomPost();
   }
 
@@ -24,6 +19,7 @@ export class RandomPostComponent implements OnInit {
   }
 
   getRandomPost() {
+    this.post = null;
     this._postService.getRandomPost().subscribe(response => {
       this.post = response.post;
     });
