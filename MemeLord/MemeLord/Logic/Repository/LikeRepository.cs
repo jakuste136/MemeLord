@@ -8,6 +8,7 @@ namespace MemeLord.Logic.Repository
         void AddLike(Like like);
         void UpdateLike(Like like);
         Like GetLikeByPostId(int postId, int userId);
+        Like GetLikeByCommentId(int commentId, int userId);
     }
 
     public class LikeRepository : ILikeRepository
@@ -28,6 +29,17 @@ namespace MemeLord.Logic.Repository
                     .Include(l => l.Post)
                     .Include(l => l.User)
                     .SingleOrDefault(l => l.Post.Id == postId && l.User.Id == userId);
+            }
+        }
+
+        public Like GetLikeByCommentId(int commentId, int userId)
+        {
+            using (var db = CustomDatabaseFactory.GetConnection())
+            {
+                return db.Query<Like>()
+                    .Include(l => l.Comment)
+                    .Include(l => l.User)
+                    .SingleOrDefault(l => l.Comment.Id == commentId && l.User.Id == userId);
             }
         }
 

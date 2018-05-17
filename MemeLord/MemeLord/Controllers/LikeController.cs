@@ -30,7 +30,14 @@ namespace MemeLord.Controllers
         [HttpPost]
         public HttpResponseMessage AddLike([FromBody] AddLikeRequest request)
         {
-            return _likeAddModule.AddLike(request);
+            return _likeAddModule.AddPostLike(request);
+        }
+
+        [Route("add-comment")]
+        [HttpPost]
+        public HttpResponseMessage AddCommentLike([FromBody] AddLikeRequest request)
+        {
+            return _likeAddModule.AddCommentLike(request);
         }
     }
 }
