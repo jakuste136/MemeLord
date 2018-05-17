@@ -26,9 +26,9 @@ namespace MemeLord.Controllers
           return _likeGetModule.GetLike(postId);
         } 
 
-        [Route("add-like")]
+        [Route("add-post")]
         [HttpPost]
-        public HttpResponseMessage AddLike([FromBody] AddLikeRequest request)
+        public HttpResponseMessage AddPostLike([FromBody] AddLikeRequest request)
         {
             return _likeAddModule.AddPostLike(request);
         }

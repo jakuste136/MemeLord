@@ -26,6 +26,6 @@ export class RatingsService{
         //let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
         //let options = { headers: headers };
         
-        return this._http.post(`${apiUrl}/api/like/add-like`, JSON.stringify(postLike), httpOptions).toPromise();
+        return this._http.post(`${apiUrl}/api/like/add-post`, JSON.stringify(postLike), httpOptions).toPromise();
     }
 }

@@ -41,6 +41,20 @@ namespace MemeLord.Controllers
             return _getReportsModule.GetReportedComments(lastId, count);
         }
 
+        [Route("comment-reported")]
+        [HttpGet]
+        public bool CheckIfCommentAlreadyReported([FromUri] int userId, [FromUri] int commentId)
+        {
+            return _reportRepository.DidUserReportedComment(userId, commentId);
+        }
+
+        [Route("post-reported")]
+        [HttpGet]
+        public bool CheckIfPostAlreadyReported([FromUri] int userId, [FromUri] int postId)
+        {
+            return _reportRepository.DidUserReportedPost(userId, postId);
+        }
+
         [Route("add-report")]
         [HttpPost]
         public void AddReport(AddReportRequest request)
