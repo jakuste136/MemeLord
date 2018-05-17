@@ -22,27 +22,28 @@ namespace MemeLord.Controllers
         }
 
         [Route("get/{id}")]
+        [Authorize(Roles = "Admin")]
         public Report GetReportById(int id)
         {
             return _reportRepository.GetReportById(id);
         }
 
         [Route("get-posts")]
-        [HttpGet]
+        [HttpGet, Authorize(Roles = "Admin")]
         public GetReportedPostsResponse GetReportedPosts([FromUri] int lastId, [FromUri] int count)
         {
             return _getReportsModule.GetReportedPosts(lastId, count);
         }
 
         [Route("get-posts")]
-        [HttpGet]
+        [HttpGet, Authorize(Roles = "Admin")]
         public GetReportedCommentsResponse GetReportedComments([FromUri] int lastId, [FromUri] int count)
         {
             return _getReportsModule.GetReportedComments(lastId, count);
         }
 
         [Route("add-report")]
-        [HttpPost]
+        [HttpPost, Authorize(Roles = "Member, Admin")]
         public void AddReport(AddReportRequest request)
         {
             _addReportModule.AddReport(request);

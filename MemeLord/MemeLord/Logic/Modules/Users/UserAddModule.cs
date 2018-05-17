@@ -4,6 +4,7 @@ using MemeLord.DataObjects.Request;
 using MemeLord.Logic.Authentication;
 using MemeLord.Logic.Mapping.Users;
 using MemeLord.Logic.Repository;
+using MemeLord.Models;
 
 namespace MemeLord.Logic.Modules.Users
 {
@@ -30,7 +31,16 @@ namespace MemeLord.Logic.Modules.Users
             if (request == null) return new HttpResponseMessage(HttpStatusCode.UnsupportedMediaType);
             var user = _requestMapper.Map(request);
             user.Hash = _hashManager.Hash(request.Password);
+
             _userRepository.SaveUser(user);
+            
+            var role = _userRepository.GetDefaultRole();
+            _userRepository.SaveUserRole(new UserRole
+            {
+                User = user,
+                Role = role
+            });
+
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
     }

@@ -38,19 +38,18 @@ namespace MemeLord.Logic.Providers
                 var user = _userRepository.GetUserByCredentials(context.UserName);
                 if (user != null && _hashManager.Verify(context.Password, user.Hash))
                 {
-                    // TODO Mateusz: ROLE PLACEHOLDER
-                    const string role = "User";
+                    var role = _userRepository.GetUserRoleByUserId(user.Id);
 
                     var claims = new List<Claim>
-                        {
-                            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                            new Claim(ClaimTypes.Name, user.Username),
-                            new Claim(ClaimTypes.Role, role),
-                        };
+                    {
+                        new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                        new Claim(ClaimTypes.Name, user.Username),
+                        new Claim(ClaimTypes.Role, role?.Name ?? ""),
+                    };
 
                     var authenticationProperties = new AuthenticationProperties(new Dictionary<string, string>
                     {
-                        { "role", role },
+                        { "role", role?.Name ?? "" },
                     });
 
                     var oAutIdentity = new ClaimsIdentity(claims, Startup.OAuthOptions.AuthenticationType);

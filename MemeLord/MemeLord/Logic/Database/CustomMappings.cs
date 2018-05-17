@@ -80,7 +80,12 @@ namespace MemeLord.Logic.Database
 
             For<UserRole>()
                 .TableName("UserRoles")
-                .CompositePrimaryKey(ur => ur.User, ur => ur.Role);
+                .CompositePrimaryKey(ur => ur.User, ur => ur.Role)
+                .Columns(b =>
+                {
+                    b.Column(userRole => userRole.User).WithName("UserId").Reference(user => user.Id);
+                    b.Column(userRole => userRole.Role).WithName("RoleId").Reference(role => role.Id);
+                });
 
             For<User>()
                 .TableName("Users")
