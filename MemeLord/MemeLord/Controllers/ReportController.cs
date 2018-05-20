@@ -13,12 +13,14 @@ namespace MemeLord.Controllers
         private readonly IReportRepository _reportRepository;
         private readonly IGetReportsModule _getReportsModule;
         private readonly IAddReportModule _addReportModule;
+        private readonly ICheckIfUserHasReported _checkIfUserHasReported;
 
-        public ReportController(IReportRepository reportRepository, IGetReportsModule getReportsModule, IAddReportModule addReportModule)
+        public ReportController(IReportRepository reportRepository, IGetReportsModule getReportsModule, IAddReportModule addReportModule, ICheckIfUserHasReported checkIfUserHasReported)
         {
             _reportRepository = reportRepository;
             _getReportsModule = getReportsModule;
             _addReportModule = addReportModule;
+            _checkIfUserHasReported = checkIfUserHasReported;
         }
 
         [Route("posts")]
@@ -30,9 +32,9 @@ namespace MemeLord.Controllers
 
         [Route("check-post")]
         [HttpGet]
-        public bool CheckIfPostAlreadyReported([FromUri] int userId, [FromUri] int postId)
+        public bool CheckIfPostAlreadyReported([FromUri] int postId)
         {
-            return _reportRepository.DidUserReportPost(userId, postId);
+            return _checkIfUserHasReported.Post(postId);
         }
 
         [Route("comments")]
@@ -44,11 +46,11 @@ namespace MemeLord.Controllers
 
         [Route("check-comment")]
         [HttpGet]
-        public bool CheckIfCommentAlreadyReported([FromUri] int userId, [FromUri] int commentId)
+        public bool CheckIfCommentAlreadyReported([FromUri] int commentId)
         {
-            return _reportRepository.DidUserReportComment(userId, commentId);
+            return _checkIfUserHasReported.Comment(commentId);
         }
-        
+
         [HttpPost]
         public void AddReport(AddReportRequest request)
         {

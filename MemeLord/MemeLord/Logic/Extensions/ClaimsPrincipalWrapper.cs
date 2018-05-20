@@ -9,5 +9,10 @@ namespace MemeLord.Logic.Extensions
         {
             return ClaimsPrincipal.Current.Claims.FirstOrDefault(x => x.Type == types)?.Value ?? "";
         }
+
+        public static int GetIdFromClaim()
+        {
+            return int.Parse(GetFromClaim(ClaimTypes.NameIdentifier));
+        }
     }
 }

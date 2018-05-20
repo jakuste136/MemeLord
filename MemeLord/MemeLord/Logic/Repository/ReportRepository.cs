@@ -80,9 +80,7 @@ namespace MemeLord.Logic.Repository
                 return db.Query<Report>()
                     .Include(r => r.Reporter)
                     .Include(r => r.Comment)
-                    .Where(r => r.Reporter.Id == userId)
-                    .Where(r => r.Comment.Id == commentId)
-                    .Any();
+                    .Any(r => r.Reporter.Id == userId && r.Comment.Id == commentId);
             }
         }
 
@@ -93,9 +91,7 @@ namespace MemeLord.Logic.Repository
                 return db.Query<Report>()
                     .Include(r => r.Reporter)
                     .Include(r => r.Post)
-                    .Where(r => r.Reporter.Id == userId)
-                    .Where(r => r.Post.Id == postId)
-                    .Any();
+                    .Any(r => r.Reporter.Id == userId && r.Post.Id == postId);
             }
         }
     }
