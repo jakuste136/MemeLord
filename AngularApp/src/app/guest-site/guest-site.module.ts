@@ -28,6 +28,7 @@ import { PostService } from './post/post.service';
 import { BestCommentsComponent } from './post/best-comments/best-comments.component';
 import { BestCommentsService } from './post/best-comments/best-comments.service';
 import { CommentComponent } from './posts-list/post-details/comment/comment.component';
+import { ReportButtonComponent } from './post/post-bar/report-button/report-button.component';
 
 
 
@@ -57,7 +58,8 @@ import { CommentComponent } from './posts-list/post-details/comment/comment.comp
     PostBarComponent,
     CommentButtonComponent,
     BestCommentsComponent,
-    CommentComponent],
+    CommentComponent,
+    ReportButtonComponent],
   providers: [
     UserDetailsService,
     PostsListService,

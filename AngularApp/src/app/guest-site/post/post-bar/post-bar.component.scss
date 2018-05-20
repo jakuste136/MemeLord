@@ -1,5 +1,5 @@
-#appRatingsBar{
-    width: 52%; 
-    float: left;
-    padding-left: 215px;
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5px;
 }

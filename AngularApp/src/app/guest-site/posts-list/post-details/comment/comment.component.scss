@@ -14,7 +14,14 @@
         justify-content: center;
 
         p {
-            margin: 3px 5px;                
+            margin: 3px 5px;            
+        }
+
+        .report-button {
+            cursor: pointer;
+            text-decoration: underline;
+            font-size: 10pt;
+            color: #919191;
         }
 
         .inline-wrapper{
