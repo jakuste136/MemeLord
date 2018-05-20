@@ -13,12 +13,20 @@
         flex-direction: column;
         justify-content: center;
 
-        .comment-header {
-            font-weight: bold;
+        p {
+            margin: 3px 5px;                
         }
 
-        p {
-            margin: 3px 5px;
-        }
+        .inline-wrapper{
+            display: inline-flex;    
+            
+            .username {
+                font-weight: bold;
+            }
+
+            .date {
+                color: #c4c2c2;
+            }            
+        }        
     }
 }
