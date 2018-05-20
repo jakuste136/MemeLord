@@ -2,9 +2,9 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Rx";
 import { Headers, RequestOptions, Http, Response } from "@angular/http";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { IPostLike } from "../../dto/like-dto";
-import { environment } from "../../../../environments/environment";
-import { AuthenticationService } from "../../../core/services/authentication.service";
+import { environment } from "../../../../../environments/environment";
+import { AuthenticationService } from "../../../../core/services/authentication.service";
+import { IPostLike } from "../../../dto/like-dto";
 
 const apiUrl = environment.apiUrl;
 

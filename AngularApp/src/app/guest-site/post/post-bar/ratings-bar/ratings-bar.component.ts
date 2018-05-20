@@ -1,8 +1,8 @@
 import { Component, Input, AfterContentChecked, AfterViewInit, SimpleChanges, OnChanges } from '@angular/core';
 import { RatingsService } from './ratings-bar.service';
-import { PostLike } from '../../dto/like-dto';
-import { AuthGuardService } from '../../../core/services/auth-guard.service';
-import { PostsListService } from '../../posts-list/posts-list.service';
+import { AuthGuardService } from '../../../../core/services/auth-guard.service';
+import { PostsListService } from '../../../posts-list/posts-list.service';
+import { PostLike } from '../../../dto/like-dto';
 
 @Component({
   selector: 'app-ratings-bar',
