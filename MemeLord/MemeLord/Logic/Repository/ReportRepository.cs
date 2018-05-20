@@ -10,8 +10,8 @@ namespace MemeLord.Logic.Repository
         List<Report> GetReportedPosts(int lastId);
         List<Report> GetReportedComments(int lastId);
         void AddReport(Report report);
-        bool DidUserReportedComment(int userId, int commentId);
-        bool DidUserReportedPost(int userId, int postId);
+        bool DidUserReportComment(int userId, int commentId);
+        bool DidUserReportPost(int userId, int postId);
     }
 
     public class ReportRepository : IReportRepository
@@ -73,7 +73,7 @@ namespace MemeLord.Logic.Repository
             }
         }
 
-        public bool DidUserReportedComment(int userId, int commentId)
+        public bool DidUserReportComment(int userId, int commentId)
         {
             using (var db = CustomDatabaseFactory.GetConnection())
             {
@@ -86,7 +86,7 @@ namespace MemeLord.Logic.Repository
             }
         }
 
-        public bool DidUserReportedPost(int userId, int postId)
+        public bool DidUserReportPost(int userId, int postId)
         {
             using (var db = CustomDatabaseFactory.GetConnection())
             {

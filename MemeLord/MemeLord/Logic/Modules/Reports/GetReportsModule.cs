@@ -1,8 +1,8 @@
 ﻿using System.Linq;
-using MemeLord.DataObjects.Response.ReportResponses;
 using MemeLord.Logic.Mapping.Reports;
 using MemeLord.Logic.Repository;
 using MemeLord.Configuration;
+using MemeLord.DataObjects.Response.Reports;
 
 namespace MemeLord.Logic.Modules.Reports
 {
@@ -14,10 +14,10 @@ namespace MemeLord.Logic.Modules.Reports
 
     public class GetReportsModule : IGetReportsModule
     {
-        private IReportRepository _reportRepository;
-        private IReportedPostMapper _reportedPostMapper;
-        private IReportedCommentMapper _reportedCommentMapper;
-        private ReportingConfiguration _reportingConfiguration;
+        private readonly IReportRepository _reportRepository;
+        private readonly IReportedPostMapper _reportedPostMapper;
+        private readonly IReportedCommentMapper _reportedCommentMapper;
+        private readonly ReportingConfiguration _reportingConfiguration;
 
         public GetReportsModule(IReportRepository reportRepository, IReportedPostMapper reportedPostMapper, IReportedCommentMapper reportedCommentMapper, ReportingConfiguration reportingConfiguration)
         {
@@ -26,7 +26,7 @@ namespace MemeLord.Logic.Modules.Reports
             _reportedCommentMapper = reportedCommentMapper;
             _reportingConfiguration = reportingConfiguration;
         }
-
+        
         public GetReportedPostsResponse GetReportedPosts(int lastId, int count)
         {
             var repositoryReports = _reportRepository.GetReportedPosts(lastId);  //ogarnać liczbę postów do infinity scrolla

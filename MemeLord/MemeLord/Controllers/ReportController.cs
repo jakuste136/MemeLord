@@ -1,8 +1,8 @@
 ﻿using MemeLord.Logic.Repository;
-using MemeLord.DataObjects.Response.ReportResponses;
 using MemeLord.Models;
 using System.Web.Http;
 using MemeLord.DataObjects.Request.Reports;
+using MemeLord.DataObjects.Response.Reports;
 using MemeLord.Logic.Modules.Reports;
 
 namespace MemeLord.Controllers
@@ -21,41 +21,34 @@ namespace MemeLord.Controllers
             _addReportModule = addReportModule;
         }
 
-        [Route("get/{id}")]
-        public Report GetReportById(int id)
-        {
-            return _reportRepository.GetReportById(id);
-        }
-
-        [Route("get-posts")]
+        [Route("posts")]
         [HttpGet]
         public GetReportedPostsResponse GetReportedPosts([FromUri] int lastId, [FromUri] int count)
         {
             return _getReportsModule.GetReportedPosts(lastId, count);
         }
 
-        [Route("get-comments")]
+        [Route("check-post")]
+        [HttpGet]
+        public bool CheckIfPostAlreadyReported([FromUri] int userId, [FromUri] int postId)
+        {
+            return _reportRepository.DidUserReportPost(userId, postId);
+        }
+
+        [Route("comments")]
         [HttpGet]
         public GetReportedCommentsResponse GetReportedComments([FromUri] int lastId, [FromUri] int count)
         {
             return _getReportsModule.GetReportedComments(lastId, count);
         }
 
-        [Route("comment-reported")]
+        [Route("check-comment")]
         [HttpGet]
         public bool CheckIfCommentAlreadyReported([FromUri] int userId, [FromUri] int commentId)
         {
-            return _reportRepository.DidUserReportedComment(userId, commentId);
+            return _reportRepository.DidUserReportComment(userId, commentId);
         }
-
-        [Route("post-reported")]
-        [HttpGet]
-        public bool CheckIfPostAlreadyReported([FromUri] int userId, [FromUri] int postId)
-        {
-            return _reportRepository.DidUserReportedPost(userId, postId);
-        }
-
-        [Route("add-report")]
+        
         [HttpPost]
         public void AddReport(AddReportRequest request)
         {

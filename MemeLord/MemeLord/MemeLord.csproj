@@ -194,8 +194,8 @@
     <Compile Include="DataObjects\Request\UpdateUserRequest.cs" />
     <Compile Include="DataObjects\Response\CommentResponses\AddCommentResponse.cs" />
     <Compile Include="DataObjects\Response\CommentResponses\GetBestCommentsResponse.cs" />
-    <Compile Include="DataObjects\Response\ReportResponses\GetReportedCommentsResponse.cs" />
-    <Compile Include="DataObjects\Response\ReportResponses\GetReportedPostsResponse.cs" />
+    <Compile Include="DataObjects\Response\Reports\GetReportedCommentsResponse.cs" />
+    <Compile Include="DataObjects\Response\Reports\GetReportedPostsResponse.cs" />
     <Compile Include="DataObjects\Response\GetUserResponse.cs" />
     <Compile Include="DataObjects\Response\Posts\GetRandomPostResponse.cs" />
     <Compile Include="Global.asax.cs">
