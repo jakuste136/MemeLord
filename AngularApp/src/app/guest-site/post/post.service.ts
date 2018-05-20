@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Rx";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { IPostLike } from "../dto/like-dto";
+import { ILike } from "../dto/like-dto";
 import { environment } from "../../../environments/environment";
 import { AuthenticationService } from "../../core/services/authentication.service";
 
@@ -15,7 +15,7 @@ export class PostService {
         
      }
 
-    getPostLikeForUser(postId: number): Observable<IPostLike>{
+    getPostLikeForUser(postId: number): Observable<ILike>{
 
         var token = this._authenticationService.getToken().access_token;
 
@@ -25,6 +25,6 @@ export class PostService {
                 .set('Content-Type', 'application/json')
         };
 
-        return this._http.get<IPostLike>(`${apiUrl}/api/like/get-post?postId=${postId}`, httpOptions);
+        return this._http.get<ILike>(`${apiUrl}/api/like/get-post?postId=${postId}`, httpOptions);
     }
 }

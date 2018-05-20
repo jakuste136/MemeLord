@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Rx";
 import { Headers, RequestOptions, Http, Response } from "@angular/http";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { IPostLike } from "../../dto/like-dto";
+import { ILike } from "../../dto/like-dto";
 import { environment } from "../../../../environments/environment";
 import { AuthenticationService } from "../../../core/services/authentication.service";
 
@@ -13,7 +13,7 @@ export class RatingsService{
 
     constructor(private _http: HttpClient, private _authenticationService: AuthenticationService){ }
 
-    addOrRemoveLike(postLike: IPostLike): Promise<any>{
+    addOrRemoveLike(postLike: ILike): Promise<any>{
 
         var token = this._authenticationService.getToken().access_token;
 

@@ -1,6 +1,6 @@
 import { Component, Input, AfterContentChecked, AfterViewInit, SimpleChanges, OnChanges } from '@angular/core';
 import { RatingsService } from './ratings-bar.service';
-import { PostLike } from '../../dto/like-dto';
+import { Like } from '../../dto/like-dto';
 import { AuthGuardService } from '../../../core/services/auth-guard.service';
 import { PostsListService } from '../../posts-list/posts-list.service';
 
@@ -41,7 +41,7 @@ export class RatingsBarComponent implements AfterViewInit, OnChanges {
         this.changeLikeButtonToActiveStyle(requestedLikeValue, this.index.toString());
         this.likeValue = requestedLikeValue;
       }
-      this._ratingsService.addOrRemoveLike(new PostLike(this.likeValue, this.postId, null))
+      this._ratingsService.addOrRemoveLike(new Like(this.likeValue, this.postId, null))
       this._postsListService.updatePostRating(this.postId, this.rating);
     }
   }

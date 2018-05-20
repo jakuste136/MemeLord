@@ -3,6 +3,8 @@ import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { AuthenticationService } from '../../../core/services/authentication.service';
+import { IGetCommentsResponse } from '../../dto/get-comments-response';
+import { ILike } from '../../dto/like-dto';
 
 const apiUrl = environment.apiUrl;
 
@@ -23,7 +25,7 @@ export class CommentService {
         return this._http.post<any>(`${apiUrl}/api/comment`, comment, httpOptions);
     }
 
-    getComments(postId, lastId, count): Observable<any> {
+    getComments(postId, lastId, count): Observable<IGetCommentsResponse> {
         var token = this._authenticationService.getToken().access_token;
 
         const httpOptions = {
@@ -31,6 +33,19 @@ export class CommentService {
                 .set('Authorization', `bearer ${token}`)
         };
 
-        return this._http.get<any>(`${apiUrl}/api/comment?postId=${postId}&lastId=${lastId}&count=${count}`, httpOptions);
+        return this._http.get<IGetCommentsResponse>(`${apiUrl}/api/comment?postId=${postId}&lastId=${lastId}&count=${count}`, httpOptions);
     }
+
+    getCommentLikeForUser(commentId: number): Observable<ILike>{
+
+        var token = this._authenticationService.getToken().access_token;
+
+        const httpOptions = {
+            headers: new HttpHeaders()
+                .set('Authorization', `bearer ${token}`)
+                .set('Content-Type', 'application/json')
+        };
+
+        return this._http.get<ILike>(`${apiUrl}/api/like/get-comment?commentId=${commentId}`, httpOptions);
+}
 }

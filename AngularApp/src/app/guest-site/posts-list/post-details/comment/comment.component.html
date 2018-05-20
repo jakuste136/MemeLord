@@ -4,4 +4,5 @@
       <p class="comment-header">{{comment.username}}</p>
       <p>{{comment.text}}</p>
     </div>
+    <app-answer-comment *ngFor="let answerComment of answerComments" [answerComment]="answerComment"></app-answer-comment>
   </div>
