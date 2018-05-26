@@ -13,6 +13,7 @@ namespace MemeLord.Logic.Repository
         void AddPost(Post post);
         Post GetRandomPost();
         void UpdatePost(Post post);
+        int GetNumberOfDeletedByUserId(int userId);
     }
 
     public class PostRepository : IPostRepository
@@ -88,6 +89,18 @@ namespace MemeLord.Logic.Repository
             using (var db = CustomDatabaseFactory.GetConnection())
             {
                 db.Save(post);
+            }
+        }
+
+        public int GetNumberOfDeletedByUserId(int userId)
+        {
+            using (var db = CustomDatabaseFactory.GetConnection())
+            {
+                return db.Query<Post>()
+                    .Include(c => c.Op)
+                    .Where(c => c.Op.Id == userId || userId == 0)
+                    .Where(c => c.DeletionDate != null)
+                    .Count();
             }
         }
     }

@@ -1,7 +1,11 @@
 <div class="wrapper">
-    <img [src]="comment.avatar">
-    <div class="text-wrapper">
-      <p class="comment-header">{{comment.username}}</p>
-      <p>{{comment.text}}</p>
+  <img [src]="_comment.avatar">
+  <div class="text-wrapper">
+    <div class="inline-wrapper">
+      <p class="username">{{_comment.username}}</p>
+      <p class="date">{{_comment.existanceDuration}}</p>
     </div>
+    <p>{{_comment.text}}</p>
+    <p class="report-button">Zgłoś</p>
   </div>
+</div>

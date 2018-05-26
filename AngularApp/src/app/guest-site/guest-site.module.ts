@@ -15,20 +15,21 @@ import { LoginPageComponent } from '../core/login-page/login-page.component';
 import { CoreModule } from '../core/core.module';
 import { TopComponent } from './top/top.component';
 import { RandomPostComponent } from './random/random-post.component';
-import { RatingsBarComponent } from './post/ratings-bar/ratings-bar.component';
-import { RatingsService } from './post/ratings-bar/ratings-bar.service';
+import { RatingsBarComponent } from './post/post-bar/ratings-bar/ratings-bar.component';
+import { RatingsService } from './post/post-bar/ratings-bar/ratings-bar.service';
 import { AddPostModalComponent } from './posts-list/add-post-modal/add-post-modal.component';
 import { AddPostService } from './posts-list/add-post-modal/add-post.service';
 import { PostDetailsComponent } from './posts-list/post-details/post-details.component';
 import { CommentService } from './posts-list/post-details/comment.service';
 import { UserDetailsService } from '../user-site/user-profile-site/user-details/user-details.service';
-import { PostBarComponent } from './post/post-bar/post-bar/post-bar.component';
-import { CommentButtonComponent } from './post/comment-button/comment-button/comment-button.component';
+import { PostBarComponent } from './post/post-bar/post-bar.component';
+import { CommentButtonComponent } from './post/post-bar/comment-button/comment-button.component';
 import { PostService } from './post/post.service';
 import { BestCommentsComponent } from './post/best-comments/best-comments.component';
 import { BestCommentsService } from './post/best-comments/best-comments.service';
 import { CommentComponent } from './posts-list/post-details/comment/comment.component';
 import { JwtInterceptor } from '../core/services/jwt.inerceptor';
+import { ReportButtonComponent } from './post/post-bar/report-button/report-button.component';
 
 
 
@@ -58,7 +59,8 @@ import { JwtInterceptor } from '../core/services/jwt.inerceptor';
     PostBarComponent,
     CommentButtonComponent,
     BestCommentsComponent,
-    CommentComponent],
+    CommentComponent,
+    ReportButtonComponent],
   providers: [
     UserDetailsService,
     PostsListService,

@@ -18,8 +18,6 @@ namespace Test.Unit.Logic.Mapping.ReportMapping
             {
                 PostId = null,
                 CommentId = 1,
-                ReporterId = 2,
-                ReportDate = new DateTime(2013, 1, 1),
                 ReportTypeId = 3
             };
 
@@ -32,8 +30,6 @@ namespace Test.Unit.Logic.Mapping.ReportMapping
             {
                 Post = null,
                 Comment = new Comment { Id = 1 },
-                Reporter = new User { Id = 2 },
-                ReportDate = new DateTime(2013, 1, 1),
                 ReportType = new ReportType { Id = 3 }
             };
             result.Should().BeEquivalentTo(expectedResult);
@@ -60,24 +56,18 @@ namespace Test.Unit.Logic.Mapping.ReportMapping
                 new AddReportRequest
                 {
                     CommentId = 1,
-                    ReporterId = 2,
-                    ReportDate = new DateTime(2013, 1, 1),
                     ReportTypeId = 3
                 },
                 new AddReportRequest
                 {
                     PostId = null,
                     CommentId = 2,
-                    ReporterId = 3,
-                    ReportDate = new DateTime(2014, 1, 1),
                     ReportTypeId = 4
                 },
                 new AddReportRequest
                 {
                     PostId = 3,
                     CommentId = null,
-                    ReporterId = 4,
-                    ReportDate = new DateTime(2015, 1, 1),
                     ReportTypeId = 5
                 }
             };
@@ -93,24 +83,18 @@ namespace Test.Unit.Logic.Mapping.ReportMapping
                 {
                     Post = null,
                     Comment = new Comment { Id = 1 },
-                    Reporter = new User { Id = 2 },
-                    ReportDate = new DateTime(2013, 1, 1),
                     ReportType = new ReportType { Id = 3 }
                 },
                 new Report
                 {
                     Post = null,
                     Comment = new Comment { Id = 2 },
-                    Reporter = new User { Id = 3 },
-                    ReportDate = new DateTime(2014, 1, 1),
                     ReportType = new ReportType { Id = 4 }
                 },
                 new Report
                 {
                     Post = new Post { Id = 3 },
                     Comment = null,
-                    Reporter = new User { Id = 4 },
-                    ReportDate = new DateTime(2015, 1, 1),
                     ReportType = new ReportType { Id = 5 }
                 }
             };

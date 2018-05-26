@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using MemeLord.DataObjects.Dto.ReportDtos;
 
-namespace MemeLord.DataObjects.Response.ReportResponses
+namespace MemeLord.DataObjects.Response.Reports
 {
     public class GetReportedCommentsResponse
     {

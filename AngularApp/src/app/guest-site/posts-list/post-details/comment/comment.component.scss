@@ -13,12 +13,27 @@
         flex-direction: column;
         justify-content: center;
 
-        .comment-header {
-            font-weight: bold;
+        p {
+            margin: 3px 5px;            
         }
 
-        p {
-            margin: 3px 5px;
+        .report-button {
+            cursor: pointer;
+            text-decoration: underline;
+            font-size: 10pt;
+            color: #919191;
         }
+
+        .inline-wrapper{
+            display: inline-flex;    
+            
+            .username {
+                font-weight: bold;
+            }
+
+            .date {
+                color: #c4c2c2;
+            }            
+        }        
     }
 }
