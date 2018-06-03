@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Web.Http;
 using MemeLord.DataObjects.Request;
 using MemeLord.DataObjects.Response;
+using MemeLord.DataObjects.Response.UserResponses;
 using MemeLord.Logic.Modules.Users;
 
 namespace MemeLord.Controllers
@@ -51,6 +52,13 @@ namespace MemeLord.Controllers
         public HttpResponseMessage Put([FromBody] UpdateUserRequest request)
         {
             return _userUpdateModule.UpdateUser(request);
+        }
+
+        [Route("activity")]
+        [HttpGet]
+        public GetUserActivityResponse GetActivity([FromUri] string username)
+        {
+            return _userGetModule.GetUserActivity(username);
         }
     }
 }
