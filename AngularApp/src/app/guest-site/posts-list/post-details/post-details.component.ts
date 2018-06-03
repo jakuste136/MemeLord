@@ -62,7 +62,7 @@ export class PostDetailsComponent implements OnInit {
     })
   }
 
-  private appendComments(comments: IMasterCommentDto) {
+  private appendComments(comments: Array<IMasterCommentDto>) {
     this.comments = this.comments.concat(comments);
   }
 
