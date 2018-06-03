@@ -64,6 +64,10 @@ export class PostsListComponent implements OnInit {
     })
   }
 
+  openReportModal(postId) {
+    console.log("Dupa");
+  }
+
   isAuthenticated() {
     return this._authenticationService.getToken() != null;
   }

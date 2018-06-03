@@ -22,6 +22,7 @@ export class PostComponent implements OnInit, OnChanges {
   storedPostId: number;
 
   @Output() onClicked: EventEmitter<any> = new EventEmitter();
+  @Output() reportButtonClicked: EventEmitter<any> = new EventEmitter();
 
   @ViewChild(BestCommentsComponent)
   private bestComments: BestCommentsComponent;
@@ -52,6 +53,10 @@ export class PostComponent implements OnInit, OnChanges {
 
   postClicked() {
     this.onClicked.emit();
+  }
+
+  onReportButtonClicked() {
+    this.reportButtonClicked.emit(this.postId);
   }
 
   toggleComments() {
