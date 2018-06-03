@@ -1,14 +1,15 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CommentService } from '../../comment.service';
+import { ICommentDto } from '../../../../dto/comment-dto';
 
 @Component({
   selector: 'app-answer-comment',
   templateUrl: './answer-comment.component.html',
-  styleUrls: ['./comment.component.scss']
+  styleUrls: ['./answer-comment.component.scss']
 })
-export class CommentComponent implements OnInit, OnChanges {
+export class AnswerCommentComponent implements OnInit, OnChanges {
 
-    @Input() comment;
+    @Input() answerComment: ICommentDto;
 
     likeValue: number;
     commentId: number;
@@ -16,15 +17,15 @@ export class CommentComponent implements OnInit, OnChanges {
     constructor(private _commentService: CommentService) { }
   
     ngOnInit() {
-      if(this.comment.id !== undefined){
-        this.commentId = this.comment.id;
+      if(this.answerComment.id !== undefined){
+        this.commentId = this.answerComment.id;
         this._commentService.getCommentLikeForUser(this.commentId).subscribe(result => { this.likeValue = (result == null ? 0 : result.value) } )
       }
     }
   
     ngOnChanges(changes: SimpleChanges): void {
-      if(this.comment.id !== undefined){
-        this.commentId = this.comment.id;
+      if(this.answerComment.id !== undefined){
+        this.commentId = this.answerComment.id;
         this._commentService.getCommentLikeForUser(this.commentId).subscribe(result => { this.likeValue = (result == null ? 0 : result.value) } )
       }
     }

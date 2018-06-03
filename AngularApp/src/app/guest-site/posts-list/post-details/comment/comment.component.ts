@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ICommentDto } from "../../../dto/comment-dto";
+import { IMasterCommentDto } from '../../../dto/master-comment-dto';
 import { CommentService } from '../comment.service';
 
 @Component({
@@ -9,7 +11,7 @@ import { CommentService } from '../comment.service';
 })
 export class CommentComponent implements OnInit, OnChanges {
 
-  @Input() comment;
+  @Input() comment: IMasterCommentDto;
 
   answerComments: Array<ICommentDto>;
   likeValue: number;
