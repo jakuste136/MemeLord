@@ -1,0 +1,10 @@
+<form>
+  <mat-form-field>
+    <mat-select placeholder="Przyczyna zgłoszenia" [(ngModel)]="selectedType" name="selectedType">
+      <mat-option *ngFor="let reportType of reportTypes" [value]="reportType">
+        {{ reportType.description }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>
+<button mat-raised-button color="primary" (click)="report()">Zgłoś</button>

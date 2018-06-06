@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { MatDialogRef, MatDialog } from '@angular/material';
+import { ReportModalComponent } from '../../../report-modal/report-modal.component';
 
 @Component({
   selector: 'app-comment',
@@ -19,7 +21,9 @@ export class CommentComponent implements OnInit {
     this._comment = comment;
   }
 
-  constructor() {
+  reportModalRef: MatDialogRef<ReportModalComponent>;
+
+  constructor(private _dialog: MatDialog) {
   }
 
   getCommentExistanceDuration(comment) {
@@ -45,6 +49,15 @@ export class CommentComponent implements OnInit {
       return `dodano ${diffInMinutes} minut temu`;
 
     return "dodano przed chwilą";
+  }
+
+  reportComment() {
+    this.reportModalRef = this._dialog.open(ReportModalComponent, {
+      width: "550px",
+      data: {
+        commentId: this._comment.id
+      }
+    });
   }
 
   ngOnInit() {

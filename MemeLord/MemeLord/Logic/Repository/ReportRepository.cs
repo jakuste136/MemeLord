@@ -12,6 +12,7 @@ namespace MemeLord.Logic.Repository
         void AddReport(Report report);
         bool DidUserReportComment(int userId, int commentId);
         bool DidUserReportPost(int userId, int postId);
+        IList<ReportType> GetReportTypes();
     }
 
     public class ReportRepository : IReportRepository
@@ -92,6 +93,15 @@ namespace MemeLord.Logic.Repository
                     .Include(r => r.Reporter)
                     .Include(r => r.Post)
                     .Any(r => r.Reporter.Id == userId && r.Post.Id == postId);
+            }
+        }
+
+        public IList<ReportType> GetReportTypes()
+        {
+            using (var db = CustomDatabaseFactory.GetConnection())
+            {
+                return db.Query<ReportType>()
+                    .ToList();
             }
         }
     }

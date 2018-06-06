@@ -2,6 +2,8 @@ import { Component, OnInit, Input, AfterViewInit, AfterViewChecked, OnChanges, S
 import { PostService } from './post.service';
 import { BestCommentsService } from './best-comments/best-comments.service';
 import { BestCommentsComponent } from './best-comments/best-comments.component';
+import { MatDialogRef, MatDialog } from '@angular/material';
+import { ReportModalComponent } from '../report-modal/report-modal.component';
 
 @Component({
   selector: 'app-post',
@@ -21,15 +23,17 @@ export class PostComponent implements OnInit, OnChanges {
   likeValue: number;
   storedPostId: number;
 
+  reportModalRef: MatDialogRef<ReportModalComponent>;
+
   @Output() onClicked: EventEmitter<any> = new EventEmitter();
-  @Output() reportButtonClicked: EventEmitter<any> = new EventEmitter();
 
   @ViewChild(BestCommentsComponent)
   private bestComments: BestCommentsComponent;
   areBestCommentsVisible = false;
 
   constructor(private _postService: PostService,
-    private _bestCommentsService: BestCommentsService) {
+    private _bestCommentsService: BestCommentsService,
+    private _dialog: MatDialog) {
 
   }
 
@@ -56,7 +60,12 @@ export class PostComponent implements OnInit, OnChanges {
   }
 
   onReportButtonClicked() {
-    this.reportButtonClicked.emit(this.postId);
+    this.reportModalRef = this._dialog.open(ReportModalComponent, {
+      width: "550px",
+      data: {
+        postId: this.postId
+      }
+    });
   }
 
   toggleComments() {

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Net.Http;
+using System.Security.Claims;
 using MemeLord.DataObjects.Request.Reports;
+using MemeLord.Logic.Extensions;
 using MemeLord.Logic.Repository;
 using MemeLord.Logic.Mapping.Reports;
 

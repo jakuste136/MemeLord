@@ -29,8 +29,8 @@ import { BestCommentsComponent } from './post/best-comments/best-comments.compon
 import { BestCommentsService } from './post/best-comments/best-comments.service';
 import { CommentComponent } from './posts-list/post-details/comment/comment.component';
 import { ReportButtonComponent } from './post/post-bar/report-button/report-button.component';
-
-
+import { ReportModalComponent } from './report-modal/report-modal.component';
+import { ReportService } from './report-modal/report.service';
 
 @NgModule({
   imports: [
@@ -59,7 +59,8 @@ import { ReportButtonComponent } from './post/post-bar/report-button/report-butt
     CommentButtonComponent,
     BestCommentsComponent,
     CommentComponent,
-    ReportButtonComponent],
+    ReportButtonComponent,
+    ReportModalComponent],
   providers: [
     UserDetailsService,
     PostsListService,
@@ -67,10 +68,12 @@ import { ReportButtonComponent } from './post/post-bar/report-button/report-butt
     CommentService,
     RatingsService,
     PostService,
-    BestCommentsService
+    BestCommentsService,
+    ReportService
   ],  
   entryComponents: [
-    AddPostModalComponent
+    AddPostModalComponent,
+    ReportModalComponent
   ]
 })
 export class GuestSiteModule { }

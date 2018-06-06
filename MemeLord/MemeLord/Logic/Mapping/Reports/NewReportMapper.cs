@@ -25,10 +25,9 @@ namespace MemeLord.Logic.Mapping.Reports
 
         private User GetReporter()
         {
-            var userId = ClaimsPrincipalWrapper.GetFromClaim(ClaimTypes.NameIdentifier);
             return new User
             {
-                Id = int.Parse(userId)
+                Id = ClaimsPrincipalWrapper.GetIdFromClaim()
             };
         }
 
