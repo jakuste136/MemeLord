@@ -38,6 +38,7 @@ namespace MemeLord.Controllers
         }
 
         [Route("{id}")]
+        [HttpGet]
         public PostDto GetById(int id)
         {
             return _getPostsModule.GetPost(id);

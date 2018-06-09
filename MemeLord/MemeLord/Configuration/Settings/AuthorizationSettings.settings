@@ -6,13 +6,13 @@
       <Value Profile="(Default)">00:30:00</Value>
     </Setting>
     <Setting Name="Audience" Type="System.String" Scope="Application">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">kAqpK8Ah2BJ9uQGU</Value>
     </Setting>
     <Setting Name="Issuer" Type="System.String" Scope="Application">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">3dNfaHaFtvtzdnww</Value>
     </Setting>
     <Setting Name="Secret" Type="System.String" Scope="Application">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">3Xk46MxtFcah7VDCQPphSmCg</Value>
     </Setting>
   </Settings>
 </SettingsFile>

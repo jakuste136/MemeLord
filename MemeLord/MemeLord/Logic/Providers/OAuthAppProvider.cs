@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using MemeLord.Logic.Authentication;
@@ -60,6 +61,21 @@ namespace MemeLord.Logic.Providers
                     context.SetError("invalid_grant", "Invalid credentials");
                 }
             });
+        }
+
+        public override Task ValidateClientRedirectUri(OAuthValidateClientRedirectUriContext context)
+        {
+            if (context.ClientId != null)
+            {
+                var expectedRootUri = new Uri(context.Request.Uri, "/login");
+
+                if (expectedRootUri.AbsoluteUri == context.RedirectUri)
+                {
+                    context.Validated();
+                }
+            }
+
+            return Task.FromResult<object>(null);
         }
 
         public override Task TokenEndpoint(OAuthTokenEndpointContext context)

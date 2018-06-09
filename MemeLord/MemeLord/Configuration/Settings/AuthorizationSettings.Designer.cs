@@ -34,7 +34,7 @@ namespace MemeLord.Configuration.Settings {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("kAqpK8Ah2BJ9uQGU")]
         public string Audience {
             get {
                 return ((string)(this["Audience"]));
@@ -43,7 +43,7 @@ namespace MemeLord.Configuration.Settings {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("3dNfaHaFtvtzdnww")]
         public string Issuer {
             get {
                 return ((string)(this["Issuer"]));
@@ -52,7 +52,7 @@ namespace MemeLord.Configuration.Settings {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("3Xk46MxtFcah7VDCQPphSmCg")]
         public string Secret {
             get {
                 return ((string)(this["Secret"]));

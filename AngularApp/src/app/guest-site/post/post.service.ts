@@ -10,12 +10,12 @@ const apiUrl = environment.apiUrl;
 @Injectable()
 export class PostService {
 
-    
-    constructor(private _authenticationService: AuthenticationService, private _http: HttpClient) {
-        
-     }
 
-    getPostLikeForUser(postId: number): Observable<IPostLike>{
-        return this._http.get<IPostLike>(`${apiUrl}/api/like?postId=${postId}`);
+    constructor(private _authenticationService: AuthenticationService, private _http: HttpClient) {
+
+    }
+
+    getPostLikeForUser(postId: number): Observable<IPostLike> {
+        return this._http.get<IPostLike>(`${apiUrl}/api/like/get-post?postId=${postId}`);
     }
 }

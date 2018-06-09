@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { ToastrService } from 'ngx-toastr';
+import { GetGoogleRedirectUriResponse } from '../../guest-site/dto/get-google-redirect-uri-respose';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -31,6 +32,17 @@ export class AuthenticationService {
         console.log(error.error.error_description)
         this.showError("Błąd logowania");
       });
+  }
+
+  googleLogin() {
+    this._http.get<GetGoogleRedirectUriResponse>(`${apiUrl}/api/externalLogin`)
+    .subscribe(response => {
+      document.location.href = response.uri;
+    }, error => {
+      console.log(error.error.error_description)
+      this.showError("Błąd logowania");
+    });
+    
   }
 
   showSuccess(message) {
