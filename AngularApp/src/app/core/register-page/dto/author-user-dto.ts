@@ -1,5 +1,5 @@
 export interface IAuthorUserDto {
-    userName: string;
+    username: string;
     email: string;
     sex: string;
     dateOfBirth: Date;
@@ -8,7 +8,7 @@ export interface IAuthorUserDto {
 }
 
 export class AuthorUserDto implements IAuthorUserDto {
-    userName: string;
+    username: string;
     email: string;
     sex: string;
     dateOfBirth: Date;

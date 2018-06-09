@@ -6,7 +6,7 @@ using System.Web.Http;
 
 namespace MemeLord.Controllers
 {
-    [RoutePrefix("api/follow")]
+    [RoutePrefix("api/following")]
     public class FollowingController: ApiController
     {
         private readonly IGetFollowingModule _getFollowingModule;
@@ -20,12 +20,18 @@ namespace MemeLord.Controllers
         }
 
         [HttpGet]
+        public FollowingDto Get()
+        {
+            return _getFollowingModule.GetFollowing("mateher");
+        }
+
+        [HttpGet, Authorize]
         public FollowingDto Get([FromUri] string authorName)
         {
             return _getFollowingModule.GetFollowing(authorName);
         }
 
-        [HttpPost]
+        [HttpPost, Authorize]
         public HttpResponseMessage Post([FromBody] FollowRequest request)
         {
             return _upsertFollowingModule.UpsertFollowing(request);

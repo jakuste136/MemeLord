@@ -13,6 +13,6 @@ export class UserInformationService {
     }
 
     getUserInfo(username: string): Observable<IAuthorUserDto> {
-        return this._http.get<IAuthorUserDto>(`${apiUrl}/${username}`);
+        return this._http.get<IAuthorUserDto>(`${apiUrl}/api/user/${username}`);
       }
 }

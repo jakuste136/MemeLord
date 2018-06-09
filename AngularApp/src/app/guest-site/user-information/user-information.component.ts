@@ -13,15 +13,15 @@ export class UserInformationComponent implements OnInit {
   userInfo: AuthorUserDto = new AuthorUserDto();
 
   constructor(private _userInformationService: UserInformationService) {   
-    this.userInfo.dateOfBirth = new Date(1996, 5, 31);
-      this.userInfo.userName = "BestUsernameEver";
-      this.userInfo.description = "I'm super cool guy. Never look back at explosions that I have just caused. Like to drink a lot and smoke weed every day. My biggest dream is that someday the whole world will be in peace.";
+    //this.userInfo.dateOfBirth = new Date(1996, 5, 31);
+      //this.userInfo.username = "BestUsernameEver";
+      //this.userInfo.description = "I'm super cool guy. Never look back at explosions that I have just caused. Like to drink a lot and smoke weed every day. My biggest dream is that someday the whole world will be in peace.";
 
    }
 
   ngOnInit() {
     this._userInformationService.getUserInfo(this.authorName).subscribe(data => {
-      //this.userInfo = data;
+      this.userInfo = data;
     });
     
   }

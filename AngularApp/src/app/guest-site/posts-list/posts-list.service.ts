@@ -17,7 +17,7 @@ export class PostsListService {
 
   getPosts(lastId: number, count: number, authorName: string): Observable<IGetPostsResponse> {
     if (!authorName)
-      return this._http.get<IGetPostsResponse>(`${apiUrl}/api/post?lastid=${lastId}&count=${count}`);
+      return this._http.get<IGetPostsResponse>(`${apiUrl}/api/post?lastid=${lastId}&count=${count}&authorName=`);
     else
       return this._http.get<IGetPostsResponse>(`${apiUrl}/api/post?lastid=${lastId}&count=${count}&authorName=${authorName}`);
   }
@@ -31,6 +31,7 @@ export class PostsListService {
   }
 
   getTopPosts(lastId: number, count: number): Observable<IGetPostsResponse> {
+    
     return this._http.get<IGetPostsResponse>(`${apiUrl}/api/post/top?lastid=${lastId}&count=${count}`);
   }
 

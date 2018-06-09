@@ -22,7 +22,7 @@ export class RegisterPageComponent implements OnInit {
     private _toastr: ToastrService,
     private _authenticationService: AuthenticationService) {
     this.registryForm = _fb.group({
-      'userName': [null, Validators.compose([
+      'username': [null, Validators.compose([
         Validators.required,
         Validators.maxLength(30)
       ])],
@@ -49,15 +49,15 @@ export class RegisterPageComponent implements OnInit {
     if (this.registryForm.valid) {
       this._registerUserService.registerUser(user).subscribe(response => {
         this._toastr.success("Pomyślnie założono konto");
-        this._authenticationService.login(user.userName, user.password);
+        this._authenticationService.login(user.username, user.password);
       });
       console.log("Adding user...");
     }
   }
 
   getUserNameErrorMessage() {
-    return this.registryForm.get('userName').hasError('required') ? 'Pole jest wymagane' :
-      this.registryForm.get('userName').hasError('maxlength') ? 'Maksymalna długość nazwy użytkownika wynosi 30 znaków' : '';
+    return this.registryForm.get('username').hasError('required') ? 'Pole jest wymagane' :
+      this.registryForm.get('username').hasError('maxlength') ? 'Maksymalna długość nazwy użytkownika wynosi 30 znaków' : '';
   }
 
   getEmailErrorMessage() {

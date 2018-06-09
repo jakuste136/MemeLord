@@ -120,7 +120,7 @@ namespace MemeLord.Logic.Repository
                     .ToList();
             }
         }
-        
+
         public List<Post> GetUserPosts(string username)
         {
             using (var db = CustomDatabaseFactory.GetConnection())
@@ -130,5 +130,7 @@ namespace MemeLord.Logic.Repository
                     .Where(p => p.Op.Username.Equals(username))
                     .Where(p => p.DeletionDate == null)
                     .ToList();
+            }
+        }
     }
 }

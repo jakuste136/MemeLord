@@ -1,5 +1,5 @@
 export interface IAddUserRequest {
-    userName: string;
+    username: string;
     password: string;
     email: string;
     sex: string;

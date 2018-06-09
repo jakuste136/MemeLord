@@ -4,6 +4,8 @@ import { HttpClient, HttpHeaderResponse, HttpHeaders } from '@angular/common/htt
 import { environment } from '../../../environments/environment';
 import { IGetFollowResponse } from '../dto/get-follow-response';
 import { AuthGuardService } from '../../core/services/auth-guard.service';
+import { AuthenticationService } from '../../core/services/authentication.service';
+import { AddFollowingRequest } from '../dto/add-following-request';
 
 const apiUrl = environment.apiUrl;
 
@@ -11,21 +13,39 @@ const apiUrl = environment.apiUrl;
 export class AuthorUserProfileService {
 
     constructor(private _http: HttpClient,
-        private _authGuardService: AuthGuardService) {
+        private _authGuardService: AuthGuardService,
+        private _authenticationService: AuthenticationService) {
     }
 
     getFollow(authorName: string): Observable<IGetFollowResponse> {
-        //if (this._authGuardService.canActivate())
-            return this._http.get<IGetFollowResponse>(`${apiUrl}/api/follow?authorName=${authorName}`);
+        if (this._authGuardService.canActivate())
+
+            var token = this._authenticationService.getToken().access_token;
+
+            const httpOptions = {
+                headers: new HttpHeaders()
+                    .set('Authorization', `bearer ${token}`)
+            };
+
+        return this._http.get<IGetFollowResponse>(`${apiUrl}/api/following?authorName=${authorName}`, httpOptions);
     }
 
     follow(authorName: string, follow: Boolean): Observable<any> {
-        // if (this._authGuardService.canActivate()) {
-            let body = new FormData();
-            body.append('authorName', authorName);
-            body.append('follow', follow.valueOf.toString());
+        if (this._authGuardService.canActivate()) {
 
-            return this._http.post(`${apiUrl}/api/follow`, body);
-        //}
+            
+            var token = this._authenticationService.getToken().access_token;
+
+            const httpOptions = {
+                headers: new HttpHeaders()
+                    .set('Authorization', `bearer ${token}`)
+            };
+
+            let body = new AddFollowingRequest;
+            body.authorName = authorName;
+            body.follow = follow;
+
+            return this._http.post(`${apiUrl}/api/following`, body, httpOptions);
+        }
     }
 }

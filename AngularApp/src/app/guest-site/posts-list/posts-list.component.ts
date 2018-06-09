@@ -38,9 +38,9 @@ export class PostsListComponent implements OnInit {
       this.posts = data.postsList;
       this.lastId = data.lastId;
 
-      this.posts.forEach(element => {
-        element.userName = "kurwamac";
-      });
+      // this.posts.forEach(element => {
+      //   element.username = "kurwamac";
+      // });
     });
   }
 

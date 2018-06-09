@@ -26,7 +26,7 @@ export class AuthorUserProfileComponent implements OnInit {
     this._authorUserProfileService.getFollow(this.authorName).subscribe(data => {
       if (!data)
         this.userFollowed = false;
-      this.userFollowed = data.active;
+      else this.userFollowed = data.active;
     })
   }
 
