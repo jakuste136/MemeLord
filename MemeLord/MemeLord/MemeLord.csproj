@@ -181,9 +181,11 @@
     </Compile>
     <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\FollowingController.cs" />
+    <Compile Include="DataObjects\Response\Reports\GetReportTypesReponse.cs" />
     <Compile Include="Controllers\LikeController.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="DataObjects\Dto\ReportDtos\ReportTypeDto.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DataObjects\Dto\FollowingDto.cs" />
     <Compile Include="DataObjects\Dto\ReportDtos\ReportedCommentDto.cs" />
@@ -201,6 +203,7 @@
     <Compile Include="DataObjects\Response\Reports\GetReportedPostsResponse.cs" />
     <Compile Include="DataObjects\Response\GetUserResponse.cs" />
     <Compile Include="DataObjects\Response\Posts\GetRandomPostResponse.cs" />
+    <Compile Include="DataObjects\Response\UserResponses\GetUserActivityResponse.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -222,6 +225,7 @@
     <Compile Include="Logic\Mapping\Reports\NewReportMapper.cs" />
     <Compile Include="Logic\Mapping\Reports\ReportedCommentMapper.cs" />
     <Compile Include="Logic\Mapping\Reports\ReportedPostMapper.cs" />
+    <Compile Include="Logic\Mapping\Reports\ReportTypeMapper.cs" />
     <Compile Include="Logic\Mapping\Users\AddUserRequestMapper.cs" />
     <Compile Include="Logic\Mapping\Users\GetUserResponseMapper.cs" />
     <Compile Include="Logic\Mapping\Users\UpdateUserRequestMapper.cs" />

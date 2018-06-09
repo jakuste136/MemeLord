@@ -5,6 +5,7 @@ import { AuthenticationService } from '../../core/services/authentication.servic
 import { MatDialogRef, MatDialog } from '@angular/material';
 import { AddPostModalComponent } from './add-post-modal/add-post-modal.component';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ReportModalComponent } from '../report-modal/report-modal.component';
 
 @Component({
   selector: 'app-posts-list',
@@ -12,7 +13,7 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./posts-list.component.scss']
 })
 export class PostsListComponent implements OnInit {
-  
+
   @Input() authorName: string;
   posts = new Array<IPostDto>();
   lastId: number;
@@ -55,7 +56,7 @@ export class PostsListComponent implements OnInit {
   }
 
   openPostDetails(post) {
-    this._router.navigate(['./post', post.id], {relativeTo: this._route})
+    this._router.navigate(['./post', post.id], { relativeTo: this._route })
   }
 
   openAddPostModal() {

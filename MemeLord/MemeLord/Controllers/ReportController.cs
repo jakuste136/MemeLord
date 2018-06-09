@@ -10,14 +10,12 @@ namespace MemeLord.Controllers
     [RoutePrefix("api/report")]
     public class ReportController : ApiController
     {
-        private readonly IReportRepository _reportRepository;
         private readonly IGetReportsModule _getReportsModule;
         private readonly IAddReportModule _addReportModule;
         private readonly ICheckIfUserHasReported _checkIfUserHasReported;
 
-        public ReportController(IReportRepository reportRepository, IGetReportsModule getReportsModule, IAddReportModule addReportModule, ICheckIfUserHasReported checkIfUserHasReported)
+        public ReportController(IGetReportsModule getReportsModule, IAddReportModule addReportModule, ICheckIfUserHasReported checkIfUserHasReported)
         {
-            _reportRepository = reportRepository;
             _getReportsModule = getReportsModule;
             _addReportModule = addReportModule;
             _checkIfUserHasReported = checkIfUserHasReported;
@@ -49,6 +47,13 @@ namespace MemeLord.Controllers
         public bool CheckIfCommentAlreadyReported([FromUri] int commentId)
         {
             return _checkIfUserHasReported.Comment(commentId);
+        }
+
+        [Route("types")]
+        [HttpGet]
+        public GetReportTypesReponse GetReportTypes()
+        {
+            return _getReportsModule.GetReportTypes();
         }
 
         [HttpPost]

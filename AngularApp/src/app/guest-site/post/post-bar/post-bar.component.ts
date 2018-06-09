@@ -14,6 +14,7 @@ export class PostBarComponent implements OnInit {
   @Input() postId: number;
 
   @Output() commentsToggled: EventEmitter<any> = new EventEmitter();
+  @Output() reportButtonClicked: EventEmitter<any> = new EventEmitter();
   
   constructor() { }
 
@@ -24,4 +25,7 @@ export class PostBarComponent implements OnInit {
     this.commentsToggled.emit();
   }
 
+  onReportButtonClicked() {
+    this.reportButtonClicked.emit();
+  }
 }

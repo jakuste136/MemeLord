@@ -5,7 +5,7 @@
   </mat-card-header>
   <img mat-card-image [src]="path" (click)="postClicked()">
   <mat-card-footer>
-    <app-post-bar [rating]="rating" [likeValue]="likeValue" [index]="index" [postId]="postId" (commentsToggled)="toggleComments()">
+    <app-post-bar [rating]="rating" [likeValue]="likeValue" [index]="index" [postId]="postId" (commentsToggled)="toggleComments()" (reportButtonClicked)="onReportButtonClicked()">
     </app-post-bar>
   </mat-card-footer> 
 </mat-card>

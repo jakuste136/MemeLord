@@ -31,10 +31,10 @@ import { CommentComponent } from './posts-list/post-details/comment/comment.comp
 import { ReportButtonComponent } from './post/post-bar/report-button/report-button.component';
 import { AuthorUserProfileComponent } from './author-user-profile/author-user-profile.component';
 import { UserInformationComponent } from './user-information/user-information.component';
+import { ReportModalComponent } from './report-modal/report-modal.component';
+import { ReportService } from './report-modal/report.service';
 import { UserInformationService } from './user-information/user-information.service';
 import { AuthorUserProfileService } from './author-user-profile/author-user-profile.service';
-
-
 
 @NgModule({
   imports: [
@@ -65,6 +65,7 @@ import { AuthorUserProfileService } from './author-user-profile/author-user-prof
     CommentComponent,
     ReportButtonComponent,
     AuthorUserProfileComponent,
+    ReportModalComponent,
     UserInformationComponent],
   providers: [
     UserDetailsService,
@@ -75,10 +76,12 @@ import { AuthorUserProfileService } from './author-user-profile/author-user-prof
     PostService,
     BestCommentsService,
     UserInformationService,
+    ReportService,
     AuthorUserProfileService
   ],  
   entryComponents: [
-    AddPostModalComponent
+    AddPostModalComponent,
+    ReportModalComponent
   ]
 })
 export class GuestSiteModule { }
