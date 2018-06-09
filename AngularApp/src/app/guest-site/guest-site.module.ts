@@ -29,6 +29,10 @@ import { BestCommentsComponent } from './post/best-comments/best-comments.compon
 import { BestCommentsService } from './post/best-comments/best-comments.service';
 import { CommentComponent } from './posts-list/post-details/comment/comment.component';
 import { ReportButtonComponent } from './post/post-bar/report-button/report-button.component';
+import { AuthorUserProfileComponent } from './author-user-profile/author-user-profile.component';
+import { UserInformationComponent } from './user-information/user-information.component';
+import { UserInformationService } from './user-information/user-information.service';
+import { AuthorUserProfileService } from './author-user-profile/author-user-profile.service';
 
 
 
@@ -59,7 +63,9 @@ import { ReportButtonComponent } from './post/post-bar/report-button/report-butt
     CommentButtonComponent,
     BestCommentsComponent,
     CommentComponent,
-    ReportButtonComponent],
+    ReportButtonComponent,
+    AuthorUserProfileComponent,
+    UserInformationComponent],
   providers: [
     UserDetailsService,
     PostsListService,
@@ -67,7 +73,9 @@ import { ReportButtonComponent } from './post/post-bar/report-button/report-butt
     CommentService,
     RatingsService,
     PostService,
-    BestCommentsService
+    BestCommentsService,
+    UserInformationService,
+    AuthorUserProfileService
   ],  
   entryComponents: [
     AddPostModalComponent

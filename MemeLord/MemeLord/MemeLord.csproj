@@ -180,15 +180,18 @@
       <DependentUpon>ReportingSettings.settings</DependentUpon>
     </Compile>
     <Compile Include="Controllers\CommentController.cs" />
+    <Compile Include="Controllers\FollowingController.cs" />
     <Compile Include="Controllers\LikeController.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="DataObjects\Dto\FollowingDto.cs" />
     <Compile Include="DataObjects\Dto\ReportDtos\ReportedCommentDto.cs" />
     <Compile Include="DataObjects\Dto\ReportDtos\ReportedPostDto.cs" />
     <Compile Include="DataObjects\Request\AddCommentRequest.cs" />
     <Compile Include="DataObjects\Request\AddLikeRequest.cs" />
     <Compile Include="DataObjects\Request\AddUserRequest.cs" />
+    <Compile Include="DataObjects\Request\FollowRequest.cs" />
     <Compile Include="DataObjects\Request\UpdatePostRatingRequest.cs" />
     <Compile Include="DataObjects\Request\Reports\AddReportRequest.cs" />
     <Compile Include="DataObjects\Request\UpdateUserRequest.cs" />
@@ -212,6 +215,7 @@
     <Compile Include="Logic\Mapping\CommentMapping\AnswerCommentMapper.cs" />
     <Compile Include="Logic\Mapping\CommentMapping\MasterCommentMapper.cs" />
     <Compile Include="Logic\Mapping\CommentMapping\NewCommentMapper.cs" />
+    <Compile Include="Logic\Mapping\FollowingMapper.cs" />
     <Compile Include="Logic\Mapping\PostMapper.cs" />
     <Compile Include="Logic\Extensions\OwinContextExtentions.cs" />
     <Compile Include="Logic\Mapping\Mapper.cs" />
@@ -223,6 +227,8 @@
     <Compile Include="Logic\Mapping\Users\UpdateUserRequestMapper.cs" />
     <Compile Include="Logic\Mapping\Users\UserMapper.cs" />
     <Compile Include="Logic\Modules\Comments\UpdateCommentModule.cs" />
+    <Compile Include="Logic\Modules\Followings\GetFollowingModule.cs" />
+    <Compile Include="Logic\Modules\Followings\UpsertFollowingModule.cs" />
     <Compile Include="Logic\Modules\Likes\LikeAddModule.cs" />
     <Compile Include="Logic\Modules\Likes\LikeGetModule.cs" />
     <Compile Include="Logic\Modules\Posts\AddPostModule.cs" />
@@ -241,6 +247,7 @@
     <Compile Include="Logic\Providers\OAuthAppProvider.cs" />
     <Compile Include="Logic\Modules\Comments\GetCommentsModule.cs" />
     <Compile Include="Logic\Modules\Posts\GetPostsModule.cs" />
+    <Compile Include="Logic\Repository\FollowingRepository.cs" />
     <Compile Include="Logic\Repository\LikeRepository.cs" />
     <Compile Include="Logic\Repository\ReportRepository.cs" />
     <Compile Include="Logic\Repository\UserRepository.cs" />

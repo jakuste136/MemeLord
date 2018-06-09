@@ -9,6 +9,7 @@ namespace MemeLord.Logic.Repository
     {
         Post GetPostById(int id);
         List<Post> GetPosts(int lastId, int count);
+        List<Post> GetUserPosts(int lastId, int count, string authorName);
         List<Post> GetTopPosts(int lastId, int count);
         void AddPost(Post post);
         Post GetRandomPost();
@@ -101,6 +102,21 @@ namespace MemeLord.Logic.Repository
                     .Where(c => c.Op.Id == userId || userId == 0)
                     .Where(c => c.DeletionDate != null)
                     .Count();
+            }
+        }
+
+        public List<Post> GetUserPosts(int lastId, int count, string authorName)
+        {
+            using (var db = CustomDatabaseFactory.GetConnection())
+            {
+                return db.Query<Post>()
+                    .Include(p => p.Op)
+                    .OrderByDescending(p => p.CreationDate)
+                    .Where(p => p.Op.Username.Equals(authorName))
+                    .Where(p => p.Id < lastId || lastId == 0)
+                    .Where(p => p.DeletionDate == null)
+                    .Limit(count)
+                    .ToList();
             }
         }
     }

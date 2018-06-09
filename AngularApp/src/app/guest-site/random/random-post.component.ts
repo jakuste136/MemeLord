@@ -26,6 +26,8 @@ export class RandomPostComponent implements OnInit {
   getRandomPost() {
     this._postService.getRandomPost().subscribe(response => {
       this.post = response.post;
+
+      this.post.userName = "kurwamac";
     });
   }
 

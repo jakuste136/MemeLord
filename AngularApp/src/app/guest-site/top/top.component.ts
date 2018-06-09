@@ -29,7 +29,7 @@ export class TopComponent implements OnInit {
   }
 
   onScroll() {
-    this._postsListService.getPosts(this.lastId, 10).subscribe(data => {
+    this._postsListService.getTopPosts(this.lastId, 10).subscribe(data => {
       this.appendPosts(data.postsList);
       this.lastId = data.lastId;
     });

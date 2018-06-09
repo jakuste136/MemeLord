@@ -15,8 +15,11 @@ export class PostsListService {
   constructor(private _http: HttpClient) {
   }
 
-  getPosts(lastId: number, count: number): Observable<IGetPostsResponse> {
-    return this._http.get<IGetPostsResponse>(`${apiUrl}/api/post?lastid=${lastId}&count=${count}`);
+  getPosts(lastId: number, count: number, authorName: string): Observable<IGetPostsResponse> {
+    if (!authorName)
+      return this._http.get<IGetPostsResponse>(`${apiUrl}/api/post?lastid=${lastId}&count=${count}`);
+    else
+      return this._http.get<IGetPostsResponse>(`${apiUrl}/api/post?lastid=${lastId}&count=${count}&authorName=${authorName}`);
   }
 
   getRandomPost(): Observable<IGetRandomPostResponse> {
@@ -26,12 +29,12 @@ export class PostsListService {
   getPost(id): Observable<IPostDto> {
     return this._http.get<IPostDto>(`${apiUrl}/api/post/${id}`);
   }
-    
-  getTopPosts(lastId: number, count: number): Observable<IGetPostsResponse>{
+
+  getTopPosts(lastId: number, count: number): Observable<IGetPostsResponse> {
     return this._http.get<IGetPostsResponse>(`${apiUrl}/api/post/top?lastid=${lastId}&count=${count}`);
   }
 
-  updatePostRating(postId: number, rating: number): Promise<any>{
+  updatePostRating(postId: number, rating: number): Promise<any> {
     return this._http.put(`${apiUrl}/api/post/update-rating`, new UpdatePostRequest(postId, rating), {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'

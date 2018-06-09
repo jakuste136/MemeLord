@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { IPostDto } from '../dto/post-dto';
 import { PostsListService } from './posts-list.service';
 import { AuthenticationService } from '../../core/services/authentication.service';
@@ -13,6 +13,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class PostsListComponent implements OnInit {
   
+  @Input() authorName: string;
   posts = new Array<IPostDto>();
   lastId: number;
 
@@ -23,19 +24,22 @@ export class PostsListComponent implements OnInit {
     private _dialog: MatDialog,
     private _router: Router,
     private _route: ActivatedRoute) {
-
-    this.refreshPosts();
   }
 
   ngOnInit() {
+    this.refreshPosts();
   }
 
   refreshPosts() {
     this.lastId = 0;
 
-    this._postsListService.getPosts(this.lastId, 10).subscribe(data => {
+    this._postsListService.getPosts(this.lastId, 10, this.authorName).subscribe(data => {
       this.posts = data.postsList;
       this.lastId = data.lastId;
+
+      this.posts.forEach(element => {
+        element.userName = "kurwamac";
+      });
     });
   }
 
@@ -44,7 +48,7 @@ export class PostsListComponent implements OnInit {
   }
 
   onScroll() {
-    this._postsListService.getPosts(this.lastId, 10).subscribe(data => {
+    this._postsListService.getPosts(this.lastId, 10, this.authorName).subscribe(data => {
       this.appendPosts(data.postsList);
       this.lastId = data.lastId;
     });

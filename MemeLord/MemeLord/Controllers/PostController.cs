@@ -12,7 +12,6 @@ namespace MemeLord.Controllers
     [RoutePrefix("api/post")]
     public class PostController : ApiController
     {
-        private readonly IPostRepository _postRepository;
         private readonly IGetPostsModule _getPostsModule;
         private readonly IAddPostModule _addPostModule;
         private readonly IGetRandomPostModule _getRandomPostModule;
@@ -20,15 +19,13 @@ namespace MemeLord.Controllers
         private readonly IUpdatePostModule _updatePostModule;
         private readonly IAutoBanModule _autoBanModule;
 
-        public PostController(IPostRepository postRepository, 
-            IGetPostsModule getPostsModule, 
-            IAddPostModule addPostModule, 
-            IGetRandomPostModule getRandomPostModule, 
+        public PostController(IGetPostsModule getPostsModule,
+            IAddPostModule addPostModule,
+            IGetRandomPostModule getRandomPostModule,
             IPostUpdateModule postUpdateModule,
             IUpdatePostModule updatePostModule,
             IAutoBanModule autoBanModule)
         {
-            _postRepository = postRepository;
             _getPostsModule = getPostsModule;
             _addPostModule = addPostModule;
             _postUpdateModule = postUpdateModule;
@@ -51,9 +48,12 @@ namespace MemeLord.Controllers
         }
 
         [HttpGet]
-        public GetPostsResponse GetManyPosts([FromUri] int lastId, [FromUri] int count)
+        public GetPostsResponse GetManyPosts([FromUri] int lastId, [FromUri] int count, [FromUri] string authorName)
         {
-            return _getPostsModule.GetPosts(lastId, count);
+            if (string.IsNullOrEmpty(authorName))
+                return _getPostsModule.GetPosts(lastId, count);
+            else
+                return _getPostsModule.GetUserPosts(lastId, count, authorName);
         }
 
         [HttpPost]
@@ -70,7 +70,7 @@ namespace MemeLord.Controllers
             //check if user should be banned
             _autoBanModule.BanIfDeserveByPostId(id);
         }
-        
+
         [Route("update-rating")]
         [HttpPut]
         public HttpResponseMessage UpdatePostRating([FromBody] UpdatePostRatingRequest request)

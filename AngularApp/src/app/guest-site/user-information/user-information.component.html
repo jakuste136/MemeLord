@@ -1,0 +1,12 @@
+<mat-card>
+    <mat-card-header>
+        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+        <mat-card-title>
+            <h2>{{userInfo.userName}}</h2>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-subtitle>Date of birth: {{userInfo.dateOfBirth | date: "d MMMM y"}}</mat-card-subtitle>
+    <mat-card-content>
+        <p>{{userInfo.description}}</p>
+    </mat-card-content>
+</mat-card>
