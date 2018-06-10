@@ -17,9 +17,9 @@ export class AuthorUserProfileService {
         private _authenticationService: AuthenticationService) {
     }
 
-    getFollow(authorName: string): Observable<IGetFollowResponse> {
-        if (this._authGuardService.canActivate())
-
+    getFollow(authorName: string): Observable<any> {
+        if (this._authGuardService.canActivate(false))
+        {
             var token = this._authenticationService.getToken().access_token;
 
             const httpOptions = {
@@ -27,11 +27,13 @@ export class AuthorUserProfileService {
                     .set('Authorization', `bearer ${token}`)
             };
 
-        return this._http.get<IGetFollowResponse>(`${apiUrl}/api/following?authorName=${authorName}`, httpOptions);
+            return this._http.get<IGetFollowResponse>(`${apiUrl}/api/following?authorName=${authorName}`, httpOptions);
+        }
+        return null
     }
 
     follow(authorName: string, follow: Boolean): Observable<any> {
-        if (this._authGuardService.canActivate()) {
+        if (this._authGuardService.canActivate(true)) {
 
             
             var token = this._authenticationService.getToken().access_token;

@@ -37,7 +37,7 @@ export class PostComponent implements OnInit, OnChanges {
   private bestComments: BestCommentsComponent;
   areBestCommentsVisible = false;
 
-  constructor(private _authGuardService: AuthGuardService, 
+  constructor(private _authGuardService: AuthGuardService,
     private _bestCommentsService: BestCommentsService,
     private _postService: PostService,
     private _router: Router,
@@ -86,10 +86,13 @@ export class PostComponent implements OnInit, OnChanges {
   }
 
   goToAuthorUser() {
-    if (this._router.url.includes("/guest"))
-      this._router.navigate(['./guest/author', this.username]);
-    else
-      this._router.navigate(['./user/author', this.username]);
+    if (this._authGuardService.canActivate(true)) {
+      if (this._router.url.includes("/guest"))
+        this._router.navigate(['./guest/author', this.username]);
+      else
+        this._router.navigate(['./user/author', this.username]);
+    }
+
   }
 
 }

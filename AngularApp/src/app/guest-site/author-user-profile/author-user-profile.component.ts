@@ -2,6 +2,7 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuthorUserProfileService } from './author-user-profile.service';
 import { ToastrService } from 'ngx-toastr';
+import { AuthGuardService } from '../../core/services/auth-guard.service';
 
 
 @Component({
@@ -17,17 +18,24 @@ export class AuthorUserProfileComponent implements OnInit {
   userFollowed: Boolean;
   displayEvent: EventEmitter<any> = new EventEmitter();
 
-  constructor(private _route: ActivatedRoute,
+  constructor(
+    private _route: ActivatedRoute,
     private _authorUserProfileService: AuthorUserProfileService,
-    private _toastr: ToastrService) {
+    private _toastr: ToastrService,
+    private _authGuardService: AuthGuardService
+  ) {
     this.authorName = this._route.snapshot.paramMap.get('authorName');
     this.show = false;
     this.delayedShow = false;
-    this._authorUserProfileService.getFollow(this.authorName).subscribe(data => {
-      if (!data)
-        this.userFollowed = false;
-      else this.userFollowed = data.active;
-    })
+    if (this._authGuardService.canActivate(false)) 
+    {
+      this._authorUserProfileService.getFollow(this.authorName).subscribe(data => {
+        if (!data)
+          this.userFollowed = false;
+        else this.userFollowed = data.active;
+      })
+    }
+    else this.userFollowed = false;
   }
 
   ngOnInit() {
