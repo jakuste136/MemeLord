@@ -6,6 +6,7 @@ import { MatDialogRef, MatDialog } from '@angular/material';
 import { AddPostModalComponent } from './add-post-modal/add-post-modal.component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ReportModalComponent } from '../report-modal/report-modal.component';
+import { AuthGuardService } from '../../core/services/auth-guard.service';
 
 @Component({
   selector: 'app-posts-list',
@@ -21,7 +22,7 @@ export class PostsListComponent implements OnInit {
   addPostModalRef: MatDialogRef<AddPostModalComponent>;
 
   constructor(private _postsListService: PostsListService,
-    private _authenticationService: AuthenticationService,
+    private _authGuardService: AuthGuardService,
     private _dialog: MatDialog,
     private _router: Router,
     private _route: ActivatedRoute) {
@@ -70,6 +71,6 @@ export class PostsListComponent implements OnInit {
   }
 
   isAuthenticated() {
-    return this._authenticationService.getToken() != null;
+    return this._authGuardService.canActivate(false);
   }
 }

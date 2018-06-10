@@ -1,13 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { PostsListService } from './guest-site/posts-list/posts-list.service';
 import { MaterialModule } from './shared/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material';
+import { JwtInterceptor } from './core/services/jwt.inerceptor';
 import * as $ from 'jquery';
-
 
 @NgModule({
   declarations: [
@@ -18,9 +19,16 @@ import * as $ from 'jquery';
     CoreModule,
     MaterialModule,
     MatIconModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

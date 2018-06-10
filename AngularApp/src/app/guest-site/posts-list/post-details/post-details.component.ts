@@ -5,6 +5,7 @@ import { UserDetailsService } from '../../../user-site/user-profile-site/user-de
 import { CommentService } from './comment.service';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from '../../../core/services/authentication.service';
+import { AuthGuardService } from '../../../core/services/auth-guard.service';
 
 @Component({
   selector: 'app-post-details',
@@ -25,7 +26,7 @@ export class PostDetailsComponent implements OnInit {
     private _userDetailsService: UserDetailsService,
     private _commentService: CommentService,
     private _toastr: ToastrService,
-    private _authenticationService: AuthenticationService) {
+    private _authGuardService: AuthGuardService) {
 
     var id = _route.snapshot.params.id;
     this.comment = {
@@ -39,7 +40,7 @@ export class PostDetailsComponent implements OnInit {
       this.initializeComments();
     })
 
-    if (_authenticationService.getToken())
+    if (_authGuardService.canActivate(true))
       _userDetailsService.getUserDetails().subscribe(response => {
         this.user = response;
       })

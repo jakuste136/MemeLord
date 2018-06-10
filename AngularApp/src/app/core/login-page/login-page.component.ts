@@ -36,6 +36,11 @@ export class LoginPageComponent implements OnInit {
     }
   }
 
+  googleLogin() {
+    this._authenticationService.googleLogin();
+    this._toastr.info("Logged with google");
+  }
+
   getLoginErrorMessage() {
     return this.registryForm.get('login').hasError('required') ? 'Pole jest wymagane' :
       this.registryForm.get('login').hasError('maxlength') ? 'Maksymalna długość nazwy użytkownika wynosi 30 znaków' : '';

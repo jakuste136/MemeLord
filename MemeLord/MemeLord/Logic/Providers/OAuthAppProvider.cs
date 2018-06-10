@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using MemeLord.Logic.Authentication;
@@ -38,19 +39,18 @@ namespace MemeLord.Logic.Providers
                 var user = _userRepository.GetUserByCredentials(context.UserName);
                 if (user != null && _hashManager.Verify(context.Password, user.Hash))
                 {
-                    // TODO Mateusz: ROLE PLACEHOLDER
-                    const string role = "User";
+                    var role = _userRepository.GetUserRoleByUserId(user.Id);
 
                     var claims = new List<Claim>
-                        {
-                            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                            new Claim(ClaimTypes.Name, user.Username),
-                            new Claim(ClaimTypes.Role, role),
-                        };
+                    {
+                        new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                        new Claim(ClaimTypes.Name, user.Username),
+                        new Claim(ClaimTypes.Role, role?.Name ?? ""),
+                    };
 
                     var authenticationProperties = new AuthenticationProperties(new Dictionary<string, string>
                     {
-                        { "role", role },
+                        { "role", role?.Name ?? "" },
                     });
 
                     var oAutIdentity = new ClaimsIdentity(claims, Startup.OAuthOptions.AuthenticationType);
@@ -61,6 +61,21 @@ namespace MemeLord.Logic.Providers
                     context.SetError("invalid_grant", "Invalid credentials");
                 }
             });
+        }
+
+        public override Task ValidateClientRedirectUri(OAuthValidateClientRedirectUriContext context)
+        {
+            if (context.ClientId != null)
+            {
+                var expectedRootUri = new Uri(context.Request.Uri, "/login");
+
+                if (expectedRootUri.AbsoluteUri == context.RedirectUri)
+                {
+                    context.Validated();
+                }
+            }
+
+            return Task.FromResult<object>(null);
         }
 
         public override Task TokenEndpoint(OAuthTokenEndpointContext context)

@@ -33,7 +33,7 @@ export class RatingsBarComponent implements AfterViewInit, OnChanges {
     }
 
   addOrRemoveLike(event: Event, requestedLikeValue: number) {
-    if(this._authGuardService.canActivate()){
+    if(this._authGuardService.canActivate(true)){
       if (this.likeValue == 1 || this.likeValue == -1) {
         this.changeLikeButtonToDefaultStyle(this.likeValue, requestedLikeValue, this.index.toString());
       }

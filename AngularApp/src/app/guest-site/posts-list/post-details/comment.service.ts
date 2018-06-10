@@ -13,24 +13,12 @@ export class CommentService {
 
     addComment(comment): Observable<any> {
 
-        var token = this._authenticationService.getToken().access_token;
 
-        const httpOptions = {
-            headers: new HttpHeaders()
-                .set('Authorization', `bearer ${token}`)
-        };
-
-        return this._http.post<any>(`${apiUrl}/api/comment`, comment, httpOptions);
+        return this._http.post<any>(`${apiUrl}/api/comment`, comment);
     }
 
     getComments(postId, lastId, count): Observable<any> {
-        var token = this._authenticationService.getToken().access_token;
 
-        const httpOptions = {
-            headers: new HttpHeaders()
-                .set('Authorization', `bearer ${token}`)
-        };
-
-        return this._http.get<any>(`${apiUrl}/api/comment?postId=${postId}&lastId=${lastId}&count=${count}`, httpOptions);
+        return this._http.get<any>(`${apiUrl}/api/comment?postId=${postId}&lastId=${lastId}&count=${count}`);
     }
 }

@@ -22,21 +22,21 @@ namespace MemeLord.Controllers
         }
 
         [Route("posts")]
-        [HttpGet]
+        [HttpGet, Authorize(Roles = "Admin")]
         public GetReportedPostsResponse GetReportedPosts([FromUri] int lastId, [FromUri] int count)
         {
             return _getReportsModule.GetReportedPosts(lastId, count);
         }
 
         [Route("check-post")]
-        [HttpGet]
+        [HttpGet, Authorize(Roles = "Admin")]
         public bool CheckIfPostAlreadyReported([FromUri] int postId)
         {
             return _checkIfUserHasReported.Post(postId);
         }
 
         [Route("comments")]
-        [HttpGet]
+        [HttpGet, Authorize(Roles = "Admin")]
         public GetReportedCommentsResponse GetReportedComments([FromUri] int lastId, [FromUri] int count)
         {
             return _getReportsModule.GetReportedComments(lastId, count);
@@ -56,7 +56,7 @@ namespace MemeLord.Controllers
             return _getReportsModule.GetReportTypes();
         }
 
-        [HttpPost]
+        [HttpPost, Authorize(Roles = "Member, Admin")]
         public void AddReport(AddReportRequest request)
         {
             _addReportModule.AddReport(request);

@@ -43,7 +43,7 @@ namespace MemeLord.Controllers
             return _getCommentsModule.GetBestComments(postId, count);
         }
 
-        [HttpPost]
+        [HttpPost, Authorize(Roles = "Member, Admin")]
         public AddCommentResponse AddComment(AddCommentRequest addCommentRequest)
         {
             return new AddCommentResponse
@@ -53,7 +53,7 @@ namespace MemeLord.Controllers
         }
 
         [Route("delete")]
-        [HttpGet]
+        [HttpGet, Authorize(Roles = "Member, Admin")]
         public void DeleteComment([FromUri] int id)
         {
             _updateCommentModule.DeleteComment(id);
