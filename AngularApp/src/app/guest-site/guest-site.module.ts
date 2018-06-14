@@ -16,6 +16,7 @@ import { CoreModule } from '../core/core.module';
 import { TopComponent } from './top/top.component';
 import { RandomPostComponent } from './random/random-post.component';
 import { RatingsBarComponent } from './post/post-bar/ratings-bar/ratings-bar.component';
+import { CommentRatingBarComponent } from './posts-list/post-details/comment/comment-rating-bar/comment-rating-bar.component'
 import { RatingsService } from './post/post-bar/ratings-bar/ratings-bar.service';
 import { AddPostModalComponent } from './posts-list/add-post-modal/add-post-modal.component';
 import { AddPostService } from './posts-list/add-post-modal/add-post.service';
@@ -28,6 +29,7 @@ import { PostService } from './post/post.service';
 import { BestCommentsComponent } from './post/best-comments/best-comments.component';
 import { BestCommentsService } from './post/best-comments/best-comments.service';
 import { CommentComponent } from './posts-list/post-details/comment/comment.component';
+import { AnswerCommentComponent } from './posts-list/post-details/comment/answer-comment/answer-comment.component';
 import { JwtInterceptor } from '../core/services/jwt.inerceptor';
 import { ReportButtonComponent } from './post/post-bar/report-button/report-button.component';
 import { AuthorUserProfileComponent } from './author-user-profile/author-user-profile.component';
@@ -60,10 +62,12 @@ import { AuthorUserProfileService } from './author-user-profile/author-user-prof
     AddPostModalComponent,
     PostDetailsComponent,
     RatingsBarComponent,
+    CommentRatingBarComponent,
     PostBarComponent,
     CommentButtonComponent,
     BestCommentsComponent,
     CommentComponent,
+    AnswerCommentComponent,
     ReportButtonComponent,
     AuthorUserProfileComponent,
     ReportModalComponent,

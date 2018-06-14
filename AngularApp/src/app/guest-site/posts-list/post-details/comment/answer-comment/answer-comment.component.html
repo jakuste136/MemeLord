@@ -1,0 +1,11 @@
+<div class="wrapper">
+    <img [src]="answerComment.avatar">
+    <div class="text-wrapper">
+      <p class="comment-header">{{answerComment.username}}</p>
+      <p>{{answerComment.text}}</p>
+      <button mat-mini-fab color="primary" (click)="answer()">
+        <mat-icon>comment</mat-icon>
+      </button>
+      <app-comment-rating-bar [rating]="rating" [commentId]="commentId"></app-comment-rating-bar>
+    </div>
+</div>

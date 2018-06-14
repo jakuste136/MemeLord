@@ -2,7 +2,7 @@ import { Component, Input, AfterContentChecked, AfterViewInit, SimpleChanges, On
 import { RatingsService } from './ratings-bar.service';
 import { AuthGuardService } from '../../../../core/services/auth-guard.service';
 import { PostsListService } from '../../../posts-list/posts-list.service';
-import { PostLike } from '../../../dto/like-dto';
+import { ILike } from '../../../dto/like-dto';
 
 @Component({
   selector: 'app-ratings-bar',
@@ -41,7 +41,7 @@ export class RatingsBarComponent implements AfterViewInit, OnChanges {
         this.changeLikeButtonToActiveStyle(requestedLikeValue, this.index.toString());
         this.likeValue = requestedLikeValue;
       }
-      this._ratingsService.addOrRemoveLike(new PostLike(this.likeValue, this.postId, null))
+      this._ratingsService.addOrRemoveLike(new ILike(this.likeValue, this.postId, null))
       this._postsListService.updatePostRating(this.postId, this.rating);
     }
   }

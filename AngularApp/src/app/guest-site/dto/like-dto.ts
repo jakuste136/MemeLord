@@ -1,10 +1,10 @@
-export interface IPostLike{
+export interface ILike{
     value: number,
     postId: number,
     commentId: number
 }
 
-export class PostLike implements IPostLike {
+export class ILike implements ILike {
     value: number;
     postId: number;
     commentId: number;

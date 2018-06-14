@@ -10,5 +10,5 @@
   </button>
 </div>
 <div infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="1000" (scrolled)="onScroll()">
-    <app-comment *ngFor="let comment of comments" [comment]="comment"></app-comment>
+    <app-comment *ngFor="let comment of comments" [comment]="comment" [rating]="comment.rating" [postId]="post.id"></app-comment>
 </div>

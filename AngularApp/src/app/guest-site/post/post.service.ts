@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Rx";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { IPostLike } from "../dto/like-dto";
+import { ILike } from "../dto/like-dto";
 import { environment } from "../../../environments/environment";
 import { AuthenticationService } from "../../core/services/authentication.service";
 
@@ -15,7 +15,7 @@ export class PostService {
 
     }
 
-    getPostLikeForUser(postId: number): Observable<IPostLike> {
-        return this._http.get<IPostLike>(`${apiUrl}/api/like/get-post?postId=${postId}`);
+    getPostLikeForUser(postId: number): Observable<ILike> {
+        return this._http.get<ILike>(`${apiUrl}/api/like/get-post?postId=${postId}`);
     }
 }

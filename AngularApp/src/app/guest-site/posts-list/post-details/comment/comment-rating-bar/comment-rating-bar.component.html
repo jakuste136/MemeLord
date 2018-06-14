@@ -1,0 +1,9 @@
+<section>
+  <button id="comment-minus-button-{{index}}" mat-mini-fab color="primary" (click)="addOrRemoveLike($event, -1)">
+      <mat-icon id="comment-minus-icon-{{index}}">remove</mat-icon>
+  </button>
+  <button mat-mini-fab color="primary" readonly>{{rating}}</button>
+  <button id="comment-plus-button-{{index}}" mat-mini-fab color="primary" (click)="addOrRemoveLike($event, 1)">
+      <mat-icon id="comment-plus-icon-{{index}}">add</mat-icon>
+  </button>
+</section>

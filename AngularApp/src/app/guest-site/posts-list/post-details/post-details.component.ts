@@ -6,6 +6,7 @@ import { CommentService } from './comment.service';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from '../../../core/services/authentication.service';
 import { AuthGuardService } from '../../../core/services/auth-guard.service';
+import { IMasterCommentDto } from "../../dto/master-comment-dto";
 
 @Component({
   selector: 'app-post-details',
@@ -18,8 +19,8 @@ export class PostDetailsComponent implements OnInit {
   user;
   comment;
 
-  comments;
-  lastCommentId;
+  comments:Array<IMasterCommentDto>;
+  lastCommentId: number;
 
   constructor(private _route: ActivatedRoute,
     private _postService: PostsListService,
@@ -33,7 +34,7 @@ export class PostDetailsComponent implements OnInit {
       postId: id
     };
 
-    this.comments = [];
+    //this.comments = [];
 
     _postService.getPost(id).subscribe(response => {
       this.post = response;
@@ -62,7 +63,7 @@ export class PostDetailsComponent implements OnInit {
     })
   }
 
-  private appendComments(comments) {
+  private appendComments(comments: Array<IMasterCommentDto>) {
     this.comments = this.comments.concat(comments);
   }
 

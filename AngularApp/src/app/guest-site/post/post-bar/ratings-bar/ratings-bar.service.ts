@@ -4,7 +4,7 @@ import { Headers, RequestOptions, Http, Response } from "@angular/http";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "../../../../../environments/environment";
 import { AuthenticationService } from "../../../../core/services/authentication.service";
-import { IPostLike } from "../../../dto/like-dto";
+import { ILike } from "../../../dto/like-dto";
 
 const apiUrl = environment.apiUrl;
 
@@ -13,7 +13,7 @@ export class RatingsService{
 
     constructor(private _http: HttpClient, private _authenticationService: AuthenticationService){ }
 
-    addOrRemoveLike(postLike: IPostLike): Promise<any>{
+    addOrRemoveLike(postLike: ILike): Promise<any>{
 
         const httpOptions = {
             headers: new HttpHeaders()

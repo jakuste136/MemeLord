@@ -7,5 +7,16 @@
     </div>
     <p>{{_comment.text}}</p>
     <p class="report-button" (click)="reportComment()">Zgłoś</p>
+    <button mat-mini-fab color="primary" (click)="toggleAnswerArea()">
+      <mat-icon>comment</mat-icon>
+    </button>
+    <app-comment-rating-bar [rating]="rating" [commentId]="_comment.id"></app-comment-rating-bar>
+  </div>
+  <app-answer-comment *ngFor="let answerComment of answerComments" [answerComment]="answerComment" (onAnswer)="toggleAnswerArea()"></app-answer-comment>
+  <div [hidden]="!isAnswerAreaVisible" >
+  <textarea matInput [(ngModel)]="newComment.text" placeholder="Napisz komentarz..." 
+    matTextareaAutosize matAutosizeMinRows="1" matAutosizeMaxRows="3"></textarea>
+  <button mat-icon-button color="primary" (click)="addComment()">
+    <mat-icon>send</mat-icon></button>
   </div>
 </div>

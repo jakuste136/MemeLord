@@ -1,6 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {  Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { MatDialogRef, MatDialog } from '@angular/material';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { ReportModalComponent } from '../../../report-modal/report-modal.component';
+import { ICommentDto } from "../../../dto/comment-dto";
+import { IMasterCommentDto } from '../../../dto/master-comment-dto';
+import { CommentService } from '../comment.service';
 
 @Component({
   selector: 'app-comment',
@@ -9,21 +13,31 @@ import { ReportModalComponent } from '../../../report-modal/report-modal.compone
 })
 export class CommentComponent implements OnInit {
 
-  _comment;
+  _comment: IMasterCommentDto;
+  
+  answerComments: Array<ICommentDto>;
+  likeValue: number;
+  commentId: number;
+  newComment;
 
   get name() {
     return this._comment;
   }
 
+  @Input() postId: number;
+  @Input() rating: number;
   @Input()
-  set comment(comment) {
+  set comment(comment)  {
     comment.existanceDuration = this.getCommentExistanceDuration(comment);
     this._comment = comment;
   }
+  isAnswerAreaVisible;
 
   reportModalRef: MatDialogRef<ReportModalComponent>;
 
-  constructor(private _dialog: MatDialog) {
+  constructor(private _dialog: MatDialog,
+              private _commentService: CommentService,
+              private _toastr: ToastrService) {
   }
 
   getCommentExistanceDuration(comment) {
@@ -60,7 +74,49 @@ export class CommentComponent implements OnInit {
     });
   }
 
+  private addComment() {
+    if (!this.comment.text) {
+      this._toastr.error("Nie można dodać pustego komentarza")
+      return;
+    }
+    this._commentService.addComment(this.comment).subscribe(response => {
+      this.appendNewComment(response.comment);
+      this._toastr.success("Dodano komentarz");
+    }, error => {
+      this._toastr.error("Dodawanie komentarza nie powiodło się");
+    });
+
+    this.comment.text = '';
+  }
+
+  private appendNewComment(comment){
+    this.toggleAnswerArea();
+    this.answerComments.push(comment);
+  }
+
+  private toggleAnswerArea(){
+    this.isAnswerAreaVisible = !this.isAnswerAreaVisible;
+  }
+
   ngOnInit() {
+	  if(this._comment.id !== undefined){
+      this.answerComments = this._comment.answers;
+      this.commentId = this._comment.id;
+      this.isAnswerAreaVisible = false;
+      this.newComment = {
+        PostId : this.postId,
+        MasterCommentId : this.commentId
+      }
+      this._commentService.getCommentLikeForUser(this.commentId).subscribe(result => { this.likeValue = (result == null ? 0 : result.value) } )
+    }
+  }
+  
+  ngOnChanges(changes: SimpleChanges): void {
+    if(this._comment.id !== undefined){
+      this.answerComments = this._comment.answers;
+      this.commentId = this._comment.id;
+      this._commentService.getCommentLikeForUser(this.commentId).subscribe(result => { this.likeValue = (result == null ? 0 : result.value) } )
+    }
   }
 
 }

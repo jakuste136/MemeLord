@@ -5,6 +5,6 @@
 
 export const environment = {
   production: false,
-  apiUrl: "http://Memelordapp.azurewebsites.net",
+  apiUrl: "https://localhost:44372/",
   bestCommentsCount: 3
 };

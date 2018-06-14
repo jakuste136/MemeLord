@@ -5,6 +5,7 @@ using MemeLord.DataObjects.Request;
 using MemeLord.Logic.Modules.Comments;
 using MemeLord.Logic.Modules;
 using MemeLord.Logic.Modules.Reports;
+using System.Net.Http;
 
 namespace MemeLord.Controllers
 {
@@ -50,6 +51,13 @@ namespace MemeLord.Controllers
             {
                 Comment = _addCommentsModule.AddComment(addCommentRequest)
             };
+        }
+
+        [Route("update-rating")]
+        [HttpPut, Authorize]
+        public HttpResponseMessage UpdateCommentRating([FromBody] UpdateCommentRatingRequest request)
+        {
+            return _updateCommentModule.UpdateCommentRating(request);
         }
 
         [Route("delete")]
