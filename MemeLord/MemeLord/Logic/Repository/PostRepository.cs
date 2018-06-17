@@ -16,6 +16,7 @@ namespace MemeLord.Logic.Repository
         void UpdatePost(Post post);
         int GetNumberOfDeletedByUserId(int userId);
         List<Post> GetUserPosts(string username);
+        Post GetBestUserPost(string username);
     }
 
     public class PostRepository : IPostRepository
@@ -130,6 +131,17 @@ namespace MemeLord.Logic.Repository
                     .Where(p => p.Op.Username.Equals(username))
                     .Where(p => p.DeletionDate == null)
                     .ToList();
+            }
+        }
+
+        public Post GetBestUserPost(string username)
+        {
+            using (var db = CustomDatabaseFactory.GetConnection())
+            {
+                return db.Query<Post>()
+                    .Include(p => p.Op)
+                    .OrderByDescending(p => p.Rating)
+                    .SingleOrDefault(p => p.Op.Username.Equals(username));
             }
         }
     }

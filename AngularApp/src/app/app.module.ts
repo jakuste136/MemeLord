@@ -2,10 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
-import { PostsListService } from './guest-site/posts-list/posts-list.service';
 import { MaterialModule } from './shared/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatIconModule } from '@angular/material';
+import { MatIconModule, MatFormFieldModule, MatButtonModule, MatSortModule, MatSelectModule } from '@angular/material';
+import { MatTableModule } from '@angular/material/table';
+import { CdkTableModule } from '@angular/cdk/table';
 import * as $ from 'jquery';
 
 
@@ -18,7 +19,14 @@ import * as $ from 'jquery';
     CoreModule,
     MaterialModule,
     MatIconModule,
-    BrowserAnimationsModule
+    MatButtonModule,
+    MatFormFieldModule,
+    BrowserAnimationsModule,
+    MatTableModule,
+    MatSortModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    CdkTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Security.Claims;
 using MemeLord.DataObjects.Response;
 using MemeLord.DataObjects.Response.UserResponses;
@@ -6,6 +7,7 @@ using MemeLord.Logic.Extensions;
 using MemeLord.Logic.Mapping;
 using MemeLord.Logic.Mapping.Users;
 using MemeLord.Logic.Repository;
+using MemeLord.Models;
 
 namespace MemeLord.Logic.Modules.Users
 {
@@ -16,6 +18,7 @@ namespace MemeLord.Logic.Modules.Users
         GetUserResponse GetUserByName(string name);
         IList<GetUserResponse> GetAllUsers();
         GetUserActivityResponse GetUserActivity(string name);
+        GetUserReportResponse GetUserReport(string username, string sex, int status);
     }
 
     public class UserGetModule : IUserGetModule
@@ -59,8 +62,8 @@ namespace MemeLord.Logic.Modules.Users
             var userList = _userRepository.GetUsers();
             return _responseMapper.Map(userList);
         }
-		
-		public GetUserActivityResponse GetUserActivity(string name)
+
+        public GetUserActivityResponse GetUserActivity(string name)
         {
             return new GetUserActivityResponse
             {
@@ -68,5 +71,33 @@ namespace MemeLord.Logic.Modules.Users
                 PostList = _postMapper.Map(_postRepository.GetUserPosts(name))
             };
         }
+
+        public GetUserReportResponse GetUserReport(string username, string sex, int status)
+        {
+            var users = _userRepository.GetUsersForReport(username, sex, status);
+
+            return new GetUserReportResponse
+            {
+                Users = PrepareListForResponse(users)
+            };
+        }
+
+        private List<SingleUserReportResponse> PrepareListForResponse(List<User> users)
+        {
+            var userList = new List<SingleUserReportResponse>();
+            foreach (var user in users)
+            {
+                userList.Add(new SingleUserReportResponse
+                {
+                    Username = user.Username,
+                    Sex = user.Sex.ToString(),
+                    Email = user.Email,
+                    DateOfBirth = user.DateOfBirth.Value,
+                    PostsCount = _postRepository.GetUserPosts(user.Username).Count,
+                    PostRating = _postRepository.GetBestUserPost(user.Username).Rating
+                });
+            }
+            return userList;
+        }
     }
-}
+};

@@ -60,5 +60,12 @@ namespace MemeLord.Controllers
         {
             return _userGetModule.GetUserActivity(username);
         }
+
+        [Route("report")]
+        [HttpGet]
+        public GetUserReportResponse GetUserReport([FromUri] string username, [FromUri] string sex, [FromUri] int status)
+        {
+            return _userGetModule.GetUserReport(username, sex, status);
+        }
     }
 }

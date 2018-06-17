@@ -9,10 +9,13 @@ namespace MemeLord.Logic.Repository
     {
         Post GetPostById(int id);
         List<Post> GetPosts(int lastId, int count);
+        List<Post> GetUserPosts(int lastId, int count, string authorName);
         List<Post> GetTopPosts(int lastId, int count);
         void AddPost(Post post);
         Post GetRandomPost();
         void UpdatePost(Post post);
+        int GetNumberOfDeletedByUserId(int userId);
+        List<Post> GetUserPosts(string username);
     }
 
     public class PostRepository : IPostRepository
@@ -71,7 +74,7 @@ namespace MemeLord.Logic.Repository
                     .Include(p => p.Op)
                     .Where(p => p.DeletionDate == null)
                     .Limit(randomIndex, 1)
-                    .First();
+                    .FirstOrDefault();
             }
         }
 
@@ -87,11 +90,44 @@ namespace MemeLord.Logic.Repository
         {
             using (var db = CustomDatabaseFactory.GetConnection())
             {
-<<<<<<< HEAD
-                db.Update(post);
-=======
                 db.Save(post);
->>>>>>> 66b7cfafe146f65a43af7f71945c48a958adb231
+            }
+        }
+
+        public int GetNumberOfDeletedByUserId(int userId)
+        {
+            using (var db = CustomDatabaseFactory.GetConnection())
+            {
+                return db.Query<Post>()
+                    .Include(c => c.Op)
+                    .Where(c => c.Op.Id == userId || userId == 0)
+                    .Where(c => c.DeletionDate != null)
+                    .Count();
+            }
+        }
+<<<<<<< HEAD
+
+        public List<Post> GetUserPosts(int lastId, int count, string authorName)
+=======
+		
+        public List<Post> GetUserPosts(string username)
+>>>>>>> 491d85872ab12a7b2a292958c69160590a7d3c8d
+        {
+            using (var db = CustomDatabaseFactory.GetConnection())
+            {
+                return db.Query<Post>()
+                    .Include(p => p.Op)
+<<<<<<< HEAD
+                    .OrderByDescending(p => p.CreationDate)
+                    .Where(p => p.Op.Username.Equals(authorName))
+                    .Where(p => p.Id < lastId || lastId == 0)
+                    .Where(p => p.DeletionDate == null)
+                    .Limit(count)
+=======
+                    .Where(p => p.Op.Username.Equals(username))
+                    .Where(p => p.DeletionDate == null)
+>>>>>>> 491d85872ab12a7b2a292958c69160590a7d3c8d
+                    .ToList();
             }
         }
     }

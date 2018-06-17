@@ -1,0 +1,64 @@
+<div>
+
+  <div>
+    <mat-form-field class="form-field-wrapper" appearance="outline">
+      <mat-label>Username</mat-label>
+      <input matInput placeholder="Username" [(ngModel)]="model.username">
+    </mat-form-field>
+    <mat-form-field class="form-field-wrapper">
+      <mat-select placeholder="Sex" [(ngModel)]="model.sex">
+        <mat-option [value]="1">Male</mat-option>
+        <mat-option [value]="2">Female</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="form-field-wrapper">
+      <mat-select placeholder="Status" [(ngModel)]="model.status">
+        <mat-option [value]="1">Active</mat-option>
+        <mat-option [value]="2">Banned</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <button mat-raised-button color="primary" (click)="filter()">Filter</button>
+    <button mat-raised-button color="primary" (click)="clear()">Clear</button>
+  </div>
+
+  <div class="table-wrapper" *ngIf="users.length > 0">
+    <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" (matSortChange)="sortData($event)">
+      <ng-container matColumnDef="username">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Username </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.username}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="dateOfBirth">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Date of birth </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.dateOfBirth | date: "dd MM yyyy"}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="sex">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Sex </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.sex}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="postsCount">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Posts </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.postsCount}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="postRating">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Highest rating </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.postRating}} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+    
+</div>

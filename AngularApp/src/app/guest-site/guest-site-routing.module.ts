@@ -6,6 +6,7 @@ import { TopComponent } from './top/top.component';
 import { RandomPostComponent } from './random/random-post.component';
 import { PostDetailsComponent } from './posts-list/post-details/post-details.component';
 import { AuthorUserProfileComponent } from './author-user-profile/author-user-profile.component';
+import { ReportComponent } from './report/report.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
       {
         path: 'author/:authorName',
         component: AuthorUserProfileComponent
+      },
+      {
+        path: 'report',
+        component: ReportComponent
       }
     ]
   }

@@ -204,6 +204,8 @@
     <Compile Include="DataObjects\Response\GetUserResponse.cs" />
     <Compile Include="DataObjects\Response\Posts\GetRandomPostResponse.cs" />
     <Compile Include="DataObjects\Response\UserResponses\GetUserActivityResponse.cs" />
+    <Compile Include="DataObjects\Response\UserResponses\GetUserReportResponse.cs" />
+    <Compile Include="DataObjects\Response\UserResponses\SingleUserReportResponse.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

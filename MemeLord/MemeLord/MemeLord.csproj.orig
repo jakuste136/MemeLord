@@ -180,26 +180,33 @@
       <DependentUpon>ReportingSettings.settings</DependentUpon>
     </Compile>
     <Compile Include="Controllers\CommentController.cs" />
+<<<<<<< HEAD
+    <Compile Include="Controllers\FollowingController.cs" />
+=======
+    <Compile Include="DataObjects\Response\Reports\GetReportTypesReponse.cs" />
+>>>>>>> 491d85872ab12a7b2a292958c69160590a7d3c8d
     <Compile Include="Controllers\LikeController.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="DataObjects\Dto\ReportDtos\ReportTypeDto.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="DataObjects\Dto\FollowingDto.cs" />
     <Compile Include="DataObjects\Dto\ReportDtos\ReportedCommentDto.cs" />
     <Compile Include="DataObjects\Dto\ReportDtos\ReportedPostDto.cs" />
     <Compile Include="DataObjects\Request\AddCommentRequest.cs" />
     <Compile Include="DataObjects\Request\AddLikeRequest.cs" />
     <Compile Include="DataObjects\Request\AddUserRequest.cs" />
-<<<<<<< HEAD
+    <Compile Include="DataObjects\Request\FollowRequest.cs" />
     <Compile Include="DataObjects\Request\UpdatePostRatingRequest.cs" />
-=======
     <Compile Include="DataObjects\Request\Reports\AddReportRequest.cs" />
     <Compile Include="DataObjects\Request\UpdateUserRequest.cs" />
->>>>>>> 66b7cfafe146f65a43af7f71945c48a958adb231
+    <Compile Include="DataObjects\Response\CommentResponses\AddCommentResponse.cs" />
     <Compile Include="DataObjects\Response\CommentResponses\GetBestCommentsResponse.cs" />
-    <Compile Include="DataObjects\Response\ReportResponses\GetReportedCommentsResponse.cs" />
-    <Compile Include="DataObjects\Response\ReportResponses\GetReportedPostsResponse.cs" />
+    <Compile Include="DataObjects\Response\Reports\GetReportedCommentsResponse.cs" />
+    <Compile Include="DataObjects\Response\Reports\GetReportedPostsResponse.cs" />
     <Compile Include="DataObjects\Response\GetUserResponse.cs" />
     <Compile Include="DataObjects\Response\Posts\GetRandomPostResponse.cs" />
+    <Compile Include="DataObjects\Response\UserResponses\GetUserActivityResponse.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -214,31 +221,31 @@
     <Compile Include="Logic\Mapping\CommentMapping\AnswerCommentMapper.cs" />
     <Compile Include="Logic\Mapping\CommentMapping\MasterCommentMapper.cs" />
     <Compile Include="Logic\Mapping\CommentMapping\NewCommentMapper.cs" />
+    <Compile Include="Logic\Mapping\FollowingMapper.cs" />
     <Compile Include="Logic\Mapping\PostMapper.cs" />
     <Compile Include="Logic\Extensions\OwinContextExtentions.cs" />
     <Compile Include="Logic\Mapping\Mapper.cs" />
     <Compile Include="Logic\Mapping\Reports\NewReportMapper.cs" />
     <Compile Include="Logic\Mapping\Reports\ReportedCommentMapper.cs" />
     <Compile Include="Logic\Mapping\Reports\ReportedPostMapper.cs" />
+    <Compile Include="Logic\Mapping\Reports\ReportTypeMapper.cs" />
     <Compile Include="Logic\Mapping\Users\AddUserRequestMapper.cs" />
     <Compile Include="Logic\Mapping\Users\GetUserResponseMapper.cs" />
     <Compile Include="Logic\Mapping\Users\UpdateUserRequestMapper.cs" />
     <Compile Include="Logic\Mapping\Users\UserMapper.cs" />
-<<<<<<< HEAD
+    <Compile Include="Logic\Modules\Comments\UpdateCommentModule.cs" />
+    <Compile Include="Logic\Modules\Followings\GetFollowingModule.cs" />
+    <Compile Include="Logic\Modules\Followings\UpsertFollowingModule.cs" />
     <Compile Include="Logic\Modules\Likes\LikeAddModule.cs" />
     <Compile Include="Logic\Modules\Likes\LikeGetModule.cs" />
     <Compile Include="Logic\Modules\Posts\AddPostModule.cs" />
     <Compile Include="Logic\Modules\Comments\AddCommentModule.cs" />
     <Compile Include="Logic\Modules\Posts\GetRandomPostModule.cs" />
-    <Compile Include="Logic\Modules\Posts\PostUpdateModule.cs" />
-=======
-    <Compile Include="Logic\Modules\Comments\UpdateCommentModule.cs" />
-    <Compile Include="Logic\Modules\Posts\AddPostModule.cs" />
-    <Compile Include="Logic\Modules\Comments\AddCommentModule.cs" />
-    <Compile Include="Logic\Modules\Posts\GetRandomPostModule.cs" />
     <Compile Include="Logic\Modules\Posts\UpdatePostModule.cs" />
->>>>>>> 66b7cfafe146f65a43af7f71945c48a958adb231
+    <Compile Include="Logic\Modules\Posts\PostUpdateModule.cs" />
     <Compile Include="Logic\Modules\Reports\AddReportModule.cs" />
+    <Compile Include="Logic\Modules\Reports\AutoBanModule.cs" />
+    <Compile Include="Logic\Modules\Reports\CheckIfUserHasReported.cs" />
     <Compile Include="Logic\Modules\Reports\FindMostFrequentReport.cs" />
     <Compile Include="Logic\Modules\Reports\GetReportsModule.cs" />
     <Compile Include="Logic\Modules\Users\UserAddModule.cs" />
@@ -247,6 +254,7 @@
     <Compile Include="Logic\Providers\OAuthAppProvider.cs" />
     <Compile Include="Logic\Modules\Comments\GetCommentsModule.cs" />
     <Compile Include="Logic\Modules\Posts\GetPostsModule.cs" />
+    <Compile Include="Logic\Repository\FollowingRepository.cs" />
     <Compile Include="Logic\Repository\LikeRepository.cs" />
     <Compile Include="Logic\Repository\ReportRepository.cs" />
     <Compile Include="Logic\Repository\UserRepository.cs" />

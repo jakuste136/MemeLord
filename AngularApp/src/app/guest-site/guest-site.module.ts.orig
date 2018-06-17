@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { GuestSiteRoutingModule } from './guest-site-routing.module';
 import { GuestSiteComponent } from './guest-site.component';
 import { GuestNavbarComponent } from './guest-navbar/guest-navbar.component';
@@ -28,14 +29,17 @@ import { BestCommentsComponent } from './post/best-comments/best-comments.compon
 import { BestCommentsService } from './post/best-comments/best-comments.service';
 import { CommentComponent } from './posts-list/post-details/comment/comment.component';
 import { ReportButtonComponent } from './post/post-bar/report-button/report-button.component';
+<<<<<<< HEAD
 import { AuthorUserProfileComponent } from './author-user-profile/author-user-profile.component';
 import { UserInformationComponent } from './user-information/user-information.component';
-import { ReportModalComponent } from './report-modal/report-modal.component';
-import { ReportService } from './report-modal/report.service';
 import { UserInformationService } from './user-information/user-information.service';
 import { AuthorUserProfileService } from './author-user-profile/author-user-profile.service';
-import { ReportComponent } from './report/report.component';
-import { UserReportService } from './report/report.service';
+
+
+=======
+import { ReportModalComponent } from './report-modal/report-modal.component';
+import { ReportService } from './report-modal/report.service';
+>>>>>>> 491d85872ab12a7b2a292958c69160590a7d3c8d
 
 @NgModule({
   imports: [
@@ -65,10 +69,12 @@ import { UserReportService } from './report/report.service';
     BestCommentsComponent,
     CommentComponent,
     ReportButtonComponent,
+<<<<<<< HEAD
     AuthorUserProfileComponent,
-    ReportModalComponent,
-    UserInformationComponent,
-    ReportComponent],
+    UserInformationComponent],
+=======
+    ReportModalComponent],
+>>>>>>> 491d85872ab12a7b2a292958c69160590a7d3c8d
   providers: [
     UserDetailsService,
     PostsListService,
@@ -77,10 +83,12 @@ import { UserReportService } from './report/report.service';
     RatingsService,
     PostService,
     BestCommentsService,
+<<<<<<< HEAD
     UserInformationService,
-    ReportService,
-    AuthorUserProfileService,
-    UserReportService
+    AuthorUserProfileService
+=======
+    ReportService
+>>>>>>> 491d85872ab12a7b2a292958c69160590a7d3c8d
   ],  
   entryComponents: [
     AddPostModalComponent,
