@@ -21,28 +21,28 @@ namespace MemeLord.Controllers
         }
 
         [Route("get-post")]
-        [HttpGet]
+        [HttpGet, Authorize]
         public Like GetPostLikeForUser([FromUri] int postId)
         {
           return _likeGetModule.GetPostLike(postId);
         }
 
         [Route("get-comment")]
-        [HttpGet]
+        [HttpGet, Authorize]
         public Like GetCommentLikeForUser([FromUri] int commentId)
         {
             return _likeGetModule.GetCommentLike(commentId);
         }
 
         [Route("add-post")]
-        [HttpPost]
+        [HttpPost, Authorize]
         public HttpResponseMessage AddPostLike([FromBody] AddLikeRequest request)
         {
             return _likeAddModule.AddPostLike(request);
         }
 
         [Route("add-comment")]
-        [HttpPost]
+        [HttpPost, Authorize]
         public HttpResponseMessage AddCommentLike([FromBody] AddLikeRequest request)
         {
             return _likeAddModule.AddCommentLike(request);

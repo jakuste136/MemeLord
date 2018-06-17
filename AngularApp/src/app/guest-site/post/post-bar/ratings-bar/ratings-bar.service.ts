@@ -15,11 +15,8 @@ export class RatingsService{
 
     addOrRemoveLike(postLike: IPostLike): Promise<any>{
 
-        var token = this._authenticationService.getToken().access_token;
-
         const httpOptions = {
             headers: new HttpHeaders()
-                .set('Authorization', `bearer ${token}`)
                 .set('Content-Type', 'application/json')
         };
 

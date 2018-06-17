@@ -1,6 +1,6 @@
 <app-guest-navbar></app-guest-navbar>
 <div class="wrapper">
-  <form [formGroup]="registryForm" (ngSubmit)="login()">
+  <form [formGroup]="registryForm">
     <mat-card class="center login-form">
       <mat-form-field>
         <input matInput placeholder="Login" formControlName="login">
@@ -12,7 +12,8 @@
         <mat-error *ngIf="!registryForm.controls['password'].valid && registryForm.controls['password'].touched">{{getPasswordErrorMessage()}}</mat-error>
       </mat-form-field>
 
-      <button mat-raised-button color="primary" class="login-button">Zaloguj</button>
+      <button mat-raised-button color="primary" class="login-button" (click)="login()">Zaloguj</button>
+      <button mat-raised-button color="secondary" class="login-button" (click)="googleLogin()">Zaloguj się z kontem Google</button>
     </mat-card>
   </form>
 </div>

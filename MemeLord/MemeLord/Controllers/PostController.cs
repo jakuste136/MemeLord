@@ -35,6 +35,7 @@ namespace MemeLord.Controllers
         }
 
         [Route("{id}")]
+        [HttpGet]
         public PostDto GetById(int id)
         {
             return _getPostsModule.GetPost(id);
@@ -56,14 +57,14 @@ namespace MemeLord.Controllers
                 return _getPostsModule.GetUserPosts(lastId, count, authorName);
         }
 
-        [HttpPost]
+        [HttpPost, Authorize(Roles = "Member, Admin")]
         public HttpResponseMessage AddPost()
         {
             return _addPostModule.AddPost(Request);
         }
 
         [Route("delete")]
-        [HttpGet]
+        [HttpGet, Authorize(Roles = "Member, Admin")]
         public void DeletePost([FromUri] int id)
         {
             _updatePostModule.DeletePost(id);
@@ -72,7 +73,7 @@ namespace MemeLord.Controllers
         }
 
         [Route("update-rating")]
-        [HttpPut]
+        [HttpPut, Authorize]
         public HttpResponseMessage UpdatePostRating([FromBody] UpdatePostRatingRequest request)
         {
             return _postUpdateModule.UpdatePostRating(request);
