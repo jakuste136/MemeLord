@@ -92,9 +92,9 @@ namespace MemeLord.Logic.Modules.Users
                     Username = user.Username,
                     Sex = user.Sex.ToString(),
                     Email = user.Email,
-                    DateOfBirth = user.DateOfBirth.Value,
+                    DateOfBirth = user.DateOfBirth,
                     PostsCount = _postRepository.GetUserPosts(user.Username).Count,
-                    PostRating = _postRepository.GetBestUserPost(user.Username).Rating
+                    PostRating = _postRepository.GetBestUserPost(user.Username)?.Rating ?? 0
                 });
             }
             return userList;

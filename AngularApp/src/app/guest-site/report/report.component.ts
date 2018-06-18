@@ -41,25 +41,6 @@ export class ReportComponent implements OnInit {
     this._userReportService.getUsersReport(this.model).subscribe(data =>{
       this.users = data.users;
     })
-
-    var examplaryUser = new SingleUserReportResponse();
-    examplaryUser.username = "filmus";
-    examplaryUser.sex = "male";
-    examplaryUser.email = "filmus@lol.gg";
-    examplaryUser.dateOfBirth = new Date(1996, 5, 31);
-    examplaryUser.postRating = 56;
-    examplaryUser.postsCount = 11;
-    this.users.push(examplaryUser);
-    var examplaryUser2 = new SingleUserReportResponse();
-    examplaryUser2.username = "bae";
-    examplaryUser2.sex = "female";
-    examplaryUser2.email = "zzz@lollolololololol.gg";
-    examplaryUser2.dateOfBirth = new Date(2000, 5, 31);
-    examplaryUser2.postRating = 20;
-    examplaryUser2.postsCount = 60;
-    this.users.push(examplaryUser2);
-    this.users.push(examplaryUser);
-    this.users.push(examplaryUser);
   }
 
   sortData(sort: Sort) {

@@ -59,7 +59,8 @@ namespace MemeLord.Logic.Repository
         {
             using (var db = CustomDatabaseFactory.GetConnection())
             {
-                db.Save(userRole);
+                db.Execute(
+                    $"INSERT INTO [dbo].[UserRoles]  ([UserId],[RoleId])  VALUES ({userRole.User.Id} , {userRole.Role.Id})");
             }
         }
 
@@ -88,29 +89,42 @@ namespace MemeLord.Logic.Repository
         {
             using (var db = CustomDatabaseFactory.GetConnection())
             {
-                return db.Query<User>()
-                    .Where(u => 
-                        u.Username.StartsWith(username) && u.Sex == GetGender(sex) && u.BannedDate.HasValue == IsBanned(status))
-                    .ToList();
+                //return db.Query<User>()
+                //    .Where(u => 
+                //        u.Username.StartsWith(username) && u.Sex == GetGender(sex) && u.BannedDate.HasValue == IsBanned(status))
+                //    .ToList();
+                var paramUsername = 1;
+                var paramSex = 1;
+                var paramBanned = 1;
+                var notStr = "";
+
+                if (string.IsNullOrEmpty(username))
+                    paramUsername = 0;
+
+                if (sex.Equals("0"))
+                    paramSex = 0;
+
+                if (status == 0)
+                    paramBanned = 0;
+
+                if (status == 2)
+                    notStr = "NOT";
+
+                return db.Fetch<User>(
+                    $"SELECT * FROM [Users] U WHERE ({paramUsername} = 0 OR U.Username LIKE '{username}%') AND ({paramSex} = 0 OR U.Sex LIKE '{GetGender(sex)}') AND ({paramBanned} = 0 OR ([U].[BannedDate] is {notStr} null))");
             }
         }
 
-        private bool IsBanned(int status)
+        private static bool IsBanned(int status)
         {
-            if (status == 1)
-                return false;
-            else
-                return true;
+            return status != 1;
         }
 
-        private Sex GetGender(string sex)
+        private static Sex GetGender(string sex)
         {
             if (string.IsNullOrEmpty(sex))
                 return Sex.Undefined;
-            if (sex.Equals("Female"))
-                return Sex.Female;
-            else
-                return Sex.Male;
+            return sex.Equals("2") ? Sex.Female : Sex.Male;
         }
     }
 }

@@ -81,7 +81,7 @@ import { UserReportService } from './report/report.service';
     UserInformationService,
     ReportService,
     AuthorUserProfileService,
-    UserReportService
+    UserReportService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,

@@ -141,7 +141,7 @@ namespace MemeLord.Logic.Repository
                 return db.Query<Post>()
                     .Include(p => p.Op)
                     .OrderByDescending(p => p.Rating)
-                    .SingleOrDefault(p => p.Op.Username.Equals(username));
+                    .FirstOrDefault(p => p.Op.Username.Equals(username));
             }
         }
     }

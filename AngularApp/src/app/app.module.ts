@@ -27,7 +27,7 @@ import * as $ from 'jquery';
     MatSortModule,
     MatSelectModule,
     MatFormFieldModule,
-    CdkTableModule
+    CdkTableModule,
     HttpClientModule
   ],
   providers: [

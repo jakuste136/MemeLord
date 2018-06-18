@@ -17,17 +17,8 @@ export class UserReportService {
     }
 
     getUsersReport(userReportForm: UserReportForm): Observable<UserReportResponse> {
-        //var token = this._authenticationService.getToken().access_token;
-
-        // const httpOptions = {
-        //     headers: new HttpHeaders()
-        //         .set('Authorization', `bearer ${token}`)
-        //         .set('Content-Type', 'application/json')
-        // };
-
         return this._http.get<UserReportResponse>(
-            `${apiUrl}/api/user/report?username=${userReportForm.username}&sex=${userReportForm.sex}&status=${userReportForm.status}`,
-             /*httpOptions*/);
+            `${apiUrl}/api/user/report?username=${userReportForm.username}&sex=${userReportForm.sex}&status=${userReportForm.status}`);
     }
 
 }
