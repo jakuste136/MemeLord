@@ -25,16 +25,16 @@
   </div>
 
   <div class="table-wrapper" *ngIf="users.length > 0">
-    <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" (matSortChange)="sortData($event)">
+    <mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)">
       <ng-container matColumnDef="username">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Username </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.username}} </mat-cell>
       </ng-container>
 
-      <ng-container matColumnDef="dateOfBirth">
+      <!-- <ng-container matColumnDef="dateOfBirth">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Date of birth </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.dateOfBirth | date: "dd MM yyyy"}} </mat-cell>
-      </ng-container>
+      </ng-container> -->
 
       <ng-container matColumnDef="sex">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Sex </mat-header-cell>

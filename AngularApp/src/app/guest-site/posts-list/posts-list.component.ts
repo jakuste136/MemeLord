@@ -6,6 +6,7 @@ import { MatDialogRef, MatDialog } from '@angular/material';
 import { AddPostModalComponent } from './add-post-modal/add-post-modal.component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ReportModalComponent } from '../report-modal/report-modal.component';
+import { AuthGuardService } from '../../core/services/auth-guard.service';
 
 @Component({
   selector: 'app-posts-list',
@@ -13,19 +14,15 @@ import { ReportModalComponent } from '../report-modal/report-modal.component';
   styleUrls: ['./posts-list.component.scss']
 })
 export class PostsListComponent implements OnInit {
-<<<<<<< HEAD
-  
-  @Input() authorName: string;
-=======
 
->>>>>>> 491d85872ab12a7b2a292958c69160590a7d3c8d
+  @Input() authorName: string;
   posts = new Array<IPostDto>();
   lastId: number;
 
   addPostModalRef: MatDialogRef<AddPostModalComponent>;
 
   constructor(private _postsListService: PostsListService,
-    private _authenticationService: AuthenticationService,
+    private _authGuardService: AuthGuardService,
     private _dialog: MatDialog,
     private _router: Router,
     private _route: ActivatedRoute) {
@@ -41,10 +38,6 @@ export class PostsListComponent implements OnInit {
     this._postsListService.getPosts(this.lastId, 10, this.authorName).subscribe(data => {
       this.posts = data.postsList;
       this.lastId = data.lastId;
-
-      this.posts.forEach(element => {
-        element.userName = "kurwamac";
-      });
     });
   }
 
@@ -74,6 +67,6 @@ export class PostsListComponent implements OnInit {
   }
 
   isAuthenticated() {
-    return this._authenticationService.getToken() != null;
+    return this._authGuardService.canActivate(false);
   }
 }

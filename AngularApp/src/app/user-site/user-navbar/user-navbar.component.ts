@@ -16,6 +16,10 @@ export class UserNavbarComponent implements OnInit {
   ngOnInit() {
   }
 
+  isAdmin() : boolean {
+    return this._authenticationService.getToken().role == "Admin";
+  }
+
   logout(){
     this._authenticationService.logout();
   }

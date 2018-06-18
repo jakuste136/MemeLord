@@ -1,8 +1,8 @@
 .grid-container {
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto auto auto;
     grid-gap: 15px;
-    background-color: #343b42;
+    //background-color: #343b42;
     padding: 15px;
     -webkit-transition: grid-gap 2s ease;
     -moz-transition: grid-gap 2s ease;
@@ -15,6 +15,7 @@
   }
 
   #profile-info{
+    padding-top: 30px;
     width: 600px;
     -webkit-transition: width 1s ease;
     -moz-transition: width 1s ease;
@@ -29,13 +30,7 @@
     color: green;
   }
 
-  .navigate-button{
-    position: relative;
-    top: 350px;
-  }
-
-  .follow-button{
-    position: absolute;
-    top: 350px;
-    right: 90px;
+  #buttons {
+    padding-top: 30px;
+    padding-left: 20px;
   }

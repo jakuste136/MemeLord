@@ -1,0 +1,43 @@
+.avatar.mat-card-image {
+    width: 200px;
+    height: 200px;
+    margin: 0;
+    border-radius: 100%;
+}
+
+.mat-card {
+    padding: 0 50px;
+    padding-top: 20px;
+    padding-bottom: 30px;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.mat-form-field {
+    display: block;
+    width: 300px;
+}
+
+.image {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.save-button {
+    width: 200px;
+    margin-bottom: 20px;
+}
+
+.mat-card-header {
+    display: block;
+}
+
+p {
+    border-bottom: solid #343b42 1px;
+    padding: 10px 0;
+    color: #343b42;
+}

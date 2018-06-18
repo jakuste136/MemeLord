@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { UserReportForm } from '../dto/user-report-form';
 import { UserReportService } from './report.service';
-import { SingleUserReportResponse } from '../dto/single-user-report';
 import { MatTableDataSource, MatSort, Sort } from '@angular/material';
 import { DataSource } from '@angular/cdk/table';
+import { SingleUserReportResponse } from '../../guest-site/dto/single-user-report';
+import { UserReportForm } from '../../guest-site/dto/user-report-form';
 
 @Component({
   selector: 'app-report',
@@ -15,7 +15,7 @@ export class ReportComponent implements OnInit {
 
   model: UserReportForm;
   users: Array<SingleUserReportResponse>;
-  displayedColumns = ['username', 'dateOfBirth', 'sex', 'email', 'postsCount', 'postRating'];
+  displayedColumns = ['username', 'sex', 'email', 'postsCount', 'postRating'];
   dataSource;
   
   
@@ -40,7 +40,9 @@ export class ReportComponent implements OnInit {
   filter(){
     this._userReportService.getUsersReport(this.model).subscribe(data =>{
       this.users = data.users;
+      this.dataSource = this.users;
     })
+    
   }
 
   sortData(sort: Sort) {

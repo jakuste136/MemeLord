@@ -7,6 +7,8 @@ import { TopComponent } from '../guest-site/top/top.component';
 import { UserProfileSiteComponent } from './user-profile-site/user-profile-site.component';
 import { PostDetailsComponent } from '../guest-site/posts-list/post-details/post-details.component';
 import { AuthorUserProfileComponent } from '../guest-site/author-user-profile/author-user-profile.component';
+import { AdminAuthGuardService } from '../core/services/admin-auth-guard.service';
+import { AdminComponent } from './admin/admin.component';
 
 const routes: Routes = [
   {
@@ -32,6 +34,11 @@ const routes: Routes = [
       {
         path: 'profile',
         component: UserProfileSiteComponent
+      },
+      {
+        path: 'admin',
+        canActivate: [AdminAuthGuardService],
+        component: AdminComponent
       },
       {
         path: 'author/:authorName',

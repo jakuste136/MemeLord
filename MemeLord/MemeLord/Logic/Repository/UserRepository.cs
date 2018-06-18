@@ -93,22 +93,33 @@ namespace MemeLord.Logic.Repository
                 //    .Where(u => 
                 //        u.Username.StartsWith(username) && u.Sex == GetGender(sex) && u.BannedDate.HasValue == IsBanned(status))
                 //    .ToList();
+
+                var query = db.Query<User>()
+                    .Where(u => string.IsNullOrEmpty(username) || u.Username.StartsWith(username))
+                    .Where(u => sex.Equals("0") || u.Sex == GetGender(sex))
+                    .Where(u => status == 0 || u.BannedDate.HasValue == IsBanned(status));
+
                 var paramUsername = 1;
                 var paramSex = 1;
                 var paramBanned = 1;
                 var notStr = "";
 
-                if (string.IsNullOrEmpty(username))
-                    paramUsername = 0;
+                if (!string.IsNullOrEmpty(username))
+                    query = query.Where(u => u.Username.StartsWith(username));
 
-                if (sex.Equals("0"))
-                    paramSex = 0;
+                if (!sex.Equals("0"))
+                    query = query.Where(u => u.Sex == GetGender(sex));
 
-                if (status == 0)
-                    paramBanned = 0;
+                if (status != 0)
+                    query = query.Where(u => u.BannedDate.HasValue == IsBanned(status));
 
-                if (status == 2)
-                    notStr = "NOT";
+                //if (status == 0)
+                //    paramBanned = 0;
+
+                //if (status == 2)
+                //    notStr = "NOT";
+
+                return query.ToList();
 
                 return db.Fetch<User>(
                     $"SELECT * FROM [Users] U WHERE ({paramUsername} = 0 OR U.Username LIKE '{username}%') AND ({paramSex} = 0 OR U.Sex LIKE '{GetGender(sex)}') AND ({paramBanned} = 0 OR ([U].[BannedDate] is {notStr} null))");

@@ -35,8 +35,6 @@ import { ReportModalComponent } from './report-modal/report-modal.component';
 import { ReportService } from './report-modal/report.service';
 import { UserInformationService } from './user-information/user-information.service';
 import { AuthorUserProfileService } from './author-user-profile/author-user-profile.service';
-import { ReportComponent } from './report/report.component';
-import { UserReportService } from './report/report.service';
 
 @NgModule({
   imports: [
@@ -68,8 +66,8 @@ import { UserReportService } from './report/report.service';
     ReportButtonComponent,
     AuthorUserProfileComponent,
     ReportModalComponent,
-    UserInformationComponent,
-    ReportComponent],
+    UserInformationComponent
+  ],
   providers: [
     UserDetailsService,
     PostsListService,
@@ -81,7 +79,6 @@ import { UserReportService } from './report/report.service';
     UserInformationService,
     ReportService,
     AuthorUserProfileService,
-    UserReportService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,

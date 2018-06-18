@@ -4,6 +4,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
+import { AdminAuthGuardService } from './services/admin-auth-guard.service';
 
 const routes: Routes = [
   {
@@ -18,11 +19,6 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterPageComponent
-  },
-  {
-    path: 'admin',
-    canActivate: [AuthGuardService],
-    loadChildren: '../admin/admin.module#AdminModule'
   },
   {
     path: 'guest',

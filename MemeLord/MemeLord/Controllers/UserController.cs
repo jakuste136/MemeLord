@@ -62,7 +62,7 @@ namespace MemeLord.Controllers
         }
 
         [Route("report")]
-        [HttpGet]
+        [HttpGet, Authorize(Roles = "Admin")]
         public GetUserReportResponse GetUserReport([FromUri] string username, [FromUri] string sex, [FromUri] int status)
         {
             return _userGetModule.GetUserReport(username, sex, status);

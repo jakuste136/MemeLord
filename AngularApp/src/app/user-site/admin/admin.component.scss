@@ -1,0 +1,16 @@
+.wrapper {
+    display:flex;
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+}
+
+.single-column {
+    margin: 0 5px;
+}
+
+.details {
+    flex-grow:4;
+    min-width: 800px;
+    max-width: 1000px;
+}

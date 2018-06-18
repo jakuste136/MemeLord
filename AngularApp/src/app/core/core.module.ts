@@ -16,6 +16,7 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './services/jwt.inerceptor';
+import { AdminAuthGuardService } from './services/admin-auth-guard.service';
 
 @NgModule({
   imports: [
@@ -39,6 +40,7 @@ import { JwtInterceptor } from './services/jwt.inerceptor';
   providers: [
     AuthenticationService,
     AuthGuardService,
+    AdminAuthGuardService,
     RegisterUserService,
     {
       provide: HTTP_INTERCEPTORS,
