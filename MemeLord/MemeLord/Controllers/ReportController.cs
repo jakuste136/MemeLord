@@ -29,7 +29,7 @@ namespace MemeLord.Controllers
         }
 
         [Route("check-post")]
-        [HttpGet, Authorize(Roles = "Admin")]
+        [HttpGet, Authorize(Roles = "Member, Admin")]
         public bool CheckIfPostAlreadyReported([FromUri] int postId)
         {
             return _checkIfUserHasReported.Post(postId);
@@ -43,7 +43,7 @@ namespace MemeLord.Controllers
         }
 
         [Route("check-comment")]
-        [HttpGet]
+        [HttpGet, Authorize(Roles = "Member, Admin")]
         public bool CheckIfCommentAlreadyReported([FromUri] int commentId)
         {
             return _checkIfUserHasReported.Comment(commentId);

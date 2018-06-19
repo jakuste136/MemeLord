@@ -31,8 +31,8 @@ namespace MemeLord.Logic.Modules.Followings
             var userId = ClaimsPrincipal.Current.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value ?? "0";
             var following = new Following
             {
-                Follower = _userRepository.GetUserByCredentials(request.AuthorName),
-                Followed = _userRepository.GetUserById(int.Parse(userId)),
+                Follower = _userRepository.GetUserById(int.Parse(userId)),
+                Followed = _userRepository.GetUserByCredentials(request.AuthorName),
                 Active = request.Follow
             };
 

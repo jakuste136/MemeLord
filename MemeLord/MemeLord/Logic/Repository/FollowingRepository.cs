@@ -33,11 +33,11 @@ namespace MemeLord.Logic.Repository
                     db.Query<Following>()
                         .Include(p => p.Followed)
                         .Include(p => p.Follower)
-                        .SingleOrDefault(f => f.Followed.Id == following.Followed.Id && f.Follower.Id == following.Follower.Id);
+                        .Where(f => f.Followed.Id == following.Followed.Id && f.Follower.Id == following.Follower.Id).FirstOrDefault();
                 db.Execute(
                     result != null
                         ? $"UPDATE [Followings] SET [Active] = '{following.Active}' WHERE [FollowerId] = {following.Follower.Id} AND [FollowedId] = {following.Followed.Id}"
-                        : $"INSERT INTO [Followings] VALUES ({following.Followed.Id}, {following.Follower.Id}, '{following.Active}')");
+                        : $"INSERT INTO [Followings] VALUES ({following.Follower.Id}, {following.Followed.Id}, '{following.Active}')");
                 //db.Save(following);
             }
         }
