@@ -14,12 +14,14 @@ namespace MemeLord.Controllers
         private readonly IUserUpdateModule _userUpdateModule;
         private readonly IUserAddModule _userAddModule;
         private readonly IUserGetModule _userGetModule;
+        private readonly IUserBanModule _userBanModule;
 
-        public UserController(IUserUpdateModule userUpdateModule, IUserAddModule userAddModule, IUserGetModule userGetModule)
+        public UserController(IUserUpdateModule userUpdateModule, IUserAddModule userAddModule, IUserGetModule userGetModule, IUserBanModule userBanModule)
         {
             _userUpdateModule = userUpdateModule;
             _userAddModule = userAddModule;
             _userGetModule = userGetModule;
+            _userBanModule = userBanModule;
         }
 
         [Route("all")]
@@ -66,6 +68,13 @@ namespace MemeLord.Controllers
         public GetUserReportResponse GetUserReport([FromUri] string username, [FromUri] string sex, [FromUri] int status)
         {
             return _userGetModule.GetUserReport(username, sex, status);
+        }
+
+        [Route("ban")]
+        [HttpPost, Authorize(Roles = "Admin")]
+        public HttpResponseMessage PostBanUser([FromBody] BanUserRequest request)
+        {
+            return _userBanModule.BanUser(request);
         }
     }
 }

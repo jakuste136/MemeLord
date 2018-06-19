@@ -28,7 +28,10 @@
 
       <ng-container matColumnDef="action">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Akcja </mat-header-cell>
-        <mat-cell *matCellDef="let element"><button mat-button (click) = "banUser(element.username)">Zabanuj</button></mat-cell>
+        <mat-cell *matCellDef="let element">
+          <button mat-stroked-button color="primary" (click) = "banUser(element.username, element.postId)">Zabanuj</button>
+          <button mat-stroked-button color="primary" (click) = "deletePost(element.postId)">Usuń</button>
+        </mat-cell>
       </ng-container>
 
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

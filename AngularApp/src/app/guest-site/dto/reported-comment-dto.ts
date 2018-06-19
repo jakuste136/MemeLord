@@ -3,5 +3,5 @@ export class ReportedCommentDto {
     text: string
     creationDate: Date;
     description: string;
-    postId: number;
+    commentId: number;
 }

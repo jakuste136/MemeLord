@@ -59,9 +59,9 @@ namespace MemeLord.Logic.Repository
                     .Include(r => r.ReportType)
                     .Where(r => r.Post == null)
                     .Where(r => r.Comment != null)
-                    .Where(r => r.Post.DeletionDate == null)
-                    .Where(r => r.Post.Id > lastId || lastId == 0)
-                    .OrderBy(r => r.Post.Id)
+                    .Where(r => r.Comment.DeletionDate == null)
+                    .Where(r => r.Comment.Id > lastId || lastId == 0)
+                    .OrderBy(r => r.Comment.Id)
                     .ToList();
             }
         }

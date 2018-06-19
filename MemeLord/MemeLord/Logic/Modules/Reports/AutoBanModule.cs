@@ -11,10 +11,10 @@ namespace MemeLord.Logic.Modules.Reports
 
     public class AutoBanModule : IAutoBanModule
     {
-        private ICommentRepository _commentRepository;
-        private IPostRepository _postRepository;
-        private IUserRepository _userRepository;
-        private ReportingConfiguration _reportingConfiguration;
+        private readonly ICommentRepository _commentRepository;
+        private readonly IPostRepository _postRepository;
+        private readonly IUserRepository _userRepository;
+        private readonly ReportingConfiguration _reportingConfiguration;
 
         public AutoBanModule(ICommentRepository commentRepository, IPostRepository postRepository, IUserRepository userRepository, ReportingConfiguration reportingConfiguration)
         {
@@ -30,26 +30,30 @@ namespace MemeLord.Logic.Modules.Reports
             if (_commentRepository.GetNumberOfDeletedByUserId(userId) + _postRepository.GetNumberOfDeletedByUserId(userId) >= _reportingConfiguration.MinimumDeletionsNumber)
             {
                 var user = _userRepository.GetUserById(userId);
-                if (user.BannedDate == null)
-                {
-                    user.BannedDate = System.DateTime.Now;
-                    _userRepository.SaveUser(user);
-                }
+                if (user.BannedDate != null)
+                    return;
+
+                user.BannedDate = System.DateTime.Now;
+                _userRepository.SaveUser(user);
             }
         }
 
         public void BanIfDeserveByPostId(int postId)
         {
-            int userId = _postRepository.GetPostById(postId).Op.Id;
-            if (_commentRepository.GetNumberOfDeletedByUserId(userId) + _postRepository.GetNumberOfDeletedByUserId(userId) >= _reportingConfiguration.MinimumDeletionsNumber)
-            {
-                var user = _userRepository.GetUserById(userId);
-                if (user.BannedDate == null)
-                {
-                    user.BannedDate = System.DateTime.Now;
-                    _userRepository.SaveUser(user);
-                }
-            }
+            var userId = _postRepository.GetPostById(postId).Op.Id;
+
+            if (_commentRepository.GetNumberOfDeletedByUserId(userId) +
+                _postRepository.GetNumberOfDeletedByUserId(userId) <
+                _reportingConfiguration.MinimumDeletionsNumber)
+                return;
+
+            var user = _userRepository.GetUserById(userId);
+            if (user.BannedDate != null)
+                return;
+
+            user.BannedDate = System.DateTime.Now.AddMonths(1);
+
+            _userRepository.SaveUser(user);
         }
     }
 }

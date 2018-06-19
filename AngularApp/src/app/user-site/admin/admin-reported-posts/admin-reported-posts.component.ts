@@ -3,6 +3,9 @@ import { Sort, MatTableDataSource, MatSort } from '@angular/material';
 import { ReportedPostDto } from '../../../guest-site/dto/reported-post-dto';
 import { AdminReportingService } from '../admin-reporting.service';
 import { Router } from '@angular/router';
+import { BanUserDto } from '../../../guest-site/dto/ban-user-dto';
+import { ToastrService } from 'ngx-toastr';
+import { post } from 'selenium-webdriver/http';
 
 @Component({
   selector: 'app-admin-reported-posts',
@@ -19,7 +22,8 @@ export class AdminReportedPostsComponent implements OnInit {
 
   constructor(
     private _reportsService: AdminReportingService,
-    private _router: Router
+    private _router: Router,
+    private _toastr: ToastrService
   ) {
     this.reportedPosts = new Array<ReportedPostDto>();
   }
@@ -46,10 +50,26 @@ export class AdminReportedPostsComponent implements OnInit {
     this._router.navigate([`/user/author/${username}`]);
   }
 
-  banUser(username: string) {
-    // this._reportsService.banUser(username).subscribe(success => {
-    //   this.
-    // })
+  banUser(username: string, postId: number) {
+    var request = new BanUserDto();
+    request.username = username;
+    this._reportsService.banUser(request).subscribe(
+      response => {
+        this._toastr.success("Zabanowano użytnika");
+        var index = this.reportedPosts.findIndex(i => i.postId == postId)
+        this.reportedPosts.splice(index, 1)
+      }
+    )
+  }
+
+  deletePost(postId: number) {
+    this._reportsService.deletePost(postId).subscribe(
+      response => {
+        this._toastr.success("Usunięto post");
+        var index = this.reportedPosts.findIndex(i => i.postId == postId)
+        this.reportedPosts.splice(index, 1)
+      }
+    )
   }
 
   sortData(sort: Sort) {

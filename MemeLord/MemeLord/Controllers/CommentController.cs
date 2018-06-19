@@ -53,7 +53,7 @@ namespace MemeLord.Controllers
         }
 
         [Route("delete")]
-        [HttpGet, Authorize(Roles = "Member, Admin")]
+        [HttpDelete, Authorize(Roles = "Member, Admin")]
         public void DeleteComment([FromUri] int id)
         {
             _updateCommentModule.DeleteComment(id);

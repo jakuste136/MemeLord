@@ -39,22 +39,30 @@ namespace MemeLord.Logic.Providers
                 var user = _userRepository.GetUserByCredentials(context.UserName);
                 if (user != null && _hashManager.Verify(context.Password, user.Hash))
                 {
-                    var role = _userRepository.GetUserRoleByUserId(user.Id);
-
-                    var claims = new List<Claim>
+                    if (user.BannedDate > DateTime.Now)
                     {
-                        new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                        new Claim(ClaimTypes.Name, user.Username),
-                        new Claim(ClaimTypes.Role, role?.Name ?? ""),
-                    };
-
-                    var authenticationProperties = new AuthenticationProperties(new Dictionary<string, string>
+                        context.SetError("invalid_grant", "User is banned");
+                    }
+                    else
                     {
-                        { "role", role?.Name ?? "" },
-                    });
+                        var role = _userRepository.GetUserRoleByUserId(user.Id);
 
-                    var oAutIdentity = new ClaimsIdentity(claims, Startup.OAuthOptions.AuthenticationType);
-                    context.Validated(new AuthenticationTicket(oAutIdentity, authenticationProperties));
+                        var claims = new List<Claim>
+                        {
+                            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                            new Claim(ClaimTypes.Name, user.Username),
+                            new Claim(ClaimTypes.Role, role?.Name ?? ""),
+                        };
+
+                        var authenticationProperties = new AuthenticationProperties(new Dictionary<string, string>
+                        {
+                            { "role", role?.Name ?? "" },
+                        });
+
+                        var oAutIdentity = new ClaimsIdentity(claims, Startup.OAuthOptions.AuthenticationType);
+                        context.Validated(new AuthenticationTicket(oAutIdentity, authenticationProperties));
+                    }
+                    
                 }
                 else
                 {
@@ -65,14 +73,13 @@ namespace MemeLord.Logic.Providers
 
         public override Task ValidateClientRedirectUri(OAuthValidateClientRedirectUriContext context)
         {
-            if (context.ClientId != null)
-            {
-                var expectedRootUri = new Uri(context.Request.Uri, "/login");
+            if (context.ClientId == null)
+                return Task.FromResult<object>(null);
+            var expectedRootUri = new Uri(context.Request.Uri, "/login");
 
-                if (expectedRootUri.AbsoluteUri == context.RedirectUri)
-                {
-                    context.Validated();
-                }
+            if (expectedRootUri.AbsoluteUri == context.RedirectUri)
+            {
+                context.Validated();
             }
 
             return Task.FromResult<object>(null);

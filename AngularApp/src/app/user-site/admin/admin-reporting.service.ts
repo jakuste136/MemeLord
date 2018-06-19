@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { GetReportedPostsResponse } from '../../guest-site/dto/get-reported-posts-response';
 import { environment } from '../../../environments/environment';
 import { GetReportedCommentsResponse } from '../../guest-site/dto/get-reported-comments-response';
+import { BanUserDto } from '../../guest-site/dto/ban-user-dto';
 
 const apiUrl = environment.apiUrl;
 
@@ -22,4 +23,15 @@ export class AdminReportingService {
       `${apiUrl}/api/report/comments?lastId=${0}&count=${100}`);
   }
 
+  banUser(request: BanUserDto){
+    return this._http.post<BanUserDto>(`${apiUrl}/api/user/ban`, request);
+  }
+
+  deletePost(postId: number){
+    return this._http.delete(`${apiUrl}/api/post/delete?id=${postId}`)
+  }
+
+  deleteComment(commentId: number){
+    return this._http.delete(`${apiUrl}/api/comment/delete?id=${commentId}`)
+  }
 }

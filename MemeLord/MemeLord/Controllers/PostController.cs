@@ -1,7 +1,6 @@
 ﻿using MemeLord.DataObjects.Request;
 using MemeLord.DataObjects.Response.Posts;
 using MemeLord.Logic.Modules.Posts;
-using MemeLord.Logic.Repository;
 using MemeLord.Logic.Modules.Reports;
 using System.Net.Http;
 using System.Web.Http;
@@ -51,10 +50,7 @@ namespace MemeLord.Controllers
         [HttpGet]
         public GetPostsResponse GetManyPosts([FromUri] int lastId, [FromUri] int count, [FromUri] string authorName)
         {
-            if (string.IsNullOrEmpty(authorName))
-                return _getPostsModule.GetPosts(lastId, count);
-            else
-                return _getPostsModule.GetUserPosts(lastId, count, authorName);
+            return string.IsNullOrEmpty(authorName) ? _getPostsModule.GetPosts(lastId, count) : _getPostsModule.GetUserPosts(lastId, count, authorName);
         }
 
         [HttpPost, Authorize(Roles = "Member, Admin")]
@@ -64,12 +60,13 @@ namespace MemeLord.Controllers
         }
 
         [Route("delete")]
-        [HttpGet, Authorize(Roles = "Member, Admin")]
+        [HttpDelete, Authorize(Roles = "Member, Admin")]
         public void DeletePost([FromUri] int id)
         {
             _updatePostModule.DeletePost(id);
             //check if user should be banned
             _autoBanModule.BanIfDeserveByPostId(id);
+            
         }
 
         [Route("update-rating")]

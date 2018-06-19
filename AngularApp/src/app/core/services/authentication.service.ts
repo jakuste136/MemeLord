@@ -30,7 +30,7 @@ export class AuthenticationService {
         this.showSuccess('Zalogowano się'); 
       }, error => {
         console.log(error.error.error_description)
-        this.showError("Błąd logowania");
+        this.showError(`Błąd logowania: ${error.error.error_description}`);
       });
   }
 
