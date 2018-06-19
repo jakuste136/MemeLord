@@ -20,6 +20,8 @@ import { ReportComponent } from './report/report.component';
 import { AdminReportedPostsComponent } from './admin/admin-reported-posts/admin-reported-posts.component';
 import { AdminReportedCommentsComponent } from './admin/admin-reported-comments/admin-reported-comments.component';
 import { AdminReportingService } from './admin/admin-reporting.service';
+import { UserFollowersComponent } from './user-profile-site/user-followers/user-followers.component';
+import { UserFollowersService } from './user-profile-site/user-followers/user-followers.service';
 
 @NgModule({
   imports: [
@@ -39,12 +41,14 @@ import { AdminReportingService } from './admin/admin-reporting.service';
     AdminReportsComponent,
     ReportComponent,
     AdminReportedPostsComponent,
-    AdminReportedCommentsComponent
+    AdminReportedCommentsComponent,
+    UserFollowersComponent
   ],
   providers: [
     UserDetailsService,
     UserReportService,
     AdminReportingService,
+    UserFollowersService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,

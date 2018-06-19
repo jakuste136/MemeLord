@@ -1,4 +1,6 @@
-﻿using MemeLord.Logic.Database;
+﻿using System.Collections.Generic;
+using System.Linq;
+using MemeLord.Logic.Database;
 using MemeLord.Models;
 
 namespace MemeLord.Logic.Repository
@@ -7,6 +9,7 @@ namespace MemeLord.Logic.Repository
     {
         Following GetFollowing(string authorName, int userId);
         void UpsertFollowing(Following following);
+        List<User> StepaniakToKutas(string userName);
     }
 
     public class FollowingRepository : IFollowingRepository
@@ -36,6 +39,20 @@ namespace MemeLord.Logic.Repository
                         ? $"UPDATE [Followings] SET [Active] = '{following.Active}' WHERE [FollowerId] = {following.Follower.Id} AND [FollowedId] = {following.Followed.Id}"
                         : $"INSERT INTO [Followings] VALUES ({following.Followed.Id}, {following.Follower.Id}, '{following.Active}')");
                 //db.Save(following);
+            }
+        }
+
+        public List<User> StepaniakToKutas(string userName)
+        {
+            using (var db = CustomDatabaseFactory.GetConnection())
+            {
+                var result =  db.Query<Following>()
+                    .Include(p => p.Followed)
+                    .Include(p => p.Follower)
+                    .Where(f => f.Follower.Username == userName && f.Active)
+                    .ToList();
+
+                return result.Select(r => r.Followed).ToList();
             }
         }
     }

@@ -99,10 +99,10 @@ namespace MemeLord.Logic.Repository
                     .Where(u => sex.Equals("0") || u.Sex == GetGender(sex))
                     .Where(u => status == 0 || u.BannedDate.HasValue == IsBanned(status));
 
-                var paramUsername = 1;
-                var paramSex = 1;
-                var paramBanned = 1;
-                var notStr = "";
+                //var paramUsername = 1;
+                //var paramSex = 1;
+                //var paramBanned = 1;
+                //var notStr = "";
 
                 if (!string.IsNullOrEmpty(username))
                     query = query.Where(u => u.Username.StartsWith(username));
@@ -121,8 +121,8 @@ namespace MemeLord.Logic.Repository
 
                 return query.ToList();
 
-                return db.Fetch<User>(
-                    $"SELECT * FROM [Users] U WHERE ({paramUsername} = 0 OR U.Username LIKE '{username}%') AND ({paramSex} = 0 OR U.Sex LIKE '{GetGender(sex)}') AND ({paramBanned} = 0 OR ([U].[BannedDate] is {notStr} null))");
+                //return db.Fetch<User>(
+                //    $"SELECT * FROM [Users] U WHERE ({paramUsername} = 0 OR U.Username LIKE '{username}%') AND ({paramSex} = 0 OR U.Sex LIKE '{GetGender(sex)}') AND ({paramBanned} = 0 OR ([U].[BannedDate] is {notStr} null))");
             }
         }
 

@@ -30,6 +30,10 @@ export class AuthGuardService {
 		return true;
 	}
 
+	resetToken(){
+		this.authentication.logout();
+	}
+
 	redirectToLoginPage() {
 		this.router.navigate(['/login']);
 	}

@@ -1,8 +1,10 @@
-﻿using MemeLord.DataObjects.Dto;
+﻿using System.Collections.Generic;
+using MemeLord.DataObjects.Dto;
 using MemeLord.DataObjects.Request;
 using MemeLord.Logic.Modules.Followings;
 using System.Net.Http;
 using System.Web.Http;
+using MemeLord.DataObjects.Response;
 
 namespace MemeLord.Controllers
 {
@@ -19,16 +21,17 @@ namespace MemeLord.Controllers
             _upsertFollowingModule = upsertFollowingModule;
         }
 
-        [HttpGet]
-        public FollowingDto Get()
-        {
-            return _getFollowingModule.GetFollowing("mateher");
-        }
-
         [HttpGet, Authorize]
         public FollowingDto Get([FromUri] string authorName)
         {
             return _getFollowingModule.GetFollowing(authorName);
+        }
+
+        [Route("users")]
+        [HttpGet, Authorize]
+        public List<GetUserResponse> GetFollowers()
+        {
+            return _getFollowingModule.GetFollowers();
         }
 
         [HttpPost, Authorize]

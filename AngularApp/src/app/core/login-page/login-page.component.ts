@@ -28,6 +28,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   ngOnInit() {
+    this._authenticationService.removeToken();
   }
 
   login() {
