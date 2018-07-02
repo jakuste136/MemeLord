@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using Autofac;
@@ -41,6 +43,7 @@ namespace MemeLord
             GoogleOptions = new GoogleOAuth2AuthenticationOptions
             {
                 AuthenticationType = "GoogleAuth",
+                
                 ClientId = GoogleApiConfiguration.ClientId,
                 ClientSecret = GoogleApiConfiguration.ClientSecret,
                 CallbackPath = new PathString("/signin-google"),
@@ -52,6 +55,14 @@ namespace MemeLord
 
         public void ConfigureAuth(IAppBuilder app)
         {
+            app.UseCookieAuthentication(new CookieAuthenticationOptions
+            {
+                AuthenticationType = DefaultAuthenticationTypes.ExternalCookie
+            });
+            app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
+            app.UseTwoFactorSignInCookie(DefaultAuthenticationTypes.TwoFactorCookie, TimeSpan.FromMinutes(5));
+            app.UseTwoFactorRememberBrowserCookie(DefaultAuthenticationTypes.TwoFactorRememberBrowserCookie);
+
             app.SetDefaultSignInAsAuthenticationType("GoogleAuth");
 
             app.UseGoogleAuthentication(GoogleOptions);

@@ -16,7 +16,7 @@ namespace MemeLord.Logic.Modules.Authentication
             var clientId = GoogleApiConfiguration.ClientId;
             return new GetGoogleRedirectUriRespose
             {
-                Uri = $"{authUri}?redirect_uri={callbackUri}&response_type=token&client_id={clientId}&state=6Phc_u0Xkj3opJ9TymPhw9olZV_zB6Pjv_OcIfNAprk1&scope=profile"
+                Uri = $"{authUri}?redirect_uri={callbackUri}&response_type=token&client_id={clientId}&scope=profile"
             };
         }
     }

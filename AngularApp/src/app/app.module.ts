@@ -10,6 +10,24 @@ import { JwtInterceptor } from './core/services/jwt.inerceptor';
 import { MatTableModule } from '@angular/material/table';
 import { CdkTableModule } from '@angular/cdk/table';
 import * as $ from 'jquery';
+import {
+  SocialLoginModule,
+  AuthServiceConfig,
+  GoogleLoginProvider,
+  FacebookLoginProvider,
+} from "angular5-social-login";
+
+export function getAuthServiceConfigs() {
+  let config = new AuthServiceConfig(
+      [
+        {
+          id: GoogleLoginProvider.PROVIDER_ID,
+          provider: new GoogleLoginProvider("462863838838-5q24j1bjcml1k7sfhvetsbsh57jvvada.apps.googleusercontent.com")
+        },
+      ]
+  );
+  return config;
+}
 
 @NgModule({
   declarations: [
@@ -28,13 +46,18 @@ import * as $ from 'jquery';
     MatSelectModule,
     MatFormFieldModule,
     CdkTableModule,
-    HttpClientModule
+    HttpClientModule,
+    SocialLoginModule
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
       multi: true
+    },
+    {
+      provide: AuthServiceConfig,
+      useFactory: getAuthServiceConfigs
     },
   ],
   bootstrap: [AppComponent]
