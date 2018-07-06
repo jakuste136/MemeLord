@@ -25,6 +25,7 @@ export class PostComponent implements OnInit, OnChanges {
   @Input() showBestComments = true;
 
   apiurl = environment.apiUrl;
+  url
 
   likeValue: number;
   storedPostId: number;

@@ -1,5 +1,7 @@
 <div class="wrapper">
   <app-report-button (click)="onReportButtonClicked()"></app-report-button>
+  
   <app-ratings-bar id="appRatingsBar" [rating]="rating" [likeValue]="likeValue" [index]="index" [postId]="postId"></app-ratings-bar>
+  
   <app-comment-button id="appCommentButton" [index]="index" [postId]="postId" (commentsToggled)="onCommentsToggled()"></app-comment-button>
 </div>

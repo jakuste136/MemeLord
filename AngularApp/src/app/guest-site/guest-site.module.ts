@@ -35,6 +35,7 @@ import { ReportModalComponent } from './report-modal/report-modal.component';
 import { ReportService } from './report-modal/report.service';
 import { UserInformationService } from './user-information/user-information.service';
 import { AuthorUserProfileService } from './author-user-profile/author-user-profile.service';
+import { JwSocialButtonsModule } from 'jw-angular-social-buttons';
 
 @NgModule({
   imports: [
@@ -44,7 +45,8 @@ import { AuthorUserProfileService } from './author-user-profile/author-user-prof
     InfiniteScrollModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    JwSocialButtonsModule
   ],
   exports: [
     GuestNavbarComponent

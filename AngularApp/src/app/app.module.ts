@@ -16,6 +16,7 @@ import {
   GoogleLoginProvider,
   FacebookLoginProvider,
 } from "angular5-social-login";
+import { JwSocialButtonsModule } from 'jw-angular-social-buttons';
 
 export function getAuthServiceConfigs() {
   let config = new AuthServiceConfig(
@@ -47,7 +48,8 @@ export function getAuthServiceConfigs() {
     MatFormFieldModule,
     CdkTableModule,
     HttpClientModule,
-    SocialLoginModule
+    SocialLoginModule,
+    JwSocialButtonsModule
   ],
   providers: [
     {

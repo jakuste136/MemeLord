@@ -1,6 +1,8 @@
 <mat-card class="post-card">
   <mat-card-header>
       <mat-card-title>{{postId}}. {{title}}</mat-card-title>
+      <google-plus></google-plus>
+      <fb-like></fb-like>
       <button class="textOnlyButton" (click)="goToAuthorUser()">{{username}}</button>
   </mat-card-header>
   <img mat-card-image [src]="path" (click)="postClicked()">
