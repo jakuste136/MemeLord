@@ -1,0 +1,39 @@
+.wrapper{
+    display: flex;
+    margin: 15px 0;
+
+    img {
+        max-width: 60px;
+        max-height: 60px;
+        border-radius: 100%;
+    }
+
+    .text-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        p {
+            margin: 3px 5px;            
+        }
+
+        .report-button {
+            cursor: pointer;
+            text-decoration: underline;
+            font-size: 10pt;
+            color: #919191;
+        }
+
+        .inline-wrapper{
+            display: inline-flex;    
+            
+            .username {
+                font-weight: bold;
+            }
+
+            .date {
+                color: #c4c2c2;
+            }            
+        }        
+    }
+}

@@ -1,0 +1,27 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="MemeLord.Configuration.Settings" GeneratedClassName="GoogleApiSettings">
+  <Profiles />
+  <Settings>
+    <Setting Name="client_id" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">462863838838-5q24j1bjcml1k7sfhvetsbsh57jvvada.apps.googleusercontent.com</Value>
+    </Setting>
+    <Setting Name="project_id" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">memelord-auth</Value>
+    </Setting>
+    <Setting Name="auth_uri" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://accounts.google.com/o/oauth2/auth</Value>
+    </Setting>
+    <Setting Name="token_uri" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://accounts.google.com/o/oauth2/token</Value>
+    </Setting>
+    <Setting Name="auth_provider_x509_cert_url" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://www.googleapis.com/oauth2/v1/certs</Value>
+    </Setting>
+    <Setting Name="client_secret" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">X5dXhcEcZ4zTuPUwu24DglTq</Value>
+    </Setting>
+    <Setting Name="redirect_uris" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://localhost:44372/signin-google</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

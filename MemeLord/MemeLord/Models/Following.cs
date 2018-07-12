@@ -6,5 +6,6 @@ namespace MemeLord.Models
     {
         public User Follower { get; set; }
         public User Followed { get; set; }
+        public bool Active { get; set; }
     }
 }

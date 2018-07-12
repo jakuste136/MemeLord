@@ -13,6 +13,7 @@ namespace MemeLord.Logic.Mapping.CommentMapping
         public override IMappingExpression<Comment, CommentDto> CreateMap(IMapperConfigurationExpression cfg)
         {
             return base.CreateMap(cfg)
+                .ForMember(dto => dto.Avatar, map => map.MapFrom(comment => comment.User.Avatar))
                 .ForMember(dto => dto.Username, map => map.MapFrom(comment => comment.User.Username))
                 .ForMember(dto => dto.Answers, map => map.Ignore());
         }

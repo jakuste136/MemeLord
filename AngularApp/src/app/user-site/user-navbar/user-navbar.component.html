@@ -5,11 +5,11 @@
         <button mat-button routerLink="/user/random">Losowy</button>
       </div>
       <div>
-        <button mat-button routerLink="/user/posts">MemeLord</button>
+        <button mat-button routerLink="/user">MemeLord</button>
       </div>
       <div>
         <button mat-button routerLink="/user/profile" >Mój profil</button>
-        <button mat-button routerLink="/user/notifications" >Powiadomienia</button>
+        <button *ngIf='isAdmin()' mat-button routerLink="/user/admin" >Admin</button>
         <button mat-button (click)="logout()" >Wyloguj</button>
       </div>
     </mat-toolbar>

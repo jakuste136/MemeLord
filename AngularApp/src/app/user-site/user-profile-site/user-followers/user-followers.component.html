@@ -1,0 +1,23 @@
+<mat-card>
+  <mat-card-header>
+    <p>Followers</p>
+  </mat-card-header>
+
+  <div class="table-wrapper" *ngIf="followers.length > 0">
+    <mat-table [dataSource]="dataSource">
+
+      <ng-container matColumnDef="avatar">
+        <mat-header-cell *matHeaderCellDef style="display: none;"> </mat-header-cell>
+        <mat-cell *matCellDef="let element" (click)="showUser(element.username)"> <img mat-card-image class="avatar" [src]="element.avatar"> </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="username">
+        <mat-header-cell *matHeaderCellDef style="display: none;"> </mat-header-cell>
+        <mat-cell *matCellDef="let element" (click)="showUser(element.username)"> {{element.username}} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns" style="display: none;"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" ></mat-row>
+    </mat-table>
+  </div>
+</mat-card>

@@ -14,6 +14,9 @@ import { RegisterPageComponent } from './register-page/register-page.component';
 import { RegisterUserService } from './register-page/register-user.service';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from './services/jwt.inerceptor';
+import { AdminAuthGuardService } from './services/admin-auth-guard.service';
 
 @NgModule({
   imports: [
@@ -37,7 +40,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   providers: [
     AuthenticationService,
     AuthGuardService,
-    RegisterUserService
+    AdminAuthGuardService,
+    RegisterUserService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    },
   ]
 })
 export class CoreModule { }

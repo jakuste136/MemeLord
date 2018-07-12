@@ -10,7 +10,7 @@ namespace MemeLord.Logic.Modules.Posts
 
     public class UpdatePostModule : IUpdatePostModule
     {
-        private IPostRepository _postRepository;
+        private readonly IPostRepository _postRepository;
 
         public UpdatePostModule(IPostRepository postRepository)
         {

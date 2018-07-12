@@ -1,0 +1,25 @@
+<div id="grid-container" class="grid-container">
+  
+  <div>
+    <app-posts-list [authorName]="authorName"></app-posts-list>
+  </div>
+  <div id="profile-info">
+    <app-user-information *ngIf="!show && !delayedShow" [authorName]="authorName"></app-user-information>
+  </div>
+  <div id="buttons">
+      <button *ngIf="!show" class="navigate-button" mat-mini-fab color="primary" (click)="hideUserProfile()" title="hide user profile">
+        <mat-icon>arrow_back_ios</mat-icon>
+      </button>
+      <button *ngIf="show" class="navigate-button" mat-mini-fab color="primary" (click)="showUserProfile()" title="show user profile">
+        <mat-icon>arrow_forward_ios</mat-icon>
+      </button>
+      <button *ngIf="!userFollowed && !show && !delayedShow" class="follow-button" mat-mini-fab color="primary" (click)="follow()"
+        title="follow">
+        <mat-icon id="followButtonIcon">done</mat-icon>
+      </button>
+      <button *ngIf="userFollowed && !show && !delayedShow" class="follow-button" mat-mini-fab color="primary" (click)="unfollow()"
+        title="unfollow">
+        <mat-icon id="unfollowButtonIcon">done</mat-icon>
+      </button>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 15px;
+    //background-color: #343b42;
+    padding: 15px;
+    -webkit-transition: grid-gap 2s ease;
+    -moz-transition: grid-gap 2s ease;
+    transition: grid-gap 2s ease;
+  }
+
+  .grid-container>div {
+    background-color: white;
+    padding-top: 10px;
+  }
+
+  #profile-info{
+    padding-top: 30px;
+    width: 600px;
+    -webkit-transition: width 1s ease;
+    -moz-transition: width 1s ease;
+    transition: width 1s ease;
+  }
+
+  #followButtonIcon{
+    color: red;
+  }
+
+  #unfollowButtonIcon{
+    color: green;
+  }
+
+  #buttons {
+    padding-top: 30px;
+    padding-left: 20px;
+  }

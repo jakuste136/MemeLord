@@ -10,6 +10,9 @@ namespace MemeLord.Logic.Repository
         List<Report> GetReportedPosts(int lastId);
         List<Report> GetReportedComments(int lastId);
         void AddReport(Report report);
+        bool DidUserReportComment(int userId, int commentId);
+        bool DidUserReportPost(int userId, int postId);
+        IList<ReportType> GetReportTypes();
     }
 
     public class ReportRepository : IReportRepository
@@ -56,9 +59,9 @@ namespace MemeLord.Logic.Repository
                     .Include(r => r.ReportType)
                     .Where(r => r.Post == null)
                     .Where(r => r.Comment != null)
-                    .Where(r => r.Post.DeletionDate == null)
-                    .Where(r => r.Post.Id > lastId || lastId == 0)
-                    .OrderBy(r => r.Post.Id)
+                    .Where(r => r.Comment.DeletionDate == null)
+                    .Where(r => r.Comment.Id > lastId || lastId == 0)
+                    .OrderBy(r => r.Comment.Id)
                     .ToList();
             }
         }
@@ -68,6 +71,37 @@ namespace MemeLord.Logic.Repository
             using (var db = CustomDatabaseFactory.GetConnection())
             {
                 db.Save(report);
+            }
+        }
+
+        public bool DidUserReportComment(int userId, int commentId)
+        {
+            using (var db = CustomDatabaseFactory.GetConnection())
+            {
+                return db.Query<Report>()
+                    .Include(r => r.Reporter)
+                    .Include(r => r.Comment)
+                    .Any(r => r.Reporter.Id == userId && r.Comment.Id == commentId);
+            }
+        }
+
+        public bool DidUserReportPost(int userId, int postId)
+        {
+            using (var db = CustomDatabaseFactory.GetConnection())
+            {
+                return db.Query<Report>()
+                    .Include(r => r.Reporter)
+                    .Include(r => r.Post)
+                    .Any(r => r.Reporter.Id == userId && r.Post.Id == postId);
+            }
+        }
+
+        public IList<ReportType> GetReportTypes()
+        {
+            using (var db = CustomDatabaseFactory.GetConnection())
+            {
+                return db.Query<ReportType>()
+                    .ToList();
             }
         }
     }

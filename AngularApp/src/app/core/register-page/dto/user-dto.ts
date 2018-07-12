@@ -1,5 +1,5 @@
 export interface IUserDto {
-    userName: string;
+    username: string;
     password: string;
     repeatPassword: string;
     email: string;

@@ -12,6 +12,7 @@ namespace MemeLord.Models
         public Sex Sex { get; set; }
         public DateTime? DateOfBirth { get; set; }
         public string Description { get; set; }
+        public DateTime? BannedDate { get; set; }
     }
 
     public enum Sex

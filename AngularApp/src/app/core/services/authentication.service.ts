@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { ToastrService } from 'ngx-toastr';
+import { GetGoogleRedirectUriResponse } from '../../guest-site/dto/get-google-redirect-uri-respose';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -15,7 +16,7 @@ const apiUrl = environment.apiUrl;
 @Injectable()
 export class AuthenticationService {
 
-  tokenKey: string = "a5smm_utoken"
+  tokenKey: string = "currentUser"
 
   constructor(private router: Router,
     private _http: HttpClient,
@@ -29,9 +30,22 @@ export class AuthenticationService {
         this.showSuccess('Zalogowano się'); 
       }, error => {
         console.log(error.error.error_description)
-        this.showError("Błąd logowania");
+        this.showError(`Błąd logowania: ${error.error.error_description}`);
       });
   }
+
+  googleLogin() {
+    this._http.get<GetGoogleRedirectUriResponse>(`${apiUrl}/api/externalLogin`)
+    .subscribe(response => {
+      document.location.href = response.uri;
+    }, error => {
+      console.log(error.error.error_description)
+      this.showError("Błąd logowania");
+    });
+    
+  }
+
+  
 
   showSuccess(message) {
     this._toastr.success(message);

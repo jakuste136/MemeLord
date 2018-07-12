@@ -11,6 +11,17 @@ import { UserProfileSiteComponent } from './user-profile-site/user-profile-site.
 import { UserDetailsComponent } from './user-profile-site/user-details/user-details.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { UserDetailsService } from './user-profile-site/user-details/user-details.service';
+import { JwtInterceptor } from '../core/services/jwt.inerceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AdminComponent } from './admin/admin.component';
+import { AdminReportsComponent } from './admin/admin-reports/admin-reports.component';
+import { UserReportService } from './report/report.service';
+import { ReportComponent } from './report/report.component';
+import { AdminReportedPostsComponent } from './admin/admin-reported-posts/admin-reported-posts.component';
+import { AdminReportedCommentsComponent } from './admin/admin-reported-comments/admin-reported-comments.component';
+import { AdminReportingService } from './admin/admin-reporting.service';
+import { UserFollowersComponent } from './user-profile-site/user-followers/user-followers.component';
+import { UserFollowersService } from './user-profile-site/user-followers/user-followers.service';
 
 @NgModule({
   imports: [
@@ -25,9 +36,24 @@ import { UserDetailsService } from './user-profile-site/user-details/user-detail
     UserSiteComponent, 
     UserNavbarComponent, 
     UserProfileSiteComponent, 
-    UserDetailsComponent],
+    UserDetailsComponent,
+    AdminComponent,
+    AdminReportsComponent,
+    ReportComponent,
+    AdminReportedPostsComponent,
+    AdminReportedCommentsComponent,
+    UserFollowersComponent
+  ],
   providers: [
-    UserDetailsService
+    UserDetailsService,
+    UserReportService,
+    AdminReportingService,
+    UserFollowersService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    },
   ]
 })
 export class UserSiteModule { }

@@ -9,9 +9,14 @@ namespace MemeLord.Logic.Repository
     {
         Post GetPostById(int id);
         List<Post> GetPosts(int lastId, int count);
+        List<Post> GetUserPosts(int lastId, int count, string authorName);
+        List<Post> GetTopPosts(int lastId, int count);
         void AddPost(Post post);
         Post GetRandomPost();
         void UpdatePost(Post post);
+        int GetNumberOfDeletedByUserId(int userId);
+        List<Post> GetUserPosts(string username);
+        Post GetBestUserPost(string username);
     }
 
     public class PostRepository : IPostRepository
@@ -42,6 +47,20 @@ namespace MemeLord.Logic.Repository
             }
         }
 
+        public List<Post> GetTopPosts(int lastId, int count)
+        {
+            using (var db = CustomDatabaseFactory.GetConnection())
+            {
+                return db.Query<Post>()
+                    .Include(p => p.Op)
+                    .OrderByDescending(p => p.Rating)
+                    .Where(p => p.Id < lastId || lastId == 0)
+                    .Where(p => p.DeletionDate == null)
+                    .Limit(count)
+                    .ToList();
+            }
+        }
+
         public Post GetRandomPost()
         {
             using (var db = CustomDatabaseFactory.GetConnection())
@@ -56,7 +75,7 @@ namespace MemeLord.Logic.Repository
                     .Include(p => p.Op)
                     .Where(p => p.DeletionDate == null)
                     .Limit(randomIndex, 1)
-                    .First();
+                    .FirstOrDefault();
             }
         }
 
@@ -73,6 +92,56 @@ namespace MemeLord.Logic.Repository
             using (var db = CustomDatabaseFactory.GetConnection())
             {
                 db.Save(post);
+            }
+        }
+
+        public int GetNumberOfDeletedByUserId(int userId)
+        {
+            using (var db = CustomDatabaseFactory.GetConnection())
+            {
+                return db.Query<Post>()
+                    .Include(c => c.Op)
+                    .Where(c => c.Op.Id == userId || userId == 0)
+                    .Where(c => c.DeletionDate != null)
+                    .Count();
+            }
+        }
+
+        public List<Post> GetUserPosts(int lastId, int count, string authorName)
+        {
+            using (var db = CustomDatabaseFactory.GetConnection())
+            {
+                return db.Query<Post>()
+                    .Include(p => p.Op)
+                    .OrderByDescending(p => p.CreationDate)
+                    .Where(p => p.Op.Username.Equals(authorName))
+                    .Where(p => p.Id < lastId || lastId == 0)
+                    .Where(p => p.DeletionDate == null)
+                    .Limit(count)
+                    .ToList();
+            }
+        }
+
+        public List<Post> GetUserPosts(string username)
+        {
+            using (var db = CustomDatabaseFactory.GetConnection())
+            {
+                return db.Query<Post>()
+                    .Include(p => p.Op)
+                    .Where(p => p.Op.Username.Equals(username))
+                    .Where(p => p.DeletionDate == null)
+                    .ToList();
+            }
+        }
+
+        public Post GetBestUserPost(string username)
+        {
+            using (var db = CustomDatabaseFactory.GetConnection())
+            {
+                return db.Query<Post>()
+                    .Include(p => p.Op)
+                    .OrderByDescending(p => p.Rating)
+                    .FirstOrDefault(p => p.Op.Username.Equals(username));
             }
         }
     }

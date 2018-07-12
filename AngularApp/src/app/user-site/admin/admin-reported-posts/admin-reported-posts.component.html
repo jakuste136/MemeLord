@@ -1,0 +1,42 @@
+<mat-card>
+  <mat-card-header>
+    <p>Reported Posts</p>
+  </mat-card-header>
+
+  <div class="table-wrapper" *ngIf="reportedPosts.length > 0">
+    <mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)">
+
+      <ng-container matColumnDef="title">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Title </mat-header-cell>
+        <mat-cell *matCellDef="let element" (click) = "showPost(element.postId)"> {{element.title}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="username">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Username </mat-header-cell>
+        <mat-cell *matCellDef="let element" (click) = "showUser(element.username)"> {{element.username}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="creationDate">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Creation Date </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.creationDate | date: "dd MM yyyy"}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Description </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Akcja </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button mat-stroked-button color="primary" (click) = "banUser(element.username, element.postId)">Zabanuj</button>
+          <button mat-stroked-button color="primary" (click) = "deletePost(element.postId)">Usuń</button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+
+</mat-card>

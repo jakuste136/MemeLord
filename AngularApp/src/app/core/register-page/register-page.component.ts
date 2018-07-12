@@ -6,6 +6,12 @@ import { PasswordValidator } from './password-validator';
 import { RegisterUserService } from './register-user.service'
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from '../services/authentication.service';
+import {
+  AuthService,
+  FacebookLoginProvider,
+  GoogleLoginProvider
+} from 'angular5-social-login';
+
 
 @Component({
   selector: 'app-register-page',
@@ -20,9 +26,10 @@ export class RegisterPageComponent implements OnInit {
     private _fb: FormBuilder,
     private _registerUserService: RegisterUserService,
     private _toastr: ToastrService,
-    private _authenticationService: AuthenticationService) {
+    private _authenticationService: AuthenticationService,
+    private socialAuthService: AuthService) {
     this.registryForm = _fb.group({
-      'userName': [null, Validators.compose([
+      'username': [null, Validators.compose([
         Validators.required,
         Validators.maxLength(30)
       ])],
@@ -49,15 +56,42 @@ export class RegisterPageComponent implements OnInit {
     if (this.registryForm.valid) {
       this._registerUserService.registerUser(user).subscribe(response => {
         this._toastr.success("Pomyślnie założono konto");
-        this._authenticationService.login(user.userName, user.password);
+        this._authenticationService.login(user.username, user.password);
       });
       console.log("Adding user...");
     }
   }
 
+  public googleRegister() {
+    let socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
+    this.socialAuthService.signIn(socialPlatformProvider).then(
+      (userData) => {
+        this._toastr.info(`Google sign in data : ${userData.name}`);
+        // Now sign-in with userData
+        
+        var useer: IUserDto = {
+          username: userData.name, 
+          email: userData.email, 
+          password: userData.id, 
+          repeatPassword: userData.id,
+          sex: null,
+          dateOfBirth: null,
+          description: 'Google added',
+          avatar: userData.image,
+        };
+
+        this._registerUserService.registerUser(useer).subscribe(response => {
+          this._toastr.success("Pomyślnie założono konto");
+          this._authenticationService.login(userData.name, userData.id);
+        });
+      }
+      
+    );
+  }
+
   getUserNameErrorMessage() {
-    return this.registryForm.get('userName').hasError('required') ? 'Pole jest wymagane' :
-      this.registryForm.get('userName').hasError('maxlength') ? 'Maksymalna długość nazwy użytkownika wynosi 30 znaków' : '';
+    return this.registryForm.get('username').hasError('required') ? 'Pole jest wymagane' :
+      this.registryForm.get('username').hasError('maxlength') ? 'Maksymalna długość nazwy użytkownika wynosi 30 znaków' : '';
   }
 
   getEmailErrorMessage() {
