@@ -76,9 +76,12 @@ class PostsFragment : RxBaseFragment() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        val posts = (posts_list.adapter as PostsAdapter).getPosts()
-        if(memePosts != null && posts.isNotEmpty()) {
-            outState.putParcelable(KEY_MEME_POSTS, memePosts?.copy(posts = posts))
+
+        if (posts_list != null) {
+            val posts = (posts_list.adapter as PostsAdapter).getPosts()
+            if(memePosts != null && posts.isNotEmpty()) {
+                outState.putParcelable(KEY_MEME_POSTS, memePosts?.copy(posts = posts))
+            }
         }
     }
 

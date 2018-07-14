@@ -51,4 +51,6 @@ dependencies {
     kapt 'com.google.dagger:dagger-compiler:2.15'
     compileOnly 'org.glassfish:javax.annotation:10.0-b28'
 
+    implementation 'id.zelory:compressor:2.1.0'
+
 }

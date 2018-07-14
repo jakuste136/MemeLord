@@ -47,10 +47,12 @@ class LoginFragment : RxBaseFragment() {
         }
     }
 
+    var callResponse: Call<LoginResponse>? = null
+
     private fun login() {
 
-        val callResponse = api.login(editUsername.text.toString(), editPassword.text.toString())
-        callResponse.enqueue(object: Callback<LoginResponse>{
+        callResponse = api.login(editUsername.text.toString(), editPassword.text.toString())
+        callResponse?.enqueue(object: Callback<LoginResponse>{
                     override fun onResponse(call: Call<LoginResponse>?, response: Response<LoginResponse>?) {
                         if (response?.code() == 200) {
                             AuthorizationInterceptor.token = response.body()?.access_token ?: ""
@@ -75,6 +77,11 @@ class LoginFragment : RxBaseFragment() {
 
                 }
         )
+    }
+
+    override fun onPause(){
+        super.onPause()
+        callResponse?.cancel()
     }
 
 }// Required empty public constructor

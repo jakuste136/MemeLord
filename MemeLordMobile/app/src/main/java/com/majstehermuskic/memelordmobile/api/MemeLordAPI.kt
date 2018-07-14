@@ -2,6 +2,7 @@ package com.majstehermuskic.memelordmobile.api
 
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -21,5 +22,5 @@ interface MemeLordAPI {
     @Multipart
     @POST("api/post")
     fun addPost(@Part image: MultipartBody.Part,
-                @Part("title") title: RequestBody): Call<AddPostResponse>
+                @Part("title") title: RequestBody): Call<ResponseBody>
 }
